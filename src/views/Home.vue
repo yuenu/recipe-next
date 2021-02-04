@@ -24,6 +24,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .home {
   width: 100%;
-  height: 20vh;
+  height: 100%;
 }
 </style>

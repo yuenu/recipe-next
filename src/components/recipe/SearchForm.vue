@@ -2,17 +2,16 @@
   <div class="search">
     <form @submit.prevent="submitForm">
       <input
-        id="search-tern"
+        class="search__tern"
         type="text"
-        placeholder="搜尋"
+        placeholder="Search"
         v-model.trim="searchInput"
-      >
-      <button id="search">
-        <font-awesome-icon
-          icon="search"
-          size="lg"
-        />
-      </button>
+      />
+      <span class="search__icon"></span>
+      <div
+        class="search__clear"
+        @click="clearInput"
+      ></div>
     </form>
   </div>
 </template>
@@ -21,38 +20,60 @@
 export default {
   data () {
     return {
-      searchInput: ''
+      searchInput: '',
+      hasInput: false
     }
   },
   methods: {
     submitForm () {
       console.log('sumbit search')
+    },
+    clearInput () {
+      this.searchInput = ''
+    }
+  },
+  watch: {
+    searchInput (val) {
+      if (!val) this.hasInput = true
+      else this.hasInput = false
+    }
+  },
+  computed: {
+    getHasInput () {
+      return this.hasInput
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .search {
   display: flex;
-  max-width:200px;
-  background-color: #eee;
-}
+  min-width: 125px;
+  width: 185px;
+  position: relative;
 
-#search-tern {
-  background-color: #eee;
-  border: none;
-  border-radius: 0;
-  padding: 0.4rem 1rem;
-  font-size: 1rem;
-  width:150px;
-}
+  &__tern {
+    width: 100%;
+    padding: 0.2rem 0.5rem 0.1rem 1.7rem;
+  }
 
-#search {
-  color: #aaa;
-  font-size: 1rem;
-  border: none;
-  margin-left: 6px;
-  padding-right: 8px;
+  &__icon {
+    background: url('../../assets/icon/search.png') no-repeat center / cover;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    left: 9px;
+    top: 7.5px;
+  }
+
+  &__clear {
+    background: url('../../assets/icon/clear.png') no-repeat center / cover;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 7px;
+    right: 8px;
+  }
 }
 </style>

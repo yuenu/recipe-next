@@ -80,10 +80,6 @@ export default defineComponent({
   }
 }
 
-.search {
-  flex-grow: 1;
-}
-
 .item__list {
   display: flex;
   list-style: none;
