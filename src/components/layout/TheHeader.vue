@@ -28,16 +28,18 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import SearchForm from '@/components/recipe/SearchForm'
+import { defineComponent, ref } from 'vue'
+import SearchForm from './SearchForm'
 
 export default defineComponent({
   components: {
     SearchForm
   },
-  data () {
+  setup () {
+    const mobileMenuControl = ref(false)
+
     return {
-      mobileMenuControl: false
+      mobileMenuControl
     }
   }
 })
@@ -73,7 +75,6 @@ export default defineComponent({
   margin-left: 30px;
   -webkit-text-stroke: 1px red;
   -webkit-text-fill-color: transparent;
-  // -webkit-transition: all 1s ease;
 
   &:hover {
     -webkit-text-fill-color: red;

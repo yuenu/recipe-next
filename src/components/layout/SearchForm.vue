@@ -62,7 +62,7 @@ export default defineComponent({
     width: 12px;
     height: 12px;
     position: absolute;
-    top: 7px;
+    top: 6px;
     right: 8px;
   }
 }
