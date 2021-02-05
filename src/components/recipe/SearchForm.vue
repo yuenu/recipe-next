@@ -16,34 +16,24 @@
   </div>
 </template>
 
-<script>
-export default {
-  data () {
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup () {
+    const searchInput = ref('')
+    // Methods
+    const submitForm = () => { console.log('submit search:', searchInput.value) }
+    const clearInput = () => { searchInput.value = '' }
+
     return {
-      searchInput: '',
-      hasInput: false
-    }
-  },
-  methods: {
-    submitForm () {
-      console.log('sumbit search')
-    },
-    clearInput () {
-      this.searchInput = ''
-    }
-  },
-  watch: {
-    searchInput (val) {
-      if (!val) this.hasInput = true
-      else this.hasInput = false
-    }
-  },
-  computed: {
-    getHasInput () {
-      return this.hasInput
+      searchInput,
+      submitForm,
+      clearInput
     }
   }
-}
+
+})
 </script>
 
 <style lang="scss" scoped>
