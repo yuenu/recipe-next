@@ -3,7 +3,7 @@
     <div class="container">
       <div class="main">
         <div class="title"></div>
-        <Banner />
+        <Carousel />
         <Cards />
       </div>
       <SideBar />
@@ -14,14 +14,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import SideBar from '@/components/recipe/SideBar.vue'
-import Banner from '@/components/recipe/Banner.vue'
+import Carousel from '@/components/recipe/Carousel.vue'
 import Cards from '@/components/recipe/Cards.vue'
 
 export default defineComponent({
   name: 'Home',
   components: {
     SideBar,
-    Banner,
+    Carousel,
     Cards
   }
 })

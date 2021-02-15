@@ -8,10 +8,7 @@
         v-model.trim="searchInput"
       />
       <span class="search__icon"></span>
-      <div
-        class="search__clear"
-        @click="clearInput"
-      ></div>
+      <div class="search__clear" @click="clearInput"></div>
     </form>
   </div>
 </template>
@@ -23,8 +20,12 @@ export default defineComponent({
   setup () {
     const searchInput = ref('')
     // Methods
-    const submitForm = () => { console.log('submit search:', searchInput.value) }
-    const clearInput = () => { searchInput.value = '' }
+    const submitForm = () => {
+      console.log('submit search:', searchInput.value)
+    }
+    const clearInput = () => {
+      searchInput.value = ''
+    }
 
     return {
       searchInput,
@@ -32,20 +33,20 @@ export default defineComponent({
       clearInput
     }
   }
-
 })
 </script>
 
 <style lang="scss" scoped>
 .search {
   display: flex;
-  min-width: 125px;
+  max-width: 200px;
+  width: 100%;
   width: 185px;
   position: relative;
 
   &__tern {
-    width: 100%;
-    padding: 0.2rem 0.5rem 0.1rem 1.7rem;
+    padding: 0.2rem 0 0.1rem 4.4rem;
+    max-width: 180px;
   }
 
   &__icon {
@@ -53,17 +54,31 @@ export default defineComponent({
     width: 12px;
     height: 12px;
     position: absolute;
-    left: 9px;
-    top: 7.5px;
+    left: 55px;
+    top: 6.5px;
   }
 
   &__clear {
+    display: none;
+  }
+
+  &__tern:focus {
+    width: 100%;
+    padding: 0.2rem 0 0.1rem 1.7rem;
+  }
+
+  &__tern:focus ~ &__icon {
+    left: 9px;
+  }
+
+  &__tern:focus ~ &__clear {
     background: url('../../assets/icon/clear.png') no-repeat center / cover;
     width: 12px;
     height: 12px;
     position: absolute;
     top: 6px;
-    right: 8px;
+    right: 12px;
+    display: block;
   }
 }
 </style>

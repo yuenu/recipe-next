@@ -116,11 +116,14 @@ export default defineComponent({
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
+    border:1px solid #eee;
+    box-shadow:0px 0px 3px #000;
   }
 
   &__text {
     margin-left: 20px;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
+    font-weight:700;
     letter-spacing: 1.4px;
   }
 }
