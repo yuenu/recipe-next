@@ -14,16 +14,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   setup () {
     const searchInput = ref('')
+    const store = useStore()
+
     // Methods
     const submitForm = () => {
-      console.log('submit search:', searchInput.value)
+      store.dispatch('SEARCH_MEALS', searchInput.value)
+      searchInput.value = ''
     }
+
     const clearInput = () => {
+      console.log(clearInput)
       searchInput.value = ''
     }
 

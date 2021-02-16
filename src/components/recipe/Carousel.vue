@@ -64,8 +64,9 @@ export default defineComponent({
       }
     ]
     const imagesLen = images.length
-    let timer: number
 
+    // set Interval Timer
+    let timer: number
     const resetInterval = (timer: number) => {
       clearInterval(timer)
 
@@ -89,6 +90,7 @@ export default defineComponent({
       if (sliderIndex.value >= imagesLen + 1) sliderIndex.value = 1
     }
 
+    // computed
     const getShowImg = computed(() =>
       images.filter(img => img.id === sliderIndex.value)
     )

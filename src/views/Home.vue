@@ -4,7 +4,7 @@
       <div class="main">
         <div class="title"></div>
         <Carousel />
-        <MealResults />
+        <SearchMealResults />
       </div>
       <SideBar />
     </div>
@@ -15,21 +15,23 @@
 import { defineComponent, onMounted } from 'vue'
 import SideBar from '@/components/recipe/SideBar.vue'
 import Carousel from '@/components/recipe/Carousel.vue'
-import MealResults from '@/components/recipe/MealResults.vue'
-import { useStore } from 'vuex'
+import SearchMealResults from '@/components/recipe/SearchMealResults.vue'
+// import getRandom from '@/requessts/recipe'
 
 export default defineComponent({
   name: 'Home',
   components: {
     SideBar,
     Carousel,
-    MealResults
+    SearchMealResults
   },
   setup () {
-    const store = useStore()
-
-    onMounted(() => {
-      console.log(store.state.requests.request)
+    let getRandomMel = null
+    onMounted(async () => {
+      getRandomMel = 'check'
+      console.log('mounted', getRandomMel)
+      // getRandomMel = await getRandom()
+      // console.log('mounted', getRandomMel.data.meals[0])
     })
   }
 })

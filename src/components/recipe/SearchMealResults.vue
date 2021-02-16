@@ -3,16 +3,16 @@
     <div class="card">
       <div
         class="card__box"
-        v-for="image in images"
-        :key="image.id"
+        v-for="meal in searchedMeals"
+        :key="meal.idMeal"
       >
         <img
-          :src="image.path"
-          :alt="image.description"
+          :src="meal.strMealThumb + '/preview'"
+          :alt="meal.strMeal"
           class="card__img"
         />
         <div class="card__content">
-          <div class="card__title">Juice Pink</div>
+          <div class="card__title">{{ meal.strMeal }}</div>
           <div class="card__text">lerom this is sdafjasopfjaskfcmzkxlcm</div>
         </div>
       </div>
@@ -20,39 +20,22 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script lang="ts">
+import { defineComponent, onMounted, ref, computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
-  computed: {
-    images () {
-      return [
-        {
-          id: 1,
-          path: require('@/assets/example/img1.jpg'),
-          description: 'img1'
-        },
-        {
-          id: 2,
-          path: require('@/assets/example/img2.jpg'),
-          description: 'img2'
-        },
-        {
-          id: 3,
-          path: require('@/assets/example/img3.jpg'),
-          description: 'img3'
-        },
-        {
-          id: 4,
-          path: require('@/assets/example/img4.jpg'),
-          description: 'img4'
-        },
-        {
-          id: 5,
-          path: require('@/assets/example/img5.jpg'),
-          description: 'img5'
-        }
-      ]
+  setup () {
+    const store = useStore()
+
+    const searchedMeals = computed(() => {
+      return store.getters.getMeals
+    })
+
+    console.log('searchedMeals', searchedMeals)
+
+    return {
+      searchedMeals
     }
   }
 })
