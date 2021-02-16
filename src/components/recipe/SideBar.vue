@@ -69,7 +69,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .sidebar {
   min-width: 300px;
-  background: rgba(18, 244, 244, 0.219);
   display: flex;
   justify-content: center;
 

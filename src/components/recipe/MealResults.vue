@@ -71,6 +71,7 @@ export default defineComponent({
   box-shadow: 0px 2px 5px #000;;
   border-radius:10px;
   margin-top: calc(10vh + 370px);
+  margin-bottom:2rem;
 
   &__box {
     break-inside: avoid;

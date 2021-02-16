@@ -49,7 +49,7 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 56px);
+  min-height: calc(100vh - 91px);
   width: 100%;
 }
 

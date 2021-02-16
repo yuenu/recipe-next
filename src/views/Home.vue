@@ -4,7 +4,7 @@
       <div class="main">
         <div class="title"></div>
         <Carousel />
-        <Cards />
+        <MealResults />
       </div>
       <SideBar />
     </div>
@@ -15,36 +15,32 @@
 import { defineComponent } from 'vue'
 import SideBar from '@/components/recipe/SideBar.vue'
 import Carousel from '@/components/recipe/Carousel.vue'
-import Cards from '@/components/recipe/Cards.vue'
+import MealResults from '@/components/recipe/MealResults.vue'
 
 export default defineComponent({
   name: 'Home',
   components: {
     SideBar,
     Carousel,
-    Cards
+    MealResults
   }
 })
 </script>
 
 <style lang="scss" scoped>
 .home {
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
 
   .container {
     display: flex;
     width: 100%;
-    min-height: 100vh;
     max-width: 1024px;
   }
 }
 
 .main {
   width: 100%;
-  background: rgba(126, 47, 47, 0.171);
   position: relative;
 }
 </style>

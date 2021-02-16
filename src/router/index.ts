@@ -10,7 +10,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/editProfile',
     name: 'editProfile',
-    component: () => import('@/components/user/UserSettings.vue')
+    component: () => import('@/views/UserSettings.vue')
   }
 ]
 

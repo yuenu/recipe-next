@@ -39,7 +39,7 @@ body {
   background: #eee;
   font-family: sans-serif;
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh - 91px);
   display: flex;
   flex-direction: column;
   margin-bottom: 32px;
