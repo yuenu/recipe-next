@@ -12,9 +12,9 @@
       <SearchForm class="search" />
       <div class="container__left">
         <ul class="item__list">
-          <li><a href="#" class="item__link othersPro">其他作品</a></li>
-          <li><a href="#" class="item__link collect">收藏食譜</a></li>
-          <li><a href="#" class="item__link login">登入</a></li>
+          <li><router-link to="/" class="item__link othersPro">其他作品</router-link></li>
+          <li><router-link to="/" class="item__link collect">收藏食譜</router-link></li>
+          <li><router-link to="/editProfile" class="item__link login">個人設定</router-link></li>
         </ul>
       </div>
     </div>
@@ -84,7 +84,7 @@ export default defineComponent({
 .item__list {
   display: flex;
   list-style: none;
-  max-width: 250px;
+  max-width: 300px;
   margin-right: 20px;
 
   .item__link {

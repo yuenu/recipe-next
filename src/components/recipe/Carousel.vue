@@ -64,16 +64,7 @@ export default defineComponent({
       }
     ]
     const imagesLen = images.length
-
-    // setInterval timer
-    const slideThrough = () => {
-      sliderIndex.value++
-      if (sliderIndex.value > 5) sliderIndex.value = 1
-    }
-
-    let timer = setInterval(() => {
-      slideThrough()
-    }, 2500)
+    let timer: number
 
     const resetInterval = (timer: number) => {
       clearInterval(timer)
