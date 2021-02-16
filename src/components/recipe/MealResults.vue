@@ -10,7 +10,7 @@
           :src="image.path"
           :alt="image.description"
           class="card__img"
-        >
+        />
         <div class="card__content">
           <div class="card__title">Juice Pink</div>
           <div class="card__text">lerom this is sdafjasopfjaskfcmzkxlcm</div>
@@ -63,53 +63,61 @@ export default defineComponent({
   max-width: 600px;
   padding: 20px 10px;
   margin: 0 auto;
-  height:fit-content;
+  height: fit-content;
   columns: 2 auto;
   column-gap: 0;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.151), rgba(255,255,255,0.42));
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.151),
+    rgba(255, 255, 255, 0.42)
+  );
   backdrop-filter: blur(10px);
-  box-shadow: 0px 2px 5px #000;;
-  border-radius:10px;
+  box-shadow: 0px 2px 5px #000;
+  border-radius: 10px;
   margin-top: calc(10vh + 370px);
-  margin-bottom:2rem;
+  margin-bottom: 2rem;
 
   &__box {
     break-inside: avoid;
     color: #ffffff;
     border-radius: 12px;
     max-width: 250px;
-    width:100%;
-    margin:0 auto;
+    width: 100%;
+    margin: 0 auto;
     height: 240px;
     overflow: hidden;
     cursor: pointer;
-    background:#eee;
-    margin:10px;
+    background: rgb(196, 196, 196);
+    margin: 10px;
     text-align: center;
-    padding:0 20px;
+    padding: 0 20px;
+
+    &:hover {
+      background: rgb(190, 190, 190);
+    }
   }
 
   &__box:first-of-type {
-    margin-top:0;
+    margin-top: 0;
   }
 
   &__img {
-    width: 80px;
-    height: 80px;
-    border-radius:50%;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
     object-fit: cover;
-    margin:12px 0;
+    margin: 20px 0 16px 0;
   }
 
   &__content {
-    color:rgb(20,20,20);
+    color: rgb(20, 20, 20);
   }
 
   &__title {
-    font-size:1.2rem;
-    display:inline-block;
+    font-size: 1.2rem;
+    display: inline-block;
     border-bottom: 1px solid #000;
-    margin-bottom:20px;
+    margin-bottom: 20px;
   }
 }
 </style>

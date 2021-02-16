@@ -12,10 +12,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import SideBar from '@/components/recipe/SideBar.vue'
 import Carousel from '@/components/recipe/Carousel.vue'
 import MealResults from '@/components/recipe/MealResults.vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   name: 'Home',
@@ -23,6 +24,13 @@ export default defineComponent({
     SideBar,
     Carousel,
     MealResults
+  },
+  setup () {
+    const store = useStore()
+
+    onMounted(() => {
+      console.log(store.state.requests.request)
+    })
   }
 })
 </script>
