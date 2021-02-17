@@ -3,64 +3,33 @@
     <div class="sidebar__box">
       <div
         class="category__box"
-        v-for="cat in category"
-        :key="cat.id"
+        v-for="cat in categories"
+        :key="cat.idCategory"
       >
-        <img :src="cat.path" class="category__img" />
-        <div class="category__text">{{ cat.name.toUpperCase() }}</div>
+        <img
+          class="category__img"
+          :src="cat.strCategoryThumb"
+          :alt="cat.strCategory"
+        />
+        <div class="category__text">{{ cat.strCategory }}</div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script lang="ts">
+import { defineComponent, computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
-  computed: {
-    category () {
-      return [
-        {
-          id: 1,
-          name: 'bread',
-          path: require('@/assets/category/bread.jpg')
-        },
-        {
-          id: 2,
-          name: 'chicken',
-          path: require('@/assets/category/chicken.jpg')
-        },
-        {
-          id: 3,
-          name: 'dessert',
-          path: require('@/assets/category/dessert.jpg')
-        },
-        {
-          id: 5,
-          name: 'pasta',
-          path: require('@/assets/category/pasta.jpg')
-        },
-        {
-          id: 6,
-          name: 'bread',
-          path: require('@/assets/category/bread.jpg')
-        },
-        {
-          id: 7,
-          name: 'salad',
-          path: require('@/assets/category/salad.jpg')
-        },
-        {
-          id: 8,
-          name: 'seafood',
-          path: require('@/assets/category/seafood.png')
-        },
-        {
-          id: 9,
-          name: 'vegetarian',
-          path: require('@/assets/category/vegetarian.png')
-        }
-      ]
+  setup () {
+    const store = useStore()
+    const categories = computed(() => {
+      return store.getters.getCategory
+    })
+
+    return {
+      categories
     }
   }
 })
@@ -115,14 +84,14 @@ export default defineComponent({
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
-    border:1px solid #eee;
-    box-shadow:0px 0px 3px #000;
+    border: 1px solid #eee;
+    box-shadow: 0px 0px 3px #000;
   }
 
   &__text {
     margin-left: 20px;
     font-size: 0.9rem;
-    font-weight:700;
+    font-weight: 700;
     letter-spacing: 1.4px;
   }
 }

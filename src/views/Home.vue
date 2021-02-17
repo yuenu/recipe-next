@@ -13,10 +13,10 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
+import { useStore } from 'vuex'
 import SideBar from '@/components/recipe/SideBar.vue'
 import Carousel from '@/components/recipe/Carousel.vue'
 import SearchMealResults from '@/components/recipe/SearchMealResults.vue'
-// import getRandom from '@/requessts/recipe'
 
 export default defineComponent({
   name: 'Home',
@@ -26,12 +26,10 @@ export default defineComponent({
     SearchMealResults
   },
   setup () {
-    let getRandomMel = null
-    onMounted(async () => {
-      getRandomMel = 'check'
-      console.log('mounted', getRandomMel)
-      // getRandomMel = await getRandom()
-      // console.log('mounted', getRandomMel.data.meals[0])
+    const store = useStore()
+
+    onMounted(() => {
+      store.dispatch('GET_CATEGORY')
     })
   }
 })

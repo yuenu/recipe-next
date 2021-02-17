@@ -32,8 +32,6 @@ export default defineComponent({
       return store.getters.getMeals
     })
 
-    console.log('searchedMeals', searchedMeals)
-
     return {
       searchedMeals
     }

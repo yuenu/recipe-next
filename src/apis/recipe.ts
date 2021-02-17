@@ -9,3 +9,13 @@ export const searchByName = async (name: string) => {
   const res = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`)
   return res.data.meals
 }
+
+export const searchByCategory = async (category: string) => {
+  const res = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
+  return res.data.meals
+}
+
+export const getAllCategory = async () => {
+  const res = await axios.get('https://www.themealdb.com/api/json/v1/1/categories.php')
+  return res.data.categories
+}

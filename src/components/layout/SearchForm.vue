@@ -29,7 +29,6 @@ export default defineComponent({
     }
 
     const clearInput = () => {
-      console.log(clearInput)
       searchInput.value = ''
     }
 
