@@ -28,6 +28,11 @@ export default defineComponent({
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  &::selection {
+    background: rgba(255, 148, 1, 0.69);
+    color: #fff;
+  }
 }
 
 html {

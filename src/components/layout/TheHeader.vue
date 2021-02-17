@@ -96,7 +96,7 @@ export default defineComponent({
     border-radius: 25px;
 
     &:hover {
-      background: rgb(60, 60, 196);
+      background: #3c3cc4e5;
       color: #eee;
     }
   }

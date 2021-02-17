@@ -13,7 +13,9 @@
         />
         <div class="card__content">
           <div class="card__title">{{ meal.strMeal }}</div>
-          <div class="card__text">lerom this is sdafjasopfjaskfcmzkxlcm</div>
+          <div class="card__text">
+            {{ meal.strInstructions || 'strInstructions' }}
+          </div>
         </div>
       </div>
     </div>

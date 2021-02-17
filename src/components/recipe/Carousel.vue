@@ -178,7 +178,7 @@ export default defineComponent({
   cursor: pointer;
   height: 15px;
   width: 15px;
-  margin: 0 6px;
+  margin: 0 7px;
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
@@ -187,6 +187,7 @@ export default defineComponent({
 
 .dot.active,
 .dot:hover {
-  background-color: #717171;
+  background-color: #20ad96;
+  transform:scale(1.2);
 }
 </style>
