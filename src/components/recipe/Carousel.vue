@@ -77,24 +77,24 @@ export default defineComponent({
       return timer
     }
 
-    // Methods
+    // Control the image index
     const prev = () => {
       timer = resetInterval(timer)
       sliderIndex.value--
       if (sliderIndex.value < 1) sliderIndex.value = imagesLen
     }
-
+    // Control the image index
     const next = () => {
       timer = resetInterval(timer)
       sliderIndex.value++
       if (sliderIndex.value >= imagesLen + 1) sliderIndex.value = 1
     }
 
-    // computed
+    // get show up to silde image by index
     const getShowImg = computed(() =>
       images.filter(img => img.id === sliderIndex.value)
     )
-
+    // Choose which 'dot' and get the index to switch the image by the indwz
     const currentSlide = (index: number) => {
       timer = resetInterval(timer)
       sliderIndex.value = index

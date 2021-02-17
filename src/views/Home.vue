@@ -4,7 +4,7 @@
       <div class="main">
         <div class="title"></div>
         <Carousel />
-        <SearchMealResults />
+        <MealLists />
       </div>
       <SideBar />
     </div>
@@ -16,14 +16,14 @@ import { defineComponent, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import SideBar from '@/components/recipe/SideBar.vue'
 import Carousel from '@/components/recipe/Carousel.vue'
-import SearchMealResults from '@/components/recipe/SearchMealResults.vue'
+import MealLists from '@/components/recipe/MealLists.vue'
 
 export default defineComponent({
   name: 'Home',
   components: {
     SideBar,
     Carousel,
-    SearchMealResults
+    MealLists
   },
   setup () {
     const store = useStore()

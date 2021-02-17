@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { searchByName, getAllCategory } from '@/apis/recipe'
+import { searchByName, getAllCategory, searchByCategory } from '@/apis/recipe'
 // import authModuel from './modules/auth/index'
 // import requestsModule from './modules/requests/index'
 
@@ -16,18 +16,22 @@ export default createStore({
     GET_CATEGORY (state, payload: []) {
       state.category = payload
     },
-    SEARCH_MEALS (state, payload: []) {
+    GET_MEALS (state, payload: []) {
       state.meals = payload
     }
   },
   actions: {
     async SEARCH_MEALS (context, input: string) {
       const res = await searchByName(input)
-      context.commit('SEARCH_MEALS', res)
+      context.commit('GET_MEALS', res)
     },
     async GET_CATEGORY (context) {
       const res = await getAllCategory()
       context.commit('GET_CATEGORY', res)
+    },
+    async GET_CATEGORY_MEALS (context, category: string) {
+      const res = await searchByCategory(category)
+      context.commit('GET_MEALS', res)
     }
   },
   getters: {

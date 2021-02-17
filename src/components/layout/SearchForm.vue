@@ -8,7 +8,7 @@
         v-model.trim="searchInput"
       />
       <span class="search__icon"></span>
-      <div class="search__clear" @click="clearInput"></div>
+      <div class="search__clear" @click.capture="clearInput"></div>
     </form>
   </div>
 </template>
@@ -29,6 +29,7 @@ export default defineComponent({
     }
 
     const clearInput = () => {
+      console.log('clear')
       searchInput.value = ''
     }
 
@@ -48,10 +49,13 @@ export default defineComponent({
   width: 100%;
   width: 185px;
   position: relative;
+  height:28px;
 
   &__tern {
     padding: 0.2rem 0 0.1rem 4.4rem;
     max-width: 180px;
+    height:100%;
+    z-index:2;
   }
 
   &__icon {
@@ -60,16 +64,17 @@ export default defineComponent({
     height: 12px;
     position: absolute;
     left: 55px;
-    top: 6.5px;
+    top: 8px;
+
   }
 
   &__clear {
-    display: none;
+    opacity:0;
   }
 
   &__tern:focus {
     width: 100%;
-    padding: 0.2rem 0 0.1rem 1.7rem;
+    padding: 0.2rem 1rem 0.1rem 1.7rem;
   }
 
   &__tern:focus ~ &__icon {
@@ -81,9 +86,12 @@ export default defineComponent({
     width: 12px;
     height: 12px;
     position: absolute;
-    top: 6px;
+    top: 8px;
     right: 12px;
     display: block;
+    z-index:1;
+    cursor:pointer;
+    opacity:1;
   }
 }
 </style>

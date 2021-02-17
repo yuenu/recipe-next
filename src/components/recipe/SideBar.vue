@@ -5,6 +5,7 @@
         class="category__box"
         v-for="cat in categories"
         :key="cat.idCategory"
+        @click="getCatgoryMeals(cat.strCategory)"
       >
         <img
           class="category__img"
@@ -28,8 +29,13 @@ export default defineComponent({
       return store.getters.getCategory
     })
 
+    const getCatgoryMeals = (category: string) => {
+      store.dispatch('GET_CATEGORY_MEALS', category)
+    }
+
     return {
-      categories
+      categories,
+      getCatgoryMeals
     }
   }
 })
