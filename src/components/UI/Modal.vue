@@ -1,0 +1,57 @@
+<template>
+  <div class="modal">
+
+    <slot></slot>
+
+    <div class="close" @click="close">
+      <Close />
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import Close from './Close.vue'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  components: {
+    Close
+  },
+  setup () {
+    const close = () => {
+      console.log('clicked close')
+    }
+
+    return { close }
+  }
+})
+</script>
+
+<style lang="scss" scoped>
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.close {
+  position: absolute;
+  top: 2%;
+  right: 2.5%;
+  cursor: pointer;
+
+  svg {
+    fill: azure;
+  }
+}
+</style>

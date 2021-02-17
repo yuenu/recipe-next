@@ -9,6 +9,7 @@
       <SideBar />
     </div>
   </div>
+  <base-modal />
 </template>
 
 <script lang="ts">

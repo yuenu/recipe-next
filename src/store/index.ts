@@ -3,35 +3,41 @@ import { searchByName, getAllCategory, searchByCategory } from '@/apis/recipe'
 // import authModuel from './modules/auth/index'
 // import requestsModule from './modules/requests/index'
 
-export default createStore({
+interface Recipe {
+  random: object
+  meals: object
+  category: object
+}
+
+export default createStore<Recipe>({
   state: {
     random: [],
     meals: [],
     category: []
   },
   mutations: {
-    GET_RANDOM_MEAL (state, payload) {
+    SET_RANDOM_MEAL (state, payload) {
       state.random = payload
     },
-    GET_CATEGORY (state, payload: []) {
+    SET_CATEGORY (state, payload: []) {
       state.category = payload
     },
-    GET_MEALS (state, payload: []) {
+    SET_MEALS (state, payload: []) {
       state.meals = payload
     }
   },
   actions: {
-    async SEARCH_MEALS (context, input: string) {
-      const res = await searchByName(input)
-      context.commit('GET_MEALS', res)
+    async SEARCH_MEALS ({ commit }, input: string) {
+      const res: object = await searchByName(input)
+      commit('SET_MEALS', res)
     },
-    async GET_CATEGORY (context) {
-      const res = await getAllCategory()
-      context.commit('GET_CATEGORY', res)
+    async GET_CATEGORY ({ commit }) {
+      const res: object = await getAllCategory()
+      commit('SET_CATEGORY', res)
     },
-    async GET_CATEGORY_MEALS (context, category: string) {
-      const res = await searchByCategory(category)
-      context.commit('GET_MEALS', res)
+    async GET_CATEGORY_MEALS ({ commit }, category: string) {
+      const res: object = await searchByCategory(category)
+      commit('SET_MEALS', res)
     }
   },
   getters: {
