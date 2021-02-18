@@ -57,7 +57,7 @@ export default defineComponent({
     );
     box-shadow: 1px 5px 5px rgb(117, 117, 117);
     border-radius: 16px;
-    margin-top: 10vh;
+    margin: 10vh 0;
   }
 }
 
@@ -102,7 +102,7 @@ export default defineComponent({
   }
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 930px) {
   .sidebar {
     display: none;
   }

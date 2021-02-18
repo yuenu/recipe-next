@@ -9,7 +9,7 @@
       <div class="meal__media">
         <img
           :src="meal.strMealThumb"
-          alt="img"
+          :alt="meal.strMeal"
           class="meal__media__img"
         />
         <a
@@ -31,10 +31,10 @@
 
         <li
           class="meal__ingrendients__content"
-          v-for="idx in 20"
-          :key="idx"
+          v-for="ing in meal.mealIngrendients"
+          :key="ing"
         >
-          {{ meal.strIngredient1}}
+          {{ ing }}
         </li>
       </div>
     </div>
@@ -51,7 +51,6 @@ export default defineComponent({
   },
   setup (props) {
     const store = useStore()
-
     onMounted(() => {
       store.dispatch('GET_MEALS_BY_ID', props.mealId)
     })
@@ -60,9 +59,33 @@ export default defineComponent({
       return store.getters.getMealInfo
     })
 
-    if (getMealInfo.value) {
-      console.log(getMealInfo)
-    }
+    // const mealData = reactive({
+    //   mealId: '',
+    //   mealName: '',
+    //   mealImgUrl: '',
+    //   mealYoutubeLink: '',
+    //   mealInstructions: '',
+    //   mealIngrendients: [] as string[]
+    // })
+
+    // const getMealData = computed(() => {
+    //   return mealData
+    // })
+
+    // if (getMealInfo.value.length === 1) {
+    //   const data = getMealInfo.value[0]
+    //   console.log('data', data)
+    //   mealData.mealId = data.idMeal
+    //   mealData.mealName = data.strMeal
+    //   mealData.mealImgUrl = data.strMealThumb
+    //   mealData.mealYoutubeLink = data.strYoutube
+    //   mealData.mealInstructions = data.strInstructions
+    //   for (let i = 1; i <= 20; i++) {
+    //     if (data['strIngredient' + i]) {
+    //       mealData.mealIngrendients.push(`${data['strIngredient' + i]} -> ${data['strMeasure' + i]}`)
+    //     }
+    //   }
+    // }
 
     return {
       getMealInfo
@@ -78,21 +101,26 @@ export default defineComponent({
   min-height: 100px;
   background: rgba(255, 255, 255, 0.945);
   box-shadow: 0px 2px 5px #fff;
-  border-radius: 20px;
+  border-radius: 4px;
   padding: 10px 30px;
   position: absolute;
   top: 10vh;
 
   &__title {
-    text-align: center;
-    margin: 12px 0 20px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #000;
+    margin: 12px 0 28px 0;
   }
 
   &__media {
     position: relative;
-
     &:hover {
-      opacity:0.8;
+      opacity: 0.8;
+    }
+
+    &:hover &__link {
+      animation:popup 0.3s ease-in-out;
+      opacity:1;
     }
   }
 
@@ -101,24 +129,27 @@ export default defineComponent({
     max-height: 270px;
     border-radius: 4px;
     box-shadow: 0px 2px 7px #000;
+    object-fit: cover;
   }
 
   &__media__link {
     position: absolute;
     bottom: 5%;
     left: 50%;
-    transform:translateX(-50%);
-    padding:0.6rem 1.5rem;
-    font-size:14px;
-    outline:none;
+    transform: translateX(-50%);
+    padding: 0.6rem 1.5rem;
+    font-size: 14px;
+    text-decoration: none;
+    outline: none;
     border: none;
-    border-radius: 22px;
-    background: rgba(0, 0, 0, 0.75);
+    border-radius: 34px;
+    background: rgba(0, 0, 0, 0.8);
     color: #fff;
-    cursor:pointer;
+    cursor: pointer;
+    opacity:0;
 
     &:hover {
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(0, 0, 0, 1);
     }
   }
 }
@@ -143,5 +174,16 @@ export default defineComponent({
 
 .meal__ingrendients__content {
   margin: 3px 0 0 10px;
+}
+
+@keyframes popup {
+  0% {
+    opacity:0;
+    transform:translate(-50%,10px);
+  }
+  100% {
+    opacity:1;
+    transform:translate(-50%,0);
+  }
 }
 </style>
