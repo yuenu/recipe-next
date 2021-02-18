@@ -1,4 +1,5 @@
 <template>
+
   <div class="home">
     <div class="container">
       <div class="main">
@@ -9,7 +10,6 @@
       <SideBar />
     </div>
   </div>
-  <base-modal />
 </template>
 
 <script lang="ts">
@@ -28,7 +28,6 @@ export default defineComponent({
   },
   setup () {
     const store = useStore()
-
     onMounted(() => {
       store.dispatch('GET_CATEGORY')
     })

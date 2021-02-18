@@ -10,17 +10,16 @@
 </template>
 
 <script lang="ts">
-import Close from './Close.vue'
 import { defineComponent } from 'vue'
+import Close from './Close.vue'
 
 export default defineComponent({
   components: {
     Close
   },
-  setup () {
-    const close = () => {
-      console.log('clicked close')
-    }
+  emits: ['close'],
+  setup (props, { emit }) {
+    const close = () => { emit('close') }
 
     return { close }
   }
@@ -42,6 +41,7 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   z-index: 50;
+  overflow:auto;
 }
 
 .close {

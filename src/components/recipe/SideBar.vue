@@ -30,7 +30,7 @@ export default defineComponent({
     })
 
     const getCatgoryMeals = (category: string) => {
-      store.dispatch('GET_CATEGORY_MEALS', category)
+      store.dispatch('GET_MEALS_BY_CATEGORY', category)
     }
 
     return {

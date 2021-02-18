@@ -1,10 +1,16 @@
 <template>
+  <MealModal
+    v-if="isModalOpen"
+    @close="setModalClose"
+    :mealId="mealId"
+  />
   <div class="cards">
     <div class="card">
       <div
         class="card__box"
         v-for="meal in searchedMeals"
         :key="meal.idMeal"
+        @click="setModalOpen(meal.idMeal)"
       >
         <img
           :src="meal.strMealThumb + '/preview'"
@@ -23,19 +29,42 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ref } from 'vue'
 import { useStore } from 'vuex'
+import MealModal from './MealModal.vue'
 
 export default defineComponent({
+  components: {
+    MealModal
+  },
   setup () {
     const store = useStore()
-
     const searchedMeals = computed(() => {
       return store.getters.getMeals
     })
+    const mealId = ref('')
+
+    // Modal status
+    const modalStatus = ref(false)
+    const setModalOpen = (id: string) => {
+      modalStatus.value = true
+      mealId.value = id
+      document.body.style.overflow = 'hidden'
+    }
+    const setModalClose = () => {
+      modalStatus.value = !modalStatus.value
+      document.body.style.overflow = 'auto'
+    }
+    const isModalOpen = computed(() => {
+      return modalStatus.value
+    })
 
     return {
-      searchedMeals
+      searchedMeals,
+      isModalOpen,
+      setModalOpen,
+      setModalClose,
+      mealId
     }
   }
 })
