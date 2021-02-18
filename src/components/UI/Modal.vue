@@ -1,6 +1,5 @@
 <template>
   <div class="modal">
-
     <slot></slot>
 
     <div class="close" @click="close">
@@ -18,8 +17,10 @@ export default defineComponent({
     Close
   },
   emits: ['close'],
-  setup (props, { emit }) {
-    const close = () => { emit('close') }
+  setup (_, { emit }) {
+    const close = () => {
+      emit('close')
+    }
 
     return { close }
   }
@@ -41,7 +42,7 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   z-index: 50;
-  overflow:auto;
+  overflow: auto;
 }
 
 .close {

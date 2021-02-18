@@ -46,7 +46,6 @@ export default createStore<Recipe>({
     },
     async GET_MEALS_BY_ID ({ commit }, mealId: string) {
       const res: object = await searchById(mealId)
-      console.log('boom')
       commit('SET_SINGLE_MEAL', res)
     }
   },

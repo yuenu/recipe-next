@@ -2,18 +2,18 @@
   <base-modal>
     <div
       class="meal"
-      v-for="meal in getMealInfo"
-      :key="meal.idMeal"
+      v-for="meal in getMealData"
+      :key="meal.mealId"
     >
-      <h1 class="meal__title">{{ meal.strMeal }}</h1>
+      <h1 class="meal__title">{{ meal.mealName }}</h1>
       <div class="meal__media">
         <img
-          :src="meal.strMealThumb"
-          :alt="meal.strMeal"
+          :src="meal.mealImgUrl"
+          :alt="meal.mealName"
           class="meal__media__img"
         />
         <a
-          :href="meal.strYoutube"
+          :href="meal.mealYoutubeLink"
           class="meal__media__link"
           target="_blank"
         >
@@ -23,7 +23,7 @@
       <div class="meal__info">
         <h2 class="meal__info__title">information</h2>
         <p class="meal__info__content">
-          {{ meal.strInstructions }}
+          {{ meal.mealInstructions }}
         </p>
       </div>
       <div class="meal__ingrendients">
@@ -31,10 +31,10 @@
 
         <li
           class="meal__ingrendients__content"
-          v-for="ing in meal.mealIngrendients"
-          :key="ing"
+          v-for="ingrendients in meal.mealIngrendients"
+          :key="ingrendients"
         >
-          {{ ing }}
+          {{ ingrendients }}
         </li>
       </div>
     </div>
@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed } from 'vue'
+import { defineComponent, onMounted, computed, watch, reactive } from 'vue'
 import { useStore } from 'vuex'
 
 export default defineComponent({
@@ -55,40 +55,38 @@ export default defineComponent({
       store.dispatch('GET_MEALS_BY_ID', props.mealId)
     })
 
+    const mealData = reactive({
+      mealId: '',
+      mealName: '',
+      mealImgUrl: '',
+      mealYoutubeLink: '',
+      mealInstructions: '',
+      mealIngrendients: [] as string[]
+    })
+
     const getMealInfo = computed(() => {
       return store.getters.getMealInfo
     })
 
-    // const mealData = reactive({
-    //   mealId: '',
-    //   mealName: '',
-    //   mealImgUrl: '',
-    //   mealYoutubeLink: '',
-    //   mealInstructions: '',
-    //   mealIngrendients: [] as string[]
-    // })
+    watch(getMealInfo, (newVal) => {
+      newVal = newVal[0]
+      mealData.mealId = newVal.idMeal
+      mealData.mealName = newVal.strMeal
+      mealData.mealImgUrl = newVal.strMealThumb
+      mealData.mealYoutubeLink = newVal.strYoutube
+      mealData.mealInstructions = newVal.strInstructions
+      for (let i = 1; i <= 20; i++) {
+        if (newVal['strIngredient' + i]) {
+          mealData.mealIngrendients.push(`${newVal['strIngredient' + i]} -> ${newVal['strMeasure' + i]}`)
+        }
+      }
+    })
 
-    // const getMealData = computed(() => {
-    //   return mealData
-    // })
-
-    // if (getMealInfo.value.length === 1) {
-    //   const data = getMealInfo.value[0]
-    //   console.log('data', data)
-    //   mealData.mealId = data.idMeal
-    //   mealData.mealName = data.strMeal
-    //   mealData.mealImgUrl = data.strMealThumb
-    //   mealData.mealYoutubeLink = data.strYoutube
-    //   mealData.mealInstructions = data.strInstructions
-    //   for (let i = 1; i <= 20; i++) {
-    //     if (data['strIngredient' + i]) {
-    //       mealData.mealIngrendients.push(`${data['strIngredient' + i]} -> ${data['strMeasure' + i]}`)
-    //     }
-    //   }
-    // }
+    const getMealData = computed(() => { return [mealData] })
 
     return {
-      getMealInfo
+      getMealInfo,
+      getMealData
     }
   }
 })
@@ -105,6 +103,7 @@ export default defineComponent({
   padding: 10px 30px;
   position: absolute;
   top: 10vh;
+  margin-bottom:10vh;
 
   &__title {
     padding-bottom: 8px;
