@@ -4,11 +4,11 @@ import router from './router'
 import store from './store'
 
 // ui
-import Modal from '@/components/UI/Modal.vue'
+import BaseModal from '@/components/UI/BaseModal.vue'
 
 const app = createApp(App)
 
-app.component('base-modal', Modal)
+app.component('base-modal', BaseModal)
   .use(store)
   .use(router)
   .mount('#app')

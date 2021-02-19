@@ -162,12 +162,12 @@ export default defineComponent({
 
 .arrow-left {
   left: 1%;
-  transform: translateY(-100%) rotate(180deg);
+  transform: translateY(-50%) rotate(180deg);
 }
 
 .arrow-right {
   right: 1%;
-  transform: translateY(-100%);
+  transform: translateY(-50%);
 }
 
 .dots {

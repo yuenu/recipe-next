@@ -40,7 +40,7 @@ export default defineComponent({
   backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   z-index: 50;
   overflow: auto;
 }

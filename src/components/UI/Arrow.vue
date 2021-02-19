@@ -8,7 +8,12 @@
 </template>
 
 <style lang="scss" scoped>
-path {
+svg {
   fill:#fff;
+  transition:0.3s all ease;
+
+  &:hover {
+    fill:#20ad96;
+  }
 }
 </style>
