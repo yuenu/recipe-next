@@ -68,7 +68,7 @@ export default defineComponent({
       return store.getters.getMealInfo
     })
 
-    watch(getMealInfo, (newVal) => {
+    watch(getMealInfo, newVal => {
       newVal = newVal[0]
       mealData.mealId = newVal.idMeal
       mealData.mealName = newVal.strMeal
@@ -77,12 +77,16 @@ export default defineComponent({
       mealData.mealInstructions = newVal.strInstructions
       for (let i = 1; i <= 20; i++) {
         if (newVal['strIngredient' + i]) {
-          mealData.mealIngrendients.push(`${newVal['strIngredient' + i]} -> ${newVal['strMeasure' + i]}`)
+          mealData.mealIngrendients.push(
+            `${newVal['strIngredient' + i]} -> ${newVal['strMeasure' + i]}`
+          )
         }
       }
     })
 
-    const getMealData = computed(() => { return [mealData] })
+    const getMealData = computed(() => {
+      return [mealData]
+    })
 
     return {
       getMealInfo,
@@ -103,12 +107,12 @@ export default defineComponent({
   padding: 10px 30px;
   position: absolute;
   top: 10vh;
-  margin-bottom:10vh;
+  margin-bottom: 10vh;
 
   &__title {
     padding-bottom: 8px;
     border-bottom: 2px solid #000;
-    margin: 12px 0 28px 0;
+    margin: 12px 0 20px 0;
   }
 
   &__media {
@@ -118,8 +122,8 @@ export default defineComponent({
     }
 
     &:hover &__link {
-      animation:popup 0.3s ease-in-out;
-      opacity:1;
+      animation: popup 0.35s ease-in-out;
+      opacity: 1;
     }
   }
 
@@ -145,7 +149,7 @@ export default defineComponent({
     background: rgba(0, 0, 0, 0.8);
     color: #fff;
     cursor: pointer;
-    opacity:0;
+    opacity: 0;
 
     &:hover {
       background: rgba(0, 0, 0, 1);
@@ -161,6 +165,7 @@ export default defineComponent({
     background-color: lightsalmon;
     display: inline-block;
     padding: 3px 5px;
+    margin-top:10px;
     border-radius: 5px;
     text-transform: uppercase;
   }
@@ -177,12 +182,12 @@ export default defineComponent({
 
 @keyframes popup {
   0% {
-    opacity:0;
-    transform:translate(-50%,10px);
+    opacity: 0;
+    transform: translate(-50%, 10px);
   }
   100% {
-    opacity:1;
-    transform:translate(-50%,0);
+    opacity: 1;
+    transform: translate(-50%, 0);
   }
 }
 </style>
