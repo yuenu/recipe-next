@@ -129,12 +129,12 @@ export default defineComponent({
     object-fit: cover;
     width: 100%;
     max-height:200px;
-    border-radius:5px 5px 0 0;
-    transition:all 500ms ease-in-out;
+    border-radius:3px 3px 0 0;
+    transition:all 1000ms ease-in-out;
   }
 
   &__box:hover &__img {
-    transform:scale(1.1);
+    transform:scale(1.25);
   }
 
   &__title {

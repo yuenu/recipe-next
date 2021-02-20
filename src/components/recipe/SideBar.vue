@@ -55,8 +55,8 @@ export default defineComponent({
       rgba(255, 255, 255, 0.7),
       rgba(255, 255, 255, 0.547)
     );
-    box-shadow: 0px 0px 5px rgb(117, 117, 117);
-    border-radius: 5px;
+    box-shadow: 0px 0px 3px rgb(117, 117, 117);
+    border-radius: 3px;
     margin: 10vh 0;
   }
 }
@@ -71,11 +71,11 @@ export default defineComponent({
   }
 
   &__box:first-of-type {
-    border-radius: 5px 5px 0 0;
+    border-radius: 3px 3px 0 0;
   }
 
   &__box:last-of-type {
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 3px 3px;
   }
 
   &__box:not(:last-of-type) {
