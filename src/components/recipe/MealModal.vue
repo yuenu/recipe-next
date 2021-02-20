@@ -31,7 +31,7 @@
       </div>
       <div class="meal__info">
         <h2 class="meal__info__title">Instruction</h2>
-        <p class="meal__info__content" v-html="meal.mealInstructions"></p>
+        <p class="meal__info__content" v-html="meal.mealInstructions.replace(/\r?\n/g, '<br />')"></p>
       </div>
       <div class="meal__ingrendients">
         <h2 class="meal__ingrendients__title">ingredients</h2>
@@ -93,7 +93,7 @@ export default defineComponent({
           )
         }
       }
-      console.log(newVal)
+      console.log('1:', mealData)
     })
 
     const getMealData = computed(() => {
