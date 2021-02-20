@@ -12,16 +12,16 @@
         :key="meal.idMeal"
         @click="setModalOpen(meal.idMeal)"
       >
-        <img
-          :src="meal.strMealThumb + '/preview'"
-          :alt="meal.strMeal"
-          class="card__img"
-        />
+        <div class="card__pic">
+          <img
+            :src="meal.strMealThumb"
+            :alt="meal.strMeal"
+            class="card__img"
+          />
+        </div>
         <div class="card__content">
           <div class="card__title">{{ meal.strMeal }}</div>
-          <div class="card__text">
-            {{ meal.strInstructions || 'strInstructions' }}
-          </div>
+
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@ export default defineComponent({
   padding: 20px 10px;
   margin: 0 auto;
   height: fit-content;
-  columns: 2 auto;
+  columns: 250px;
   column-gap: 0;
   background: linear-gradient(
     to bottom,
@@ -84,28 +84,31 @@ export default defineComponent({
     rgba(255, 255, 255, 0.42)
   );
   backdrop-filter: blur(10px);
-  box-shadow: 0px 2px 5px #000;
-  border-radius: 10px;
+  box-shadow: 0px 2px 3px rgb(117, 117, 117);
+  border-radius: 0px;
   margin-top: calc(10vh + 370px);
   margin-bottom: 2rem;
+  border:1px solid #ccc;
 
   &__box {
     break-inside: avoid;
     color: #ffffff;
-    border-radius: 12px;
+    border-radius: 5px;
     max-width: 250px;
     width: 100%;
+    height: fit-content;
+    min-height:274px;
     margin: 0 auto;
-    height: 240px;
     overflow: hidden;
     cursor: pointer;
-    background: rgb(196, 196, 196);
-    margin: 10px;
+    background:#eee;
     text-align: center;
-    padding: 0 20px;
+    border:1px solid #ccc;
+    margin-bottom:14px;
+    overflow:hidden;
 
     &:hover {
-      background: rgb(190, 190, 190);
+      background: rgb(218, 218, 218);
     }
   }
 
@@ -113,23 +116,54 @@ export default defineComponent({
     margin-top: 0;
   }
 
-  &__img {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 20px 0 16px 0;
+  &__pic {
+    width:100%;
+    height:100%;
+    max-width: 250px;
+    max-height:200px;
+    overflow:hidden;
+    margin-bottom:4px;
   }
 
-  &__content {
-    color: rgb(20, 20, 20);
+  &__img {
+    object-fit: cover;
+    width: 100%;
+    max-height:200px;
+    border-radius:5px 5px 0 0;
+    transition:all 500ms ease-in-out;
+  }
+
+  &__box:hover &__img {
+    transform:scale(1.1);
   }
 
   &__title {
-    font-size: 1.2rem;
-    display: inline-block;
-    border-bottom: 1px solid #000;
-    margin-bottom: 20px;
+    color: #d57d1f;
+    font-size: 1rem;
+    margin:0 10px;
+    position:relative;
+    font-family:'Syne Tactile', cursive;
+    font-weight:600;
+    letter-spacing: 1px;
+
+    &::before {
+      content:'';
+      width:0%;
+      height:2px;
+      background:red;
+      position:absolute;
+      bottom:-2px;
+      left:0;
+      transition:all 300ms ease;
+    }
+
+    &::before:hover {
+      width:100%;
+    }
   }
+}
+
+.card__box:hover .card__title {
+  color:rgb(241, 66, 66);
 }
 </style>

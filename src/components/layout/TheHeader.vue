@@ -12,9 +12,27 @@
       <SearchForm class="search" />
       <div class="container__left">
         <ul class="item__list">
-          <li><router-link to="/" class="item__link othersPro">其他作品</router-link></li>
-          <li><router-link to="/" class="item__link collect">收藏食譜</router-link></li>
-          <li><router-link to="/editProfile" class="item__link login">個人設定</router-link></li>
+          <li>
+            <a
+              href="https://profile-d6420.firebaseapp.com/"
+              class="item__link othersPro"
+              target="_blank"
+            >
+              其他作品
+            </a>
+          </li>
+          <li>
+            <router-link
+              to="/"
+              class="item__link collect"
+            >收藏食譜</router-link>
+          </li>
+          <li>
+            <router-link
+              to="/editProfile"
+              class="item__link login"
+            >個人設定</router-link>
+          </li>
         </ul>
       </div>
     </div>

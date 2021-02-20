@@ -4,7 +4,7 @@
       <h1 class="card__title">個人資料</h1>
       <form @submit.prevent="submitProfile">
         <div class="card__input user">
-          <label for="uName"><span class="card__label">UserName:</span>  {{ fakeData[0].userName }}</label>
+          <label for="uName"><span class="card__label">username:</span>  {{ fakeData[0].userName }}</label>
           <input type="text" placeholder="Your user name" />
         </div>
         <div class="card__input password">

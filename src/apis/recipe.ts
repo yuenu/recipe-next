@@ -22,5 +22,6 @@ export const searchByCategory = async (category: string) => {
 
 export const searchById = async (id: string) => {
   const res = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
+  console.log(res)
   return res.data.meals
 }

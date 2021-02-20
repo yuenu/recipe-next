@@ -1,12 +1,12 @@
 <template>
-  <div class="banner">
-    <div class="banner__section">
+  <div class="carousel">
+    <div class="carousel__section">
       <img
         v-for="img in getShowImg"
         :key="img.id"
         :src="img.src"
         :alt="img.name"
-        class="banner__img"
+        class="carousel__img"
       />
       <Arrow class="arrow-left" @click="prev" />
       <Arrow class="arrow-right" @click="next" />
@@ -118,7 +118,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.banner {
+.carousel {
   position: absolute;
   top: 10vh;
   left: 50%;
@@ -147,7 +147,7 @@ export default defineComponent({
   }
 }
 
-.banner__section {
+.carousel__section {
   position: relative;
   height: 100%;
   width: 100%;

@@ -55,8 +55,8 @@ export default defineComponent({
       rgba(255, 255, 255, 0.7),
       rgba(255, 255, 255, 0.547)
     );
-    box-shadow: 1px 5px 5px rgb(117, 117, 117);
-    border-radius: 16px;
+    box-shadow: 0px 0px 5px rgb(117, 117, 117);
+    border-radius: 5px;
     margin: 10vh 0;
   }
 }
@@ -64,30 +64,32 @@ export default defineComponent({
 .category {
   &__box {
     display: flex;
-    padding: 10px 20px;
     align-items: center;
     cursor: pointer;
+    padding: 8px 10px 8px 10px;
+    color:rgb(10,10,10);
   }
 
   &__box:first-of-type {
-    border-radius: 16px 16px 0 0;
+    border-radius: 5px 5px 0 0;
   }
 
   &__box:last-of-type {
-    border-radius: 0 0 16px 16px;
+    border-radius: 0 0 5px 5px;
   }
 
   &__box:not(:last-of-type) {
-    border-bottom: 1px solid rebeccapurple;
+    border-bottom: 1px solid rgb(57, 57, 57);
   }
 
   &__box:hover {
-    background: rgba(220, 220, 220, 1);
+    background: rgb(41, 44, 56);
+    color:#eee;
   }
 
   &__img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
     border: 1px solid #eee;
@@ -98,7 +100,6 @@ export default defineComponent({
     margin-left: 20px;
     font-size: 0.9rem;
     font-weight: 700;
-    letter-spacing: 1.4px;
   }
 }
 
