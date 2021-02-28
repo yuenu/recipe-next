@@ -21,7 +21,6 @@
         </div>
         <div class="card__content">
           <div class="card__title">{{ meal.strMeal }}</div>
-
         </div>
       </div>
     </div>
@@ -86,9 +85,8 @@ export default defineComponent({
   backdrop-filter: blur(10px);
   box-shadow: 0px 2px 3px rgb(117, 117, 117);
   border-radius: 0px;
-  margin-top: calc(10vh + 370px);
-  margin-bottom: 2rem;
-  border:1px solid #ccc;
+  margin: 5vh 0;
+  border: 1px solid #ccc;
 
   &__box {
     break-inside: avoid;
@@ -97,15 +95,15 @@ export default defineComponent({
     max-width: 250px;
     width: 100%;
     height: fit-content;
-    min-height:274px;
+    min-height: 274px;
     margin: 0 auto;
     overflow: hidden;
     cursor: pointer;
-    background:#eee;
+    background: #eee;
     text-align: center;
-    border:1px solid #ccc;
-    margin-bottom:14px;
-    overflow:hidden;
+    border: 1px solid #ccc;
+    margin-bottom: 14px;
+    overflow: hidden;
 
     &:hover {
       background: rgb(218, 218, 218);
@@ -117,53 +115,53 @@ export default defineComponent({
   }
 
   &__pic {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     max-width: 250px;
-    max-height:200px;
-    overflow:hidden;
-    margin-bottom:4px;
+    max-height: 200px;
+    overflow: hidden;
+    margin-bottom: 4px;
   }
 
   &__img {
     object-fit: cover;
     width: 100%;
-    max-height:200px;
-    border-radius:3px 3px 0 0;
-    transition:all 1000ms ease-in-out;
+    max-height: 200px;
+    border-radius: 3px 3px 0 0;
+    transition: all 1000ms ease-in-out;
   }
 
   &__box:hover &__img {
-    transform:scale(1.25);
+    transform: scale(1.25);
   }
 
   &__title {
     color: #d57d1f;
     font-size: 1rem;
-    margin:0 10px;
-    position:relative;
-    font-family:'Syne Tactile', cursive;
-    font-weight:600;
+    margin: 0 10px;
+    position: relative;
+    font-family: 'Syne Tactile', cursive;
+    font-weight: 600;
     letter-spacing: 1px;
 
     &::before {
-      content:'';
-      width:0%;
-      height:2px;
-      background:red;
-      position:absolute;
-      bottom:-2px;
-      left:0;
-      transition:all 300ms ease;
+      content: '';
+      width: 0%;
+      height: 2px;
+      background: red;
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      transition: all 300ms ease;
     }
 
     &::before:hover {
-      width:100%;
+      width: 100%;
     }
   }
 }
 
 .card__box:hover .card__title {
-  color:rgb(241, 66, 66);
+  color: #f14242;
 }
 </style>

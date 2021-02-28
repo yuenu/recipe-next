@@ -93,7 +93,6 @@ export default defineComponent({
           )
         }
       }
-      console.log('1:', mealData)
     })
 
     const getMealData = computed(() => {

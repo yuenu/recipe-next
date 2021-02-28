@@ -48,5 +48,6 @@ body {
   display: flex;
   flex-direction: column;
   margin-bottom: 32px;
+  font-family: 'Roboto Mono', monospace;
 }
 </style>

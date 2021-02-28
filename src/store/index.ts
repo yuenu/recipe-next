@@ -3,7 +3,7 @@ import { searchByName, searchById, searchByCategory, getAllCategory } from '@/ap
 // import authModuel from './modules/auth/index'
 // import requestsModule from './modules/requests/index'
 
-interface Recipe {
+type Recipe = {
   random: object
   meals: object
   meal: object
@@ -32,20 +32,41 @@ export default createStore<Recipe>({
     }
   },
   actions: {
+    /**
+     * search mael by name
+     *
+     * @param input - Search input
+     */
     async SEARCH_MEALS ({ commit }, input: string) {
-      const res: object = await searchByName(input)
+      const res = await searchByName(input)
       commit('SET_MEALS', res)
     },
+
+    /**
+     *  get all category
+     */
     async GET_CATEGORY ({ commit }) {
-      const res: object = await getAllCategory()
+      const res = await getAllCategory()
       commit('SET_CATEGORY', res)
     },
+
+    /**
+     * get maels by which selected category
+     *
+     * @param category - meals category
+     */
     async GET_MEALS_BY_CATEGORY ({ commit }, category: string) {
-      const res: object = await searchByCategory(category)
+      const res = await searchByCategory(category)
       commit('SET_MEALS', res)
     },
+
+    /**
+     *  get meals by id
+     *
+     * @param mealId - meal id
+     */
     async GET_MEALS_BY_ID ({ commit }, mealId: string) {
-      const res: object = await searchById(mealId)
+      const res = await searchById(mealId)
       commit('SET_SINGLE_MEAL', res)
     }
   },
@@ -53,6 +74,10 @@ export default createStore<Recipe>({
     getMeals: state => {
       return state.meals
     },
+    /**
+     *
+     * @param state - 222
+     */
     getCategory: state => {
       return state.category
     },

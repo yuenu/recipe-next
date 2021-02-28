@@ -8,8 +8,8 @@
         :alt="img.name"
         class="carousel__img"
       />
-      <Arrow class="arrow-left" @click="prev" />
-      <Arrow class="arrow-right" @click="next" />
+      <Arrow class="arrow-left" @click="onPrev" />
+      <Arrow class="arrow-right" @click="onNext" />
     </div>
 
     <br />
@@ -27,15 +27,13 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted } from 'vue'
-import Arrow from '@/components/UI/Arrow.vue'
 
 export default defineComponent({
-  components: {
-    Arrow
-  },
+
   setup () {
-    // Variables
     const sliderIndex = ref(1)
+
+    // Fake data
     const images = [
       {
         id: 1,
@@ -65,7 +63,11 @@ export default defineComponent({
     ]
     const imagesLen = images.length
 
-    // set Interval Timer
+    /**
+     * set Interval Timer
+     *
+     * @param {Number} timer - store interval time
+     */
     let timer: number
     const resetInterval = (timer: number) => {
       clearInterval(timer)
@@ -77,14 +79,19 @@ export default defineComponent({
       return timer
     }
 
-    // Control the image index
-    const prev = () => {
+    /**
+     * Backward to previous the image
+     */
+    const onPrev = () => {
       timer = resetInterval(timer)
       sliderIndex.value--
       if (sliderIndex.value < 1) sliderIndex.value = imagesLen
     }
-    // Control the image index
-    const next = () => {
+
+    /**
+     * Forward to next the image
+     */
+    const onNext = () => {
       timer = resetInterval(timer)
       sliderIndex.value++
       if (sliderIndex.value >= imagesLen + 1) sliderIndex.value = 1
@@ -94,7 +101,12 @@ export default defineComponent({
     const getShowImg = computed(() =>
       images.filter(img => img.id === sliderIndex.value)
     )
-    // Choose which 'dot' and get the index to switch the image by the indwz
+
+    /**
+     * Swtich the index by clicked dot
+     *
+     * @param {string} index - clciked index
+     */
     const currentSlide = (index: number) => {
       timer = resetInterval(timer)
       sliderIndex.value = index
@@ -108,8 +120,8 @@ export default defineComponent({
       sliderIndex,
       images,
       imagesLen,
-      prev,
-      next,
+      onPrev,
+      onNext,
       getShowImg,
       currentSlide
     }
@@ -119,13 +131,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .carousel {
-  position: absolute;
-  top: 10vh;
-  left: 50%;
-  transform: translateX(-50%);
   max-width: 600px;
   width: 100%;
   height: 270px;
+  margin:10vh 0;
   background: linear-gradient(
     to left bottom,
     rgba(255, 255, 255, 0.4),

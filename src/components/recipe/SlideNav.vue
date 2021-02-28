@@ -1,0 +1,183 @@
+<template>
+  <div class="carouselNav">
+    <h2 class="carouselNav__title">Meal Cateories</h2>
+    <Arrow :class="['arrow__left', { hidden: leftHidden }]" @click="prev" />
+    <Arrow :class="['arrow__right', { hidden: rightHidden }]" @click="next" />
+    <div class="category" ref="carosuel">
+      <div
+        class="category__box"
+        v-for="cat in categories"
+        :key="cat.idCategory"
+        @click="getCatgoryMeals(cat.strCategory)"
+      >
+        <img
+          class="category__img"
+          :src="cat.strCategoryThumb"
+          :alt="cat.strCategory"
+        />
+        <p class="category__text">{{ cat.strCategory }}</p>
+      </div>
+    </div>
+  </div>
+</template>
+<script lang="ts">
+import { defineComponent, ref, computed, watchEffect } from 'vue'
+import { useStore } from 'vuex'
+
+export default defineComponent({
+  setup () {
+    /**
+     * Get categories data
+     */
+    const store = useStore()
+    const sliderIndex = ref(0)
+    const categories = computed(() => {
+      return store.getters.getCategory
+    })
+
+    const getCatgoryMeals = (category: string) => {
+      store.dispatch('GET_MEALS_BY_CATEGORY', category)
+    }
+
+    /**
+     * Slide Control
+     *
+     * @param {HTMLElement} carosuel - carosuel container
+     * @param {boolean} leftHidden - control left arrow display
+     * @param {boolean} rightHidden - control right arrow display
+     * @param {number} counter - slide count
+     * @param {number} size - container translateX size
+     * @param {number} totlaSlideCount - Count the slide count which container only show 6 categories
+     */
+    const carosuel = ref<HTMLElement | null>(null)
+    const leftHidden = ref(false)
+    const rightHidden = ref(false)
+
+    const counter = ref(0)
+    const size = 540
+    const totlaSlideCount = categories.value.length % 6
+
+    const next = () => {
+      if (carosuel.value && counter.value < totlaSlideCount) {
+        counter.value++
+        carosuel.value.style.transform =
+          'translateX(' + -size * counter.value + 'px)'
+      }
+    }
+
+    const prev = () => {
+      if (carosuel.value && counter.value > 0) {
+        counter.value--
+        carosuel.value.style.transform =
+          'translateX(' + -size * counter.value + 'px)'
+      }
+    }
+
+    watchEffect(() => {
+      leftHidden.value = counter.value === 0
+      rightHidden.value = counter.value === totlaSlideCount
+    })
+
+    return {
+      sliderIndex,
+      categories,
+      getCatgoryMeals,
+      next,
+      prev,
+      carosuel,
+      leftHidden,
+      rightHidden
+    }
+  }
+})
+</script>
+<style lang="scss" scoped>
+.carouselNav {
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid rgb(175, 175, 175);
+  height: 170px;
+  padding: 0 10px;
+  position: relative;
+  overflow: hidden;
+
+  &__title {
+    padding: 5px 0;
+    text-align: center;
+    color: #d57d1f;
+    border-bottom: 5px solid #f14242;
+    border-radius: 4px;
+  }
+}
+
+.category {
+  height: 130px;
+  position: relative;
+  display: flex;
+  transition: 0.5s transform ease;
+
+  &__box {
+    margin: auto 10px;
+    cursor: pointer;
+    max-width: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #eee;
+    box-shadow: 0px 0px 3px #000;
+    margin: 0 auto;
+    user-select: none;
+  }
+
+  &__text {
+    font-size: 0.7rem;
+    width: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  :hover &__title {
+    white-space: normal;
+  }
+}
+
+.arrow__left,
+.arrow__right {
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  z-index: 1;
+  transition: all 0.3s ease-out;
+  background: rgb(132, 132, 132);
+  padding: 4px 0;
+
+  &:hover {
+    fill: #000;
+  }
+}
+
+.arrow__left {
+  left: 0;
+  transform: rotate(180deg);
+}
+
+.arrow__right {
+  right: 0;
+}
+
+.arrow__left.hidden,
+.arrow__right.hidden {
+  opacity: 0;
+}
+</style>

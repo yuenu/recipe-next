@@ -20,28 +20,32 @@ import { useStore } from 'vuex'
 
 export default defineComponent({
   setup () {
+    const store = useStore()
     const searchInput = ref('')
 
-    const store = useStore()
     const submitForm = () => {
       store.dispatch('SEARCH_MEALS', searchInput.value)
       searchInput.value = ''
     }
 
+    const clearInput = () => {
+      searchInput.value = ''
+    }
+
+    /**
+     * EventListener the clicked where input section or others section
+     *
+     */
     const inputActive = ref(false)
     window.addEventListener('click', (event: MouseEvent) => {
-      const target = event.target as HTMLElement
-      if (target.classList[0] === 'search__tern' || target.classList[0] === 'search__icon') {
+      const inputTarget = event.target as HTMLElement
+      if (inputTarget.classList.contains('search__tern') || inputTarget.classList.contains('search__icon')) {
         inputActive.value = true
       } else {
         searchInput.value = ''
         inputActive.value = false
       }
     })
-
-    const clearInput = () => {
-      searchInput.value = ''
-    }
 
     return {
       searchInput,
