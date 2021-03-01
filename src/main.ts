@@ -9,7 +9,7 @@ import Arrow from '@/components/UI/Arrow.vue'
 
 const app = createApp(App)
 
-app.component('base-modal', BaseModal)
+app.component('BaseModal', BaseModal)
   .component('Arrow', Arrow)
   .use(store)
   .use(router)

@@ -3,7 +3,7 @@
     <input
       type="checkbox"
       id="check"
-      v-model="mobileMenuControl"
+      v-model="isMobileOpen"
     />
     <div class="container">
       <div class="logo">
@@ -35,6 +35,7 @@
           </li>
         </ul>
       </div>
+      <div class="ham"></div>
     </div>
     <div class="hamburger">
       <div class="hamburger__menu">
@@ -42,6 +43,35 @@
         <span class="menuicon-bottom"></span>
       </div>
     </div>
+    <BaseModal
+      @close="isMobileOpen = false"
+      :isMobileOpen="isMobileOpen"
+      class="mobile__modal"
+    >
+      <ul class="mobile__list">
+        <li class="mobile__item">
+          <a
+            href="https://profile-d6420.firebaseapp.com/"
+            class="mobile__link othersPro"
+            target="_blank"
+          >
+            其他作品
+          </a>
+        </li>
+        <li class="mobile__item">
+          <router-link
+            to="/"
+            class="mobile__link collect"
+          >收藏食譜</router-link>
+        </li>
+        <li class="mobile__item">
+          <router-link
+            to="/editProfile"
+            class="mobile__link login"
+          >個人設定</router-link>
+        </li>
+      </ul>
+    </BaseModal>
   </div>
 </template>
 
@@ -54,10 +84,10 @@ export default defineComponent({
     SearchForm
   },
   setup () {
-    const mobileMenuControl = ref(false)
+    const isMobileOpen = ref(false)
 
     return {
-      mobileMenuControl
+      isMobileOpen
     }
   }
 })
@@ -90,13 +120,17 @@ export default defineComponent({
   color: #f4a261;
   font-family: 'Syne Tactile', cursive;
   margin-bottom: 8px;
-  margin-left: 30px;
+  margin-left: 18px;
   -webkit-text-stroke: 1px red;
   -webkit-text-fill-color: transparent;
 
   &:hover {
     -webkit-text-fill-color: red;
   }
+}
+
+.search {
+  flex-grow: 1;
 }
 
 .item__list {
@@ -128,7 +162,6 @@ export default defineComponent({
   &__menu {
     width: 34px;
     height: 34px;
-    background: cadetblue;
     position: relative;
     display: none;
   }
@@ -174,6 +207,34 @@ export default defineComponent({
   transform: rotate(45deg) translate(-50%, 0);
 }
 
+.mobile {
+  &__list {
+    list-style-type: none;
+  }
+
+  &__link {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    padding: 20px 28px;
+    margin: 10px 0;
+    border-radius: 3px;
+    font-size: 26px;
+    background: rgb(72, 72, 72);
+    transition: all 300ms ease;
+  }
+
+  &__link:hover {
+    background: rgb(100, 100, 100);
+  }
+}
+
+@media (max-width: 1100px) {
+  .item__list {
+    margin-right: 50px;
+  }
+}
+
 @media (max-width: 768px) {
   #check,
   .hamburger__menu {
@@ -182,6 +243,12 @@ export default defineComponent({
 
   .container__left {
     display: none;
+  }
+
+  .ham {
+    width: 53px;
+    height: 100%;
+    display: flex;
   }
 }
 </style>

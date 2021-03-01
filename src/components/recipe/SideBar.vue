@@ -102,10 +102,4 @@ export default defineComponent({
     font-weight: 700;
   }
 }
-
-@media (max-width: 930px) {
-  .sidebar {
-    display: none;
-  }
-}
 </style>

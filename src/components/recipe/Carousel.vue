@@ -29,7 +29,6 @@
 import { defineComponent, ref, computed, onMounted } from 'vue'
 
 export default defineComponent({
-
   setup () {
     const sliderIndex = ref(1)
 
@@ -131,10 +130,9 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .carousel {
-  max-width: 600px;
   width: 100%;
   height: 270px;
-  margin:10vh 0;
+  margin: 10vh 0;
   background: linear-gradient(
     to left bottom,
     rgba(255, 255, 255, 0.4),
@@ -197,6 +195,6 @@ export default defineComponent({
 .dot.active,
 .dot:hover {
   background-color: #20ad96;
-  transform:scale(1.2);
+  transform: scale(1.2);
 }
 </style>

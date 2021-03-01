@@ -73,7 +73,6 @@ export default defineComponent({
 .card {
   max-width: 600px;
   padding: 20px 10px;
-  margin: 0 auto;
   height: fit-content;
   columns: 250px;
   column-gap: 0;
@@ -85,7 +84,7 @@ export default defineComponent({
   backdrop-filter: blur(10px);
   box-shadow: 0px 2px 3px rgb(117, 117, 117);
   border-radius: 0px;
-  margin: 5vh 0;
+  margin: 5vh auto;
   border: 1px solid #ccc;
 
   &__box {

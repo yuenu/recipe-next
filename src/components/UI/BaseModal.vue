@@ -1,7 +1,6 @@
 <template>
-  <div class="modal">
+  <div :class="['modal']" v-if="isOpen">
     <slot></slot>
-
     <div class="close" @click="close">
       <Close />
     </div>
@@ -9,26 +8,41 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted, computed } from 'vue'
 import Close from './Close.vue'
 
 export default defineComponent({
   components: {
     Close
   },
+  props: {
+    isMobileOpen: {
+      type: Boolean,
+      required: true
+    }
+  },
   emits: ['close'],
-  setup (_, { emit }) {
+  setup (props, { emit }) {
     const close = () => {
       emit('close')
     }
 
-    return { close }
+    const isOpen = computed(() => {
+      return props.isMobileOpen
+    })
+
+    onMounted(() => {
+      console.log(props)
+    })
+
+    return { close, isOpen }
   }
 })
 </script>
 
 <style lang="scss" scoped>
 .modal {
+  display: block;
   position: fixed;
   top: 0;
   left: 0;
@@ -37,19 +51,24 @@ export default defineComponent({
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   z-index: 50;
   overflow: auto;
 }
 
+.modal.hide {
+  display: none;
+}
+
 .close {
-  position: absolute;
+  position: fixed;
   top: 2%;
-  right: 2.5%;
+  right: 0%;
   cursor: pointer;
+  margin-right: 2rem;
 
   svg {
     fill: azure;

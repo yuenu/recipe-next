@@ -41,6 +41,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.home {
+  width: 100%;
+}
+
 .container {
   display: flex;
   width: 100%;
@@ -61,6 +65,37 @@ export default defineComponent({
 
   &__right {
     max-width: 300px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .main__left {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 940px) {
+  .main__left {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .main__right {
+    display: none;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .main__left {
+    margin-right: 0;
+    display: block;
+  }
+}
+
+@media (max-width:476px) {
+  .main__left {
+    padding: 0 8px;
   }
 }
 </style>

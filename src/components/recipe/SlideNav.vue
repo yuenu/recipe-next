@@ -55,10 +55,12 @@ export default defineComponent({
 
     const counter = ref(0)
     const size = 540
-    const totlaSlideCount = categories.value.length % 6
+    const totlaSlideCount = computed(() => {
+      return categories.value.length % 6
+    })
 
     const next = () => {
-      if (carosuel.value && counter.value < totlaSlideCount) {
+      if (carosuel.value && counter.value < totlaSlideCount.value) {
         counter.value++
         carosuel.value.style.transform =
           'translateX(' + -size * counter.value + 'px)'
@@ -75,7 +77,16 @@ export default defineComponent({
 
     watchEffect(() => {
       leftHidden.value = counter.value === 0
-      rightHidden.value = counter.value === totlaSlideCount
+      rightHidden.value = counter.value === totlaSlideCount.value
+      console.log('left', leftHidden.value, 'count:', counter.value)
+      console.log(
+        'right',
+        rightHidden.value,
+        'count:',
+        counter.value,
+        'totlaSlideCount',
+        totlaSlideCount
+      )
     })
 
     return {
@@ -94,19 +105,21 @@ export default defineComponent({
 <style lang="scss" scoped>
 .carouselNav {
   width: 100%;
+  max-width: 600px;
   border-radius: 3px;
   border: 1px solid rgb(175, 175, 175);
   height: 170px;
   padding: 0 10px;
   position: relative;
   overflow: hidden;
+  margin: 0 auto;
 
   &__title {
     padding: 5px 0;
     text-align: center;
     color: #d57d1f;
-    border-bottom: 5px solid #f14242;
-    border-radius: 4px;
+    border-bottom: 3px solid #f14242;
+    border-radius: 2px;
   }
 }
 
