@@ -1,7 +1,10 @@
 <template>
-  <base-modal>
+  <div class="meal__modal">
+    <div class="close" @click="close">
+      <Close />
+    </div>
     <div
-      class="meal"
+      class="meal__container"
       v-for="meal in getMealData"
       :key="meal.mealId"
     >
@@ -45,18 +48,24 @@
         </li>
       </div>
     </div>
-  </base-modal>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, computed, watch, reactive } from 'vue'
 import { useStore } from 'vuex'
+import Close from '@/components/UI/Close.vue'
 
 export default defineComponent({
+  components: {
+    Close
+  },
   props: {
     mealId: String
   },
-  setup (props) {
+  emits: ['close'],
+  setup (props, { emit }) {
+    // get data by meal's id
     const store = useStore()
     onMounted(() => {
       store.dispatch('GET_MEALS_BY_ID', props.mealId)
@@ -71,6 +80,10 @@ export default defineComponent({
       mealYoutubeLink: '',
       mealInstructions: '',
       mealIngredients: [] as string[]
+    })
+
+    const getMealData = computed(() => {
+      return [mealData]
     })
 
     const getMealInfo = computed(() => {
@@ -95,13 +108,14 @@ export default defineComponent({
       }
     })
 
-    const getMealData = computed(() => {
-      return [mealData]
-    })
+    const close = () => {
+      emit('close')
+    }
 
     return {
       getMealInfo,
-      getMealData
+      getMealData,
+      close
     }
   }
 })
@@ -109,14 +123,35 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .meal {
-  max-width: 500px;
-  width: 100%;
-  min-height: 100px;
-  background: rgba(255, 255, 255, 0.945);
-  box-shadow: 0px 2px 5px rgb(255, 255, 255);
-  border-radius: 8px;
-  padding: 10px 30px;
-  margin: 10vh 0;
+
+  &__modal {
+      display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 50;
+  overflow: auto;
+  }
+
+  &__container {
+    max-width: 500px;
+    width: 100%;
+    min-height: 100px;
+    background: rgba(255, 255, 255, 0.945);
+    box-shadow: 0px 2px 5px rgb(255, 255, 255);
+    border-radius: 8px;
+    padding: 10px 30px;
+    margin: 10vh 0;
+  }
 
   &__title {
     padding-bottom: 8px;
@@ -218,6 +253,18 @@ export default defineComponent({
 
 .meal__ingrendients__content {
   margin: 3px 0 0 10px;
+}
+
+.close {
+  position: fixed;
+  top: 2%;
+  right: 0%;
+  cursor: pointer;
+  margin-right: 2rem;
+
+  svg {
+    fill: azure;
+  }
 }
 
 @keyframes popup {
