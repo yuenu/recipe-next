@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed } from 'vue'
+import { defineComponent, computed } from 'vue'
 import Close from './Close.vue'
 
 export default defineComponent({
@@ -29,10 +29,6 @@ export default defineComponent({
 
     const isOpen = computed(() => {
       return props.isMobileOpen
-    })
-
-    onMounted(() => {
-      console.log(props)
     })
 
     return { close, isOpen }

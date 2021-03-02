@@ -1,9 +1,9 @@
 <template>
-  <MealModal
+  <!-- <MealModal
     v-if="isModalOpen"
     @close="setModalClose"
     :mealId="mealId"
-  />
+  /> -->
   <div class="cards">
     <div class="card">
       <div
@@ -29,17 +29,13 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue'
-import { useStore } from 'vuex'
-import MealModal from './MealModal.vue'
+import recipeStore from '@/store/recipe'
 
 export default defineComponent({
-  components: {
-    MealModal
-  },
   setup () {
-    const store = useStore()
+    // Get meals data
     const searchedMeals = computed(() => {
-      return store.getters.getMeals
+      return recipeStore.getters.getMeals
     })
     const mealId = ref('')
 

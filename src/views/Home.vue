@@ -16,12 +16,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { defineComponent, onBeforeMount } from 'vue'
 import SideBar from '@/components/recipe/SideBar.vue'
 import Carousel from '@/components/recipe/Carousel.vue'
 import MealLists from '@/components/recipe/MealLists.vue'
 import SlideNav from '@/components/recipe/SlideNav.vue'
+import recipeStore from '@/store/recipe'
 
 export default defineComponent({
   name: 'Home',
@@ -32,9 +32,8 @@ export default defineComponent({
     SlideNav
   },
   setup () {
-    const store = useStore()
-    onMounted(() => {
-      store.dispatch('GET_CATEGORY')
+    onBeforeMount(async () => {
+      await recipeStore.GET_CATEGORY()
     })
   }
 })

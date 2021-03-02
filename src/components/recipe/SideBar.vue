@@ -20,18 +20,15 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import { useStore } from 'vuex'
+import recipeStore from '@/store/recipe'
 
 export default defineComponent({
   setup () {
-    const store = useStore()
-    const categories = computed(() => {
-      return store.getters.getCategory
-    })
-
     const getCatgoryMeals = (category: string) => {
-      store.dispatch('GET_MEALS_BY_CATEGORY', category)
+      recipeStore.GET_MEALS_BY_CATEGORY(category)
     }
+
+    const categories = computed(() => recipeStore.getters.getCategory)
 
     return {
       categories,

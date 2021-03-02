@@ -9,6 +9,7 @@
         v-for="cat in categories"
         :key="cat.idCategory"
         @click="getCatgoryMeals(cat.strCategory)"
+        ref="mealBox"
       >
         <img
           class="category__img"
@@ -21,22 +22,19 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed, watchEffect } from 'vue'
-import { useStore } from 'vuex'
+import { defineComponent, ref, computed, watchEffect, onMounted } from 'vue'
+import recipeStore from '@/store/recipe'
 
 export default defineComponent({
   setup () {
     /**
      * Get categories data
      */
-    const store = useStore()
     const sliderIndex = ref(0)
-    const categories = computed(() => {
-      return store.getters.getCategory
-    })
+    const categories = computed(() => recipeStore.getters.getCategory)
 
     const getCatgoryMeals = (category: string) => {
-      store.dispatch('GET_MEALS_BY_CATEGORY', category)
+      recipeStore.GET_MEALS_BY_CATEGORY(category)
     }
 
     /**
@@ -50,17 +48,17 @@ export default defineComponent({
      * @param {number} totlaSlideCount - Count the slide count which container only show 6 categories
      */
     const carosuel = ref<HTMLElement | null>(null)
+    const mealBox = ref<HTMLElement | null>(null)
     const leftHidden = ref(false)
     const rightHidden = ref(false)
 
     const counter = ref(0)
-    const size = 540
-    const totlaSlideCount = computed(() => {
-      return categories.value.length % 6
-    })
+    const size = 541
+    // const totalCount = 0
+    const totlaSlideCount = 2
 
     const next = () => {
-      if (carosuel.value && counter.value < totlaSlideCount.value) {
+      if (carosuel.value && counter.value < totlaSlideCount) {
         counter.value++
         carosuel.value.style.transform =
           'translateX(' + -size * counter.value + 'px)'
@@ -77,16 +75,19 @@ export default defineComponent({
 
     watchEffect(() => {
       leftHidden.value = counter.value === 0
-      rightHidden.value = counter.value === totlaSlideCount.value
-      console.log('left', leftHidden.value, 'count:', counter.value)
-      console.log(
-        'right',
-        rightHidden.value,
-        'count:',
-        counter.value,
-        'totlaSlideCount',
-        totlaSlideCount
-      )
+      rightHidden.value = counter.value === totlaSlideCount
+    })
+
+    onMounted(() => {
+      if (carosuel.value && mealBox.value) {
+        const containerWidth = carosuel.value.clientWidth
+        const boxWidth = mealBox.value.clientWidth
+        console.log('carosuel', containerWidth)
+        console.log('mealBox', boxWidth)
+        console.log(containerWidth % boxWidth)
+      }
+
+      console.log(categories.value)
     })
 
     return {
@@ -96,6 +97,7 @@ export default defineComponent({
       next,
       prev,
       carosuel,
+      mealBox,
       leftHidden,
       rightHidden
     }
