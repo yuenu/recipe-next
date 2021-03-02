@@ -78,15 +78,6 @@ export default defineComponent({
     watchEffect(() => {
       leftHidden.value = counter.value === 0
       rightHidden.value = counter.value === totlaSlideCount.value
-      console.log('left', leftHidden.value, 'count:', counter.value)
-      console.log(
-        'right',
-        rightHidden.value,
-        'count:',
-        counter.value,
-        'totlaSlideCount',
-        totlaSlideCount
-      )
     })
 
     return {

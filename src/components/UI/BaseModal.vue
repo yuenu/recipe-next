@@ -31,10 +31,6 @@ export default defineComponent({
       return props.isMobileOpen
     })
 
-    onMounted(() => {
-      console.log(props)
-    })
-
     return { close, isOpen }
   }
 })
