@@ -74,6 +74,7 @@ export default defineComponent({
   max-width: 600px;
   padding: 20px 10px;
   height: fit-content;
+  min-height:600px;
   columns: 250px;
   column-gap: 0;
   background: linear-gradient(

@@ -109,7 +109,6 @@ export default defineComponent({
     rgba(255, 255, 255, 0.151),
     rgba(255, 255, 255, 0.42)
   );
-  backdrop-filter: blur(6px);
 
   &__title {
     padding: 5px 0;

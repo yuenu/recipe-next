@@ -19,6 +19,7 @@ export default defineComponent({
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Syne+Tactile&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 
 :root {
   --text-gray: #eee;
@@ -48,6 +49,7 @@ body {
   display: flex;
   flex-direction: column;
   margin-bottom: 32px;
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.5px;
 }
 </style>
