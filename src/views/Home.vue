@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount } from 'vue'
+import { defineComponent, onBeforeMount, inject } from 'vue'
 import SideBar from '@/components/recipe/SideBar.vue'
 import Carousel from '@/components/recipe/Carousel.vue'
 import MealLists from '@/components/recipe/MealLists.vue'
@@ -32,8 +32,10 @@ export default defineComponent({
     SlideNav
   },
   setup () {
+    const store = inject('store', recipeStore)
     onBeforeMount(async () => {
-      await recipeStore.GET_CATEGORY()
+      console.log('123', store)
+      await store.GET_CATEGORY()
     })
   }
 })

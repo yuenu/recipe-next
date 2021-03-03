@@ -5,14 +5,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, provide } from 'vue'
 import TheHeader from '@/components/layout/TheHeader.vue'
 import TheFooter from '@/components/layout/TheFooter.vue'
+import store from '@/store/recipe'
 
 export default defineComponent({
   components: {
     TheHeader,
     TheFooter
+  },
+  setup () {
+    provide('store', store)
   }
 })
 </script>
