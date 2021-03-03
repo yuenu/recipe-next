@@ -78,18 +78,6 @@ export default defineComponent({
       rightHidden.value = counter.value === totlaSlideCount
     })
 
-    onMounted(() => {
-      if (carosuel.value && mealBox.value) {
-        const containerWidth = carosuel.value.clientWidth
-        const boxWidth = mealBox.value.clientWidth
-        console.log('carosuel', containerWidth)
-        console.log('mealBox', boxWidth)
-        console.log(containerWidth % boxWidth)
-      }
-
-      console.log(categories.value)
-    })
-
     return {
       sliderIndex,
       categories,
