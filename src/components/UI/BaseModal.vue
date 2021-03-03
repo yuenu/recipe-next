@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed } from 'vue'
+import { defineComponent, computed } from 'vue'
 import Close from './Close.vue'
 
 export default defineComponent({

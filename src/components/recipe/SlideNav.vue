@@ -104,6 +104,12 @@ export default defineComponent({
   position: relative;
   overflow: hidden;
   margin: 0 auto;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.151),
+    rgba(255, 255, 255, 0.42)
+  );
+  backdrop-filter: blur(6px);
 
   &__title {
     padding: 5px 0;
@@ -163,7 +169,7 @@ export default defineComponent({
   cursor: pointer;
   z-index: 1;
   transition: all 0.3s ease-out;
-  background: rgb(132, 132, 132);
+  background: #20ad96;
   padding: 4px 0;
 
   &:hover {

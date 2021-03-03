@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <div class="bg"></div>
     <div class="container">
       <div class="main">
         <div class="main__left">
@@ -11,6 +12,7 @@
           <SideBar />
         </div>
       </div>
+      <Subscribe />
     </div>
   </div>
 </template>
@@ -22,6 +24,7 @@ import SideBar from '@/components/recipe/SideBar.vue'
 import Carousel from '@/components/recipe/Carousel.vue'
 import MealLists from '@/components/recipe/MealLists.vue'
 import SlideNav from '@/components/recipe/SlideNav.vue'
+import Subscribe from '@/components/recipe/Subscribe.vue'
 
 export default defineComponent({
   name: 'Home',
@@ -29,7 +32,8 @@ export default defineComponent({
     SideBar,
     Carousel,
     MealLists,
-    SlideNav
+    SlideNav,
+    Subscribe
   },
   setup () {
     const store = useStore()
@@ -43,10 +47,24 @@ export default defineComponent({
 <style lang="scss" scoped>
 .home {
   width: 100%;
+  position:relative;
+  background-color:rgba(203, 193, 180, 0.259);
+}
+
+.bg {
+  background: url('../assets/bg.jpg') no-repeat top right;
+  opacity:0.32;
+  z-index:-20;
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
 }
 
 .container {
   display: flex;
+  flex-direction: column;
   width: 100%;
 }
 
