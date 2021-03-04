@@ -5,7 +5,11 @@
       <form @submit.prevent="submitProfile">
         <div class="card__input user">
           <label for="uName"><span class="card__label">username:</span>  {{ fakeData[0].userName }}</label>
-          <input type="text" placeholder="Your user name" />
+          <input
+            type="text"
+            placeholder="Your user name"
+            autocomplete="username"
+          />
         </div>
         <div class="card__input password">
           <label for="uName"><span class="card__label">Eamil:</span>  {{ fakeData[0].email }}</label>
@@ -13,7 +17,11 @@
         </div>
         <div class="card__input password">
           <label for="uName"><span class="card__label">Password:</span></label>
-          <input type="password" placeholder="Your password" />
+          <input
+            type="password"
+            placeholder="Your password"
+            autocomplete="current-password"
+          />
         </div>
         <button class="button" type="submit">修改</button>
       </form>

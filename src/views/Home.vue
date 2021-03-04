@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 import SideBar from '@/components/recipe/SideBar.vue'
 import Carousel from '@/components/recipe/Carousel.vue'
@@ -37,9 +37,7 @@ export default defineComponent({
   },
   setup () {
     const store = useStore()
-    onMounted(() => {
-      store.dispatch('GET_CATEGORY')
-    })
+    onBeforeMount(() => store.dispatch('GET_CATEGORY'))
   }
 })
 </script>
@@ -48,7 +46,6 @@ export default defineComponent({
 .home {
   width: 100%;
   position:relative;
-  background-color:rgba(203, 193, 180, 0.259);
 }
 
 .bg {
@@ -74,7 +71,7 @@ export default defineComponent({
   justify-content: center;
 
   &__left {
-    width: 600px;
+    width: 650px;
     padding: 0 10px;
     display: flex;
     flex-direction: column;

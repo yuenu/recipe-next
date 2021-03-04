@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed, watch, reactive } from 'vue'
+import { defineComponent, onBeforeMount, computed, watch, reactive } from 'vue'
 import { useStore } from 'vuex'
 import Close from '@/components/UI/Close.vue'
 
@@ -67,7 +67,7 @@ export default defineComponent({
   setup (props, { emit }) {
     // get data by meal's id
     const store = useStore()
-    onMounted(() => {
+    onBeforeMount(() => {
       store.dispatch('GET_MEALS_BY_ID', props.mealId)
     })
 

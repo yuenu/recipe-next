@@ -21,7 +21,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed, watchEffect } from 'vue'
+import { defineComponent, ref, computed, watchEffect, onMounted } from 'vue'
 import { useStore } from 'vuex'
 
 export default defineComponent({
@@ -52,18 +52,23 @@ export default defineComponent({
     const carosuel = ref<HTMLElement | null>(null)
     const leftHidden = ref(false)
     const rightHidden = ref(false)
-
     const counter = ref(0)
-    const size = 540
+    const size = ref(540)
     const totlaSlideCount = computed(() => {
-      return categories.value.length % 6
+      return Math.floor((categories.value.length) / (Math.floor(size.value / 90)))
+    })
+
+    onMounted(() => {
+      if (carosuel.value) {
+        size.value = carosuel.value.clientWidth - 19
+      }
     })
 
     const next = () => {
       if (carosuel.value && counter.value < totlaSlideCount.value) {
         counter.value++
         carosuel.value.style.transform =
-          'translateX(' + -size * counter.value + 'px)'
+          'translateX(' + -size.value * counter.value + 'px)'
       }
     }
 
@@ -71,7 +76,7 @@ export default defineComponent({
       if (carosuel.value && counter.value > 0) {
         counter.value--
         carosuel.value.style.transform =
-          'translateX(' + -size * counter.value + 'px)'
+          'translateX(' + -size.value * counter.value + 'px)'
       }
     }
 
@@ -96,7 +101,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .carouselNav {
   width: 100%;
-  max-width: 600px;
   border-radius: 3px;
   border: 1px solid rgb(175, 175, 175);
   height: 170px;
@@ -170,6 +174,7 @@ export default defineComponent({
   transition: all 0.3s ease-out;
   background: #20ad96;
   padding: 4px 0;
+  pointer-events: auto;
 
   &:hover {
     fill: #000;
@@ -188,5 +193,6 @@ export default defineComponent({
 .arrow__left.hidden,
 .arrow__right.hidden {
   opacity: 0;
+  pointer-events: none;
 }
 </style>

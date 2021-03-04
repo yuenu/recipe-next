@@ -132,7 +132,7 @@ export default defineComponent({
 .carousel {
   width: 100%;
   height: 270px;
-  margin: 10vh 0;
+  margin: 10vh auto 7vh;
   background: linear-gradient(
     to left bottom,
     rgba(255, 255, 255, 0.4),
@@ -196,5 +196,11 @@ export default defineComponent({
 .dot:hover {
   background-color: #20ad96;
   transform: scale(1.2);
+}
+
+@media (max-width:940px) {
+  .carousel {
+    max-width:600px;
+  }
 }
 </style>

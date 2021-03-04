@@ -42,8 +42,6 @@ html {
 }
 
 body {
-  background: #eee;
-  font-family: sans-serif;
   width: 100%;
   min-height: calc(100vh - 91px);
   display: flex;

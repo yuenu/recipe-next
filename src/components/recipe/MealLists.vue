@@ -71,10 +71,9 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .card {
-  max-width: 600px;
-  padding: 20px 10px;
+  padding: 0 10px;
   height: fit-content;
-  min-height:600px;
+  min-height: 600px;
   columns: 250px;
   column-gap: 0;
   background: linear-gradient(
@@ -83,56 +82,46 @@ export default defineComponent({
     rgba(255, 255, 255, 0.42)
   );
   backdrop-filter: blur(10px);
-  box-shadow: 0px 2px 3px rgb(117, 117, 117);
-  border-radius: 0px;
-  margin: 5vh auto;
-  border: 1px solid #ccc;
+  border-radius: 3px;
 
   &__box {
     break-inside: avoid;
     color: #ffffff;
-    border-radius: 5px;
-    max-width: 250px;
+    border-radius: 2px;
+    max-width: 300px;
     width: 100%;
-    height: fit-content;
-    min-height: 274px;
+    height: 370px;
+    min-height: 230px;
     margin: 0 auto;
-    overflow: hidden;
     cursor: pointer;
-    background: #eee;
-    text-align: center;
+    text-align: left;
     border: 1px solid #ccc;
     margin-bottom: 14px;
     overflow: hidden;
+    transition: 0.3s all ease;
 
     &:hover {
       background: rgb(218, 218, 218);
     }
   }
 
-  &__box:first-of-type {
-    margin-top: 0;
-  }
+  // &__box:first-of-type {
+  //   margin-top: 0;
+  // }
 
   &__pic {
-    width: 100%;
-    height: 100%;
-    max-width: 250px;
-    max-height: 200px;
-    overflow: hidden;
+    padding: 10px;
+    background: #efe;
     margin-bottom: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__img {
-    object-fit: cover;
-    width: 100%;
-    max-height: 200px;
-    border-radius: 3px 3px 0 0;
-    transition: all 1000ms ease-in-out;
-  }
-
-  &__box:hover &__img {
-    transform: scale(1.25);
+    width: 200px;
+    height: 200px;
+    display: block;
   }
 
   &__title {
@@ -140,28 +129,13 @@ export default defineComponent({
     font-size: 1rem;
     margin: 0 10px;
     position: relative;
-    font-family: 'Syne Tactile', cursive;
+    // font-family: 'Syne Tactile', cursive;
     font-weight: 600;
     letter-spacing: 1px;
-
-    &::before {
-      content: '';
-      width: 0%;
-      height: 2px;
-      background: red;
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      transition: all 300ms ease;
-    }
-
-    &::before:hover {
-      width: 100%;
-    }
   }
-}
 
-.card__box:hover .card__title {
-  color: #f14242;
+  &__box:hover &__title {
+    color: #f14242;
+  }
 }
 </style>

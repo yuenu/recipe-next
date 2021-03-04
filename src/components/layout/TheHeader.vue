@@ -23,7 +23,7 @@
           </li>
           <li>
             <router-link
-              to="/"
+              to="/search"
               class="item__link collect"
             >收藏食譜</router-link>
           </li>
@@ -98,8 +98,6 @@ export default defineComponent({
   width: 100%;
   height: 56px;
   background: #fff;
-  border-bottom: 1px solid #ccc;
-  box-shadow: 0px 1px 3px #bbb;
 }
 
 .container {
@@ -156,7 +154,7 @@ export default defineComponent({
 
 .hamburger {
   position: absolute;
-  top: 1.5%;
+  top: 10px;
   right: 3%;
 
   &__menu {
@@ -189,7 +187,7 @@ export default defineComponent({
 
 #check {
   position: absolute;
-  top: 1.5%;
+  top: 10px;
   right: 3%;
   width: 34px;
   height: 34px;

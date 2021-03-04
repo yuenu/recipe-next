@@ -61,10 +61,9 @@ export default defineComponent({
 
 .close {
   position: fixed;
-  top: 2%;
-  right: 0%;
+  top: 15px;
+  right: 3%;
   cursor: pointer;
-  margin-right: 2rem;
 
   svg {
     fill: azure;
