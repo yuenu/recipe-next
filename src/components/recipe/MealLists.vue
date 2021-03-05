@@ -11,7 +11,6 @@
       :key="meal.idMeal"
       @click="setModalOpen(meal.idMeal)"
     >
-
       <div class="card__box__top">
         <div class="card__box__cover"></div>
         <div class="card__pic">
@@ -42,36 +41,10 @@
           </button>
         </div>
 
-        <div class="card__box__cover"></div>
-        <div class="card__pic">
-          <img
-            :src="meal.strMealThumb"
-            :alt="meal.strMeal"
-            class="card__img"
-          />
-          <div class="enter">
-            <Link class="enter__img" />
-          </div>
-        </div>
-        <div class="card__content">
-          <div class="card__title">
-            <div class="card__title__text">{{ meal.strMeal }}</div>
-          </div>
-          <div class="card__rate">
-            <Star class="star" />
-            <Star class="star" />
-            <Star class="star" />
-            <Star class="star" />
-            <Star class="star" />
-          </div>
-          <button class="card__add" @click.stop="addRecipe($event)">
-            Save recipe
-          </button>
-          >>>>>>> f23cdf61f0cb348a9e1e5e03c9006effbf093c5d
-        </div>
-        <h3 class="view">View Recipe</h3>
       </div>
+      <h3 class="view">View Recipe</h3>
     </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -190,6 +163,7 @@ export default defineComponent({
     height: auto;
     display: block;
     transition: 0.3s transform ease;
+    border-radius: 10px;
   }
 
   &__box:hover &__img {
@@ -263,7 +237,7 @@ export default defineComponent({
 
 .enter {
   position: absolute;
-  top: 30%;
+  top: 45%;
   left: 42%;
   z-index: 4;
   opacity: 1;
@@ -382,7 +356,7 @@ export default defineComponent({
 
   .card {
     grid-template-columns: repeat(1, 1fr);
-    grid-gap: 16px;
+    grid-gap: 8px;
 
     &__box {
       max-width:fill-available;
@@ -416,10 +390,7 @@ export default defineComponent({
     }
 
     &__content__left {
-      display:flex;
-      flex-direction: column;
-      align-items: flex-start;
-      max-width:160px;
+      width:170px;
     }
 
     &__title {
@@ -434,20 +405,16 @@ export default defineComponent({
       padding:3px;
       border-radius:0;
       float:right;
-      width:100px;
+      width:90px;
     }
   }
 
   .view {
     color:#eee;
     display:block;
-    background:rgb(140, 140, 140);
+    background:#333;
     text-align:center;
     padding:3px 0;
-
-    &:hover {
-      background:rgb(113, 113, 113);
-    }
   }
 }
 </style>
