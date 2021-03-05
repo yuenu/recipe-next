@@ -51,7 +51,6 @@ export default defineComponent({
     })
 
     const getCatgoryMeals = (category: string) => {
-      console.log(category)
       store.dispatch('GET_MEALS_BY_CATEGORY', category)
     }
 
@@ -70,13 +69,6 @@ export default defineComponent({
   max-width: 1330px;
   margin: 0 auto;
   width: 100%;
-
-  &__container {
-    margin-top: 4rem;
-    min-height: 20vh;
-    display:flex;
-    width:100%;
-  }
 }
 
 .container {
@@ -101,6 +93,7 @@ export default defineComponent({
   max-width: 350px;
   width:38%;
   &__box {
+    margin-top:10px;
     width: 100%;
     height: 85px;
     background: #eee;

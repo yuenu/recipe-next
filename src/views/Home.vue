@@ -1,12 +1,10 @@
 <template>
   <div class="home">
-    <div class="bg"></div>
     <div class="container">
       <div class="main">
         <div class="main__left">
           <Carousel />
           <SlideNav />
-          <MealLists />
         </div>
         <div class="main__right">
           <SideBar />
@@ -22,7 +20,6 @@ import { defineComponent, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 import SideBar from '@/components/recipe/SideBar.vue'
 import Carousel from '@/components/recipe/Carousel.vue'
-import MealLists from '@/components/recipe/MealLists.vue'
 import SlideNav from '@/components/recipe/SlideNav.vue'
 import Subscribe from '@/components/recipe/Subscribe.vue'
 
@@ -31,7 +28,6 @@ export default defineComponent({
   components: {
     SideBar,
     Carousel,
-    MealLists,
     SlideNav,
     Subscribe
   },
@@ -45,18 +41,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .home {
   width: 100%;
-  position:relative;
-}
-
-.bg {
-  background: url('../assets/bg.jpg') no-repeat top right;
-  opacity:0.32;
-  z-index:-20;
-  width:100%;
-  height:100%;
-  position:absolute;
-  top:0;
-  left:0;
 }
 
 .container {
