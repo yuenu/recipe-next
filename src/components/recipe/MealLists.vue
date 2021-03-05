@@ -11,6 +11,7 @@
       :key="meal.idMeal"
       @click="setModalOpen(meal.idMeal)"
     >
+
       <div class="card__box__top">
         <div class="card__box__cover"></div>
         <div class="card__pic">
@@ -41,10 +42,36 @@
           </button>
         </div>
 
+        <div class="card__box__cover"></div>
+        <div class="card__pic">
+          <img
+            :src="meal.strMealThumb"
+            :alt="meal.strMeal"
+            class="card__img"
+          />
+          <div class="enter">
+            <Link class="enter__img" />
+          </div>
+        </div>
+        <div class="card__content">
+          <div class="card__title">
+            <div class="card__title__text">{{ meal.strMeal }}</div>
+          </div>
+          <div class="card__rate">
+            <Star class="star" />
+            <Star class="star" />
+            <Star class="star" />
+            <Star class="star" />
+            <Star class="star" />
+          </div>
+          <button class="card__add" @click.stop="addRecipe($event)">
+            Save recipe
+          </button>
+          >>>>>>> f23cdf61f0cb348a9e1e5e03c9006effbf093c5d
+        </div>
+        <h3 class="view">View Recipe</h3>
       </div>
-      <h3 class="view">View Recipe</h3>
     </div>
-  </div>
 </template>
 
 <script lang="ts">
