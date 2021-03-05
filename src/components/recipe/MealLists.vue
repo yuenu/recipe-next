@@ -4,29 +4,38 @@
     @close="setModalClose"
     :mealId="mealId"
   />
-  <div class="cards">
-    <div class="card">
-      <div
-        class="card__box"
-        v-for="meal in searchedMeals"
-        :key="meal.idMeal"
-        @click="setModalOpen(meal.idMeal)"
-      >
-        <div class="card__box__cover"></div>
-        <div class="card__pic">
-          <img
-            :src="meal.strMealThumb"
-            :alt="meal.strMeal"
-            class="card__img"
-          />
-          <div class="enter">
-            <Enter class="enter__img" />
-          </div>
+  <div class="card">
+    <div
+      class="card__box"
+      v-for="meal in searchedMeals"
+      :key="meal.idMeal"
+      @click="setModalOpen(meal.idMeal)"
+    >
+      <div class="card__box__cover"></div>
+      <div class="card__pic">
+        <img
+          :src="meal.strMealThumb"
+          :alt="meal.strMeal"
+          class="card__img"
+        />
+        <div class="enter">
+          <Link class="enter__img" />
         </div>
-        <div class="card__content">
-          <div class="card__title">{{ meal.strMeal }}</div>
-          <button class="card__add" @click.capture="addRecipe">Add recipe</button>
+      </div>
+      <div class="card__content">
+        <div class="card__title">
+          <div class="card__title__text">{{ meal.strMeal }}</div>
         </div>
+        <div class="card__rate">
+          <Star class="star" />
+          <Star class="star" />
+          <Star class="star" />
+          <Star class="star" />
+          <Star class="star" />
+        </div>
+        <button class="card__add" @click.stop="addRecipe($event)">
+          Save recipe
+        </button>
       </div>
     </div>
   </div>
@@ -36,12 +45,14 @@
 import { defineComponent, computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import MealModal from './MealModal.vue'
-import Enter from '@/components/UI/Enter.vue'
+import Link from '@/components/UI/Link.vue'
+import Star from '@/components/UI/Star.vue'
 
 export default defineComponent({
   components: {
     MealModal,
-    Enter
+    Link,
+    Star
   },
   setup () {
     const store = useStore()
@@ -65,7 +76,9 @@ export default defineComponent({
       return modalStatus.value
     })
 
-    const addRecipe = () => { console.log('add recipe') }
+    const addRecipe = (event: MouseEvent) => {
+      console.log('add recipe', event)
+    }
 
     return {
       searchedMeals,
@@ -81,45 +94,39 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .card {
-  padding: 10px;
   height: fit-content;
   min-height: 600px;
-  columns: 250px;
-  column-gap: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.151),
-    rgba(255, 255, 255, 0.42)
-  );
-  backdrop-filter: blur(10px);
-  border-radius: 3px;
+  // If use columns button would broken
+  // columns: 270px;
+  // column-gap: 0;
+
+  // flex settings
+  // display: flex;
+  // justify-content: flex-end;
+  // flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 
   &__box {
     break-inside: avoid;
-    color: #ffffff;
-    border-radius: 2px;
+    color: #fff;
     max-width: 300px;
     width: 100%;
     height: 370px;
-    margin: 0 auto;
     cursor: pointer;
     border: 1px solid #ccc;
-    margin-bottom: 14px;
+    margin: 0 26px 26px 0;
+    padding: 10px;
     transition: 0.3s all ease;
     position: relative;
     transform: scale(1);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    overflow:hidden;
+    overflow: hidden;
 
     &:hover {
       transform: scale(1.04);
       box-shadow: -1px 0px 10px rgba(92, 92, 92, 0.21);
+      z-index: 1;
     }
-  }
-
-  &__box:first-of-type {
-    margin-top: 0;
   }
 
   &__box__cover {
@@ -127,104 +134,232 @@ export default defineComponent({
     top: 0;
     left: 0;
     width: 100%;
+    height: 100%;
     background: #fff;
     opacity: 0;
-    height: 100%;
     transition: 0.3s ease all;
     z-index: 2;
   }
 
   &__box:hover &__box__cover {
-    opacity: 0.6;
+    opacity: 0.89;
   }
 
   &__pic {
-    padding: 10px;
-    margin-bottom: 22px;
     display: flex;
     justify-content: center;
     align-items: center;
-    position:relative;
+    position: relative;
   }
 
   &__img {
-    margin-top: 20px;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 100%;
+    height: auto;
     display: block;
+    transition: 0.3s transform ease;
+    border-radius: 10px;
+  }
+
+  &__box:hover &__img {
+    transform: scale(0.98);
   }
 
   &__content {
-    width:100%;
-    height:156px;
-    transform:translateY(0%);
-    transition:0.3s all ease-out;
-    padding: 0 10px 0 40px;
-    letter-spacing: 1px;
+    width: 100%;
+    height: 156px;
+    transform: translateY(-20%);
+    transition: 0.3s all ease-out;
+    padding: 0 10px 0 10px;
     z-index: 3;
     opacity: 1;
     font-size: 1.2rem;
-    position:relative;
+    position: relative;
   }
 
   &__box:hover &__content {
-    transform:translateY(-10%);
+    transform: translateY(-70%);
   }
 
   &__title {
     color: #d57d1f;
     position: relative;
-    font-weight: 600;
+    font-weight: 400;
+    font-size: 18px;
+    height: 80px;
+    display: flex;
+    align-items: flex-end;
+
+    &__text {
+      //  https://jiaming0708.github.io/2019/04/16/flex-text-overflow/
+      min-width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 
-  &__box:hover &__title {
+  &__box:hover &__title__text {
     color: #f14242;
+    white-space: normal;
   }
 
   &__add {
-    font-size:1.2rem;
-    margin:0 auto;
-    display:block;
-    width:80%;
-    padding:10px 22px;
-    border-radius:23px;
-    outline:none;
-    border:none;
-    color:#fff;
-    background:#ffc139;
-    cursor:pointer;
-    position:absolute;
-    bottom:16px;
-    left:30px;
+    font-size: 1.2rem;
+    padding: 10px 0;
+    width: 100%;
+    border-radius: 23px;
+    outline: none;
+    border: none;
+    color: #fff;
+    background: #ffc139;
+    cursor: pointer;
     font-family: 'Oswald', sans-serif;
-    transform:translateY(200%);
-    transition:0.25s ease all;
-    pointer-events: none;
+    transition: 0.5s ease all;
+
+    transform: translateY(100%);
 
     &:hover {
-      background:#333;
-      pointer-events: auto;
+      background: #333;
+      color: #fdb926;
     }
   }
 
   &__box:hover &__add {
-    transform:translateY(40%);
+    transform: translateY(20%);
   }
 }
 
 .enter {
-  position:absolute;
-  top:30%;
-  left:30%;
-  z-index:4;
-  opacity:0;
+  position: absolute;
+  top: 45%;
+  left: 42%;
+  z-index: 4;
+  opacity: 1;
+  transition: 0.3s all ease;
+  transition-delay: 0.15s;
+  transform: translatex(-20px);
+  opacity: 0;
 
   &__img {
-    width:50px;
-    height:auto;
-    fill:#333;
+    width: 40px;
+    height: auto;
+    fill: #333;
     background-size: 50px 50px;
+  }
+}
+
+.card__box:hover .enter {
+  opacity: 1;
+  transform: translatex(0px);
+}
+
+.star {
+  fill: #fdb926;
+  width: 12px;
+  margin: 0 2px;
+}
+
+@media (max-width: 1100px) {
+  .card {
+    grid-template-columns: repeat(2, 1fr);
+
+    &__box {
+      max-width: 350px;
+    }
+
+    &__img {
+      width: 80%;
+    }
+  }
+}
+
+@media (max-width: 940px) {
+  .card {
+    grid-template-columns: repeat(3, 1fr);
+
+    &__box {
+      max-width: 250px;
+      transition: unset;
+
+      &:hover {
+        transform: scale(1);
+        box-shadow: inset;
+      }
+    }
+
+    &__box__cover {
+      display: none;
+    }
+
+    &__img {
+      width: 90%;
+    }
+
+    &__content {
+      transform: translateY(0);
+    }
+
+    &__box:hover &__content {
+      transform: translateY(0);
+    }
+
+    &__box:hover &__add {
+      transform: translateY(0);
+    }
+
+    &__title {
+      margin-top:5px;
+      font-size: 16px;
+      height: auto;
+      align-items:flex-start;
+
+      &__text {
+        white-space:normal;
+      }
+    }
+
+    &__add {
+      transform:translateY(0);
+      padding:5px;
+    }
+  }
+
+  .enter {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    grid-template-columns: repeat(2, 1fr);
+
+    &__box {
+      max-width: 250px;
+    }
+
+    &__img {
+      width: 90%;
+    }
+  }
+}
+
+@media (max-width: 476px) {
+  .card {
+    grid-template-columns: repeat(1, 1fr);
+
+    &__box {
+      max-width: fit-content;
+      height:fit-content;
+    }
+
+    &__img {
+      width: 60%;
+      border-radius:50%;
+    }
+
+    &__title {
+      margin-top:15px;
+    }
   }
 }
 </style>

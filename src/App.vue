@@ -50,4 +50,6 @@ body {
   font-family: 'Oswald', sans-serif;
   letter-spacing: 0.5px;
 }
+
+// -476px  -768px  -940px
 </style>
