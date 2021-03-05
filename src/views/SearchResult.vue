@@ -12,7 +12,10 @@
           @click="getCatgoryMeals(cat.strCategory)"
         >
           <div class="img1">
-            <img :src="require(`../assets/icon/category/${cat.strCategory}.svg`)" :alt="cat.strCategory" />
+            <img
+              :src="require(`../assets/icon/category/${cat.strCategory}.svg`)"
+              :alt="cat.strCategory"
+            />
           </div>
           <div class="text">{{ cat.strCategory }}</div>
           <div class="img2">
@@ -20,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div class="cards">
+      <div class="cards__container">
         <MealLists />
       </div>
     </div>
@@ -67,15 +70,15 @@ export default defineComponent({
 <style lang="scss" scoped>
 .result {
   max-width: 1330px;
-  margin: 0 auto;
+  margin: 2rem auto;
   width: 100%;
 }
 
 .container {
   margin-top: 4rem;
   min-height: 20vh;
-  display:flex;
-  width:100%;
+  display: flex;
+  width: 100%;
 }
 
 .banner {
@@ -91,9 +94,9 @@ export default defineComponent({
 
 .sidebar {
   max-width: 350px;
-  width:38%;
+  width: 38%;
+
   &__box {
-    margin-top:10px;
     width: 100%;
     height: 85px;
     background: #eee;
@@ -103,7 +106,7 @@ export default defineComponent({
     margin-bottom: 10px;
     position: relative;
     cursor: pointer;
-    transition:0.3s ease all;
+    transition: 0.3s ease all;
 
     &:hover {
       box-shadow: -1px 0px 10px rgba(0, 0, 0, 0.23);
@@ -112,6 +115,7 @@ export default defineComponent({
 
   .text {
     font-size: 20px;
+    padding: 0 10px 0 0;
     text-transform: uppercase;
     color: #333333;
   }
@@ -139,8 +143,68 @@ export default defineComponent({
   }
 }
 
-.cards {
+.cards__container {
   width: 100%;
-  margin-left:16px;
+  margin: 0 0 0 16px;
+}
+
+@media (max-width: 1320px) {
+  .sidebar {
+    width: 30%;
+
+    &__box .img2 img {
+      width: 100px;
+      right: -20px;
+    }
+  }
+}
+
+@media (max-width: 1280px) {
+  .sidebar {
+    width: 26%;
+
+    &__box .img2 img {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 940px) {
+  .sidebar {
+    width: 170px;
+
+    &__box {
+      height: 70px;
+
+      .img1 {
+        margin: 0 10px 0 0;
+      }
+
+      .img1 img {
+        width: 30px;
+      }
+
+      .text {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 476px) {
+  .sidebar {
+    display: none;
+  }
+
+  .cards__container {
+    width: 100%;
+    margin: 0 3px;
+  }
 }
 </style>
