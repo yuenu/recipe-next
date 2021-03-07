@@ -1,74 +1,85 @@
 <template>
-  <MealModal
-    v-if="isModalOpen"
-    @close="setModalClose"
-    :mealId="mealId"
-  />
-  <div class="card">
-    <div
-      class="card__box"
-      v-for="meal in searchedMeals"
-      :key="meal.idMeal"
-      @click="setModalOpen(meal.idMeal)"
-    >
-      <div class="card__box__top">
-        <div class="card__box__cover"></div>
-        <div class="card__pic">
-          <img
-            :src="meal.strMealThumb"
-            :alt="meal.strMeal"
-            class="card__img"
-          />
-          <div class="enter">
-            <Link class="enter__img" />
-          </div>
-        </div>
-        <div class="card__content">
-          <div class="card__content__left">
-            <div class="card__title">
-              <div class="card__title__text">{{ meal.strMeal }}</div>
-            </div>
-            <div class="card__rate">
-              <Star class="star" />
-              <Star class="star" />
-              <Star class="star" />
-              <Star class="star" />
-              <Star class="star" />
-            </div>
-          </div>
-          <button class="card__add" @click.stop="addRecipe($event)">
-            Save recipe
-          </button>
-        </div>
-
-      </div>
-      <h3 class="view">View Recipe</h3>
+  <div class="cards__container">
+    <MealModal
+      v-if="isModalOpen"
+      @close="setModalClose"
+      :mealId="mealId"
+    />
+    <div v-if="isEmpty" class="dataEmpty" >
+      <h2 class="dataEmpty__text">No Data</h2>
     </div>
+    <div v-else-if="!isEmpty" class="card" >
+      <div
+        class="card__box"
+        v-for="meal in handlePageMeals"
+        :key="meal.idMeal"
+        @click="setModalOpen(meal.idMeal)"
+      >
+        <div class="card__box__top">
+          <div class="card__box__cover"></div>
+          <div class="card__pic">
+            <img
+              :src="meal.strMealThumb"
+              :alt="meal.strMeal"
+              class="card__img"
+            />
+            <div class="enter">
+              <Link class="enter__img" />
+            </div>
+          </div>
+          <div class="card__content">
+            <div class="card__content__left">
+              <div class="card__title">
+                <div class="card__title__text">{{ meal.strMeal }}</div>
+              </div>
+              <div class="card__rate">
+                <Star class="star" />
+                <Star class="star" />
+                <Star class="star" />
+                <Star class="star" />
+                <Star class="star" />
+              </div>
+            </div>
+            <button class="card__add" @click.stop="favoriteRecipe($event)">
+              Save recipe
+            </button>
+          </div>
+        </div>
+        <!-- <h3 class="view">View Recipe</h3> -->
+      </div>
+    </div>
+    <Pagination :getMeals="getMeals" @changePage="changePage" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from 'vue'
+import { defineComponent, computed, ref, onMounted, watch } from 'vue'
 import { useStore } from 'vuex'
-import MealModal from './MealModal.vue'
+import MealModal from '@/components/recipe/MealModal.vue'
 import Link from '@/components/UI/Link.vue'
 import Star from '@/components/UI/Star.vue'
+import Pagination from './Pagination.vue'
+import type { CategoryMeals } from '@/apis/response.type'
 
 export default defineComponent({
   components: {
     MealModal,
     Link,
-    Star
+    Star,
+    Pagination
   },
   setup () {
     const store = useStore()
-    const searchedMeals = computed(() => {
+    const isEmpty = ref(true)
+
+    // fetched the meals data
+    const getMeals = computed<CategoryMeals[]>(() => {
       return store.getters.getMeals
     })
-    const mealId = ref('')
 
-    // Modal status
+    // Modal status control
     const modalStatus = ref(false)
+    const mealId = ref('')
     const setModalOpen = (id: string) => {
       modalStatus.value = true
       mealId.value = id
@@ -82,17 +93,56 @@ export default defineComponent({
       return modalStatus.value
     })
 
-    const addRecipe = (event: MouseEvent) => {
+    // handle Page & meals UI contrl
+
+    const currentPage = ref(1)
+    const onePageMealsCount = 6
+
+    /**
+     * emit from Pagination component
+     * @param {number} page - emit pass data and saved to currentPage
+    */
+    const changePage = (page: number) => { currentPage.value = page }
+
+    /**
+     * handle every page would show maximal 6 meal
+     */
+    const handlePageMeals = computed(() => {
+      return getMeals.value.filter((_, index) => {
+        if (currentPage.value === 1) {
+          return index < (onePageMealsCount * currentPage.value)
+        } else {
+          return (index >= (onePageMealsCount * (currentPage.value - 1))) && (index < (onePageMealsCount * currentPage.value))
+        }
+      })
+    })
+
+    /**
+     * Add recipe
+     *
+     * @param {MouseEvent} event - clicked element
+     */
+    const favoriteRecipe = (event: MouseEvent) => {
       console.log('add recipe', event)
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    watch(getMeals, (_val, _oldVal) => {
+      isEmpty.value = false
+    })
+
+    onMounted(() => { isEmpty.value = true })
+
     return {
-      searchedMeals,
+      getMeals,
       isModalOpen,
       setModalOpen,
       setModalClose,
       mealId,
-      addRecipe
+      favoriteRecipe,
+      changePage,
+      handlePageMeals,
+      isEmpty
     }
   }
 })
@@ -101,7 +151,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .card {
   height: fit-content;
-  min-height: 600px;
   // If use columns button would broken
   // columns: 270px;
   // column-gap: 0;
@@ -113,6 +162,7 @@ export default defineComponent({
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
+  justify-items: end;
 
   &__box {
     color: #fff;
@@ -163,7 +213,6 @@ export default defineComponent({
     height: auto;
     display: block;
     transition: 0.3s transform ease;
-    border-radius: 10px;
   }
 
   &__box:hover &__img {
@@ -237,7 +286,7 @@ export default defineComponent({
 
 .enter {
   position: absolute;
-  top: 45%;
+  top: 35%;
   left: 42%;
   z-index: 4;
   opacity: 1;
@@ -263,6 +312,24 @@ export default defineComponent({
   fill: #fdb926;
   width: 12px;
   margin: 0 2px;
+}
+
+.cards__container {
+  width: 100%;
+  margin: 0 0 0 16px;
+}
+
+.dataEmpty {
+  width:100%;
+  height:770px;
+  border:1px solid #ddd;
+  display:flex;
+  justify-content: center;
+  align-items:center;
+
+  &__text {
+    color:#fdb926;
+  }
 }
 
 @media (max-width: 1100px) {
@@ -298,7 +365,7 @@ export default defineComponent({
     }
 
     &__img {
-      width: 90%;
+      width: 100%;
     }
 
     &__content {
@@ -349,17 +416,21 @@ export default defineComponent({
   }
 }
 
-@media (max-width: 476px) {
+@media (max-width: 650px) {
   .cards__container {
-    margin:0;
+    margin: 0;
   }
+  .card {
+    justify-items: center;
+  }
+}
 
+@media (max-width: 476px) {
   .card {
     grid-template-columns: repeat(1, 1fr);
-    grid-gap: 8px;
 
     &__box {
-      max-width:fill-available;
+      max-width: max-content;
       height: fit-content;
       margin: 0;
       display: flex;
@@ -368,7 +439,7 @@ export default defineComponent({
     }
 
     &__box__top {
-      display:flex;
+      display: flex;
     }
 
     &__pic {
@@ -379,18 +450,17 @@ export default defineComponent({
     &__img {
       width: 100px;
       height: 100px;
-      border-radius: 0;
     }
 
     &__content {
-      height:auto;
-      display:flex;
-      justify-content:space-between;
-      padding:0 0 0 6px;
+      height: auto;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 0 0 6px;
     }
 
     &__content__left {
-      width:170px;
+      width: 170px;
     }
 
     &__title {
@@ -402,19 +472,24 @@ export default defineComponent({
     }
 
     &__add {
-      padding:3px;
-      border-radius:0;
-      float:right;
-      width:90px;
+      padding: 3px;
+      border-radius: 0;
+      float: right;
+      width: 90px;
     }
   }
 
   .view {
-    color:#eee;
-    display:block;
-    background:#333;
-    text-align:center;
-    padding:3px 0;
+    color: #eee;
+    display: block;
+    background: #333;
+    text-align: center;
+    padding: 3px 0;
+  }
+
+  .cards__container {
+    width: 100%;
+    margin: 0 3px;
   }
 }
 </style>
