@@ -1,54 +1,59 @@
 <template>
-  <div class="meal__modal">
-    <div class="close" @click="close">
-      <Close />
-    </div>
-    <div
-      class="meal__container"
-      v-for="meal in getMealData"
-      :key="meal.mealId"
-    >
-      <h1 class="meal__title">{{ meal.mealName }}</h1>
-      <div class="meal__media">
-        <img
-          :src="meal.mealImgUrl"
-          :alt="meal.mealName"
-          class="meal__media__img"
-        />
-        <a
-          :href="meal.mealYoutubeLink"
-          class="meal__media__link"
-          target="_blank"
-        >
-          Youtube
-        </a>
+  <teleport to="body">
+    <div class="meal__modal">
+      <div class="close" @click="close">
+        <Close />
       </div>
-      <div class="meal__label">
-        <div class="meal__area">
-          Area: <span class="meal__label__area">{{ meal.mealArea }}</span>
+      <div
+        class="meal__container"
+        v-for="meal in getMealData"
+        :key="meal.mealId"
+      >
+        <h1 class="meal__title">{{ meal.mealName }}</h1>
+        <div class="meal__media">
+          <img
+            :src="meal.mealImgUrl"
+            :alt="meal.mealName"
+            class="meal__media__img"
+          />
+          <a
+            :href="meal.mealYoutubeLink"
+            class="meal__media__link"
+            target="_blank"
+          >
+            Youtube
+          </a>
         </div>
-        <div class="meal__category">
-          Category:
-          <span class="meal__label__category">{{ meal.mealCategory }}</span>
+        <div class="meal__label">
+          <div class="meal__area">
+            Area: <span class="meal__label__area">{{ meal.mealArea }}</span>
+          </div>
+          <div class="meal__category">
+            Category:
+            <span class="meal__label__category">{{ meal.mealCategory }}</span>
+          </div>
         </div>
-      </div>
-      <div class="meal__info">
-        <h2 class="meal__info__title">Instruction</h2>
-        <p class="meal__info__content" v-html="meal.mealInstructions.replace(/\r?\n/g, '<br />')"></p>
-      </div>
-      <div class="meal__ingrendients">
-        <h2 class="meal__ingrendients__title">ingredients</h2>
+        <div class="meal__info">
+          <h2 class="meal__info__title">Instruction</h2>
+          <p
+            class="meal__info__content"
+            v-html="meal.mealInstructions.replace(/\r?\n/g, '<br />')"
+          ></p>
+        </div>
+        <div class="meal__ingrendients">
+          <h2 class="meal__ingrendients__title">ingredients</h2>
 
-        <li
-          class="meal__ingrendients__content"
-          v-for="ingrendients in meal.mealIngredients"
-          :key="ingrendients"
-        >
-          {{ ingrendients }}
-        </li>
+          <li
+            class="meal__ingrendients__content"
+            v-for="ingrendients in meal.mealIngredients"
+            :key="ingrendients"
+          >
+            {{ ingrendients }}
+          </li>
+        </div>
       </div>
     </div>
-  </div>
+  </teleport>
 </template>
 
 <script lang="ts">
@@ -123,23 +128,22 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .meal {
-
   &__modal {
-      display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(5px);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  z-index: 50;
-  overflow: auto;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 50;
+    overflow: auto;
   }
 
   &__container {
@@ -148,7 +152,7 @@ export default defineComponent({
     min-height: 100px;
     background: rgba(255, 255, 255, 0.945);
     box-shadow: 0px 2px 5px rgb(255, 255, 255);
-    border-radius: 8px;
+    border-radius: 3  px;
     padding: 10px 30px;
     margin: 10vh 0;
   }
