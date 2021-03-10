@@ -223,7 +223,7 @@ export default defineComponent({
     width: 100%;
     height: 156px;
     transform: translateY(-20%);
-    transition: 0.3s all ease-out;
+    transition: 0.26s transform ease-out;
     padding: 0 10px 0 10px;
     z-index: 3;
     opacity: 1;
@@ -269,7 +269,7 @@ export default defineComponent({
     background: #ffc139;
     cursor: pointer;
     font-family: 'Oswald', sans-serif;
-    transition: 0.5s ease all;
+    transition: 0.42s all ease;
 
     transform: translateY(100%);
 

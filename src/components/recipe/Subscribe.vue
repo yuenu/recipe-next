@@ -105,7 +105,7 @@ hr {
 
   &__input {
     display: block;
-    padding: 12px;
+    padding: 12px 0 12px 20px;
     font-size: 12px;
     outline: none;
     width: 100%;
@@ -121,7 +121,7 @@ hr {
     position: absolute;
     top: 0;
     right: 2px;
-    height: 100%;
+    height: auto;
     width: 30px;
     padding-top: 7px;
 

@@ -5,12 +5,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/search',
     name: 'searchResult',
-    component: () => import('@/views/SearchResult.vue')
+    component: () => import(/* webpackChunkName: "search" */ '@/views/SearchResult.vue')
   },
   {
     path: '/editProfile',
     name: 'editProfile',
-    component: () => import('@/views/UserSettings.vue')
+    component: () => import(/* webpackChunkName: "editProfile" */ '@/views/UserSettings.vue')
   },
   {
     path: '/',

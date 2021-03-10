@@ -1,9 +1,8 @@
 <template>
   <div class="pagination" v-if="!!getMeals.length">
     <div
-      class="pagination__link prev-btn"
+      :class="['pagination__link' ,'prev', { disabled: !hasPrev}]"
       href="#"
-      v-if="hasPrev"
       @click="prevPage"
     >
       &lt;
@@ -17,9 +16,8 @@
       {{ page }}
     </a>
     <div
-      class="pagination__link next-btn"
+      :class="['pagination__link', 'next', { disabled: !hasNext }]"
       href="#"
-      v-if="hasNext"
       @click="nextPage"
     >
       &gt;
@@ -120,5 +118,11 @@ export default defineComponent({
       color:#fff;
     }
   }
+}
+
+.pagination__link.disabled {
+  pointer-events: none;
+  background:#fff;
+  color:#ddd;
 }
 </style>

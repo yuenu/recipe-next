@@ -55,20 +55,24 @@
             class="mobile__link othersPro"
             target="_blank"
           >
-            其他作品
+            Projects
           </a>
         </li>
         <li class="mobile__item">
           <router-link
             to="/"
             class="mobile__link collect"
-          >收藏食譜</router-link>
+          >
+            MENU
+          </router-link>
         </li>
         <li class="mobile__item">
           <router-link
             to="/editProfile"
             class="mobile__link login"
-          >個人設定</router-link>
+          >
+            Settings
+          </router-link>
         </li>
       </ul>
     </BaseModal>
@@ -103,7 +107,7 @@ export default defineComponent({
 .container {
   width: 100%;
   height: 100%;
-  max-width: 1024px;
+  max-width: 1330px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;

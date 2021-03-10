@@ -4,7 +4,6 @@
       <div class="main">
         <div class="main__left">
           <Carousel />
-          <SlideNav />
         </div>
         <div class="main__right">
           <SideBar />
@@ -20,7 +19,7 @@ import { defineComponent, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 import SideBar from '@/components/recipe/SideBar.vue'
 import Carousel from '@/components/recipe/Carousel.vue'
-import SlideNav from '@/components/recipe/SlideNav.vue'
+// import SlideNav from '@/components/recipe/SlideNav.vue'
 import Subscribe from '@/components/recipe/Subscribe.vue'
 
 export default defineComponent({
@@ -28,7 +27,6 @@ export default defineComponent({
   components: {
     SideBar,
     Carousel,
-    SlideNav,
     Subscribe
   },
   setup () {

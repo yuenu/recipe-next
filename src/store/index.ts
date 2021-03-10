@@ -1,16 +1,15 @@
 import { createStore } from 'vuex'
 import { searchByName, searchById, searchByCategory, getAllCategory } from '@/apis/recipe'
-// import authModuel from './modules/auth/index'
-// import requestsModule from './modules/requests/index'
+import type * as Response from '@/apis/response.type'
 
-type Recipe = {
-  random: object
-  meals: object
-  meal: object
-  category: object
+interface State {
+  random: Response.meal[]
+  meals: Response.meal[]
+  meal: Response.meal[]
+  category: Response.Category[]
 }
 
-export default createStore<Recipe>({
+export const store = createStore<State>({
   state: {
     random: [],
     meals: [],
@@ -18,16 +17,16 @@ export default createStore<Recipe>({
     category: []
   },
   mutations: {
-    SET_RANDOM_MEAL (state, payload: []) {
+    SET_RANDOM_MEAL (state, payload: Response.meal[]) {
       state.random = payload
     },
-    SET_CATEGORY (state, payload: []) {
+    SET_CATEGORY (state, payload: Response.Category[]) {
       state.category = payload
     },
-    SET_MEALS (state, payload: []) {
+    SET_MEALS (state, payload: Response.meal[]) {
       state.meals = payload
     },
-    SET_SINGLE_MEAL (state, payload: []) {
+    SET_SINGLE_MEAL (state, payload: Response.meal[]) {
       state.meal = payload
     }
   },
