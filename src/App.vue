@@ -20,6 +20,7 @@ export default defineComponent({
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Syne+Tactile&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spirax&display=swap');
 
 :root {
   --text-gray: #eee;
@@ -48,7 +49,6 @@ body {
   flex-direction: column;
   margin-bottom: 32px;
   font-family: 'Oswald', sans-serif;
-  letter-spacing: 0.5px;
 }
 
 // -476px  -768px  -940px

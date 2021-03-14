@@ -107,7 +107,7 @@ export default defineComponent({
 .container {
   width: 100%;
   height: 100%;
-  max-width: 1330px;
+  max-width: 1140px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;

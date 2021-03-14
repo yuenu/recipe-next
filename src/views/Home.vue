@@ -2,32 +2,39 @@
   <div class="home">
     <div class="container">
       <div class="main">
-        <div class="main__left">
-          <Carousel />
+        <div class="sec1">
+          <div class="sec1__content">
+            <h2 class="mainText">Make meal by your own</h2>
+            <div class="subText">
+              You can discover thousands of meals on here every day!
+            </div>
+            <button class="tryLink">Try now !</button>
+          </div>
         </div>
-        <div class="main__right">
-          <SideBar />
-        </div>
+        <Section2 />
+        <Section3 />
       </div>
-      <Subscribe />
+      <Carousel class="carousel" />
     </div>
+    <Subscribe />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
-import SideBar from '@/components/recipe/SideBar.vue'
 import Carousel from '@/components/recipe/Carousel.vue'
-// import SlideNav from '@/components/recipe/SlideNav.vue'
 import Subscribe from '@/components/recipe/Subscribe.vue'
+import Section2 from '@/components/recipe/Home/Section2.vue'
+import Section3 from '@/components/recipe/Home/Section3.vue'
 
 export default defineComponent({
   name: 'Home',
   components: {
-    SideBar,
     Carousel,
-    Subscribe
+    Subscribe,
+    Section2,
+    Section3
   },
   setup () {
     const store = useStore()
@@ -44,25 +51,62 @@ export default defineComponent({
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
 }
 
 .main {
+  max-width: 1140px;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  background: #fff;
+}
 
-  &__left {
-    width: 650px;
-    padding: 0 10px;
-    display: flex;
-    flex-direction: column;
-    margin-right: 3rem;
+.sec1 {
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)),
+    url('../assets/example/bg1.jpg') no-repeat left center / cover;
+  width: 100%;
+  height: 550px;
+  position: relative;
+
+  &__content {
+    color: white;
+    position: absolute;
+    right: 10%;
+    top: 20%;
+
+    .mainText {
+      font-size: 45px;
+      margin-bottom: 1.1rem;
+    }
   }
 
-  &__right {
-    max-width: 300px;
+  .tryLink {
+    text-decoration: none;
+    background: rgb(255, 206, 45);
+    color: #333;
+    padding: 13px 24px;
+    margin: 36px 0 0;
+    font-size: 18px;
+    font-weight:300;
+    position: relative;
+    float: left;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    &:hover {
+      background: rgb(255, 214, 77);
+    }
   }
+}
+
+.carousel {
+  max-width: 600px;
 }
 
 @media (max-width: 1100px) {
@@ -80,7 +124,6 @@ export default defineComponent({
   .main__right {
     display: none;
   }
-
 }
 
 @media (max-width: 768px) {
@@ -90,7 +133,7 @@ export default defineComponent({
   }
 }
 
-@media (max-width:476px) {
+@media (max-width: 476px) {
   .main__left {
     padding: 0 8px;
   }

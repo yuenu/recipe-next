@@ -42,7 +42,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .result {
-  max-width: 1330px;
+  max-width: 1140px;
   margin: 2rem auto;
   width: 100%;
 }
