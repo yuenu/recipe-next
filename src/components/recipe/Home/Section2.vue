@@ -41,7 +41,7 @@ img {
 }
 
 .sec2 {
-  max-width:1140px;
+  max-width:1330px;
   margin:54px 0 0;
 
   &__container {
