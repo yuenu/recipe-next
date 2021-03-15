@@ -13,6 +13,7 @@
         </div>
         <Section2 />
         <Section3 />
+        <Section4 />
       </div>
       <Carousel class="carousel" />
     </div>
@@ -27,6 +28,7 @@ import Carousel from '@/components/recipe/Carousel.vue'
 import Subscribe from '@/components/recipe/Subscribe.vue'
 import Section2 from '@/components/recipe/Home/Section2.vue'
 import Section3 from '@/components/recipe/Home/Section3.vue'
+import Section4 from '@/components/recipe/Home/Section4.vue'
 
 export default defineComponent({
   name: 'Home',
@@ -34,7 +36,8 @@ export default defineComponent({
     Carousel,
     Subscribe,
     Section2,
-    Section3
+    Section3,
+    Section4
   },
   setup () {
     const store = useStore()
@@ -56,7 +59,7 @@ export default defineComponent({
 }
 
 .main {
-  max-width: 1140px;
+  max-width: 1330px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -69,7 +72,7 @@ export default defineComponent({
   background: linear-gradient(to left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)),
     url('../assets/example/bg1.jpg') no-repeat left center / cover;
   width: 100%;
-  height: 550px;
+  height: 650px;
   position: relative;
 
   &__content {
