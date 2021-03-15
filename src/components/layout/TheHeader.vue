@@ -6,34 +6,50 @@
       v-model="isMobileOpen"
     />
     <div class="container">
-      <div class="logo">
-        <router-link to="/" class="logo__link">Recipe</router-link>
-      </div>
-      <SearchForm class="search" />
-      <div class="container__left">
-        <ul class="item__list">
-          <li>
-            <a
-              href="https://profile-d6420.firebaseapp.com/"
-              class="item__link othersPro"
-              target="_blank"
-            >
-              其他作品
-            </a>
-          </li>
-          <li>
-            <router-link
-              to="/search"
-              class="item__link collect"
-            >收藏食譜</router-link>
-          </li>
-          <li>
-            <router-link
-              to="/editProfile"
-              class="item__link login"
-            >個人設定</router-link>
-          </li>
+      <div class="cTop">
+        <div class="cTop__logo">
+          <router-link to="/" class="logo__link">
+            <img src="@/assets/logo.png" alt="logo" />
+          </router-link>
+        </div>
+        <ul class="lang">
+          <li class="lang__item lang__cn">簡</li>
+          <br />
+          <li class="lang__item lang__tw">繁</li>
+          <br />
+          <li class="lang__item lang__en">EN</li>
         </ul>
+      </div>
+      <div class="cBottom">
+        <div class="cBottom__nav">
+          <ul class="item__list">
+            <li>
+              <router-link to="/" class="item__link">
+                Home
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/search" class="item__link collect">
+                Melas
+              </router-link>
+            </li>
+            <li>
+              <a
+                href="https://profile-d6420.firebaseapp.com/"
+                class="item__link othersPro"
+                target="_blank"
+              >
+                Projrcts
+              </a>
+            </li>
+            <li>
+              <router-link to="/editProfile" class="item__link login">
+                Settings
+              </router-link>
+            </li>
+          </ul>
+        </div>
+        <SearchForm class="cBottom__search" />
       </div>
       <div class="ham"></div>
     </div>
@@ -59,18 +75,12 @@
           </a>
         </li>
         <li class="mobile__item">
-          <router-link
-            to="/"
-            class="mobile__link collect"
-          >
+          <router-link to="/" class="mobile__link collect">
             MENU
           </router-link>
         </li>
         <li class="mobile__item">
-          <router-link
-            to="/editProfile"
-            class="mobile__link login"
-          >
+          <router-link to="/editProfile" class="mobile__link login">
             Settings
           </router-link>
         </li>
@@ -100,58 +110,89 @@ export default defineComponent({
 <style lang="scss" scoped>
 .header {
   width: 100%;
-  height: 56px;
+  height: auto;
   background: #fff;
+  margin-bottom: 2rem;
 }
 
 .container {
   width: 100%;
   height: 100%;
-  max-width: 1140px;
+  max-width: 1330px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  flex-direction: column;
 }
 
-.logo__link {
-  display: inline-block;
-  text-decoration: none;
-  font-size: 2.2rem;
-  font-weight: 600;
-  color: #f4a261;
-  font-family: 'Syne Tactile', cursive;
-  margin-bottom: 8px;
-  margin-left: 18px;
-  -webkit-text-stroke: 1px red;
-  -webkit-text-fill-color: transparent;
+.cTop {
+  display: flex;
+  width: 100%;
 
-  &:hover {
-    -webkit-text-fill-color: red;
+  &__logo {
+    width: 60%;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .logo__link {
+    margin: 0 0 0 auto;
   }
 }
 
-.search {
-  flex-grow: 1;
+.lang {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  list-style-type: none;
+
+  &__item {
+    padding: 5px 8px;
+    margin: 0 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+
+    &:hover {
+      background:rgb(55, 55, 255);
+      color:#ddd;
+    }
+  }
+}
+
+.cBottom {
+  width:100%;
+  display:flex;
+
+  &__nav {
+    width:60%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__search {
+    width:40%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
 }
 
 .item__list {
   display: flex;
   list-style: none;
-  max-width: 300px;
-  margin-right: 20px;
 
   .item__link {
-    padding: 10px 15px;
+    font-size: 14px;
+    padding: 0 12px;
     text-decoration: none;
-    color: rgb(20, 20, 20);
+    color: #333;
     font-weight: 600;
     transition: all 140ms ease;
-    border-radius: 25px;
 
     &:hover {
-      background: #3c3cc4e5;
-      color: #eee;
+      color: rgb(255, 206, 45);
     }
   }
 }
@@ -228,12 +269,6 @@ export default defineComponent({
 
   &__link:hover {
     background: rgb(100, 100, 100);
-  }
-}
-
-@media (max-width: 1100px) {
-  .item__list {
-    margin-right: 50px;
   }
 }
 

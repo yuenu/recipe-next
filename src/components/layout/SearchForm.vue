@@ -71,7 +71,6 @@ export default defineComponent({
     width: 185px;
     position: relative;
     height: 28px;
-    margin: 0 auto;
   }
 
   &__tern {
