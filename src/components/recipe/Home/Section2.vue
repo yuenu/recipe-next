@@ -42,7 +42,7 @@ img {
 
 .sec2 {
   max-width:1330px;
-  margin:54px 0 0;
+  margin:5rem 0 3rem 0;
 
   &__container {
     display:grid;
