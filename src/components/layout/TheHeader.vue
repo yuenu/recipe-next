@@ -156,7 +156,7 @@ export default defineComponent({
 
     &:hover {
       background:rgb(55, 55, 255);
-      color:#ddd;
+      color:#fff;
     }
   }
 }

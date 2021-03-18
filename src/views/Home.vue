@@ -13,8 +13,9 @@
         </div>
         <Section2 />
         <Section3 />
-        <Section4 />
       </div>
+      <Section4 />
+
       <Carousel class="carousel" />
     </div>
     <Subscribe />
@@ -56,6 +57,7 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width:1440px;
 }
 
 .main {

@@ -57,25 +57,31 @@ export default defineComponent({
 <style lang="scss" scoped>
 .sec4 {
   width:100%;
-  margin:2.2rem 0;
+  min-height:40rem;
+  background: linear-gradient(to bottom, rgba(220,220,220,1), rgba(220,220,220,0.57)),
+    url('../../../assets/bg.jpg') no-repeat left center / cover;
+  ;
 }
 
 .wrapper {
+  width:100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 26rem));
-  gap: 2.3rem;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 20rem));
+  gap: 3.6rem;
+  margin:5rem 0 0 0;
   justify-content: center;
 }
 
 .card {
   overflow: hidden;
-  box-shadow: 0 2px 20px #e1e5ee;
   border-radius: 0.2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  transition:transform 0.2s ease-in;
+  transition:all 0.2s ease-in;
+  color:#333;
+  background:#fff;
 
   &__img {
     height:18rem;
@@ -107,11 +113,14 @@ export default defineComponent({
 
   &:hover {
     transform: scale(1.02);
+    box-shadow: 0 2px 20px #83858a;
+
   }
 
   &:hover &__btn {
     background:#d50000;
     color:#fff;
+
   }
 }
 </style>

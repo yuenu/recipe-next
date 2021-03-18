@@ -2,17 +2,20 @@
   <TheHeader />
   <router-view />
   <TheFooter />
+  <PageLoader />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import TheHeader from '@/components/layout/TheHeader.vue'
 import TheFooter from '@/components/layout/TheFooter.vue'
+import PageLoader from '@/components/PageLoader.vue'
 
 export default defineComponent({
   components: {
     TheHeader,
-    TheFooter
+    TheFooter,
+    PageLoader
   }
 })
 </script>
