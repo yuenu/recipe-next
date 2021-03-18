@@ -143,4 +143,21 @@ img {
     text-transform:uppercase;
   }
 }
+
+.pic1 {
+  position:relative;
+
+  &__body {
+    width:100%;
+    height:100%;
+  }
+
+  &__dress {
+    position:absolute;
+    top:16rem;
+    left:2rem;
+    width:60%;
+    height:auto;
+  }
+}
 </style>
