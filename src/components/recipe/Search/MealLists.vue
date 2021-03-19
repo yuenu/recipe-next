@@ -151,18 +151,14 @@ export default defineComponent({
 <style lang="scss" scoped>
 .card {
   height: fit-content;
-  // If use columns button would broken
-  // columns: 270px;
-  // column-gap: 0;
-
-  // flex settings
-  // display: flex;
-  // justify-content: flex-end;
-  // flex-wrap: wrap;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
   justify-items: end;
+
+  &:empty {
+    background:red;
+  }
 
   &__box {
     color: #fff;

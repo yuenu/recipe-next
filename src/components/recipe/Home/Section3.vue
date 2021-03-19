@@ -32,9 +32,9 @@
             class="pic3__dress"
             src="@/assets/health.png"
             alt="heath"
-          >
+          />
           <div class="pic3__text">
-            <h2 class="pic3__text__t1">Cook self</h2>
+            <h2 class="pic3__text__t1">Cookself</h2>
           </div>
         </div>
       </div>
@@ -65,7 +65,8 @@ img {
   &__dress {
     position: absolute;
     bottom: 10.5rem;
-    left: 8%;
+    left: 50%;
+    transform: translateX(-50%);
     width: 85%;
     height: auto;
   }
@@ -73,15 +74,16 @@ img {
   &__text {
     position: absolute;
     bottom: 6rem;
-    left: 20%;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
   }
 
   &__text__t1 {
     font-size: 3rem;
     letter-spacing: 2px;
-    text-transform:uppercase;
-    font-weight:500;
+    text-transform: uppercase;
+    font-weight: 500;
   }
 
   &__text__t2 {
@@ -93,71 +95,110 @@ img {
   position: relative;
 
   &__text {
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    text-align:center;
-    width:100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
   }
 
   &__text__t1 {
-    font-size:3rem;
+    font-size: 3rem;
     letter-spacing: 2px;
-    text-transform:uppercase;
-    font-weight:500;
+    text-transform: uppercase;
+    font-weight: 500;
   }
 
   &__text__t2 {
-    font-size:4rem;
+    font-size: 4rem;
   }
 
   &__text__t3 {
-    font-size:1rem;
-    font-weight:300;
+    font-size: 1rem;
+    font-weight: 300;
   }
 }
 
 .pic3 {
-  position:relative;
+  position: relative;
 
   &__dress {
-    position:absolute;
-    top:10%;
-    left:50%;
-    width:70%;
-    height:auto;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    width: 70%;
+    height: auto;
     transform: translate(-50%, 0) rotate(-4deg);
   }
 
   &__text {
-    position:absolute;
-    top:20%;
-    left:20%;
-    width:100%;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   &__text__t1 {
-    font-weight:500;
-    font-size:3rem;
-    text-transform:uppercase;
+    font-weight: 500;
+    font-size: 3rem;
+    text-align: center;
+    text-transform: uppercase;
   }
 }
 
-.pic1 {
-  position:relative;
-
-  &__body {
-    width:100%;
-    height:100%;
+@media (max-width: 1024px) {
+  .sec3__container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
   }
 
-  &__dress {
-    position:absolute;
-    top:16rem;
-    left:2rem;
-    width:60%;
-    height:auto;
+  .pic2 {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+
+  .pic1__dress {
+    width: 70%;
+  }
+
+  .pic3__dress {
+    width: 50%;
+  }
+
+  .pic1__text__t1 {
+    font-size:2.6rem;
+  }
+
+  .pic3__text__t1 {
+    font-size: 2.6rem;
+  }
+}
+
+@media (max-width: 720px) {
+}
+
+@media (max-width: 476px) {
+  img {
+    object-fit: cover;
+  }
+
+  .sec3__container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+
+  .pic2 {
+    grid-column: 1 / span 1;
+    grid-row: 1;
+  }
+
+    .pic1__text__t1 {
+    font-size:3.2rem;
+  }
+
+  .pic3__text__t1 {
+    font-size: 3.2rem;
   }
 }
 </style>

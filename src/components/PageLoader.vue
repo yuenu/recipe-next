@@ -1,31 +1,19 @@
 <template>
-  <div class="page-loader" v-if="!isLoading">
+  <div class="page-loader">
     <div class="cube"></div>
     <div class="cube"></div>
     <div class="cube"></div>
     <div class="cube"></div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue'
-export default defineComponent({
-  name: 'PageLoader',
-  setup () {
-    const isLoading = ref(false)
 
-    onMounted(() => {
-      document.onreadystatechange = () => {
-        if (document.readyState === 'complete') {
-          isLoading.value = true
-        }
-      }
-    })
-    return {
-      isLoading
-    }
-  }
+<script lang="ts">
+import { defineComponent } from 'vue'
+export default defineComponent({
+  name: 'PageLoader'
 })
 </script>
+
 <style lang="scss" scoped>
 $colors: #8cc271, #69beeb, #f5aa39, #e9643b;
 

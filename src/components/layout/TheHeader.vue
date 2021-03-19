@@ -21,6 +21,7 @@
         </ul>
       </div>
       <div class="cBottom">
+        <SearchForm class="cBottom__search" />
         <div class="cBottom__nav">
           <ul class="item__list">
             <li>
@@ -49,7 +50,11 @@
             </li>
           </ul>
         </div>
-        <SearchForm class="cBottom__search" />
+        <div class="cBottom__social">
+          <Facebook />
+          <Twitter />
+          <Instagram />
+        </div>
       </div>
       <div class="ham"></div>
     </div>
@@ -92,10 +97,16 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import SearchForm from './SearchForm'
+import Facebook from '@/components/UI/Facebook.vue'
+import Twitter from '@/components/UI/Twitter.vue'
+import Instagram from '@/components/UI/Instagram.vue'
 
 export default defineComponent({
   components: {
-    SearchForm
+    SearchForm,
+    Facebook,
+    Twitter,
+    Instagram
   },
   setup () {
     const isMobileOpen = ref(false)
@@ -127,10 +138,11 @@ export default defineComponent({
 
 .cTop {
   display: flex;
+  align-items:center;
   width: 100%;
 
   &__logo {
-    width: 60%;
+    width: 130%;
     display: flex;
     align-items: flex-end;
   }
@@ -141,7 +153,7 @@ export default defineComponent({
 }
 
 .lang {
-  width: 40%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -165,16 +177,32 @@ export default defineComponent({
   width:100%;
   display:flex;
 
+    &__social {
+    width:100%;
+    display:flex;
+    justify-content: flex-end;
+    margin:0 10px 0 0;
+
+    svg {
+      margin-left:23px;
+      transition:0.2s all ease;
+      cursor:pointer;
+      width:16px;
+
+      &:hover {
+        fill: rgb(255, 206, 45);
+      }
+    }
+  }
+
   &__nav {
-    width:60%;
+    width:100%;
     display: flex;
     justify-content: flex-end;
   }
 
   &__search {
-    width:40%;
     display: flex;
-    justify-content: flex-end;
   }
 
 }

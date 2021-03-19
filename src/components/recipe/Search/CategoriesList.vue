@@ -12,7 +12,7 @@
           :alt="cat.strCategory"
         />
       </div>
-      <div class="text">{{ cat.strCategory }}</div>
+      <div class="sidebar__text">{{ cat.strCategory }}</div>
       <div class="img2">
         <img :src="cat.strCategoryThumb" :alt="cat.strCategory" />
       </div>
@@ -52,7 +52,7 @@ export default defineComponent({
     display: flex;
     align-items: center;
     overflow: hidden;
-    margin-bottom: 10px;
+    margin:0 0 10px 0;
     position: relative;
     cursor: pointer;
     transition: 0.3s ease all;
@@ -62,7 +62,7 @@ export default defineComponent({
     }
   }
 
-  .text {
+  &__text {
     font-size: 20px;
     padding: 0 10px 0 0;
     text-transform: uppercase;
@@ -128,7 +128,7 @@ export default defineComponent({
         width: 30px;
       }
 
-      .text {
+      &__text {
         font-size: 16px;
       }
     }

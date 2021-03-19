@@ -28,6 +28,7 @@ export default defineComponent({
   components: {
     MealLists,
     CategoriesList
+
   },
   setup () {
     const store = useStore()
@@ -42,7 +43,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .result {
-  max-width: 1140px;
+  max-width: 1330px;
   margin: 2rem auto;
   width: 100%;
 }
