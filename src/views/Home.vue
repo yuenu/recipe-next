@@ -22,10 +22,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount } from 'vue'
-import { useStore } from 'vuex'
+import { defineComponent, onBeforeMount, inject } from 'vue'
 import Carousel from '@/components/recipe/Carousel.vue'
 import Subscribe from '@/components/recipe/Subscribe.vue'
+import recipeStore from '@/store/recipe'
 import Section2 from '@/components/recipe/Home/Section2.vue'
 import Section3 from '@/components/recipe/Home/Section3.vue'
 import Section4 from '@/components/recipe/Home/Section4.vue'
@@ -40,8 +40,11 @@ export default defineComponent({
     Section4
   },
   setup () {
-    const store = useStore()
-    onBeforeMount(() => store.dispatch('GET_CATEGORY'))
+    const store = inject('store', recipeStore)
+    onBeforeMount(async () => {
+      console.log('123', store)
+      await store.GET_CATEGORY()
+    })
   }
 })
 </script>

@@ -9,6 +9,7 @@
         v-for="cat in categories"
         :key="cat.idCategory"
         @click="getCatgoryMeals(cat.strCategory)"
+        ref="mealBox"
       >
         <img
           class="category__img"
@@ -22,21 +23,18 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, watchEffect, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import recipeStore from '@/store/recipe'
 
 export default defineComponent({
   setup () {
     /**
      * Get categories data
      */
-    const store = useStore()
     const sliderIndex = ref(0)
-    const categories = computed(() => {
-      return store.getters.getCategory
-    })
+    const categories = computed(() => recipeStore.getters.getCategory)
 
     const getCatgoryMeals = (category: string) => {
-      store.dispatch('GET_MEALS_BY_CATEGORY', category)
+      recipeStore.GET_MEALS_BY_CATEGORY(category)
     }
 
     /**
@@ -50,25 +48,19 @@ export default defineComponent({
      * @param {number} totlaSlideCount - Count the slide count which container only show 6 categories
      */
     const carosuel = ref<HTMLElement | null>(null)
+    const mealBox = ref<HTMLElement | null>(null)
     const leftHidden = ref(false)
     const rightHidden = ref(false)
     const counter = ref(0)
-    const size = ref(540)
-    const totlaSlideCount = computed(() => {
-      return Math.floor((categories.value.length) / (Math.floor(size.value / 90)))
-    })
-
-    onMounted(() => {
-      if (carosuel.value) {
-        size.value = carosuel.value.clientWidth - 19
-      }
-    })
+    const size = 541
+    // const totalCount = 0
+    const totlaSlideCount = 2
 
     const next = () => {
-      if (carosuel.value && counter.value < totlaSlideCount.value) {
+      if (carosuel.value && counter.value < totlaSlideCount) {
         counter.value++
         carosuel.value.style.transform =
-          'translateX(' + -size.value * counter.value + 'px)'
+          'translateX(' + -size * counter.value + 'px)'
       }
     }
 
@@ -76,13 +68,13 @@ export default defineComponent({
       if (carosuel.value && counter.value > 0) {
         counter.value--
         carosuel.value.style.transform =
-          'translateX(' + -size.value * counter.value + 'px)'
+          'translateX(' + -size * counter.value + 'px)'
       }
     }
 
     watchEffect(() => {
       leftHidden.value = counter.value === 0
-      rightHidden.value = counter.value === totlaSlideCount.value
+      rightHidden.value = counter.value === totlaSlideCount
     })
 
     return {
@@ -92,6 +84,7 @@ export default defineComponent({
       next,
       prev,
       carosuel,
+      mealBox,
       leftHidden,
       rightHidden
     }

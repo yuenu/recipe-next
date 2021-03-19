@@ -19,15 +19,14 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useStore } from 'vuex'
+import recipeStore from '@/store/recipe'
 
 export default defineComponent({
   setup () {
-    const store = useStore()
     const searchInput = ref('')
 
     const submitForm = () => {
-      store.dispatch('SEARCH_MEALS', searchInput.value)
+      recipeStore.SEARCH_MEALS(searchInput.value)
       searchInput.value = ''
     }
 

@@ -8,30 +8,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue'
+import { defineComponent, provide } from 'vue'
 import TheHeader from '@/components/layout/TheHeader.vue'
 import TheFooter from '@/components/layout/TheFooter.vue'
-import PageLoader from '@/components/PageLoader.vue'
+import store from '@/store/recipe'
 
 export default defineComponent({
   components: {
     TheHeader,
-    TheFooter,
-    PageLoader
+    TheFooter
   },
   setup () {
-    const isLoading = ref(true)
-
-    onMounted(() => {
-      document.onreadystatechange = () => {
-        if (document.readyState === 'complete') {
-          isLoading.value = false
-        }
-      }
-    })
-    return {
-      isLoading
-    }
+    provide('store', store)
   }
 })
 </script>
