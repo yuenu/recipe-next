@@ -20,17 +20,18 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
-import { useStore } from 'vuex'
+import { defineComponent, computed, inject } from 'vue'
+import recipeStore from '@/store/recipe'
 
 export default defineComponent({
   setup () {
-    const store = useStore()
+    const store = inject('store', recipeStore)
     const getCategories = computed(() => {
       return store.getters.getCategory
     })
+
     const getCategoryMeals = (category: string) => {
-      store.dispatch('GET_MEALS_BY_CATEGORY', category)
+      store.GET_MEALS_BY_CATEGORY(category)
     }
 
     return {

@@ -1,10 +1,9 @@
 <template>
   <TheHeader />
-  <transition name="route" mode=Out-in>
+  <transition name="route" mode=out-in>
     <router-view />
   </transition>
   <TheFooter />
-  <PageLoader v-if="isLoading" />
 </template>
 
 <script lang="ts">

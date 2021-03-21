@@ -57,8 +57,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, computed, watch, reactive } from 'vue'
-import { useStore } from 'vuex'
+import { defineComponent, onBeforeMount, computed, watch, reactive, inject } from 'vue'
+import recipeStore from '@/store/recipe'
 import Close from '@/components/UI/Close.vue'
 
 export default defineComponent({
@@ -66,14 +66,16 @@ export default defineComponent({
     Close
   },
   props: {
-    mealId: String
+    mealId: {
+      type: String,
+      required: true
+    }
   },
   emits: ['close'],
   setup (props, { emit }) {
-    // get data by meal's id
-    const store = useStore()
+    const store = inject('store', recipeStore)
     onBeforeMount(() => {
-      store.dispatch('GET_MEALS_BY_ID', props.mealId)
+      store.GET_MEALS_BY_ID(props.mealId)
     })
 
     const mealData = reactive({
@@ -96,18 +98,18 @@ export default defineComponent({
     })
 
     watch(getMealInfo, newVal => {
-      newVal = newVal[0]
-      mealData.mealId = newVal.idMeal
-      mealData.mealName = newVal.strMeal
-      mealData.mealArea = newVal.strArea
-      mealData.mealCategory = newVal.strCategory
-      mealData.mealImgUrl = newVal.strMealThumb
-      mealData.mealYoutubeLink = newVal.strYoutube
-      mealData.mealInstructions = newVal.strInstructions
+      const mealInfo = newVal[0]
+      mealData.mealId = mealInfo.idMeal
+      mealData.mealName = mealInfo.strMeal
+      mealData.mealArea = mealInfo.strArea
+      mealData.mealCategory = mealInfo.strCategory
+      mealData.mealImgUrl = mealInfo.strMealThumb
+      mealData.mealYoutubeLink = mealInfo.strYoutube
+      mealData.mealInstructions = mealInfo.strInstructions
       for (let i = 1; i <= 20; i++) {
-        if (newVal['strIngredient' + i]) {
+        if (mealInfo['strIngredient' + i]) {
           mealData.mealIngredients.push(
-            `${newVal['strIngredient' + i]} -> ${newVal['strMeasure' + i]}`
+            `${mealInfo['strIngredient' + i]} -> ${mealInfo['strMeasure' + i]}`
           )
         }
       }

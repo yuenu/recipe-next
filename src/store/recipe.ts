@@ -1,14 +1,14 @@
 import { reactive, computed } from 'vue'
 import * as api from '@/apis/recipe'
+import * as Response from '@/apis/response.type'
 
 type Recipe = {
-  random: object
-  meals: object
-  meal: object
-  categories: object
+  random: Response.meal[]
+  meals: Response.meal[]
+  meal: Response.meal[]
+  categories: Response.Category[]
 }
 
-// State
 const state = reactive<Recipe>({
   random: [],
   meals: [],
@@ -16,21 +16,14 @@ const state = reactive<Recipe>({
   categories: []
 })
 
-// Getter
 const getters = reactive({
   getMeals: computed(() => state.meals),
   getCategory: computed(() => state.categories),
   getMealInfo: computed(() => state.meal)
 })
 
-// Action
 const actions = {
 
-  /**
-   * search mael by name
-   *
-   * @param input - Search input
-   */
   async SEARCH_MEALS (input: string) {
     try {
       state.meals = await api.searchByName(input)
@@ -39,9 +32,6 @@ const actions = {
     }
   },
 
-  /**
-   *  get all category
-   */
   async GET_CATEGORY () {
     try {
       state.categories = await api.getAllCategory()
@@ -50,11 +40,6 @@ const actions = {
     }
   },
 
-  /**
-   * get maels by which selected category
-   *
-   * @param category - meals category
-   */
   async GET_MEALS_BY_CATEGORY (category: string) {
     try {
       state.meals = await api.searchByCategory(category)
@@ -63,11 +48,6 @@ const actions = {
     }
   },
 
-  /**
-   *  get meals by id
-   *
-   * @param mealId - meal id
-   */
   async GET_MEALS_BY_ID (mealId: string) {
     try {
       state.meal = await api.searchById(mealId)

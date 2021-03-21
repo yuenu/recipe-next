@@ -11,32 +11,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount } from 'vue'
-import { useStore } from 'vuex'
+import { defineComponent, onBeforeMount, inject } from 'vue'
 import MealLists from '@/components/recipe/Search/MealLists.vue'
 import CategoriesList from '@/components/recipe/Search/CategoriesList.vue'
-
-// type Category = {
-//   idCategory: string
-//   strCategory: string
-//   strCategoryDescription: string
-//   strCategoryThumb: string
-// }
+import recipeStore from '@/store/recipe'
 
 export default defineComponent({
   name: 'SearchResult',
   components: {
     MealLists,
     CategoriesList
-
   },
   setup () {
-    const store = useStore()
-    onBeforeMount(() => store.dispatch('GET_CATEGORY'))
-
-    return {
-
-    }
+    const store = inject('store', recipeStore)
+    onBeforeMount(async () => {
+      await store.GET_CATEGORY()
+    })
   }
 })
 </script>
@@ -66,9 +56,9 @@ export default defineComponent({
   text-transform: uppercase;
 }
 
-@media (max-width:1300px) {
+@media (max-width: 1300px) {
   .result {
-    padding:0 10px;
+    padding: 0 10px;
   }
 }
 </style>

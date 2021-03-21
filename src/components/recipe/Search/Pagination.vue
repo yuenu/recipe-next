@@ -62,8 +62,7 @@ export default defineComponent({
       changePage(currentPage.value)
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    watch(currentPage, (val, _oldVal) => {
+    watch(currentPage, val => {
       hasPrev.value = val > 1
       hasNext.value = (val < pages.value) && (pages.value !== 1)
     })

@@ -23,9 +23,9 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeMount, inject } from 'vue'
+import recipeStore from '@/store/recipe'
 import Carousel from '@/components/recipe/Carousel.vue'
 import Subscribe from '@/components/recipe/Subscribe.vue'
-import recipeStore from '@/store/recipe'
 import Section2 from '@/components/recipe/Home/Section2.vue'
 import Section3 from '@/components/recipe/Home/Section3.vue'
 import Section4 from '@/components/recipe/Home/Section4.vue'
@@ -42,7 +42,6 @@ export default defineComponent({
   setup () {
     const store = inject('store', recipeStore)
     onBeforeMount(async () => {
-      console.log('123', store)
       await store.GET_CATEGORY()
     })
   }
@@ -72,7 +71,8 @@ export default defineComponent({
 }
 
 .sec1 {
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)),
+  background: linear-gradient(
+    to left, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)),
     url('../assets/example/bg1.jpg') no-repeat left center / cover;
   width: 100%;
   height: 650px;

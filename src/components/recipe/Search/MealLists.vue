@@ -5,10 +5,10 @@
       @close="setModalClose"
       :mealId="mealId"
     />
-    <div v-if="isEmpty" class="dataEmpty" >
+    <div v-if="dataIsEmpty" class="dataEmpty" >
       <h2 class="dataEmpty__text">No Data</h2>
     </div>
-    <div v-else-if="!isEmpty" class="card" >
+    <div v-else-if="!dataIsEmpty" class="card" >
       <div
         class="card__box"
         v-for="meal in handlePageMeals"
@@ -53,13 +53,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, onMounted, watch } from 'vue'
-import { useStore } from 'vuex'
+import { defineComponent, computed, ref, onMounted, watch, inject } from 'vue'
+import recipeStore from '@/store/recipe'
 import MealModal from '@/components/recipe/MealModal.vue'
 import Link from '@/components/UI/Link.vue'
 import Star from '@/components/UI/Star.vue'
 import Pagination from './Pagination.vue'
-import type { CategoryMeals } from '@/apis/response.type'
 
 export default defineComponent({
   components: {
@@ -69,15 +68,13 @@ export default defineComponent({
     Pagination
   },
   setup () {
-    const store = useStore()
-    const isEmpty = ref(true)
+    const store = inject('store', recipeStore)
+    const dataIsEmpty = ref(true)
 
-    // fetched the meals data
-    const getMeals = computed<CategoryMeals[]>(() => {
+    const getMeals = computed(() => {
       return store.getters.getMeals
     })
 
-    // Modal status control
     const modalStatus = ref(false)
     const mealId = ref('')
     const setModalOpen = (id: string) => {
@@ -93,20 +90,11 @@ export default defineComponent({
       return modalStatus.value
     })
 
-    // handle Page & meals UI contrl
-
     const currentPage = ref(1)
     const onePageMealsCount = 6
 
-    /**
-     * emit from Pagination component
-     * @param {number} page - emit pass data and saved to currentPage
-    */
     const changePage = (page: number) => { currentPage.value = page }
 
-    /**
-     * handle every page would show maximal 6 meal
-     */
     const handlePageMeals = computed(() => {
       return getMeals.value.filter((_, index) => {
         if (currentPage.value === 1) {
@@ -128,10 +116,10 @@ export default defineComponent({
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     watch(getMeals, (_val, _oldVal) => {
-      isEmpty.value = false
+      dataIsEmpty.value = false
     })
 
-    onMounted(() => { isEmpty.value = true })
+    onMounted(() => { dataIsEmpty.value = true })
 
     return {
       getMeals,
@@ -142,7 +130,7 @@ export default defineComponent({
       favoriteRecipe,
       changePage,
       handlePageMeals,
-      isEmpty
+      dataIsEmpty
     }
   }
 })
