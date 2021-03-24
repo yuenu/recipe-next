@@ -81,7 +81,7 @@ img {
   position: relative;
   outline: none;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.5s cubic-bezier(0,1.13,.83,.67);
   font-family: inherit;
   overflow:hidden;
 

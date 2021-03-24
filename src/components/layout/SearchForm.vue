@@ -18,15 +18,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, inject } from 'vue'
 import recipeStore from '@/store/recipe'
 
 export default defineComponent({
   setup () {
+    const store = inject('store', recipeStore)
     const searchInput = ref('')
 
     const submitForm = () => {
-      recipeStore.SEARCH_MEALS(searchInput.value)
+      store.SEARCH_MEALS(searchInput.value)
       searchInput.value = ''
     }
 
@@ -34,10 +35,6 @@ export default defineComponent({
       searchInput.value = ''
     }
 
-    /**
-     * EventListener the clicked where input section or others section
-     *
-     */
     const inputActive = ref(false)
     window.addEventListener('click', (event: MouseEvent) => {
       const inputTarget = event.target as HTMLElement

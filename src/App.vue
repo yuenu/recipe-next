@@ -3,6 +3,7 @@
   <transition name="route" mode=out-in>
     <router-view />
   </transition>
+  <ScrollTop />
   <TheFooter />
 </template>
 
@@ -10,12 +11,14 @@
 import { defineComponent, provide } from 'vue'
 import TheHeader from '@/components/layout/TheHeader.vue'
 import TheFooter from '@/components/layout/TheFooter.vue'
+import ScrollTop from '@/components/layout/ScrollTop.vue'
 import store from '@/store/recipe'
 
 export default defineComponent({
   components: {
     TheHeader,
-    TheFooter
+    TheFooter,
+    ScrollTop
   },
   setup () {
     provide('store', store)

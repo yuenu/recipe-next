@@ -20,7 +20,7 @@
           <li class="lang__item lang__en">EN</li>
         </ul>
       </div>
-      <div class="cBottom">
+      <div class="cBottom" ref="cBottom">
         <SearchForm class="cBottom__search" />
         <div class="cBottom__nav">
           <ul class="item__list">
@@ -94,9 +94,9 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, ref } from 'vue'
-import SearchForm from './SearchForm'
+<script lang="ts">
+import { defineComponent, ref, onMounted } from 'vue'
+import SearchForm from './SearchForm.vue'
 import Facebook from '@/components/UI/Facebook.vue'
 import Twitter from '@/components/UI/Twitter.vue'
 import Instagram from '@/components/UI/Instagram.vue'
@@ -111,8 +111,28 @@ export default defineComponent({
   setup () {
     const isMobileOpen = ref(false)
 
+    const cBottom = ref<HTMLElement>()
+    const cBottomOffset = ref(0)
+
+    const stickyHeader = () => {
+      if (cBottom.value) {
+        if (window.pageYOffset > cBottomOffset.value) {
+          cBottom.value.classList.add('sticky')
+        } else {
+          cBottom.value.classList.remove('sticky')
+        }
+      }
+    }
+
+    onMounted(() => {
+      // On mouted get cBottom's offsetTop and store to cBottomOffset
+      if (cBottom.value) { cBottomOffset.value = cBottom.value.offsetTop }
+      document.addEventListener('scroll', () => { stickyHeader() })
+    })
+
     return {
-      isMobileOpen
+      isMobileOpen,
+      cBottom
     }
   }
 })
@@ -175,7 +195,9 @@ export default defineComponent({
 
 .cBottom {
   width:100%;
+  height:50px;
   display:flex;
+  align-items: center;
 
     &__social {
     width:100%;
@@ -298,6 +320,15 @@ export default defineComponent({
   &__link:hover {
     background: rgb(100, 100, 100);
   }
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background:#fff;
+  z-index:999;
+  box-shadow:0px 2px 10px rgba(0,0,0,0.1);
 }
 
 @media (max-width: 768px) {
