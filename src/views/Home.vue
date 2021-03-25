@@ -12,9 +12,11 @@
           </div>
         </div>
         <Section2 />
+        <Section5 />
         <Section3 />
+        <Section4 />
       </div>
-      <Section4 />
+
       <Carousel class="carousel" />
     </div>
     <Subscribe />
@@ -29,6 +31,7 @@ import Subscribe from '@/components/recipe/Subscribe.vue'
 import Section2 from '@/components/recipe/Home/Section2.vue'
 import Section3 from '@/components/recipe/Home/Section3.vue'
 import Section4 from '@/components/recipe/Home/Section4.vue'
+import Section5 from '@/components/recipe/Home/Section5.vue'
 
 export default defineComponent({
   name: 'Home',
@@ -37,7 +40,8 @@ export default defineComponent({
     Subscribe,
     Section2,
     Section3,
-    Section4
+    Section4,
+    Section5
   },
   setup () {
     const store = inject('store', recipeStore)

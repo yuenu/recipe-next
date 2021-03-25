@@ -20,7 +20,23 @@
         <button class="tryLink">
           <span class="tryLink__text">Try Now</span>
         </button>
+
+        <div class="descriptionIcon">
+          <div
+            class="descriptionIcon__box"
+            v-for="item in descriptionIcon"
+            :key="item.id"
+          >
+            <img
+              :src="item.src"
+              :alt="item.text"
+              class="descriptionIcon__img"
+            />
+            <div class="descriptionIcon__text">{{ item.text }}</div>
+          </div>
+        </div>
       </div>
+
       <div class="pic">
         <img src="@/assets/example/bg3.png" alt="bg3" />
       </div>
@@ -35,12 +51,32 @@ import Star from '@/components/UI/Star.vue'
 export default defineComponent({
   components: {
     Star
+  },
+  setup () {
+    const descriptionIcon = [
+      {
+        id: 1,
+        text: 'Fast',
+        src: require('@/assets/icon/cook.svg')
+      },
+      {
+        id: 2,
+        text: 'Health',
+        src: require('@/assets/icon/cook-self.svg')
+      },
+      {
+        id: 2,
+        text: 'Idea',
+        src: require('@/assets/icon/idea.svg')
+      }
+    ]
+    return { descriptionIcon }
   }
 })
 </script>
 
 <style lang="scss" scoped>
-$star-color:#fdb926;
+$star-color: #fdb926;
 
 img {
   width: 100%;
@@ -54,6 +90,7 @@ img {
   &__container {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
     gap: 90px;
     justify-items: center;
     align-items: center;
@@ -71,66 +108,75 @@ img {
   margin: 0 2px;
 }
 
-.tryLink {
-  background: transparent;
-  border: 2px solid #ffce2d;
-  border-radius: 0.1rem;
-  width: 6.8rem;
-  height: 3.3rem;
-  margin: 36px 0 0;
-  position: relative;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.5s cubic-bezier(0,1.13,.83,.67);
-  font-family: inherit;
-  overflow:hidden;
-
-  &::after {
-    content: '';
+  .tryLink {
+    text-decoration: none;
+    background: transparent;
+    border: 2px solid #C84F48;
+    border-radius: 0.1rem;
+    color: #333;
     width: 6.8rem;
     height: 3.3rem;
-    background: rgb(255, 206, 45);
-    border-color:rgb(255, 206, 45);
-    outline:none;
-    position:absolute;
-    left:0;
-    top:0;
-    transform: translateX(-100%);
-    transition:0.2s all ease-out;
-  }
-
-  &:hover::after {
-    transform: translateX(0);
-  }
-
-  &__text {
-    z-index:20;
-    color: #333;
+    margin: 36px 0 0;
     font-size: 18px;
     font-weight: 300;
+    font-family:inherit;
+    position: relative;
+    float: left;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    &:hover {
+      background: #C84F48;
+      color:#fff;
+    }
+  }
+
+.descriptionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 120px;
+  margin: 4.5rem 10rem 0 0;
+  padding:0 10rem 0 0;
+
+  &__text {
+    text-align: center;
+  }
+
+  &__img {
+    width: 45px;
+    height: auto;
+    margin: 5px auto;
+    display:block;
+  }
+
+  &__box:nth-child(3) &__img {
+    width:50px;
   }
 }
 
-@media (max-width:1330px) {
+@media (max-width: 1330px) {
   .content {
-    padding:0 0 0 20px;
+    padding: 0 0 0 20px;
   }
 }
 
-@media (max-width:920px) {
+@media (max-width: 920px) {
   .content {
-    padding:0 5rem;
+    padding: 0 5rem;
   }
 
   .sec2__container {
     grid-template-columns: 1fr;
-    grid-template-rows:1fr 1fr;
+    grid-template-rows: 1fr 1fr;
   }
 }
 
-@media (max-width:476px) {
-    .content {
-    padding:0 1rem;
+@media (max-width: 476px) {
+  .content {
+    padding: 0 1rem;
   }
 }
 </style>

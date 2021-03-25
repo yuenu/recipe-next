@@ -35,6 +35,7 @@ const actions = {
   async GET_CATEGORY () {
     try {
       state.categories = await api.getAllCategory()
+      return state.categories
     } catch (e) {
       console.log(e)
     }
