@@ -1,9 +1,9 @@
 <template>
-  <div class="footer">
-    <div class="copyright">
+  <footer class="footer">
+    <div class="footer--copyright">
       © 2021 All Rights Reserved. - Created by yuenu
     </div>
-  </div>
+  </footer>
 </template>
 
 <script>
@@ -25,7 +25,7 @@ export default defineComponent({})
   align-items: center;
   margin-top: auto;
 
-  .copyright {
+  &--copyright {
     font-size: 14px;
   }
 }

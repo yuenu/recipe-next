@@ -1,7 +1,7 @@
 <template>
   <div class="user-settings">
     <div class="card">
-      <h1 class="card__title">個人資料</h1>
+      <h1 class="card__title u-align-items-center">個人資料</h1>
       <form @submit.prevent="submitProfile">
         <div class="card__input user">
           <label for="uName"><span class="card__label">username:</span>  {{ fakeData[0].userName }}</label>
@@ -70,7 +70,6 @@ export default defineComponent({
   width: max-content;
 
   &__title {
-    text-align: center;
     margin: 0rem 0 2.2rem 0;
     font-size: 28px;
     font-weight: normal;

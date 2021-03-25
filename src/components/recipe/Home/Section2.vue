@@ -40,7 +40,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$star-color:#fdb926;
+$star-color: #fdb926;
 
 img {
   width: 100%;
@@ -81,22 +81,21 @@ img {
   position: relative;
   outline: none;
   cursor: pointer;
-  transition: all 0.5s cubic-bezier(0,1.13,.83,.67);
+  transition: all 0.5s cubic-bezier(0, 1.13, 0.83, 0.67);
   font-family: inherit;
-  overflow:hidden;
+  overflow: hidden;
 
   &::after {
     content: '';
     width: 6.8rem;
     height: 3.3rem;
     background: rgb(255, 206, 45);
-    border-color:rgb(255, 206, 45);
-    outline:none;
-    position:absolute;
-    left:0;
-    top:0;
+    border-color: rgb(255, 206, 45);
+    position: absolute;
+    left: 0;
+    top: 0;
     transform: translateX(-100%);
-    transition:0.2s all ease-out;
+    transition: 0.2s all ease-out;
   }
 
   &:hover::after {
@@ -104,33 +103,33 @@ img {
   }
 
   &__text {
-    z-index:20;
+    z-index: 20;
     color: #333;
     font-size: 18px;
     font-weight: 300;
   }
 }
 
-@media (max-width:1330px) {
+@media (max-width: 1330px) {
   .content {
-    padding:0 0 0 20px;
+    padding: 0 0 0 20px;
   }
 }
 
-@media (max-width:920px) {
+@media (max-width: 920px) {
   .content {
-    padding:0 5rem;
+    padding: 0 5rem;
   }
 
   .sec2__container {
     grid-template-columns: 1fr;
-    grid-template-rows:1fr 1fr;
+    grid-template-rows: 1fr 1fr;
   }
 }
 
-@media (max-width:476px) {
-    .content {
-    padding:0 1rem;
+@media (max-width: 476px) {
+  .content {
+    padding: 0 1rem;
   }
 }
 </style>

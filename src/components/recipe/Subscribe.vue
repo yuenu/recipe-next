@@ -6,7 +6,7 @@
     <div class="bg-1"></div>
     <div class="content">
       <div class="content__text">
-        <div class="content__text__title">SIGN UP FOR OUR UPDATE</div>
+        <div class="content__text__title u-align-items-center">SIGN UP FOR OUR UPDATE</div>
         <hr />
         <div class="content__text__sub">
           To stay up-to-date on our promotions,
@@ -166,10 +166,6 @@ hr {
 
     &__text {
       width:300px;
-    }
-
-    &__text__title {
-      text-align:center;
     }
   }
 

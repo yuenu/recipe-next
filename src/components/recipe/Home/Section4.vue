@@ -56,19 +56,22 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .sec4 {
-  width:100%;
-  min-height:40rem;
-  background: linear-gradient(to bottom, rgba(220,220,220,1), rgba(220,220,220,0.57)),
+  width: 100%;
+  min-height: 40rem;
+  background: linear-gradient(
+      to bottom,
+      rgba(220, 220, 220, 1),
+      rgba(220, 220, 220, 0.57)
+    ),
     url('../../../assets/bg.jpg') no-repeat left center / cover;
-  ;
 }
 
 .wrapper {
-  width:100%;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18rem, 20rem));
   gap: 3.6rem;
-  margin:5rem 0 0 0;
+  margin: 5rem 0 0 0;
   justify-content: center;
 }
 
@@ -79,48 +82,46 @@ export default defineComponent({
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  transition:all 0.2s ease-in;
-  color:#333;
-  background:#fff;
+  transition: all 0.2s ease-in;
+  color: #333;
+  background: #fff;
 
   &__img {
-    height:18rem;
-    width:100%;
-    object-fit:cover;
+    height: 18rem;
+    width: 100%;
+    object-fit: cover;
   }
 
   &__title {
-    padding:1rem;
+    padding: 1rem;
   }
 
   &__description {
-    padding:0 1rem;
+    padding: 0 1rem;
   }
 
   &__btn {
-    padding:1rem;
-    font-family:inherit;
-    font-weight:bold;
-    font-size:1rem;
-    margin:1rem;
-    border:2px solid #d50000;
-    background:transparent;
-    color:#d50000;
-    border-radius:0.2rem;
-    transition:background 200ms ease-in, color 200ms ease-in;
-    cursor:pointer;
+    padding: 1rem;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 1rem;
+    border: 2px solid #d50000;
+    background: transparent;
+    color: #d50000;
+    border-radius: 0.2rem;
+    transition: background 200ms ease-in, color 200ms ease-in;
+    cursor: pointer;
   }
 
   &:hover {
     transform: scale(1.02);
     box-shadow: 0 2px 20px #83858a;
-
   }
 
   &:hover &__btn {
-    background:#d50000;
-    color:#fff;
-
+    background: #d50000;
+    color: #fff;
   }
 }
 </style>

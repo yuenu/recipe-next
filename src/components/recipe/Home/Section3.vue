@@ -9,7 +9,7 @@
             src="@/assets/favorite.png"
             alt="favorite"
           />
-          <div class="pic1__text">
+          <div class="pic1__text u-text-align-center">
             <h2 class="pic1__text__t1">Multiple</h2>
             <h6 class="pic1__text__t2">More than 6000 kinds of meals</h6>
           </div>
@@ -18,7 +18,7 @@
       <div class="pic2">
         <img src="@/assets/example/bg2-2.png" alt="bg2-2" />
         <div class="pic2__body">
-          <div class="pic2__text">
+          <div class="pic2__text u-text-align-center">
             <h2 class="pic2__text__t1">special meals</h2>
             <h1 class="pic2__text__t2">1 month free</h1>
             <h6 class="pic2__text__t3">Use our recipe to happy meals</h6>
@@ -33,7 +33,7 @@
             src="@/assets/health.png"
             alt="heath"
           />
-          <div class="pic3__text">
+          <div class="pic3__text u-text-align-center">
             <h2 class="pic3__text__t1">Cookself</h2>
           </div>
         </div>
@@ -76,7 +76,6 @@ img {
     bottom: 6rem;
     left: 50%;
     transform: translateX(-50%);
-    text-align: center;
   }
 
   &__text__t1 {
@@ -99,7 +98,6 @@ img {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-align: center;
     width: 100%;
   }
 
@@ -142,7 +140,6 @@ img {
   &__text__t1 {
     font-weight: 500;
     font-size: 3rem;
-    text-align: center;
     text-transform: uppercase;
   }
 }
@@ -167,7 +164,7 @@ img {
   }
 
   .pic1__text__t1 {
-    font-size:2.6rem;
+    font-size: 2.6rem;
   }
 
   .pic3__text__t1 {
@@ -193,8 +190,8 @@ img {
     grid-row: 1;
   }
 
-    .pic1__text__t1 {
-    font-size:3.2rem;
+  .pic1__text__t1 {
+    font-size: 3.2rem;
   }
 
   .pic3__text__t1 {

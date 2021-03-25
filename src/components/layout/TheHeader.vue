@@ -5,7 +5,7 @@
       id="check"
       v-model="isMobileOpen"
     />
-    <div class="container">
+    <div class="header__container">
       <div class="cTop">
         <div class="cTop__logo">
           <router-link to="/" class="logo__link">
@@ -25,9 +25,7 @@
         <div class="cBottom__nav">
           <ul class="item__list">
             <li>
-              <router-link to="/" class="item__link">
-                Home
-              </router-link>
+              <router-link to="/" class="item__link"> Home </router-link>
             </li>
             <li>
               <router-link to="/search" class="item__link collect">
@@ -80,9 +78,7 @@
           </a>
         </li>
         <li class="mobile__item">
-          <router-link to="/" class="mobile__link collect">
-            MENU
-          </router-link>
+          <router-link to="/" class="mobile__link collect"> MENU </router-link>
         </li>
         <li class="mobile__item">
           <router-link to="/editProfile" class="mobile__link login">
@@ -126,8 +122,12 @@ export default defineComponent({
 
     onMounted(() => {
       // On mouted get cBottom's offsetTop and store to cBottomOffset
-      if (cBottom.value) { cBottomOffset.value = cBottom.value.offsetTop }
-      document.addEventListener('scroll', () => { stickyHeader() })
+      if (cBottom.value) {
+        cBottomOffset.value = cBottom.value.offsetTop
+      }
+      document.addEventListener('scroll', () => {
+        stickyHeader()
+      })
     })
 
     return {
@@ -144,21 +144,21 @@ export default defineComponent({
   height: auto;
   background: #fff;
   margin-bottom: 2rem;
-}
 
-.container {
-  width: 100%;
-  height: 100%;
-  max-width: 1330px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  &__container {
+    width: 100%;
+    height: 100%;
+    max-width: 1330px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
 }
 
 .cTop {
   display: flex;
-  align-items:center;
+  align-items: center;
   width: 100%;
 
   &__logo {
@@ -187,29 +187,29 @@ export default defineComponent({
     color: #333;
 
     &:hover {
-      background:rgb(55, 55, 255);
-      color:#fff;
+      background: rgb(55, 55, 255);
+      color: #fff;
     }
   }
 }
 
 .cBottom {
-  width:100%;
-  height:50px;
-  display:flex;
+  width: 100%;
+  height: 50px;
+  display: flex;
   align-items: center;
 
-    &__social {
-    width:100%;
-    display:flex;
+  &__social {
+    width: 100%;
+    display: flex;
     justify-content: flex-end;
-    margin:0 10px 0 0;
+    margin: 0 10px 0 0;
 
     svg {
-      margin-left:23px;
-      transition:0.2s all ease;
-      cursor:pointer;
-      width:16px;
+      margin-left: 23px;
+      transition: 0.2s all ease;
+      cursor: pointer;
+      width: 16px;
 
       &:hover {
         fill: rgb(255, 206, 45);
@@ -218,7 +218,7 @@ export default defineComponent({
   }
 
   &__nav {
-    width:100%;
+    width: 100%;
     display: flex;
     justify-content: flex-end;
   }
@@ -226,7 +226,6 @@ export default defineComponent({
   &__search {
     display: flex;
   }
-
 }
 
 .item__list {
@@ -326,9 +325,9 @@ export default defineComponent({
   position: fixed;
   top: 0;
   width: 100%;
-  background:#fff;
-  z-index:999;
-  box-shadow:0px 2px 10px rgba(0,0,0,0.1);
+  background: #fff;
+  z-index: 999;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 768px) {

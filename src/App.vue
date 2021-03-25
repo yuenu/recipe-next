@@ -1,6 +1,6 @@
 <template>
   <TheHeader />
-  <transition name="route" mode=out-in>
+  <transition name="route" mode="out-in">
     <router-view />
   </transition>
   <ScrollTop />
@@ -57,23 +57,28 @@ body {
   display: flex;
   flex-direction: column;
   margin-bottom: 32px;
-  font-family: 'Oswald','微軟正黑體', 'Microsoft Yahei', sans-serif;
+  font-family: 'Oswald', '微軟正黑體', 'Microsoft Yahei', sans-serif;
 }
 
 .route-enter-from,
 .route.leave-to {
-  opacity:0;
+  opacity: 0;
   transform: translateY(30px);
 }
 
 .route-enter-to,
 .route.leave-from {
-  opacity:1;
-  transform:translate(0px);
+  opacity: 1;
+  transform: translate(0px);
 }
 
 .route-enter-active,
 .route-leave-active {
-  transition:all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+}
+
+// utilities
+.u-text-align-center {
+  text-align: center;
 }
 </style>

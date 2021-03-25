@@ -14,7 +14,7 @@
 
     <br />
 
-    <div class="dots">
+    <div class="dots u-text-align-center">
       <span
         v-for="dotCount in imagesLen"
         :class="['dot', { active: getShowImg[0].id === dotCount }]"
@@ -175,10 +175,6 @@ export default defineComponent({
 .arrow-right {
   right: 1%;
   transform: translateY(-50%);
-}
-
-.dots {
-  text-align: center;
 }
 
 .dot {
