@@ -56,20 +56,15 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .sec4 {
-  width: 100%;
-  min-height: 40rem;
-  background: linear-gradient(
-      to bottom,
-      rgba(220, 220, 220, 1),
-      rgba(220, 220, 220, 0.57)
-    ),
-    url('../../../assets/bg.jpg') no-repeat left center / cover;
+  width:100%;
+  min-height:40rem;
+
 }
 
 .wrapper {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 20rem));
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 25rem));
   gap: 3.6rem;
   margin: 5rem 0 0 0;
   justify-content: center;
@@ -82,9 +77,10 @@ export default defineComponent({
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  transition: all 0.2s ease-in;
-  color: #333;
-  background: #fff;
+  transition:all 0.3s ease-in;
+  color:#333;
+  background:#fff;
+  border: 2px solid rgba(220,220,220,0.4);
 
   &__img {
     height: 18rem;
@@ -115,8 +111,9 @@ export default defineComponent({
   }
 
   &:hover {
-    transform: scale(1.02);
-    box-shadow: 0 2px 20px #83858a;
+    transform: scale(1.02) translateY(-5px);
+    box-shadow: 2px 5px 20px #83858a;
+    border: 2px solid rgba(220,220,220,0.1);
   }
 
   &:hover &__btn {
