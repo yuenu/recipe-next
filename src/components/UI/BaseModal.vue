@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import Close from './Close.vue'
+import Close from './Icon/Close.vue'
 
 export default defineComponent({
   components: {

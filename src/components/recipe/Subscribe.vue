@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Email from '@/components/UI/Email.vue'
+import Email from '@/components/UI/Icon/Email.vue'
 
 export default defineComponent({
   components: {

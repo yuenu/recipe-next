@@ -19,7 +19,7 @@ const state = reactive<Recipe>({
 const getters = reactive({
   getMeals: computed(() => state.meals),
   getCategory: computed(() => state.categories),
-  getMealInfo: computed(() => state.meal)
+  getMealDetail: computed(() => state.meal)
 })
 
 const actions = {

@@ -15,33 +15,36 @@
         <Section5 />
         <Section3 />
         <Section4 />
+        <CategoriesList />
       </div>
 
-      <Carousel class="carousel" />
+      <!-- <Carousel class="carousel" /> -->
     </div>
-    <Subscribe />
+    <!-- <Subscribe /> -->
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, onBeforeMount, inject } from 'vue'
 import recipeStore from '@/store/recipe'
-import Carousel from '@/components/recipe/Carousel.vue'
-import Subscribe from '@/components/recipe/Subscribe.vue'
+// import Carousel from '@/components/recipe/Carousel.vue'
+// import Subscribe from '@/components/recipe/Subscribe.vue'
 import Section2 from '@/components/recipe/Home/Section2.vue'
 import Section3 from '@/components/recipe/Home/Section3.vue'
 import Section4 from '@/components/recipe/Home/Section4.vue'
 import Section5 from '@/components/recipe/Home/Section5.vue'
+import CategoriesList from '@/components/recipe/Home/CategoriesList.vue'
 
 export default defineComponent({
   name: 'Home',
   components: {
-    Carousel,
-    Subscribe,
+    // Carousel,
+    // Subscribe,
     Section2,
     Section3,
     Section4,
-    Section5
+    Section5,
+    CategoriesList
   },
   setup () {
     const store = inject('store', recipeStore)

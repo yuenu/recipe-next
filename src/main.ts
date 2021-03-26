@@ -5,7 +5,7 @@ import { store } from './store'
 
 // ui
 import BaseModal from '@/components/UI/BaseModal.vue'
-import Arrow from '@/components/UI/Arrow.vue'
+import Arrow from '@/components/UI/Icon/Arrow.vue'
 
 const app = createApp(App)
 

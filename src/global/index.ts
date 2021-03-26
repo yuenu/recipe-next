@@ -12,7 +12,7 @@ const state = reactive({
 // Getter
 export const getMeals = computed(() => { return state.meals })
 export const getCategory = computed(() => { return state.categories })
-export const getMealInfo = computed(() => { return state.meal })
+export const getMealDetail = computed(() => { return state.meal })
 
 // Action
 export const SEARCH_MEALS = async (input: string) => {

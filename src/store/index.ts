@@ -80,7 +80,7 @@ export const store = createStore<State>({
     getCategory: state => {
       return state.category
     },
-    getMealInfo: state => {
+    getMealDetail: state => {
       return state.meal
     }
   }

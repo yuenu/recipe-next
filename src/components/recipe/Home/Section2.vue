@@ -46,7 +46,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Star from '@/components/UI/Star.vue'
+import Star from '@/components/UI/Icon/Star.vue'
 
 export default defineComponent({
   components: {

@@ -33,7 +33,7 @@
 import { defineComponent, inject, onBeforeMount, ref } from 'vue'
 import recipeStore from '@/store/recipe'
 import type { Category } from '@/apis/response.type'
-import Check from '@/components/UI/Check.vue'
+import Check from '@/components/UI/Icon/Check.vue'
 
 export default defineComponent({
   components: {
@@ -81,7 +81,6 @@ export default defineComponent({
 
   &__content {
     padding: 0 2rem;
-    max-height: 240px;
 
     &--primary {
       font-weight: 400;

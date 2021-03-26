@@ -1,6 +1,6 @@
 <template>
-  <div class="carousel">
-    <div class="carousel__section">
+  <div class="carousel" ref="carouselSection">
+    <div class="carousel__section" >
       <img
         v-for="img in getShowImg"
         :key="img.id"
@@ -31,7 +31,7 @@ import { defineComponent, ref, computed, onMounted } from 'vue'
 export default defineComponent({
   setup () {
     const sliderIndex = ref(1)
-
+    const carouselSection = ref<HTMLElement>()
     // Fake data
     const images = [
       {
@@ -113,6 +113,12 @@ export default defineComponent({
 
     onMounted(() => {
       timer = resetInterval(timer)
+      if (carouselSection.value) {
+        const mc = new Hammer(carouselSection.value)
+        mc.on('penright penleft press tap', (ev) => {
+          console.log(ev, ev.type)
+        })
+      }
     })
 
     return {
@@ -122,7 +128,8 @@ export default defineComponent({
       onPrev,
       onNext,
       getShowImg,
-      currentSlide
+      currentSlide,
+      carouselSection
     }
   }
 })

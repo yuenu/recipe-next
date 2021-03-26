@@ -8,11 +8,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, provide } from 'vue'
+import { defineComponent, provide, onBeforeMount } from 'vue'
 import TheHeader from '@/components/layout/TheHeader.vue'
 import TheFooter from '@/components/layout/TheFooter.vue'
 import ScrollTop from '@/components/layout/ScrollTop.vue'
 import store from '@/store/recipe'
+
+// import Hammer from '@/plugin/hammer'
+// import * as Hammer from 'hammerjs'
+import * as Hammer from 'hammerjs'
 
 export default defineComponent({
   components: {
@@ -22,6 +26,9 @@ export default defineComponent({
   },
   setup () {
     provide('store', store)
+    onBeforeMount(() => {
+      window.Hammer = Hammer.default
+    })
   }
 })
 </script>
