@@ -6,52 +6,59 @@
       v-model="isMobileOpen"
     />
     <div class="header__container">
-      <div class="cTop">
-        <div class="cTop__logo">
-          <router-link to="/" class="logo__link">
+      <div class="headerTop">
+        <div class="headerTop__logo">
+          <router-link to="/" class="headerTop__logo--link">
             <img src="@/assets/logo.png" alt="logo" />
           </router-link>
         </div>
-        <ul class="lang">
-          <li class="lang__item lang__cn">簡</li>
+        <ul class="headerTop__lang">
+          <li class="headerTop__lang-box lang--cn">簡</li>
           <br />
-          <li class="lang__item lang__tw">繁</li>
+          <li class="headerTop__lang-box lang--tw">繁</li>
           <br />
-          <li class="lang__item lang__en">EN</li>
+          <li class="headerTop__lang-box lang--en">EN</li>
         </ul>
       </div>
-      <div class="cBottom" ref="cBottom">
-        <SearchForm class="cBottom__search" />
-        <div class="cBottom__nav">
-          <ul class="item__list">
-            <li>
-              <router-link to="/" class="item__link"> Home </router-link>
-            </li>
-            <li>
-              <router-link to="/search" class="item__link collect">
-                Melas
-              </router-link>
-            </li>
-            <li>
-              <a
-                href="https://profile-d6420.firebaseapp.com/"
-                class="item__link othersPro"
-                target="_blank"
-              >
-                Projrcts
-              </a>
-            </li>
-            <li>
-              <router-link to="/editProfile" class="item__link login">
-                Settings
-              </router-link>
-            </li>
-          </ul>
-        </div>
-        <div class="cBottom__social">
-          <Facebook />
-          <Twitter />
-          <Instagram />
+      <div class="headerBottom" ref="headerBottom">
+        <SearchForm class="headerBottom__search" />
+
+        <ul class="headerBottom__nav">
+          <li>
+            <router-link to="/" class="headerBottom__nav--link">
+              Home
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              to="/search"
+              class="headerBottom__nav--link"
+            >Melas
+            </router-link>
+          </li>
+          <li>
+            <a
+              href="https://profile-d6420.firebaseapp.com/"
+              class="headerBottom__nav--link"
+              target="_blank"
+            >
+              Projrcts
+            </a>
+          </li>
+          <li>
+            <router-link
+              to="/editProfile"
+              class="headerBottom__nav--link login"
+            >
+              Settings
+            </router-link>
+          </li>
+        </ul>
+
+        <div class="headerBottom__social">
+          <Facebook class="headerBottom__social--img" />
+          <Twitter class="headerBottom__social--img" />
+          <Instagram class="headerBottom__social--img" />
         </div>
       </div>
       <div class="ham"></div>
@@ -67,21 +74,21 @@
       :isMobileOpen="isMobileOpen"
       class="mobile__modal"
     >
-      <ul class="mobile__list">
+      <ul class="mobile__nav">
         <li class="mobile__item">
           <a
             href="https://profile-d6420.firebaseapp.com/"
-            class="mobile__link othersPro"
+            class="mobile__link"
             target="_blank"
           >
             Projects
           </a>
         </li>
         <li class="mobile__item">
-          <router-link to="/" class="mobile__link collect"> MENU </router-link>
+          <router-link to="/" class="mobile__link"> MENU </router-link>
         </li>
         <li class="mobile__item">
-          <router-link to="/editProfile" class="mobile__link login">
+          <router-link to="/editProfile" class="mobile__link">
             Settings
           </router-link>
         </li>
@@ -107,23 +114,23 @@ export default defineComponent({
   setup () {
     const isMobileOpen = ref(false)
 
-    const cBottom = ref<HTMLElement>()
-    const cBottomOffset = ref(0)
+    const headerBottom = ref<HTMLElement>()
+    const headerBottomOffset = ref(0)
 
     const stickyHeader = () => {
-      if (cBottom.value) {
-        if (window.pageYOffset > cBottomOffset.value) {
-          cBottom.value.classList.add('sticky')
+      if (headerBottom.value) {
+        if (window.pageYOffset > headerBottomOffset.value) {
+          headerBottom.value.classList.add('sticky')
         } else {
-          cBottom.value.classList.remove('sticky')
+          headerBottom.value.classList.remove('sticky')
         }
       }
     }
 
     onMounted(() => {
-      // On mouted get cBottom's offsetTop and store to cBottomOffset
-      if (cBottom.value) {
-        cBottomOffset.value = cBottom.value.offsetTop
+      // On mouted get headerBottom's offsetTop and store to headerBottomOffset
+      if (headerBottom.value) {
+        headerBottomOffset.value = headerBottom.value.offsetTop
       }
       document.addEventListener('scroll', () => {
         stickyHeader()
@@ -132,7 +139,7 @@ export default defineComponent({
 
     return {
       isMobileOpen,
-      cBottom
+      headerBottom
     }
   }
 })
@@ -156,7 +163,7 @@ export default defineComponent({
   }
 }
 
-.cTop {
+.headerTop {
   display: flex;
   align-items: center;
   width: 100%;
@@ -167,20 +174,20 @@ export default defineComponent({
     align-items: flex-end;
   }
 
-  .logo__link {
+  &__logo--link {
     margin: 0 0 0 auto;
   }
-}
 
-.lang {
-  width: 100%;
+  &__lang {
+      width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   list-style-type: none;
+  }
 
-  &__item {
-    padding: 5px 8px;
+  &__lang-box {
+        padding: 5px 8px;
     margin: 0 4px;
     cursor: pointer;
     font-size: 14px;
@@ -193,7 +200,7 @@ export default defineComponent({
   }
 }
 
-.cBottom {
+.headerBottom {
   width: 100%;
   height: 50px;
   display: flex;
@@ -204,16 +211,16 @@ export default defineComponent({
     display: flex;
     justify-content: flex-end;
     margin: 0 10px 0 0;
+  }
 
-    svg {
-      margin-left: 23px;
-      transition: 0.2s all ease;
-      cursor: pointer;
-      width: 16px;
+  &__social--img {
+    margin-left: 23px;
+    transition: 0.2s all ease;
+    cursor: pointer;
+    width: 16px;
 
-      &:hover {
-        fill: rgb(255, 206, 45);
-      }
+    &:hover {
+      fill: rgb(255, 206, 45);
     }
   }
 
@@ -221,18 +228,10 @@ export default defineComponent({
     width: 100%;
     display: flex;
     justify-content: flex-end;
+    list-style: none;
   }
 
-  &__search {
-    display: flex;
-  }
-}
-
-.item__list {
-  display: flex;
-  list-style: none;
-
-  .item__link {
+  &__nav--link {
     font-size: 14px;
     padding: 0 12px;
     text-decoration: none;
@@ -241,8 +240,16 @@ export default defineComponent({
     transition: all 140ms ease;
 
     &:hover {
+      color: rgb(177, 139, 16);
+    }
+
+    &.router-link-exact-active {
       color: rgb(255, 206, 45);
     }
+  }
+
+  &__search {
+    display: flex;
   }
 }
 
@@ -300,7 +307,7 @@ export default defineComponent({
 }
 
 .mobile {
-  &__list {
+  &__nav {
     list-style-type: none;
   }
 

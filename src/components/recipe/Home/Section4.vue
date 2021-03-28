@@ -47,6 +47,13 @@ export default defineComponent({
         title: 'Simple Risotto',
         description:
           'Fear Risotto no more! This simple recipe is perfect for family dinners.'
+      },
+      {
+        id: 4,
+        img: require('@/assets/example/img4.jpg'),
+        title: 'Sweet and Spicy Main Dish Recipes',
+        description:
+          'One of the best flavor combinations going is the seemingly odd-couple marriage of sweet and spicy.  '
       }
     ]
     return { data }
@@ -64,8 +71,8 @@ export default defineComponent({
 .wrapper {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 25rem));
-  gap: 3.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 19.2rem));
+  gap: 2rem;
   margin: 5rem 0 0 0;
   justify-content: center;
 }

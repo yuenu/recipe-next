@@ -2,15 +2,7 @@
   <div class="home">
     <div class="container">
       <div class="main">
-        <div class="sec1">
-          <div class="sec1__content">
-            <h2 class="mainText">Make meal by your own</h2>
-            <div class="subText">
-              You can discover thousands of meals on here every day!
-            </div>
-            <button class="tryLink">Try now !</button>
-          </div>
-        </div>
+        <Hero />
         <Section2 />
         <Section5 />
         <Section3 />
@@ -26,6 +18,8 @@
 <script lang="ts">
 import { defineComponent, onBeforeMount, inject } from 'vue'
 import recipeStore from '@/store/recipe'
+
+import Hero from '@/components/recipe/Home/Hero.vue'
 import Carousel from '@/components/recipe/Carousel.vue'
 import Subscribe from '@/components/recipe/Subscribe.vue'
 import Section2 from '@/components/recipe/Home/Section2.vue'
@@ -36,6 +30,7 @@ import Section5 from '@/components/recipe/Home/Section5.vue'
 export default defineComponent({
   name: 'Home',
   components: {
+    Hero,
     Carousel,
     Subscribe,
     Section2,

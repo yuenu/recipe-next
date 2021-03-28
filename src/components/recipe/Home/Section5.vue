@@ -8,18 +8,18 @@
           :key="item.idCategory"
         >
           <div class="card__content">
-            <h2 class="card__content--primary">{{ item.strCategory }}</h2>
-            <div class="card__content--secondary">
+            <h2 class="card__content--heading">{{ item.strCategory }}</h2>
+            <div class="card__content--details">
               {{ textEllipsis(item.strCategoryDescription) }}
             </div>
           </div>
-          <div class="visitCategory">
+          <div class="visitCategory" :title="item.strCategory">
             <Check class="visitCategory__img" />
           </div>
           <div class="card__photo">
             <img
               :src="item.strCategoryThumb"
-              alt="photo 1"
+              :alt="'Photo-' + item.strCategory"
               class="card__img"
             />
           </div>
@@ -83,7 +83,7 @@ export default defineComponent({
     padding: 0 2rem;
     max-height: 240px;
 
-    &--primary {
+    &--heading {
       font-weight: 400;
       font-size: 2.7rem;
       color: #333;
@@ -91,7 +91,7 @@ export default defineComponent({
       margin-bottom: 0.5rem;
     }
 
-    &--secondary {
+    &--details {
       font-family: 'Montserrat', Sans-serif;
       font-size:0.9rem;
       line-height: 1.8rem;

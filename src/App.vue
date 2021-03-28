@@ -1,8 +1,13 @@
 <template>
   <TheHeader />
-  <transition name="route" mode="out-in">
+  <!-- <transition name="route" mode="out-in">
     <router-view />
-  </transition>
+  </transition> -->
+  <router-view v-slot="{ Component }">
+    <transition name="route" mode="out-in">
+      <component :is="Component" />
+    </transition>
+  </router-view>
   <ScrollTop />
   <TheFooter />
 </template>
@@ -38,7 +43,7 @@ export default defineComponent({
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: inherit;
 
   &::selection {
     background: rgba(255, 148, 1, 0.69);
@@ -52,6 +57,7 @@ html {
 }
 
 body {
+  box-sizing: border-box;
   width: 100%;
   min-height: calc(100vh - 91px);
   display: flex;
@@ -61,20 +67,20 @@ body {
 }
 
 .route-enter-from,
-.route.leave-to {
+.route-leave-to {
   opacity: 0;
   transform: translateY(30px);
 }
 
 .route-enter-to,
-.route.leave-from {
+.route-leave-from {
   opacity: 1;
-  transform: translate(0px);
+  transform: translateY(0px);
 }
 
 .route-enter-active,
 .route-leave-active {
-  transition: all 0.5s ease-out;
+  transition: all 0.3s ease-out;
 }
 
 // utilities
