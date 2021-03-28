@@ -100,9 +100,9 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue'
 import SearchForm from './SearchForm.vue'
-import Facebook from '@/components/UI/Facebook.vue'
-import Twitter from '@/components/UI/Twitter.vue'
-import Instagram from '@/components/UI/Instagram.vue'
+import Facebook from '@/components/UI/Icon/Facebook.vue'
+import Twitter from '@/components/UI/Icon/Twitter.vue'
+import Instagram from '@/components/UI/Icon/Instagram.vue'
 
 export default defineComponent({
   components: {

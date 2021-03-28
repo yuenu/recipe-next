@@ -59,7 +59,7 @@
 <script lang="ts">
 import { defineComponent, onBeforeMount, computed, watch, reactive, inject } from 'vue'
 import recipeStore from '@/store/recipe'
-import Close from '@/components/UI/Close.vue'
+import Close from '@/components/UI/Icon/Close.vue'
 
 export default defineComponent({
   components: {
@@ -93,11 +93,11 @@ export default defineComponent({
       return [mealData]
     })
 
-    const getMealInfo = computed(() => {
-      return store.getters.getMealInfo
+    const getMealDetail = computed(() => {
+      return store.getters.getMealDetail
     })
 
-    watch(getMealInfo, newVal => {
+    watch(getMealDetail, newVal => {
       const mealInfo = newVal[0]
       mealData.mealId = mealInfo.idMeal
       mealData.mealName = mealInfo.strMeal
@@ -120,7 +120,7 @@ export default defineComponent({
     }
 
     return {
-      getMealInfo,
+      getMealDetail,
       getMealData,
       close
     }

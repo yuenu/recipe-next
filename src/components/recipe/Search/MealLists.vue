@@ -56,8 +56,8 @@
 import { defineComponent, computed, ref, onMounted, watch, inject } from 'vue'
 import recipeStore from '@/store/recipe'
 import MealModal from '@/components/recipe/MealModal.vue'
-import Link from '@/components/UI/Link.vue'
-import Star from '@/components/UI/Star.vue'
+import Link from '@/components/UI/Icon/Link.vue'
+import Star from '@/components/UI/Icon/Star.vue'
 import Pagination from './Pagination.vue'
 
 export default defineComponent({
@@ -67,6 +67,7 @@ export default defineComponent({
     Star,
     Pagination
   },
+  inject: ['store'],
   setup () {
     const store = inject('store', recipeStore)
     const dataIsEmpty = ref(true)

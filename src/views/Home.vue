@@ -7,6 +7,7 @@
         <Section5 />
         <Section3 />
         <Section4 />
+        <CategoriesList />
       </div>
 
       <Carousel class="carousel" />
@@ -26,6 +27,7 @@ import Section2 from '@/components/recipe/Home/Section2.vue'
 import Section3 from '@/components/recipe/Home/Section3.vue'
 import Section4 from '@/components/recipe/Home/Section4.vue'
 import Section5 from '@/components/recipe/Home/Section5.vue'
+import CategoriesList from '@/components/recipe/Home/CategoriesList.vue'
 
 export default defineComponent({
   name: 'Home',
@@ -36,7 +38,8 @@ export default defineComponent({
     Section2,
     Section3,
     Section4,
-    Section5
+    Section5,
+    CategoriesList
   },
   setup () {
     const store = inject('store', recipeStore)
