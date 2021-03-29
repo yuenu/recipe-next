@@ -1,8 +1,5 @@
 <template>
   <TheHeader />
-  <!-- <transition name="route" mode="out-in">
-    <router-view />
-  </transition> -->
   <router-view v-slot="{ Component }">
     <transition name="route" mode="out-in">
       <component :is="Component" />
@@ -18,9 +15,6 @@ import TheHeader from '@/components/layout/TheHeader.vue'
 import TheFooter from '@/components/layout/TheFooter.vue'
 import ScrollTop from '@/components/layout/ScrollTop.vue'
 import store from '@/store/recipe'
-
-// import Hammer from '@/plugin/hammer'
-// import * as Hammer from 'hammerjs'
 import * as Hammer from 'hammerjs'
 
 export default defineComponent({

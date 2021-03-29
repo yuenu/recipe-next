@@ -113,12 +113,6 @@ export default defineComponent({
 
     onMounted(() => {
       timer = resetInterval(timer)
-      if (carouselSection.value) {
-        const mc = new Hammer(carouselSection.value)
-        mc.on('penright penleft press tap', (ev) => {
-          console.log(ev, ev.type)
-        })
-      }
     })
 
     return {

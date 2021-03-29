@@ -4,52 +4,56 @@
     @close="setModalClose"
     :mealId="mealId"
   />
-  <div class="card" style="--grid-col-fr: 3">
-    <div
-      class="card__box"
-      v-for="meal in categoryMeals"
-      :key="meal.idMeal"
-      @click="setModalOpen(meal.idMeal)"
-    >
-      <div class="card__box__top">
-        <div class="card__box--cover"></div>
-        <div class="card__pic">
-          <img
-            :src="meal.strMealThumb"
-            :alt="meal.strMeal"
-            class="card__img"
-          />
-          <div class="enter">
-            <Link class="enter__img" />
-          </div>
-        </div>
-        <div class="card__content">
-          <div class="card__content__left">
-            <div class="card__title">
-              <div class="card__title__text">{{ meal.strMeal }}</div>
-            </div>
-            <div class="card__rate">
-              <Star class="star" />
-              <Star class="star" />
-              <Star class="star" />
-              <Star class="star" />
-              <Star class="star" />
-            </div>
-          </div>
-          <button class="card__add" @click.stop="favoriteRecipe($event)">
-            Save recipe
-          </button>
-        </div>
-      </div>
-      <!-- <h3 class="view">View Recipe</h3> -->
+  <div
+    class="mealCard"
+    v-for="meal in categoryMeals"
+    :key="meal.idMeal"
+    @click="setModalOpen(meal.idMeal)"
+  >
+    <div class="mealCard--cover"></div>
+    <img
+      :src="meal.strMealThumb"
+      :alt="meal.strMeal"
+      class="mealCard__photo"
+    />
+    <div class="mealCard__enter">
+      <Link class="mealCard__enter-img" />
     </div>
+
+    <div class="mealCard__content">
+      <div class="mealCard__heading">{{ meal.strMeal }}</div>
+      <div class="mealCard__rate">
+        <Star class="mealCard__rate--star" />
+        <Star class="mealCard__rate--star" />
+        <Star class="mealCard__rate--star" />
+        <Star class="mealCard__rate--star" />
+        <Star class="mealCard__rate--star" />
+      </div>
+
+    </div>
+    <button class="mealCard__add" @click.stop="favoriteRecipe($event)">
+      View recipe
+    </button>
+    <!-- <h3 class="view">View Recipe</h3> -->
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, computed, inject } from 'vue'
 import recipeStore from '@/store/recipe'
 
+// UI
+import Star from '@/components/UI/Icon/Star.vue'
+import Link from '@/components/UI/Icon/Link.vue'
+
+import MealModal from '@/components/recipe/MealModal.vue'
+
 export default defineComponent({
+  components: {
+    MealModal,
+    Star,
+    Link
+  },
   setup () {
     const store = inject('store', recipeStore)
     const categoryMeals = computed(() => store.getters.getMeals)
@@ -89,77 +93,56 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.card {
-  height: fit-content;
-  display: grid;
-  grid-template-columns: repeat(var(--grid-col-fr, 3), 1fr);
-  grid-gap: 10px;
-  justify-items: end;
+.mealCard {
+  // height: fit-content;
+  // display: grid;
+  // grid-template-columns: repeat(var(--grid-col-fr, 3), 1fr);
+  // grid-gap: 10px;
+  // justify-items: end;
 
-  &:empty {
-    background:red;
+  min-width: 300px;
+  height: 400px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  position: relative;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-right: 2.5rem;
   }
 
-  &__box {
-    color: #fff;
-    max-width: 300px;
-    width: 100%;
-    height: 370px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    margin: 0 0 10px 0;
-    padding: 10px;
-    transition: 0.3s all ease;
-    position: relative;
-    transform: scale(1);
-    overflow: hidden;
-
-    &:hover {
-      transform: scale(1.04);
-      box-shadow: -1px 0px 10px rgba(92, 92, 92, 0.21);
-      z-index: 1;
-    }
+  &:hover {
+    box-shadow: -1px 0px 10px rgba(92, 92, 92, 0.21);
+    z-index: 1;
   }
 
-  &__box--cover {
+  &:hover &--cover {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: #fff;
-    opacity: 0;
+    background: rgba(255, 255, 255, 0.48);
     transition: 0.3s ease all;
-    z-index: 2;
+    z-index: 3;
   }
 
-  &__box:hover &__box--cover {
-    opacity: 0.89;
-  }
-
-  &__pic {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-  }
-
-  &__img {
+  &__photo {
     width: 100%;
     height: auto;
     display: block;
     transition: 0.3s transform ease;
   }
 
-  &__box:hover &__img {
-    transform: scale(0.98);
+  &:hover &__photo {
+    transform: scale(0.96);
   }
 
   &__content {
     width: 100%;
-    height: 156px;
-    transform: translateY(-20%);
-    transition: 0.26s transform ease-out;
+    height: 220px;
+    transition: 0.26s all ease-out;
     padding: 0 10px 0 10px;
     z-index: 3;
     opacity: 1;
@@ -167,36 +150,50 @@ export default defineComponent({
     position: relative;
   }
 
-  &__box:hover &__content {
-    transform: translateY(-70%);
-  }
-
-  &__title {
+  &__heading {
     color: #d57d1f;
     position: relative;
     font-weight: 400;
-    font-size: 18px;
-    height: 80px;
+    font-size: 1.3rem;
     display: flex;
     align-items: flex-end;
-
-    &__text {
-      //  https://jiaming0708.github.io/2019/04/16/flex-text-overflow/
-      min-width: 0;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
+    transition: all 0.2s linear;
+    /**
+    *  @refer https://jiaming0708.github.io/2019/04/16/flex-text-overflow/
+    *
+    */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
-  &__box:hover &__title__text {
+  &:hover &__heading {
+    transform: translateY(-100px);
     color: #f14242;
     white-space: normal;
   }
 
+  &__rate {
+    width: 100%;
+    height: auto;
+    transition: all 0.2s linear;
+    transition: 0.25s all cubic-bezier(0.03, -0.05, 0, 0.74);
+  }
+
+  &__rate--star {
+    fill: #fdb926;
+    width: 12px;
+    margin: 0 2px;
+  }
+
+  &:hover &__rate {
+    transform: translateY(-100px);
+    transition: transform 0.2s ease-out;
+  }
+
   &__add {
     font-size: 1.2rem;
-    padding: 10px 0;
+    padding: 6px 0;
     width: 100%;
     border-radius: 23px;
     outline: none;
@@ -205,9 +202,8 @@ export default defineComponent({
     background: #ffc139;
     cursor: pointer;
     font-family: 'Oswald', sans-serif;
-    transition: 0.42s all ease;
-
-    transform: translateY(100%);
+    transition: 0.25s all ease;
+    transform: translateY(0);
 
     &:hover {
       background: #333;
@@ -215,38 +211,33 @@ export default defineComponent({
     }
   }
 
-  &__box:hover &__add {
-    transform: translateY(20%);
+  &:hover &__add {
+    transform: translateY(0);
+  }
+
+  &__enter {
+    position: absolute;
+    top:7rem;
+    left: 128px;
+    z-index: 4;
+    opacity: 1;
+    transition: 0.25s all ease;
+    transition-delay: 0.1s;
+    transform: translatex(-20px);
+    opacity: 0;
+
+    &-img {
+      width: 40px;
+      height: auto;
+      fill: #333;
+      background-size: 50px 50px;
+    }
+  }
+
+  &:hover &__enter {
+    opacity:1;
+    transform: translatex(0px);
   }
 }
 
-.enter {
-  position: absolute;
-  top: 35%;
-  left: 42%;
-  z-index: 4;
-  opacity: 1;
-  transition: 0.3s all ease;
-  transition-delay: 0.15s;
-  transform: translatex(-20px);
-  opacity: 0;
-
-  &__img {
-    width: 40px;
-    height: auto;
-    fill: #333;
-    background-size: 50px 50px;
-  }
-}
-
-.card__box:hover .enter {
-  opacity: 1;
-  transform: translatex(0px);
-}
-
-.star {
-  fill: #fdb926;
-  width: 12px;
-  margin: 0 2px;
-}
 </style>

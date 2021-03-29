@@ -5,13 +5,13 @@ export const pan: Directive = {
   mounted (el: HTMLElement, binding) {
     if (typeof binding.value === 'function') {
       const mc = new Hammer(el)
-      mc.get('pan').set({ direction: Hammer.DIRECTION_ALL })
+      mc.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL })
       mc.on('pan', binding.value)
     }
   }
 }
 
-export const tap = {
+export const tap: Directive = {
   mounted (el: HTMLElement, binding) {
     if (typeof binding.value === 'function') {
       const mc = new Hammer(el)

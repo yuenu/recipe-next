@@ -1,5 +1,5 @@
 <template>
-  <div class="sec2">
+  <div class="section-about">
     <div class="sec2__container">
       <div class="content">
         <div class="title">Pizza Express Margherita</div>
@@ -83,18 +83,18 @@ img {
   height: 100%;
 }
 
-.sec2 {
+.section-about {
   max-width: 1330px;
   margin: 5rem 0 3rem 0;
+}
 
-  &__container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    gap: 90px;
-    justify-items: center;
-    align-items: center;
-  }
+.sec2__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 90px;
+  justify-items: center;
+  align-items: center;
 }
 
 .title {
@@ -108,29 +108,29 @@ img {
   margin: 0 2px;
 }
 
-  .tryLink {
-    text-decoration: none;
-    background: transparent;
-    border: 2px solid #C84F48;
-    border-radius: 0.1rem;
-    color: #333;
-    width: 6.8rem;
-    height: 3.3rem;
-    margin: 36px 0 0;
-    font-size: 18px;
-    font-weight: 300;
-    font-family:inherit;
-    position: relative;
-    float: left;
-    outline: none;
-    cursor: pointer;
-    transition: all 0.25s ease;
+.tryLink {
+  text-decoration: none;
+  background: transparent;
+  border: 2px solid #c84f48;
+  border-radius: 0.1rem;
+  color: #333;
+  width: 6.8rem;
+  height: 3.3rem;
+  margin: 36px 0 0;
+  font-size: 18px;
+  font-weight: 300;
+  font-family: inherit;
+  position: relative;
+  float: left;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
 
-    &:hover {
-      background: #C84F48;
-      color:#fff;
-    }
+  &:hover {
+    background: #c84f48;
+    color: #fff;
   }
+}
 
 .descriptionIcon {
   display: flex;
@@ -139,7 +139,7 @@ img {
   width: 100%;
   height: 120px;
   margin: 4.5rem 10rem 0 0;
-  padding:0 10rem 0 0;
+  padding: 0 10rem 0 0;
 
   &__text {
     text-align: center;
@@ -149,11 +149,11 @@ img {
     width: 45px;
     height: auto;
     margin: 5px auto;
-    display:block;
+    display: block;
   }
 
   &__box:nth-child(3) &__img {
-    width:50px;
+    width: 50px;
   }
 }
 

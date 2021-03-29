@@ -9,10 +9,7 @@
         <Section4 />
         <CategoriesList />
       </div>
-
-      <Carousel class="carousel" />
     </div>
-    <Subscribe />
   </div>
 </template>
 
@@ -21,8 +18,8 @@ import { defineComponent, onBeforeMount, inject } from 'vue'
 import recipeStore from '@/store/recipe'
 
 import Hero from '@/components/recipe/Home/Hero.vue'
-import Carousel from '@/components/recipe/Carousel.vue'
-import Subscribe from '@/components/recipe/Subscribe.vue'
+// import Carousel from '@/components/recipe/Carousel.vue'
+// import Subscribe from '@/components/recipe/Subscribe.vue'
 import Section2 from '@/components/recipe/Home/Section2.vue'
 import Section3 from '@/components/recipe/Home/Section3.vue'
 import Section4 from '@/components/recipe/Home/Section4.vue'
@@ -33,8 +30,8 @@ export default defineComponent({
   name: 'Home',
   components: {
     Hero,
-    Carousel,
-    Subscribe,
+    // Carousel,
+    // Subscribe,
     Section2,
     Section3,
     Section4,

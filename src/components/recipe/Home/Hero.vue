@@ -1,5 +1,5 @@
 <template>
-  <sction class="hero">
+  <section class="hero">
     <div class="hero-box">
       <h2 class="hero-box__heading">Make meal by your own</h2>
       <div class="hero-box__text">
@@ -7,7 +7,7 @@
       </div>
       <button class="ctaButton">Try now !</button>
     </div>
-  </sction>
+  </section>
 </template>
 
 <style lang="scss" scoped>
