@@ -12,9 +12,10 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeMount, inject } from 'vue'
+import recipeStore from '@/store/recipe'
+
 import MealLists from '@/components/recipe/Search/MealLists.vue'
 import CategoriesList from '@/components/recipe/Search/CategoriesList.vue'
-import recipeStore from '@/store/recipe'
 
 export default defineComponent({
   name: 'SearchResult',

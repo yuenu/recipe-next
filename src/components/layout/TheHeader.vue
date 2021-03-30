@@ -333,7 +333,7 @@ export default defineComponent({
   top: 0;
   width: 100%;
   background: #fff;
-  z-index: 999;
+  z-index: 10;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 

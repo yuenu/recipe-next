@@ -94,12 +94,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .mealCard {
-  // height: fit-content;
-  // display: grid;
-  // grid-template-columns: repeat(var(--grid-col-fr, 3), 1fr);
-  // grid-gap: 10px;
-  // justify-items: end;
-
   min-width: 300px;
   height: 400px;
   border: 1px solid #ddd;
@@ -168,7 +162,7 @@ export default defineComponent({
   }
 
   &:hover &__heading {
-    transform: translateY(-100px);
+    transform: translateY(-80px);
     color: #f14242;
     white-space: normal;
   }
@@ -177,7 +171,7 @@ export default defineComponent({
     width: 100%;
     height: auto;
     transition: all 0.2s linear;
-    transition: 0.25s all cubic-bezier(0.03, -0.05, 0, 0.74);
+    transition: 0.25s all ease;
   }
 
   &__rate--star {
@@ -187,14 +181,14 @@ export default defineComponent({
   }
 
   &:hover &__rate {
-    transform: translateY(-100px);
+    transform: translateY(-80px);
     transition: transform 0.2s ease-out;
   }
 
   &__add {
     font-size: 1.2rem;
-    padding: 6px 0;
-    width: 100%;
+    padding: 5px 0;
+    width: 60%;
     border-radius: 23px;
     outline: none;
     border: none;
@@ -203,7 +197,11 @@ export default defineComponent({
     cursor: pointer;
     font-family: 'Oswald', sans-serif;
     transition: 0.25s all ease;
-    transform: translateY(0);
+    position:absolute;
+    bottom:2rem;
+    left:50%;
+    transform:translate(-50%, 200%);
+    z-index:5;
 
     &:hover {
       background: #333;
@@ -212,7 +210,7 @@ export default defineComponent({
   }
 
   &:hover &__add {
-    transform: translateY(0);
+    transform: translate(-50%, 0);
   }
 
   &__enter {

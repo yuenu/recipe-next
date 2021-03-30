@@ -6,7 +6,7 @@
       :mealId="mealId"
     />
     <div v-if="dataIsEmpty" class="dataEmpty" >
-      <h2 class="dataEmpty__text">No Data</h2>
+      <h2 class="dataEmpty-text">No Data</h2>
     </div>
     <div v-else-if="!dataIsEmpty" class="card" >
       <div
@@ -312,7 +312,7 @@ export default defineComponent({
   justify-content: center;
   align-items:center;
 
-  &__text {
+  &-text {
     color:#fdb926;
   }
 }

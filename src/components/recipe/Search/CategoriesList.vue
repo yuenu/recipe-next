@@ -19,6 +19,7 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
 import { defineComponent, computed, inject } from 'vue'
 import recipeStore from '@/store/recipe'
@@ -41,6 +42,7 @@ export default defineComponent({
   }
 })
 </script>
+
 <style lang="scss" scoped>
 .sidebar {
   max-width: 350px;

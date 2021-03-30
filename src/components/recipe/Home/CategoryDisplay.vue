@@ -1,6 +1,6 @@
 <template>
-  <div class="section5">
-    <div class="section5__container">
+  <div class="categoryDisplay">
+    <div class="container">
       <div class="card">
         <div
           class="card__box"
@@ -58,7 +58,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.section5 {
+.categoryDisplay {
   width: 100%;
   height: auto;
   margin:0 0 3rem 0;
@@ -95,7 +95,6 @@ export default defineComponent({
       font-size:0.9rem;
       line-height: 1.8rem;
       letter-spacing: 1px;
-
     }
   }
 

@@ -1,23 +1,23 @@
 <template>
-  <div class="sec4">
-    <div class="wrapper">
+  <div class="railContainer">
+    <div class="railContainerWrapper">
       <div
-        class="card"
+        class="detailBox"
         v-for="item in data"
         :key="item.id"
       >
-        <div class="card__body">
+        <div class="detailBox__body">
           <img
-            class="card__img"
+            class="detailBox__photo"
             :src="item.img"
             alt="img"
           />
-          <h2 class="card__title">{{ item.title }}</h2>
-          <p class="card__description">
+          <h2 class="detailBox__heading">{{ item.title }}</h2>
+          <p class="detailBox__description">
             {{ item.description }}
           </p>
         </div>
-        <button className="card__btn">View Recipe</button>
+        <button className="detailBox__btn">View Recipe</button>
       </div>
     </div>
   </div>
@@ -62,13 +62,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.sec4 {
+.railContainer {
   width:100%;
   min-height:40rem;
-
 }
 
-.wrapper {
+.railContainerWrapper {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(17rem, 19.2rem));
@@ -77,7 +76,7 @@ export default defineComponent({
   justify-content: center;
 }
 
-.card {
+.detailBox {
   overflow: hidden;
   border-radius: 0.2rem;
   display: flex;
@@ -89,13 +88,13 @@ export default defineComponent({
   background:#fff;
   border: 2px solid rgba(220,220,220,0.4);
 
-  &__img {
+  &__photo {
     height: 18rem;
     width: 100%;
     object-fit: cover;
   }
 
-  &__title {
+  &__heading {
     padding: 1rem;
   }
 

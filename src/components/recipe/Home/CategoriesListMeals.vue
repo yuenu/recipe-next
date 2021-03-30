@@ -2,27 +2,7 @@
   <div class="categoryList-meals--display" v-pan="onPan">
     <div class="categoryList-meals" ref="categoryList">
       <MealCard />
-      <!-- <div
-        class="mealCard"
-        v-for="meal in getMeals"
-        :key="meal"
-      >
-        <div class="mealCard--cover"></div>
-        <img
-          :src="meal.strMealThumb"
-          alt="Photo"
-          class="mealCard__photo"
-        />
-        <div class="mealCard__content">
-          <div class="mealCard__heading">{{ meal.strMeal }}</div>
-          <button class="mealCard__add">View Recipe</button>
-        </div>
-      </div> -->
-
     </div>
-    <br />
-    <button @click="prev">Prev</button>
-    <button @click="next">Next</button>
   </div>
 </template>
 
@@ -49,20 +29,6 @@ export default defineComponent({
     const categoryList = ref<HTMLElement>()
 
     const currentOffset = ref(0)
-    const translateWidth = 1360
-    const prev = () => {
-      if (categoryList.value) {
-        currentOffset.value += translateWidth
-        categoryList.value.style.transform = `translateX(${currentOffset.value}px)`
-      }
-    }
-
-    const next = () => {
-      if (categoryList.value) {
-        currentOffset.value -= translateWidth
-        categoryList.value.style.transform = `translateX(${currentOffset.value}px)`
-      }
-    }
 
     const overflowRatio = computed(() => {
       return (categoryList.value as HTMLElement).scrollWidth / (categoryList.value as HTMLElement).offsetWidth
@@ -120,8 +86,6 @@ export default defineComponent({
 
     return {
       getMeals,
-      prev,
-      next,
       categoryList,
       onPan
     }
