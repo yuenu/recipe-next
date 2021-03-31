@@ -52,7 +52,6 @@ export default defineComponent({
   display:grid;
   grid-template-columns: repeat(14, 1fr);
   gap:4rem;
-  // transform:translateX(-200px);
 }
 
 .cat__box {

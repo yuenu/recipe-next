@@ -1,6 +1,6 @@
 <template>
   <MealModal
-    v-if="isModalOpen"
+    v-if="modalStatus"
     @close="setModalClose"
     :mealId="mealId"
   />
@@ -29,7 +29,6 @@
         <Star class="mealCard__rate--star" />
         <Star class="mealCard__rate--star" />
       </div>
-
     </div>
     <button class="mealCard__add" @click.stop="favoriteRecipe($event)">
       View recipe
@@ -61,9 +60,6 @@ export default defineComponent({
 
     /** Modal control */
     const modalStatus = ref(false)
-    const isModalOpen = computed(() => {
-      return modalStatus.value
-    })
 
     const setModalOpen = (id: string) => {
       modalStatus.value = true
@@ -73,6 +69,7 @@ export default defineComponent({
 
     const setModalClose = () => {
       modalStatus.value = false
+      document.body.style.overflow = 'scroll'
     }
 
     const favoriteRecipe = (event: MouseEvent) => {
@@ -83,7 +80,6 @@ export default defineComponent({
       setModalOpen,
       mealId,
       modalStatus,
-      isModalOpen,
       categoryMeals,
       setModalClose,
       favoriteRecipe
@@ -96,18 +92,20 @@ export default defineComponent({
 .mealCard {
   min-width: 300px;
   height: 400px;
-  border: 1px solid #ddd;
-  padding: 10px;
+  padding: 2rem;
+  border-radius: 5px;
   position: relative;
   transition: all 0.3s ease-out;
   cursor: pointer;
+  overflow: hidden;
+  border: 1px solid rgba(221, 221, 221, 0.6);
 
   &:not(:last-child) {
     margin-right: 2.5rem;
   }
 
   &:hover {
-    box-shadow: -1px 0px 10px rgba(92, 92, 92, 0.21);
+    box-shadow: 0px 0px 14px rgba(92, 92, 92, 0.21);
     z-index: 1;
   }
 
@@ -117,7 +115,7 @@ export default defineComponent({
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.48);
+    background: rgba(255, 255, 255, 0.8);
     transition: 0.3s ease all;
     z-index: 3;
   }
@@ -151,7 +149,7 @@ export default defineComponent({
     font-size: 1.3rem;
     display: flex;
     align-items: flex-end;
-    transition: all 0.2s linear;
+    transition: all 0.3s ease;
     /**
     *  @refer https://jiaming0708.github.io/2019/04/16/flex-text-overflow/
     *
@@ -170,8 +168,7 @@ export default defineComponent({
   &__rate {
     width: 100%;
     height: auto;
-    transition: all 0.2s linear;
-    transition: 0.25s all ease;
+    transition: 0.3s all ease;
   }
 
   &__rate--star {
@@ -182,7 +179,6 @@ export default defineComponent({
 
   &:hover &__rate {
     transform: translateY(-80px);
-    transition: transform 0.2s ease-out;
   }
 
   &__add {
@@ -196,12 +192,12 @@ export default defineComponent({
     background: #ffc139;
     cursor: pointer;
     font-family: 'Oswald', sans-serif;
-    transition: 0.25s all ease;
-    position:absolute;
-    bottom:2rem;
-    left:50%;
-    transform:translate(-50%, 200%);
-    z-index:5;
+    transition: 0.3s all ease;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translate(-50%, 300%);
+    z-index: 5;
 
     &:hover {
       background: #333;
@@ -215,7 +211,7 @@ export default defineComponent({
 
   &__enter {
     position: absolute;
-    top:7rem;
+    top: 7rem;
     left: 128px;
     z-index: 4;
     opacity: 1;
@@ -233,9 +229,8 @@ export default defineComponent({
   }
 
   &:hover &__enter {
-    opacity:1;
+    opacity: 1;
     transform: translatex(0px);
   }
 }
-
 </style>

@@ -37,6 +37,8 @@ export default defineComponent({
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Spirax&display=swap');
 
+$color-primary: #fdb926;
+
 :root {
   --text-gray: #eee;
 }
