@@ -8,6 +8,7 @@
         <ProductAd />
         <RailContainer />
         <CategoriesList />
+        <GoogleMap />
       </div>
     </div>
   </div>
@@ -23,6 +24,7 @@ import CategoryDisplay from '@/components/recipe/Home/CategoryDisplay.vue'
 import ProductAd from '@/components/recipe/Home/ProductAd.vue'
 import RailContainer from '@/components/recipe/Home/RailContainer.vue'
 import CategoriesList from '@/components/recipe/Home/CategoriesList.vue'
+import GoogleMap from '@/components/recipe/Home/GoogleMap.vue'
 
 export default defineComponent({
   name: 'Home',
@@ -32,7 +34,8 @@ export default defineComponent({
     CategoryDisplay,
     ProductAd,
     RailContainer,
-    CategoriesList
+    CategoriesList,
+    GoogleMap
   },
   setup () {
     const store = inject('store', recipeStore)

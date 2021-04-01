@@ -6,13 +6,16 @@
   </div>
   <div class="pagination u-text-align-center">
     <ul class="pagination__list">
-      <li class="pagination__item"><a href="#" class="pagination__link active"></a></li>
+      <li class="pagination__item">
+        <a href="#" class="pagination__link active"></a>
+      </li>
       <li
         v-for="dot in imagesLen"
         :key="dot"
         class="pagination__item"
-      ><span class="pagination__link"></span></li>
-
+      >
+        <span class="pagination__link"></span>
+      </li>
     </ul>
   </div>
 </template>
@@ -112,8 +115,6 @@ export default defineComponent({
     onMounted(async () => {
       if (getMeals.value.length === 0) {
         await store.GET_MEALS_BY_CATEGORY('Beef')
-        console.log('overflowRatio', overflowRatio)
-        console.log('itemWidth', itemWidth)
       }
     })
 
@@ -129,11 +130,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
 $clouds: #333;
 .categoryList-meals--display {
   overflow: hidden;
   width: 100%;
+  will-change: transform;
 }
 
 .categoryList-meals {
@@ -144,7 +145,7 @@ $clouds: #333;
   align-items: center;
   transition: transform 0.4s cubic-bezier(0.03, -0.05, 0, 1.35);
   transform: translateX(calc(var(--x, 0) * 1.2%));
-  will-change: transform;
+  content-visibility: auto;
 }
 
 .dot {
@@ -165,7 +166,6 @@ $clouds: #333;
 }
 
 .pagination {
-
   &__item {
     display: inline-block;
     margin: 0 10px;
@@ -175,15 +175,15 @@ $clouds: #333;
     position: relative;
     text-indent: -99em;
     // overflow: hiddn;
-    display:block;
+    display: block;
     width: 30px;
     height: 30px;
-    cursor:pointer;
+    cursor: pointer;
 
     &:before,
     &:after {
       content: '';
-      display:block;
+      display: block;
       position: absolute;
       top: 0;
       width: 100%;
@@ -195,10 +195,9 @@ $clouds: #333;
 
     &:before {
       background: $clouds;
-      transform: scale(.2);
+      transform: scale(0.2);
     }
     &:after {
-
     }
     &:hover {
       &:after {
@@ -207,13 +206,12 @@ $clouds: #333;
     }
     &.active {
       &:before {
-        transform: scale(.5);
+        transform: scale(0.5);
       }
       &:after {
-        transform: scale(.2);
+        transform: scale(0.2);
       }
     }
   }
 }
-
 </style>
