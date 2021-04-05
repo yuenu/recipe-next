@@ -1,6 +1,6 @@
 <template>
   <div
-    ref="scrollBtn"
+    ref="scrollTop"
     class="scrollToTop"
     @click="scrollToTop(300)"
   >
@@ -14,10 +14,10 @@ import { defineComponent, onMounted, ref } from 'vue'
 
 export default defineComponent({
   setup () {
-    const scrollBtn = ref<HTMLElement>()
+    const scrollTop = ref<HTMLInputElement>()
 
-    const scrollToTop = (duration: number) => {
-      const scrollElement = document.scrollingElement as HTMLElement
+    function scrollToTop (duration: number) {
+      const scrollElement = document.scrollingElement as HTMLInputElement
       // cancel if already on top
       if (scrollElement.scrollTop === 0 && document.scrollingElement === null) {
         return
@@ -42,14 +42,14 @@ export default defineComponent({
     }
 
     const scrollButtonShow = () => {
-      if (scrollBtn.value) {
+      if (scrollTop.value) {
         if (
           document.body.scrollTop > 800 ||
           document.documentElement.scrollTop > 800
         ) {
-          scrollBtn.value.style.display = 'flex'
+          scrollTop.value.style.display = 'flex'
         } else {
-          scrollBtn.value.style.display = 'none'
+          scrollTop.value.style.display = 'none'
         }
       }
     }
@@ -62,7 +62,7 @@ export default defineComponent({
 
     return {
       scrollToTop,
-      scrollBtn
+      scrollTop
     }
   }
 })

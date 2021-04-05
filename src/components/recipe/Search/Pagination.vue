@@ -24,6 +24,7 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
 import { defineComponent, onMounted, computed, ref, watch, PropType } from 'vue'
 import type { CategoryMeals } from '@/apis/response.type'
@@ -93,6 +94,7 @@ export default defineComponent({
   }
 })
 </script>
+
 <style lang="scss" scoped>
 .pagination {
   display: inline-block;
@@ -123,5 +125,11 @@ export default defineComponent({
   pointer-events: none;
   background:#fff;
   color:#ddd;
+}
+
+@media (max-width:476px) {
+  .pagination {
+    margin: 20px 0 0 0;
+  }
 }
 </style>

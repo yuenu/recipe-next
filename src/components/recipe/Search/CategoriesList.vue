@@ -140,13 +140,17 @@ export default defineComponent({
 
 @media (max-width: 650px) {
   .sidebar {
-    display: none;
-  }
-}
+    max-width:650px;
+    width:100%;
+    margin: 0 auto 4rem 0;
 
-@media (max-width: 476px) {
-  .sidebar {
-    display: none;
+    &__box .img2 img {
+      display: block;
+    }
+
+    &__text {
+      padding-left:20px;
+    }
   }
 }
 </style>

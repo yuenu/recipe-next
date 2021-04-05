@@ -62,4 +62,10 @@ export default defineComponent({
     padding: 0 10px;
   }
 }
+
+@media (max-width: 650px) {
+  .container {
+    flex-direction: column;
+  }
+}
 </style>
