@@ -1,27 +1,32 @@
 <template>
-  <div class="categoryList-meals--display" v-pan="onPan">
-    <div class="categoryList-meals" ref="categoryList">
+  <div class="categoryList-meals--display" ref="slide">
+    <div class="categoryList-meals" ref="slideBox">
       <MealCard />
     </div>
   </div>
   <div class="pagination u-text-align-center">
     <ul class="pagination__list">
-      <li class="pagination__item">
-        <a href="#" class="pagination__link active"></a>
-      </li>
       <li
         v-for="dot in imagesLen"
         :key="dot"
         class="pagination__item"
       >
-        <span class="pagination__link"></span>
+        <span :class="['pagination__link', { active: (dot - 1) === currentIndex}]"></span>
       </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, inject, onMounted, ref, watch } from 'vue'
+import {
+  defineComponent,
+  computed,
+  inject,
+  ref,
+  onMounted,
+  onBeforeUnmount,
+  watch
+} from 'vue'
 import recipeStore from '@/store/recipe'
 import MealCard from '@/components/UI/MealCard.vue'
 
@@ -40,90 +45,125 @@ export default defineComponent({
     const mealCounting = computed(() => getMeals.value.length)
     const imagesLen = computed(() => Math.ceil(mealCounting.value / 4))
 
-    // Images index
-    const sliderIndex = ref(1)
+    const columnWidth = 1360
+    const isDragging = ref(false)
+    const startPos = ref(0)
+    const currentTranslate = ref(0)
+    const prevTranslate = ref(0)
+    const animationID = ref(0)
+    const currentIndex = ref(0)
 
-    // Meals display
-    const categoryList = ref<HTMLElement>()
+    // Touch Slide
+    const slide = ref<HTMLElement>()
+    const slideBox = ref<HTMLInputElement>()
 
-    const currentOffset = ref(0)
+    function setSliderPosition () {
+      if (!slideBox.value) return
+      slideBox.value.style.transform = `translateX(${currentTranslate.value}px)`
+    }
 
-    const overflowRatio = computed(() => {
-      return (
-        (categoryList.value as HTMLElement).scrollWidth /
-        (categoryList.value as HTMLElement).offsetWidth
-      )
-    })
+    function setPositionByIndex () {
+      currentTranslate.value = currentIndex.value * -columnWidth
+      prevTranslate.value = currentTranslate.value
+      setSliderPosition()
+    }
 
-    const itemWidth = computed(() => {
-      return (
-        (categoryList.value as HTMLElement).scrollWidth / mealCounting.value
-      )
-    })
-    // Drag animation
-    const onPan = e => {
-      if (!categoryList.value) {
-        return
-      }
+    function animation () {
+      setSliderPosition()
+      if (isDragging.value) requestAnimationFrame(animation)
+    }
 
-      const dragOffset = computed(() => {
-        return (
-          (((100 / itemWidth.value) * e.deltaX) / mealCounting.value) *
-          overflowRatio.value
-        )
-      })
+    function getPositionX (event: MouseEvent | TouchEvent) {
+      return event.type.includes('mouse')
+        ? (event as MouseEvent).pageX
+        : (event as TouchEvent).touches[0].clientX
+    }
 
-      const progress = computed(() => currentOffset.value + dragOffset.value)
+    function touchStart () {
+      return function (event: MouseEvent | TouchEvent) {
+        event.stopPropagation()
+        isDragging.value = true
+        startPos.value = getPositionX(event)
 
-      categoryList.value.style.setProperty('--x', progress.value.toString())
-
-      if (e.isFinal) {
-        currentOffset.value = progress.value
-        const maxScroll = 100 - overflowRatio.value * 100
-
-        // scrolled to last item
-        if (currentOffset.value <= maxScroll) {
-          currentOffset.value = maxScroll
-        } else if (currentOffset.value >= 0) {
-          // scroll to first item
-          currentOffset.value = 0
-        } else {
-          // animate to next item according to pan direction
-          const index =
-            (currentOffset.value / overflowRatio.value / 100) *
-            mealCounting.value
-          const nextIndex = e.deltaX <= 0 ? Math.floor(index) : Math.ceil(index)
-          currentOffset.value =
-            ((100 * overflowRatio.value) / mealCounting.value) * nextIndex
+        animationID.value = requestAnimationFrame(animation)
+        if (slide.value) {
+          slide.value.classList.add('grabbing')
         }
-
-        categoryList.value.style.setProperty(
-          '--x',
-          currentOffset.value.toString()
-        )
       }
     }
 
-    watch(getMeals, () => {
-      if (categoryList.value) {
-        // Rest offset
-        currentOffset.value = 0
-        categoryList.value.style.setProperty('--x', '0')
+    function touchEnd () {
+      isDragging.value = false
+      cancelAnimationFrame(animationID.value)
+
+      const movedBy = currentTranslate.value - prevTranslate.value
+
+      if (movedBy < -100 && currentIndex.value < imagesLen.value - 1) currentIndex.value += 1
+
+      if (movedBy > 100 && currentIndex.value > 0) currentIndex.value -= 1
+
+      setPositionByIndex()
+    }
+
+    function touchMove (event: MouseEvent | TouchEvent) {
+      if (isDragging.value) {
+        const currentPosition = getPositionX(event)
+        currentTranslate.value =
+          prevTranslate.value + currentPosition - startPos.value
       }
-    })
+    }
 
     onMounted(async () => {
       if (getMeals.value.length === 0) {
         await store.GET_MEALS_BY_CATEGORY('Beef')
       }
+
+      if (slide.value) {
+        // Touch events
+        slide.value.addEventListener('touchstart', touchStart(), {
+          passive: true
+        })
+        slide.value.addEventListener('touchend', touchEnd, { passive: true })
+        slide.value.addEventListener('touchmove', touchMove, { passive: true })
+
+        // Mouse events
+        slide.value.addEventListener('mousedown', touchStart(), {
+          passive: true
+        })
+        slide.value.addEventListener('mouseup', touchEnd, { passive: true })
+        slide.value.addEventListener('mouseleave', touchEnd, { passive: true })
+        slide.value.addEventListener('mousemove', touchMove, { passive: true })
+      }
+    })
+
+    onBeforeUnmount(() => {
+      // removeEventListener
+      if (slide.value) {
+        slide.value.removeEventListener('touchstart', touchStart())
+        slide.value.removeEventListener('touchend', touchEnd)
+        slide.value.removeEventListener('touchmove', touchMove)
+
+        slide.value.removeEventListener('mousedown', touchStart())
+        slide.value.removeEventListener('mouseup', touchEnd)
+        slide.value.removeEventListener('mouseleave', touchEnd)
+        slide.value.removeEventListener('mousemove', touchMove)
+      }
+    })
+
+    watch(getMeals, val => {
+      if (val) {
+        currentIndex.value = 0
+        startPos.value = 0
+        currentTranslate.value = 0
+      }
     })
 
     return {
       getMeals,
-      categoryList,
-      onPan,
+      slide,
+      slideBox,
       imagesLen,
-      sliderIndex
+      currentIndex
     }
   }
 })
@@ -132,9 +172,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 $clouds: #333;
 .categoryList-meals--display {
-  overflow: hidden;
   width: 100%;
   will-change: transform;
+  overflow: hidden;
+
 }
 
 .categoryList-meals {
@@ -144,8 +185,7 @@ $clouds: #333;
   display: flex;
   align-items: center;
   transition: transform 0.4s cubic-bezier(0.03, -0.05, 0, 1.35);
-  transform: translateX(calc(var(--x, 0) * 1.2%));
-  content-visibility: auto;
+  user-select: none;
 }
 
 .dot {
@@ -197,8 +237,6 @@ $clouds: #333;
       background: $clouds;
       transform: scale(0.2);
     }
-    &:after {
-    }
     &:hover {
       &:after {
         transform: scale(1.1);
@@ -213,5 +251,9 @@ $clouds: #333;
       }
     }
   }
+}
+
+.grabbing {
+  cursor: grabbing;
 }
 </style>

@@ -52,6 +52,7 @@ export default defineComponent({
   display:grid;
   grid-template-columns: repeat(14, 1fr);
   gap:4rem;
+  overflow:hidden;
 }
 
 .cat__box {

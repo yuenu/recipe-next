@@ -15,7 +15,6 @@ import TheHeader from '@/components/layout/TheHeader.vue'
 import TheFooter from '@/components/layout/TheFooter.vue'
 import ScrollTop from '@/components/layout/ScrollTop.vue'
 import store from '@/store/recipe'
-import * as Hammer from 'hammerjs'
 
 export default defineComponent({
   components: {
@@ -25,9 +24,6 @@ export default defineComponent({
   },
   setup () {
     provide('store', store)
-    onBeforeMount(() => {
-      window.Hammer = Hammer.default
-    })
   }
 })
 </script>

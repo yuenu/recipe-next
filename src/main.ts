@@ -3,19 +3,17 @@ import App from './App.vue'
 import router from './router'
 import { store } from './store'
 
-// ui
+// UI
 import BaseModal from '@/components/UI/BaseModal.vue'
 import Arrow from '@/components/UI/Icon/Arrow.vue'
 
-import { pan, tap } from '@/directives/hammer'
-
+import lazingLoad from '@/directives/scrollAnimation'
 const app = createApp(App)
 
 app
   .component('BaseModal', BaseModal)
   .component('Arrow', Arrow)
-  .directive('pan', pan)
-  .directive('tap', tap)
+  .directive('lazingLoad', lazingLoad)
   .use(store)
   .use(router)
   .mount('#app')
