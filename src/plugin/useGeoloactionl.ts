@@ -5,8 +5,8 @@ interface Coordinate {
   longitude: number
 }
 
-export const useGeolocation = () => {
-  const coords = ref<Coordinate>({ latitude: 0, longitude: 0 })
+export function useGeolocation<T> () {
+  const coords = ref<T | Coordinate>({ latitude: 0, longitude: 0 })
   const isSupported = 'navigator' in Window && 'geolocation' in navigator
 
   let watcher: number
@@ -22,6 +22,4 @@ export const useGeolocation = () => {
       navigator.geolocation.clearWatch(watcher)
     }
   })
-
-  return coords
 }
