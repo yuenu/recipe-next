@@ -16,7 +16,7 @@
           <div class="visitCategory" :title="item.strCategory">
             <Check class="visitCategory__img" />
           </div>
-          <div class="card__photo">
+          <div class="card__img-box">
             <img
               :src="item.strCategoryThumb"
               :alt="'Photo-' + item.strCategory"
@@ -61,7 +61,7 @@ export default defineComponent({
 .categoryDisplay {
   width: 100%;
   height: auto;
-  margin:0 0 3rem 0;
+  margin: 0 0 3rem 0;
 }
 
 .card {
@@ -85,48 +85,86 @@ export default defineComponent({
     &--heading {
       font-weight: 400;
       font-size: 2.7rem;
-      color: #333;
+      color: $color-gray-dark-1;
       text-transform: uppercase;
       margin-bottom: 0.5rem;
     }
 
     &--details {
       font-family: 'Montserrat', Sans-serif;
-      font-size:0.9rem;
+      font-size: 0.9rem;
       line-height: 1.8rem;
       letter-spacing: 1px;
     }
   }
 
   &__img,
-  &__photo {
+  &__img-box {
     width: 100%;
   }
 }
 
 .visitCategory {
-  width:50px;
-  height:50px;
-  background:#ffc139;
-  border-radius:50%;
-  cursor:pointer;
-  margin:1rem 0 1rem 1.8rem;
+  width: 50px;
+  height: 50px;
+  background: #ffc139;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 1rem 0 1rem 1.8rem;
   user-select: none;
-  transition:all 0.1s ease;
+  transition: all 0.1s ease;
 
   &__img {
-    width:20px;
-    display:block;
-    margin:auto;
-    fill:#fff;
+    width: 20px;
+    display: block;
+    margin: auto;
+    fill: #fff;
   }
 
   &:hover {
-    background:#333;
+    background: #333;
   }
 
   &:hover &__img {
-    fill:#ffc139;
+    fill: #ffc139;
+  }
+}
+
+@media (max-width: 920px) {
+  .categoryDisplay {
+    margin:0;
+    border-bottom:5px solid #ddd;
+  }
+  .card {
+    grid-template-columns: 1fr;
+
+    &__box:nth-child(2) {
+      flex-direction: column;
+    }
+
+    &__content {
+      text-align: center;
+    }
+
+    &__img-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__img {
+      width: 60%;
+    }
+  }
+
+  .visitCategory {
+    margin: 1rem auto;
+  }
+}
+
+@media (max-width: 476px) {
+  .card__img {
+    width: 70%;
   }
 }
 </style>

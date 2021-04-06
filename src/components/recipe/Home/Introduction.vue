@@ -38,7 +38,11 @@
       </div>
 
       <div class="introduction__pic">
-        <img src="@/assets/example/bg3.png" alt="bg3" />
+        <img
+          class="introduction__pic-img"
+          src="@/assets/example/bg3.png"
+          alt="bg3"
+        />
       </div>
     </div>
   </div>
@@ -82,10 +86,12 @@ $star-color: #fdb926;
 
 .introduction-section {
   max-width: 1330px;
+  width: 100%;
   margin: 5rem 0 3rem 0;
 }
 
 .introduction {
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
@@ -108,7 +114,6 @@ $star-color: #fdb926;
     justify-content: space-between;
     width: 100%;
     height: 120px;
-    margin: 4.5rem 10rem 0 0;
     padding: 0 10rem 0 0;
   }
 
@@ -132,6 +137,11 @@ $star-color: #fdb926;
     width: 12px;
     margin: 0 2px;
   }
+
+  &__pic,
+  &__pic-img {
+    width: 100%;
+  }
 }
 
 @media (max-width: 1330px) {
@@ -141,19 +151,53 @@ $star-color: #fdb926;
 }
 
 @media (max-width: 920px) {
+  .introduction-section {
+    margin:0;
+    border-bottom: 5px solid #ddd;
+    border-top: 5px solid #ddd;
+  }
+
   .introduction {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 30px;
 
     &__content {
-      padding: 0 5rem;
+      padding: 0 1.2rem;
+    }
+
+    &__pic {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__pic {
+      margin: 1.2rem 0;
+    }
+
+    &__pic-img {
+      width: 70%;
     }
   }
 }
 
-@media (max-width: 476px) {
-  .introduction__content {
-    padding: 0 1rem;
+@media (max-width: 500px) {
+  .introduction {
+    display: block;
+
+    &__content {
+      padding: 0 1rem;
+    }
+
+    &__descriptionIcon {
+      justify-content: initial;
+      padding: 0;
+
+      &-box {
+        margin-right: 5rem;
+      }
+    }
   }
 }
 </style>

@@ -163,7 +163,7 @@ export default defineComponent({
 }
 
 .content__info {
-  font-size: 1rem;
+  font-size: 1.3rem;
   letter-spacing: 0.8px;
   font-weight: lighter;
   line-height: 1.7;
@@ -249,6 +249,21 @@ export default defineComponent({
     width: 100%;
     margin: 10px 8px;
     cursor: pointer;
+  }
+}
+
+@media (max-width: 920px) {
+  .contact {
+    grid-template-columns: 1fr;
+    margin: 0;
+  }
+}
+
+@media (max-width:476px) {
+  .ins {
+    grid-template-columns:repeat(2, 1fr);
+    gap:10px;
+
   }
 }
 </style>

@@ -13,7 +13,7 @@
           </router-link>
         </div>
         <ul class="headerTop__lang">
-          <li class="headerTop__lang-box lang--cn">簡</li>
+          <li class="headerTop__lang-box lang--cn">简</li>
           <br />
           <li class="headerTop__lang-box lang--tw">繁</li>
           <br />
@@ -21,7 +21,7 @@
         </ul>
       </div>
       <div class="headerBottom" ref="headerBottom">
-        <SearchForm class="headerBottom__search" />
+        <!-- <SearchForm class="headerBottom__search" /> -->
 
         <ul class="headerBottom__nav">
           <li>
@@ -55,11 +55,11 @@
           </li>
         </ul>
 
-        <div class="headerBottom__social">
+        <!-- <div class="headerBottom__social">
           <Facebook class="headerBottom__social--img" />
           <Twitter class="headerBottom__social--img" />
           <Instagram class="headerBottom__social--img" />
-        </div>
+        </div> -->
       </div>
       <div class="ham"></div>
     </div>
@@ -99,17 +99,11 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue'
-import SearchForm from './SearchForm.vue'
-import Facebook from '@/components/UI/Icon/Facebook.vue'
-import Twitter from '@/components/UI/Icon/Twitter.vue'
-import Instagram from '@/components/UI/Icon/Instagram.vue'
+// import SearchForm from './SearchForm.vue'
 
 export default defineComponent({
   components: {
-    SearchForm,
-    Facebook,
-    Twitter,
-    Instagram
+    // SearchForm
   },
   setup () {
     const isMobileOpen = ref(false)
@@ -166,12 +160,14 @@ export default defineComponent({
 .headerTop {
   display: flex;
   align-items: center;
+  justify-content: center;
+  position: relative;
+
   width: 100%;
 
   &__logo {
-    width: 130%;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
   }
 
   &__logo--link {
@@ -179,23 +175,27 @@ export default defineComponent({
   }
 
   &__lang {
-      width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  list-style-type: none;
+    display: flex;
+    position: absolute;
+    top: 85px;
+    left: 10px;
+    list-style-type: none;
   }
 
   &__lang-box {
-        padding: 5px 8px;
-    margin: 0 4px;
+    padding: 5px 10px 7px 10px;
+    margin: 0 6px;
     cursor: pointer;
     font-size: 14px;
-    color: #333;
+    font-weight: 800;
+    color: #fff;
+    background: rgb(202, 202, 240);
+    border-radius: 50%;
+    transition: 0.2s ease;
 
     &:hover {
-      background: rgb(55, 55, 255);
-      color: #fff;
+      background: rgb(118, 118, 192);
+      color: $color-primary;
     }
   }
 }
@@ -227,7 +227,7 @@ export default defineComponent({
   &__nav {
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     list-style: none;
   }
 
