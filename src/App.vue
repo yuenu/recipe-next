@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, provide, onBeforeMount } from 'vue'
+import { defineComponent, provide } from 'vue'
 import TheHeader from '@/components/layout/TheHeader.vue'
 import TheFooter from '@/components/layout/TheFooter.vue'
 import ScrollTop from '@/components/layout/ScrollTop.vue'
@@ -33,10 +33,6 @@ export default defineComponent({
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Spirax&display=swap');
 
-:root {
-  --text-gray: #eee;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -44,7 +40,7 @@ export default defineComponent({
 
   &::selection {
     background: rgba(255, 148, 1, 0.69);
-    color: #fff;
+    color: $color-white;
   }
 }
 

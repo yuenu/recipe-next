@@ -11,7 +11,10 @@
         :key="dot"
         class="pagination__item"
       >
-        <span :class="['pagination__link', { active: (dot - 1) === currentIndex}]" @click="changePageIndex(dot)"></span>
+        <span
+          :class="['pagination__link', { active: dot - 1 === currentIndex }]"
+          @click="changePageIndex(dot)"
+        ></span>
       </li>
     </ul>
   </div>
@@ -99,7 +102,7 @@ export default defineComponent({
 
       const movedBy = currentTranslate.value - prevTranslate.value
 
-      if (movedBy < -100 && currentIndex.value < imagesLen.value - 1) currentIndex.value += 1
+      if (movedBy < -100 && currentIndex.value < imagesLen.value - 1) { currentIndex.value += 1 }
 
       if (movedBy > 100 && currentIndex.value > 0) currentIndex.value -= 1
 
@@ -125,6 +128,19 @@ export default defineComponent({
       setPositionByIndex()
     }
 
+    function handleResize () {
+      console.log('width', window.innerWidth)
+    }
+
+    // const ro = new ResizeObserver(entries => {
+    //   for (const entry of entries) {
+    //     const cr = entry.contentRect
+    //     console.log('Element:', entry.target)
+    //     console.log(`Element size: ${cr.width}px x ${cr.height}px`)
+    //     console.log(`Element padding: ${cr.top}px ; ${cr.left}px`)
+    //   }
+    // })
+
     onMounted(async () => {
       if (getMeals.value.length === 0) {
         await store.GET_MEALS_BY_CATEGORY('Beef')
@@ -145,6 +161,10 @@ export default defineComponent({
         slide.value.addEventListener('mouseup', touchEnd)
         slide.value.addEventListener('mouseleave', touchEnd)
         slide.value.addEventListener('mousemove', touchMove)
+
+        window.addEventListener('resize', handleResize)
+
+        // ro.observe(slide.value)
       }
     })
 
@@ -159,6 +179,8 @@ export default defineComponent({
         slide.value.removeEventListener('mouseup', touchEnd)
         slide.value.removeEventListener('mouseleave', touchEnd)
         slide.value.removeEventListener('mousemove', touchMove)
+
+        window.removeEventListener('resize', handleResize)
       }
     })
 
@@ -189,7 +211,6 @@ $clouds: #333;
   width: 100%;
   will-change: transform;
   overflow: hidden;
-
 }
 
 .categoryList-meals {

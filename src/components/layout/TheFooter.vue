@@ -19,7 +19,7 @@ export default defineComponent({})
   width: 100%;
   height: 32px;
   background: rgb(13, 14, 35);
-  color: var(--text-gray);
+  color: $color-white;
   display: flex;
   justify-content: center;
   align-items: center;

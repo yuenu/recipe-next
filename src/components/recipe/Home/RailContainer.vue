@@ -63,14 +63,14 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .railContainer {
-  width:100%;
-  min-height:40rem;
+  width: 100%;
+  min-height: 40rem;
 }
 
 .railContainerWrapper {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(17rem, 19.2rem));
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   margin: 5rem 0 0 0;
   justify-content: center;
@@ -83,10 +83,10 @@ export default defineComponent({
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  transition:all 0.3s ease-in;
-  color:#333;
-  background:#fff;
-  border: 2px solid rgba(220,220,220,0.4);
+  transition: all 0.3s ease-in;
+  color: #333;
+  background: #fff;
+  border: 2px solid rgba(220, 220, 220, 0.4);
 
   &__photo {
     height: 18rem;
@@ -108,9 +108,9 @@ export default defineComponent({
     font-weight: bold;
     font-size: 1rem;
     margin: 1rem;
-    border: 2px solid #d50000;
+    border: 2px solid $color-red-dark;
     background: transparent;
-    color: #d50000;
+    color: $color-red-dark;
     border-radius: 0.2rem;
     transition: background 200ms ease-in, color 200ms ease-in;
     cursor: pointer;
@@ -119,12 +119,30 @@ export default defineComponent({
   &:hover {
     transform: scale(1.02) translateY(-5px);
     box-shadow: 2px 5px 20px #83858a;
-    border: 2px solid rgba(220,220,220,0.1);
+    border: 2px solid rgba(220, 220, 220, 0.1);
   }
 
   &:hover &__btn {
-    background: #d50000;
-    color: #fff;
+    background: $color-red-dark;
+    color: $color-white;
+  }
+}
+
+@media (max-width: 1360px) {
+  .railContainerWrapper {
+    padding: 0 10px;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+
+  .detailBox {
+    max-width: 450px;
+  }
+}
+
+@media (max-width: 650px) {
+  .railContainerWrapper {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 </style>

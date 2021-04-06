@@ -233,4 +233,18 @@ export default defineComponent({
     transform: translatex(0px);
   }
 }
+
+@media (max-width:1400px) {
+  .mealCard {
+    min-width:260px;
+
+    &:first-child {
+      margin-left:10px;
+    }
+
+    &:not(:last-child) {
+      margin-right:1.5rem;
+    }
+  }
+}
 </style>

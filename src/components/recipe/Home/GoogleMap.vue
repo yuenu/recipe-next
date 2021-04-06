@@ -73,7 +73,7 @@ export default defineComponent({
   height:60vh;
 }
 
-@media (max-width:920px) {
+@media (max-width:1360px) {
   .googleMap {
     padding:0 10px;
   }

@@ -189,7 +189,7 @@ export default defineComponent({
     font-size: 14px;
     font-weight: 800;
     color: #fff;
-    background: rgb(202, 202, 240);
+    background: rgba(213, 213, 228, 0.541);
     border-radius: 50%;
     transition: 0.2s ease;
 
