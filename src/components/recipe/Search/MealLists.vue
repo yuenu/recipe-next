@@ -54,7 +54,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref, onMounted, watch, inject } from 'vue'
-import recipeStore from '@/store/recipe'
+import recipeStore from '@/store/index'
 import MealModal from '@/components/recipe/MealModal.vue'
 import Link from '@/components/UI/Icon/Link.vue'
 import Star from '@/components/UI/Icon/Star.vue'

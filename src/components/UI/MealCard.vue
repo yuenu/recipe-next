@@ -39,7 +39,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed, inject } from 'vue'
-import recipeStore from '@/store/recipe'
+import recipeStore from '@/store/index'
 
 // UI
 import Star from '@/components/UI/Icon/Star.vue'
@@ -213,7 +213,7 @@ export default defineComponent({
     position: absolute;
     top: 7rem;
     left: 128px;
-    z-index: 4;
+    z-index: 3;
     opacity: 1;
     transition: 0.25s all ease;
     transition-delay: 0.1s;

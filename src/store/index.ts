@@ -1,87 +1,61 @@
-import { createStore } from 'vuex'
-import { searchByName, searchById, searchByCategory, getAllCategory } from '@/apis/recipe'
-import type * as Response from '@/apis/response.type'
+import { reactive, computed } from 'vue'
+import * as api from '@/apis/index'
+import * as Response from '@/apis/response.type'
 
-interface State {
+type Recipe = {
   random: Response.meal[]
   meals: Response.meal[]
   meal: Response.meal[]
-  category: Response.Category[]
+  categories: Response.Category[]
 }
 
-export const store = createStore<State>({
-  state: {
-    random: [],
-    meals: [],
-    meal: [],
-    category: []
-  },
-  mutations: {
-    SET_RANDOM_MEAL (state, payload: Response.meal[]) {
-      state.random = payload
-    },
-    SET_CATEGORY (state, payload: Response.Category[]) {
-      state.category = payload
-    },
-    SET_MEALS (state, payload: Response.meal[]) {
-      state.meals = payload
-    },
-    SET_SINGLE_MEAL (state, payload: Response.meal[]) {
-      state.meal = payload
+const state = reactive<Recipe>({
+  random: [],
+  meals: [],
+  meal: [],
+  categories: []
+})
+
+const getters = reactive({
+  getMeals: computed(() => state.meals),
+  getCategory: computed(() => state.categories),
+  getMealDetail: computed(() => state.meal)
+})
+
+const actions = {
+
+  async SEARCH_MEALS (input: string) {
+    try {
+      state.meals = await api.searchByName(input)
+    } catch (e) {
+      console.log(e)
     }
   },
-  actions: {
-    /**
-     * search mael by name
-     *
-     * @param input - Search input
-     */
-    async SEARCH_MEALS ({ commit }, input: string) {
-      const res = await searchByName(input)
-      commit('SET_MEALS', res)
-    },
 
-    /**
-     *  get all category
-     */
-    async GET_CATEGORY ({ commit }) {
-      const res = await getAllCategory()
-      commit('SET_CATEGORY', res)
-    },
-
-    /**
-     * get maels by which selected category
-     *
-     * @param category - meals category
-     */
-    async GET_MEALS_BY_CATEGORY ({ commit }, category: string) {
-      const res = await searchByCategory(category)
-      commit('SET_MEALS', res)
-    },
-
-    /**
-     *  get meals by id
-     *
-     * @param mealId - meal id
-     */
-    async GET_MEALS_BY_ID ({ commit }, mealId: string) {
-      const res = await searchById(mealId)
-      commit('SET_SINGLE_MEAL', res)
+  async GET_CATEGORY () {
+    try {
+      state.categories = await api.getAllCategory()
+      return state.categories
+    } catch (e) {
+      console.log(e)
     }
   },
-  getters: {
-    getMeals: state => {
-      return state.meals
-    },
-    /**
-     *
-     * @param state - 222
-     */
-    getCategory: state => {
-      return state.category
-    },
-    getMealDetail: state => {
-      return state.meal
+
+  async GET_MEALS_BY_CATEGORY (category: string) {
+    try {
+      state.meals = await api.searchByCategory(category)
+    } catch (e) {
+      console.log(e)
+    }
+  },
+
+  async GET_MEALS_BY_ID (mealId: string) {
+    try {
+      state.meal = await api.searchById(mealId)
+    } catch (e) {
+      console.log(e)
     }
   }
-})
+}
+
+export default { state, getters, ...actions }

@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, computed } from 'vue'
-import recipeStore from '@/store/recipe'
+import recipeStore from '@/store/index'
 import CategoriesListMeals from '@/components/recipe/Home/CategoriesListMeals.vue'
 
 export default defineComponent({
@@ -61,11 +61,11 @@ export default defineComponent({
   justify-content: space-between;
   align-items:center;
   width:150px;
-  height:125px;
   cursor:pointer;
   user-select: none;
   padding:10px 0;
   transition:0.2s all ease;
+  border-radius:5px;
 
   &:hover {
     transform:scale(1.02) translateY(-5px);
@@ -74,6 +74,7 @@ export default defineComponent({
   }
 
   &-img {
+    padding: 0.5rem 0;
     width:60px;
   }
 

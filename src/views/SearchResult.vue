@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeMount, inject } from 'vue'
-import recipeStore from '@/store/recipe'
+import recipeStore from '@/store/index'
 
 import MealLists from '@/components/recipe/Search/MealLists.vue'
 import CategoriesList from '@/components/recipe/Search/CategoriesList.vue'

@@ -8,6 +8,7 @@
         <ProductAd />
         <RailContainer />
         <CategoriesList />
+        <Contact />
         <GoogleMap />
       </div>
     </div>
@@ -16,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeMount, inject } from 'vue'
-import recipeStore from '@/store/recipe'
+import recipeStore from '@/store/index'
 
 import Hero from '@/components/recipe/Home/Hero.vue'
 import Introduction from '@/components/recipe/Home/Introduction.vue'
@@ -24,6 +25,7 @@ import CategoryDisplay from '@/components/recipe/Home/CategoryDisplay.vue'
 import ProductAd from '@/components/recipe/Home/ProductAd.vue'
 import RailContainer from '@/components/recipe/Home/RailContainer.vue'
 import CategoriesList from '@/components/recipe/Home/CategoriesList.vue'
+import Contact from '@/components/recipe/Home/Contact.vue'
 import GoogleMap from '@/components/recipe/Home/GoogleMap.vue'
 
 export default defineComponent({
@@ -35,7 +37,8 @@ export default defineComponent({
     ProductAd,
     RailContainer,
     CategoriesList,
-    GoogleMap
+    GoogleMap,
+    Contact
   },
   setup () {
     const store = inject('store', recipeStore)

@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import { store } from './store'
 
 // UI
 import BaseModal from '@/components/UI/BaseModal.vue'
@@ -14,6 +13,5 @@ app
   .component('BaseModal', BaseModal)
   .component('Arrow', Arrow)
   .directive('lazingLoad', lazingLoad)
-  .use(store)
   .use(router)
   .mount('#app')

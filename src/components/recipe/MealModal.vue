@@ -60,7 +60,7 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeMount, computed, watch, reactive, inject } from 'vue'
-import recipeStore from '@/store/recipe'
+import recipeStore from '@/store/index'
 import Close from '@/components/UI/Icon/Close.vue'
 
 export default defineComponent({

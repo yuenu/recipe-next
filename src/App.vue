@@ -14,7 +14,7 @@ import { defineComponent, provide, onBeforeMount } from 'vue'
 import TheHeader from '@/components/layout/TheHeader.vue'
 import TheFooter from '@/components/layout/TheFooter.vue'
 import ScrollTop from '@/components/layout/ScrollTop.vue'
-import store from '@/store/recipe'
+import store from '@/store/index'
 
 export default defineComponent({
   components: {
@@ -32,8 +32,6 @@ export default defineComponent({
 @import url('https://fonts.googleapis.com/css2?family=Syne+Tactile&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Spirax&display=swap');
-
-$color-primary: #fdb926;
 
 :root {
   --text-gray: #eee;

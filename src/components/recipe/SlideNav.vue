@@ -23,7 +23,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, watchEffect } from 'vue'
-import recipeStore from '@/store/recipe'
+import recipeStore from '@/store/index'
 
 export default defineComponent({
   setup () {

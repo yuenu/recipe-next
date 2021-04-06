@@ -11,7 +11,7 @@
         :key="dot"
         class="pagination__item"
       >
-        <span :class="['pagination__link', { active: (dot - 1) === currentIndex}]"></span>
+        <span :class="['pagination__link', { active: (dot - 1) === currentIndex}]" @click="changePageIndex(dot)"></span>
       </li>
     </ul>
   </div>
@@ -27,7 +27,7 @@ import {
   onBeforeUnmount,
   watch
 } from 'vue'
-import recipeStore from '@/store/recipe'
+import recipeStore from '@/store/index'
 import MealCard from '@/components/UI/MealCard.vue'
 
 export default defineComponent({
@@ -92,7 +92,8 @@ export default defineComponent({
       }
     }
 
-    function touchEnd () {
+    function touchEnd (event: MouseEvent | TouchEvent) {
+      event.stopPropagation()
       isDragging.value = false
       cancelAnimationFrame(animationID.value)
 
@@ -103,14 +104,25 @@ export default defineComponent({
       if (movedBy > 100 && currentIndex.value > 0) currentIndex.value -= 1
 
       setPositionByIndex()
+
+      if (slide.value) {
+        slide.value.classList.remove('grabbing')
+      }
     }
 
     function touchMove (event: MouseEvent | TouchEvent) {
+      event.stopPropagation()
       if (isDragging.value) {
         const currentPosition = getPositionX(event)
         currentTranslate.value =
           prevTranslate.value + currentPosition - startPos.value
       }
+    }
+
+    // Pagation
+    function changePageIndex (page: number) {
+      currentIndex.value = page - 1
+      setPositionByIndex()
     }
 
     onMounted(async () => {
@@ -123,16 +135,16 @@ export default defineComponent({
         slide.value.addEventListener('touchstart', touchStart(), {
           passive: true
         })
-        slide.value.addEventListener('touchend', touchEnd, { passive: true })
-        slide.value.addEventListener('touchmove', touchMove, { passive: true })
+        slide.value.addEventListener('touchend', touchEnd)
+        slide.value.addEventListener('touchmove', touchMove)
 
         // Mouse events
         slide.value.addEventListener('mousedown', touchStart(), {
           passive: true
         })
-        slide.value.addEventListener('mouseup', touchEnd, { passive: true })
-        slide.value.addEventListener('mouseleave', touchEnd, { passive: true })
-        slide.value.addEventListener('mousemove', touchMove, { passive: true })
+        slide.value.addEventListener('mouseup', touchEnd)
+        slide.value.addEventListener('mouseleave', touchEnd)
+        slide.value.addEventListener('mousemove', touchMove)
       }
     })
 
@@ -155,6 +167,7 @@ export default defineComponent({
         currentIndex.value = 0
         startPos.value = 0
         currentTranslate.value = 0
+        setPositionByIndex()
       }
     })
 
@@ -163,7 +176,8 @@ export default defineComponent({
       slide,
       slideBox,
       imagesLen,
-      currentIndex
+      currentIndex,
+      changePageIndex
     }
   }
 })
@@ -184,7 +198,7 @@ $clouds: #333;
   margin-top: 2.4rem;
   display: flex;
   align-items: center;
-  transition: transform 0.4s cubic-bezier(0.03, -0.05, 0, 1.35);
+  transition: all 0.6s cubic-bezier(0.03, -0.05, 0.01, 1.02);
   user-select: none;
 }
 
@@ -196,7 +210,7 @@ $clouds: #333;
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 
   &:hover,
   &.active {
