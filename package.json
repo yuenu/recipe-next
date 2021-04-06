@@ -10,6 +10,7 @@
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.11.3",
     "@types/googlemaps": "^3.43.3",
+    "@types/resize-observer-browser": "^0.1.5",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "vue": "^3.0.0",

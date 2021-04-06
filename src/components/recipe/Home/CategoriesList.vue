@@ -12,7 +12,7 @@
           :alt="cat.strCategory"
           class="cat__box-img"
         />
-        <div class="cat__box-txt">{{ cat.strCategory}}</div>
+        <div class="cat__box-txt">{{ cat.strCategory }}</div>
       </div>
     </div>
     <CategoriesListMeals />
@@ -31,8 +31,14 @@ export default defineComponent({
   inject: ['store'],
   setup () {
     const store = inject('store', recipeStore)
-    const categories = computed(() => store.getters.getCategory)
-    const getGategoryMeals = (category: string) => { store.GET_MEALS_BY_CATEGORY(category) }
+    const categories = computed(() => {
+      return store.getters.getCategory.filter(catgory => {
+        return +catgory.idCategory <= 8
+      })
+    })
+    const getGategoryMeals = (category: string) => {
+      store.GET_MEALS_BY_CATEGORY(category)
+    }
 
     return {
       categories,
@@ -44,42 +50,67 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .CategoryList {
-  margin:5rem 0;
-  width:100%;
+  margin: 5rem 0;
+  width: 100%;
 }
 
 .categories {
-  display:grid;
-  grid-template-columns: repeat(14, 1fr);
-  gap:4rem;
-  overflow:hidden;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 1rem;
+  overflow: hidden;
+  justify-items: center;
 }
 
 .cat__box {
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items:center;
-  width:150px;
-  cursor:pointer;
+  align-items: center;
+  width: 150px;
+  cursor: pointer;
   user-select: none;
-  padding:10px 0;
-  transition:0.2s all ease;
-  border-radius:5px;
+  padding: 10px 0;
+  transition: 0.2s all ease;
+  border-radius: 5px;
 
   &:hover {
-    transform:scale(1.02) translateY(-5px);
-    box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
-    background-color:#eee;
+    transform: scale(1.02) translateY(-5px);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    background-color: #eee;
   }
 
   &-img {
     padding: 0.5rem 0;
-    width:60px;
+    width: 60px;
   }
 
   &-txt {
-    font-size:1.2rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 1350px) {
+  .categories {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .categories {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .categories {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 476px) {
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 </style>

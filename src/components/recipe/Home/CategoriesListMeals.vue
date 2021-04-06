@@ -128,18 +128,18 @@ export default defineComponent({
       setPositionByIndex()
     }
 
-    function handleResize () {
-      console.log('width', window.innerWidth)
-    }
+    // function handleResize () {
+    //   console.log('width', window.innerWidth)
+    // }
 
-    // const ro = new ResizeObserver(entries => {
-    //   for (const entry of entries) {
-    //     const cr = entry.contentRect
-    //     console.log('Element:', entry.target)
-    //     console.log(`Element size: ${cr.width}px x ${cr.height}px`)
-    //     console.log(`Element padding: ${cr.top}px ; ${cr.left}px`)
-    //   }
-    // })
+    const ro = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        const cr = entry.contentRect
+        console.log('Element:', entry.target)
+        console.log(`Element size: ${cr.width}px x ${cr.height}px`)
+        console.log(`Element padding: ${cr.top}px ; ${cr.left}px`)
+      }
+    })
 
     onMounted(async () => {
       if (getMeals.value.length === 0) {
@@ -162,9 +162,9 @@ export default defineComponent({
         slide.value.addEventListener('mouseleave', touchEnd)
         slide.value.addEventListener('mousemove', touchMove)
 
-        window.addEventListener('resize', handleResize)
+        // window.addEventListener('resize', handleResize)
 
-        // ro.observe(slide.value)
+        ro.observe(slide.value)
       }
     })
 
@@ -180,7 +180,7 @@ export default defineComponent({
         slide.value.removeEventListener('mouseleave', touchEnd)
         slide.value.removeEventListener('mousemove', touchMove)
 
-        window.removeEventListener('resize', handleResize)
+        // window.removeEventListener('resize', handleResize)
       }
     })
 
@@ -206,7 +206,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$clouds: #333;
+
 .categoryList-meals--display {
   width: 100%;
   will-change: transform;
@@ -223,23 +223,6 @@ $clouds: #333;
   user-select: none;
 }
 
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 7px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: all 0.3s ease;
-
-  &:hover,
-  &.active {
-    background-color: #fdb926;
-    transform: scale(1.2);
-  }
-}
-
 .pagination {
   &__item {
     display: inline-block;
@@ -249,7 +232,6 @@ $clouds: #333;
   &__link {
     position: relative;
     text-indent: -99em;
-    // overflow: hiddn;
     display: block;
     width: 30px;
     height: 30px;
@@ -264,12 +246,12 @@ $clouds: #333;
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      border: 3px solid $clouds;
+      border: 3px solid $color-gray-dark-1;
       transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
     &:before {
-      background: $clouds;
+      background: $color-gray-dark-1;
       transform: scale(0.2);
     }
     &:hover {

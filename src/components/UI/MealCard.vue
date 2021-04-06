@@ -93,7 +93,6 @@ export default defineComponent({
   min-width: 300px;
   height: 400px;
   padding: 2rem;
-  border-radius: 5px;
   position: relative;
   transition: all 0.3s ease-out;
   cursor: pointer;

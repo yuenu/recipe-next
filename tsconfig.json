@@ -14,7 +14,7 @@
     "baseUrl": ".",
     "noImplicitAny": false,
     "typeRoots": ["node_modules/@types"],
-    "types": ["webpack-env", "googlemaps"],
+    "types": ["webpack-env", "googlemaps", "resize-observer-browser"],
     "paths": {
       "@/*": ["src/*"]
     },
