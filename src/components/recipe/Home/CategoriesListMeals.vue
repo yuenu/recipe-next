@@ -4,17 +4,17 @@
       class="categoryList-meals--display"
       ref="slide"
       v-on="{
-        mousedown: touchStart(),
-        mouseup: touchEnd,
-        mousemove: touchMove,
-        mouseleave: touchMove,
-        touchstart: touchStart(),
-        touchend: touchEnd,
-        touchmove: touchMove,
+        'mousedown': touchStart(),
+        'mouseup': touchEnd,
+        'mousemove': touchMove,
+        'mouseleave': touchMove,
+        'touchstart': touchStart(),
+        'touchend': touchEnd,
+        'touchmove': touchMove,
       }"
     >
       <div class="categoryList-meals" ref="slideBox">
-        <MealCard />
+        <MealCard @modalStatus="isModalOpen" />
       </div>
     </div>
     <div class="pagination u-text-align-center">
@@ -64,21 +64,29 @@ export default defineComponent({
       return store.getters.getMeals
     })
 
+    /** Display on list which meal of numbers */
     const displayMeals = ref(4)
 
     const mealCounting = computed(() => getMeals.value.length)
-    const imagesLen = computed(() => Math.ceil(mealCounting.value / displayMeals.value))
+    const imagesLen = computed(() =>
+      Math.ceil(mealCounting.value / displayMeals.value)
+    )
 
+    /** The col's width, to calculate transition */
     const columnWidth = ref(1360)
     const isDragging = ref(false)
     const startPos = ref(0)
     const currentTranslate = ref(0)
     const prevTranslate = ref(0)
+
+    /** To store animation id, reset the deley time */
     const animationID = ref(0)
+
+    /** To calculate the pagination */
     const currentIndex = ref(0)
     const mealCards = ref<NodeListOf<HTMLElement>>()
 
-    // Touch Slide
+    /** Touch slide */
     const slide = ref<HTMLInputElement>()
     const slideBox = ref<HTMLInputElement>()
 
@@ -106,7 +114,6 @@ export default defineComponent({
 
     function touchStart () {
       return function (event: MouseEvent | TouchEvent) {
-        event.preventDefault()
         isDragging.value = true
         startPos.value = getPositionX(event)
 
@@ -117,8 +124,7 @@ export default defineComponent({
       }
     }
 
-    function touchEnd (event: MouseEvent | TouchEvent) {
-      event.preventDefault()
+    function touchEnd () {
       isDragging.value = false
       cancelAnimationFrame(animationID.value)
 
@@ -138,7 +144,6 @@ export default defineComponent({
     }
 
     function touchMove (event: MouseEvent | TouchEvent) {
-      event.preventDefault()
       if (isDragging.value) {
         const currentPosition = getPositionX(event)
         currentTranslate.value =
@@ -146,7 +151,7 @@ export default defineComponent({
       }
     }
 
-    // Pagation
+    /** Pagation */
     function changePageIndex (page: number) {
       currentIndex.value = page - 1
       setPositionByIndex()
@@ -157,10 +162,11 @@ export default defineComponent({
     /** ResizeObserver */
     const ro = new ResizeObserver((entries: ResizeObserverEntry[]) => {
       if (!mealCards.value) return
-
+      // Reset timeout
       window.clearTimeout(timeoutId.value)
-      const cr = entries[0].contentRect
 
+      const cr = entries[0].contentRect
+      // Detect the window width size, and change card's width
       for (const card of mealCards.value) {
         if (cr.width >= 1313) {
           displayMeals.value = 4
@@ -176,7 +182,7 @@ export default defineComponent({
           card.style.minWidth = (cr.width - 24 * 1) / displayMeals.value + 'px'
         }
       }
-      currentIndex.value = 0
+      // currentIndex.value = 0
       columnWidth.value = cr.width
       // To deley the detect
       timeoutId.value = window.setTimeout(() => {
@@ -215,6 +221,16 @@ export default defineComponent({
       })
     }
 
+    function isModalOpen (modalStatus: boolean) {
+      if (!slide.value) return
+
+      if (modalStatus) {
+        ro.unobserve(slide.value)
+      } else {
+        ro.observe(slide.value)
+      }
+    }
+
     watch(prop, val => {
       if (val) {
         getAllMealCard()
@@ -230,7 +246,8 @@ export default defineComponent({
       changePageIndex,
       touchStart,
       touchEnd,
-      touchMove
+      touchMove,
+      isModalOpen
     }
   }
 })

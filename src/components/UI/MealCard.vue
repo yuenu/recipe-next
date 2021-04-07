@@ -37,7 +37,6 @@
     <button class="mealCard__add">
       View recipe
     </button>
-    <!-- <h3 class="view">View Recipe</h3> -->
   </div>
 </template>
 
@@ -57,7 +56,8 @@ export default defineComponent({
     Star,
     Link
   },
-  setup () {
+  emits: ['modalStatus'],
+  setup (_props, { emit }) {
     const store = inject('store', recipeStore)
     const categoryMeals = computed(() => store.getters.getMeals)
     const mealId = ref('')
@@ -69,11 +69,13 @@ export default defineComponent({
       modalStatus.value = true
       mealId.value = id
       document.body.style.overflow = 'hidden'
+      emit('modalStatus', modalStatus.value)
     }
 
     function setModalClose () {
       modalStatus.value = false
       document.body.style.overflow = 'scroll'
+      emit('modalStatus', modalStatus.value)
     }
 
     return {

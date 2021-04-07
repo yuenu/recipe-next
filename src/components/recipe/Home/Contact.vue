@@ -81,6 +81,7 @@
               :title="ins.strCategoryDescription"
             >
               <img
+                class="ins-box__img"
                 :src="ins.strCategoryThumb"
                 :alt="ins.strCategory"
                 @click="searchIns(ins.strCategory)"
@@ -247,7 +248,7 @@ export default defineComponent({
 
   img {
     width: 100%;
-    margin: 10px 8px;
+    padding: 10px 8px;
     cursor: pointer;
   }
 }
