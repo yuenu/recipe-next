@@ -1,5 +1,3 @@
-import { Directive } from 'vue'
-
 const lazingLoad = new IntersectionObserver(
   (entries, observer) => {
     entries.forEach(entry => {

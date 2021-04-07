@@ -15,12 +15,12 @@
         <div class="cat__box-txt">{{ cat.strCategory }}</div>
       </div>
     </div>
-    <CategoriesListMeals />
+    <CategoriesListMeals :fetchDone="fetchDone" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, computed } from 'vue'
+import { defineComponent, inject, computed, ref } from 'vue'
 import recipeStore from '@/store/index'
 import CategoriesListMeals from '@/components/recipe/Home/CategoriesListMeals.vue'
 
@@ -31,18 +31,25 @@ export default defineComponent({
   inject: ['store'],
   setup () {
     const store = inject('store', recipeStore)
+
     const categories = computed(() => {
       return store.getters.getCategory.filter(catgory => {
         return +catgory.idCategory <= 8
       })
     })
-    const getGategoryMeals = (category: string) => {
-      store.GET_MEALS_BY_CATEGORY(category)
+
+    const fetchDone = ref(false)
+
+    const getGategoryMeals = async (category: string) => {
+      fetchDone.value = false
+      await store.GET_MEALS_BY_CATEGORY(category)
+      fetchDone.value = true
     }
 
     return {
       categories,
-      getGategoryMeals
+      getGategoryMeals,
+      fetchDone
     }
   }
 })

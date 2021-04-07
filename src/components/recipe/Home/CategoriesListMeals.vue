@@ -1,22 +1,36 @@
 <template>
-  <div class="categoryList-meals--display" ref="slide">
-    <div class="categoryList-meals" ref="slideBox">
-      <MealCard />
+  <div>
+    <div
+      class="categoryList-meals--display"
+      ref="slide"
+      v-on="{
+        mousedown: touchStart(),
+        mouseup: touchEnd,
+        mousemove: touchMove,
+        mouseleave: touchMove,
+        touchstart: touchStart(),
+        touchend: touchEnd,
+        touchmove: touchMove,
+      }"
+    >
+      <div class="categoryList-meals" ref="slideBox">
+        <MealCard />
+      </div>
     </div>
-  </div>
-  <div class="pagination u-text-align-center">
-    <ul class="pagination__list">
-      <li
-        v-for="dot in imagesLen"
-        :key="dot"
-        class="pagination__item"
-      >
-        <span
-          :class="['pagination__link', { active: dot - 1 === currentIndex }]"
-          @click="changePageIndex(dot)"
-        ></span>
-      </li>
-    </ul>
+    <div class="pagination u-text-align-center">
+      <ul class="pagination__list">
+        <li
+          v-for="dot in imagesLen"
+          :key="dot"
+          class="pagination__item"
+        >
+          <span
+            :class="['pagination__link', { active: dot - 1 === currentIndex }]"
+            @click="changePageIndex(dot)"
+          ></span>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -27,8 +41,8 @@ import {
   inject,
   ref,
   onMounted,
-  onBeforeUnmount,
-  watch
+  watch,
+  nextTick
 } from 'vue'
 import recipeStore from '@/store/index'
 import MealCard from '@/components/UI/MealCard.vue'
@@ -38,7 +52,12 @@ export default defineComponent({
     MealCard
   },
   injects: ['store'],
-  setup () {
+  props: {
+    fetchDone: {
+      type: Boolean
+    }
+  },
+  setup (prop) {
     // API DATA
     const store = inject('store', recipeStore)
     const getMeals = computed(() => {
@@ -48,16 +67,17 @@ export default defineComponent({
     const mealCounting = computed(() => getMeals.value.length)
     const imagesLen = computed(() => Math.ceil(mealCounting.value / 4))
 
-    const columnWidth = 1360
+    const columnWidth = ref(1360)
     const isDragging = ref(false)
     const startPos = ref(0)
     const currentTranslate = ref(0)
     const prevTranslate = ref(0)
     const animationID = ref(0)
     const currentIndex = ref(0)
+    const mealCards = ref<NodeListOf<HTMLElement>>()
 
     // Touch Slide
-    const slide = ref<HTMLElement>()
+    const slide = ref<HTMLInputElement>()
     const slideBox = ref<HTMLInputElement>()
 
     function setSliderPosition () {
@@ -66,7 +86,7 @@ export default defineComponent({
     }
 
     function setPositionByIndex () {
-      currentTranslate.value = currentIndex.value * -columnWidth
+      currentTranslate.value = currentIndex.value * -columnWidth.value
       prevTranslate.value = currentTranslate.value
       setSliderPosition()
     }
@@ -102,7 +122,9 @@ export default defineComponent({
 
       const movedBy = currentTranslate.value - prevTranslate.value
 
-      if (movedBy < -100 && currentIndex.value < imagesLen.value - 1) { currentIndex.value += 1 }
+      if (movedBy < -100 && currentIndex.value < imagesLen.value - 1) {
+        currentIndex.value += 1
+      }
 
       if (movedBy > 100 && currentIndex.value > 0) currentIndex.value -= 1
 
@@ -128,17 +150,27 @@ export default defineComponent({
       setPositionByIndex()
     }
 
-    // function handleResize () {
-    //   console.log('width', window.innerWidth)
-    // }
+    const timeoutId = ref(0)
 
-    const ro = new ResizeObserver(entries => {
-      for (const entry of entries) {
-        const cr = entry.contentRect
-        console.log('Element:', entry.target)
-        console.log(`Element size: ${cr.width}px x ${cr.height}px`)
-        console.log(`Element padding: ${cr.top}px ; ${cr.left}px`)
+    // ResizeObserver
+    const ro = new ResizeObserver((entries: ResizeObserverEntry[]) => {
+      if (!mealCards.value) return
+
+      window.clearTimeout(timeoutId.value)
+      const cr = entries[0].contentRect
+      console.log(cr.width)
+
+      for (const card of mealCards.value) {
+        if (window.innerWidth >= 1330) {
+          card.style.minWidth = (cr.width - 40 * 4) / 4 + 'px'
+        } else {
+          card.style.minWidth = (cr.width - 24 * 4) / 4 + 'px'
+        }
       }
+
+      columnWidth.value = cr.width
+      // To deley the detect
+      timeoutId.value = window.setTimeout(() => setPositionByIndex(), 500)
     })
 
     onMounted(async () => {
@@ -147,40 +179,8 @@ export default defineComponent({
       }
 
       if (slide.value) {
-        // Touch events
-        slide.value.addEventListener('touchstart', touchStart(), {
-          passive: true
-        })
-        slide.value.addEventListener('touchend', touchEnd)
-        slide.value.addEventListener('touchmove', touchMove)
-
-        // Mouse events
-        slide.value.addEventListener('mousedown', touchStart(), {
-          passive: true
-        })
-        slide.value.addEventListener('mouseup', touchEnd)
-        slide.value.addEventListener('mouseleave', touchEnd)
-        slide.value.addEventListener('mousemove', touchMove)
-
-        // window.addEventListener('resize', handleResize)
-
         ro.observe(slide.value)
-      }
-    })
-
-    onBeforeUnmount(() => {
-      // removeEventListener
-      if (slide.value) {
-        slide.value.removeEventListener('touchstart', touchStart())
-        slide.value.removeEventListener('touchend', touchEnd)
-        slide.value.removeEventListener('touchmove', touchMove)
-
-        slide.value.removeEventListener('mousedown', touchStart())
-        slide.value.removeEventListener('mouseup', touchEnd)
-        slide.value.removeEventListener('mouseleave', touchEnd)
-        slide.value.removeEventListener('mousemove', touchMove)
-
-        // window.removeEventListener('resize', handleResize)
+        mealCards.value = document.querySelectorAll<HTMLElement>('.mealCard')
       }
     })
 
@@ -193,34 +193,55 @@ export default defineComponent({
       }
     })
 
+    async function getAllMealCard () {
+      await nextTick(() => {
+        mealCards.value = document.querySelectorAll<HTMLElement>('.mealCard')
+        for (const card of mealCards.value) {
+          if (slide.value) {
+            card.style.minWidth = (slide.value.clientWidth - 24 * 4) / 4 + 'px'
+          }
+        }
+      })
+    }
+
+    watch(prop, val => {
+      if (val) {
+        getAllMealCard()
+      }
+    })
+
     return {
       getMeals,
       slide,
       slideBox,
       imagesLen,
       currentIndex,
-      changePageIndex
+      changePageIndex,
+      touchStart,
+      touchEnd,
+      touchMove
     }
   }
 })
 </script>
 
 <style lang="scss" scoped>
-
 .categoryList-meals--display {
   width: 100%;
-  will-change: transform;
   overflow: hidden;
 }
 
 .categoryList-meals {
   width: 100%;
-  height: 500px;
+  height: auto;
   margin-top: 2.4rem;
-  display: flex;
-  align-items: center;
+  // display: flex;
+  // align-items: center;
+  display:grid;
+  grid-template-columns: repeat(100, 1fr);
   transition: all 0.6s cubic-bezier(0.03, -0.05, 0.01, 1.02);
   user-select: none;
+  will-change: transform;
 }
 
 .pagination {
@@ -272,5 +293,11 @@ export default defineComponent({
 
 .grabbing {
   cursor: grabbing;
+}
+
+@media (max-width: 940px) {
+  .categoryList-meals {
+    grid-template-rows: repeat(2, 1fr);
+  }
 }
 </style>
