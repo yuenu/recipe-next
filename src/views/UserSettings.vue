@@ -40,7 +40,7 @@ export default defineComponent({
         email: 'abc@gamil.com'
       }
     ]
-    const submitProfile = () => {
+    function submitProfile () {
       console.log('sumbit the data!!!')
     }
 

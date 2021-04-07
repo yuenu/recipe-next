@@ -57,6 +57,7 @@ body {
   flex-direction: column;
   margin-bottom: 32px;
   font-family: 'Oswald', '微軟正黑體', 'Microsoft Yahei', sans-serif;
+  overflow-x: hidden;
 }
 
 .route-enter-from,

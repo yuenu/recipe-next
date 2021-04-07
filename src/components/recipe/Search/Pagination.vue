@@ -48,17 +48,18 @@ export default defineComponent({
     })
 
     const getMeals = computed(() => prop.getMeals)
-    const changePage = (page: number) => {
+
+    function changePage (page: number) {
       currentPage.value = page
       emit('changePage', page)
     }
 
-    const prevPage = () => {
+    function prevPage () {
       currentPage.value--
       changePage(currentPage.value)
     }
 
-    const nextPage = () => {
+    function nextPage () {
       currentPage.value++
       changePage(currentPage.value)
     }

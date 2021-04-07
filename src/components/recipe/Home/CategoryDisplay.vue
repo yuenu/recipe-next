@@ -43,7 +43,7 @@ export default defineComponent({
     const store = inject('store', recipeStore)
     const onCategories = ref<Category[]>([])
 
-    const textEllipsis = (text: string) => {
+    function textEllipsis (text: string) {
       const maxTextCount = 212
       return text.substring(0, maxTextCount - 1) + '...'
     }

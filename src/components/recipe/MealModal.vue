@@ -76,6 +76,7 @@ export default defineComponent({
   emits: ['close'],
   setup (props, { emit }) {
     const store = inject('store', recipeStore)
+
     onBeforeMount(() => {
       store.GET_MEALS_BY_ID(props.mealId)
     })

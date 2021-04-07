@@ -8,7 +8,7 @@
     class="mealCard"
     v-for="meal in categoryMeals"
     :key="meal.idMeal"
-    @click="setModalOpen(meal.idMeal)"
+    @click.prevent="setModalOpen(meal.idMeal)"
   >
     <div class="mealCard--cover"></div>
     <img
@@ -21,7 +21,11 @@
     </div>
 
     <div class="mealCard__content">
-      <div class="mealCard__heading">{{ meal.strMeal }}</div>
+      <div class="mealCard__heading">
+        <div class="mealCard__heading--txt">
+          {{ meal.strMeal }}
+        </div>
+      </div>
       <div class="mealCard__rate">
         <Star class="mealCard__rate--star" />
         <Star class="mealCard__rate--star" />
@@ -30,7 +34,7 @@
         <Star class="mealCard__rate--star" />
       </div>
     </div>
-    <button class="mealCard__add" @click.stop="favoriteRecipe($event)">
+    <button class="mealCard__add">
       View recipe
     </button>
     <!-- <h3 class="view">View Recipe</h3> -->
@@ -61,19 +65,15 @@ export default defineComponent({
     /** Modal control */
     const modalStatus = ref(false)
 
-    const setModalOpen = (id: string) => {
+    function setModalOpen (id: string) {
       modalStatus.value = true
       mealId.value = id
       document.body.style.overflow = 'hidden'
     }
 
-    const setModalClose = () => {
+    function setModalClose () {
       modalStatus.value = false
       document.body.style.overflow = 'scroll'
-    }
-
-    const favoriteRecipe = (event: MouseEvent) => {
-      console.log('add recipe', event)
     }
 
     return {
@@ -81,8 +81,7 @@ export default defineComponent({
       mealId,
       modalStatus,
       categoryMeals,
-      setModalClose,
-      favoriteRecipe
+      setModalClose
     }
   }
 })
@@ -91,8 +90,9 @@ export default defineComponent({
 <style lang="scss" scoped>
 .mealCard {
   min-width: 300px;
-  height: 400px;
-  padding: 2rem;
+  height: auto;
+  padding: 1rem;
+  margin-bottom: 10px;
   position: relative;
   transition: all 0.3s ease-out;
   cursor: pointer;
@@ -132,7 +132,8 @@ export default defineComponent({
 
   &__content {
     width: 100%;
-    height: 220px;
+    height: auto;
+    min-height: 150px;
     transition: 0.26s all ease-out;
     padding: 0 10px 0 10px;
     z-index: 3;
@@ -143,31 +144,39 @@ export default defineComponent({
 
   &__heading {
     color: #d57d1f;
-    position: relative;
     font-weight: 400;
     font-size: 1.3rem;
     display: flex;
     align-items: flex-end;
     transition: all 0.3s ease;
-    /**
-    *  @refer https://jiaming0708.github.io/2019/04/16/flex-text-overflow/
-    *
-    */
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    height: 80px;
+    transform: translateY(-45px);
+
+    &--txt {
+      /**
+      *  @refer https://jiaming0708.github.io/2019/04/16/flex-text-overflow/
+      *
+      */
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 
   &:hover &__heading {
-    transform: translateY(-80px);
+    transform: translateY(-90px);
     color: #f14242;
-    white-space: normal;
+
+    &--txt {
+      white-space: normal;
+    }
   }
 
   &__rate {
     width: 100%;
     height: auto;
     transition: 0.3s all ease;
+    transform: translateY(-45px);
   }
 
   &__rate--star {
@@ -177,7 +186,7 @@ export default defineComponent({
   }
 
   &:hover &__rate {
-    transform: translateY(-80px);
+    transform: translateY(-85px);
   }
 
   &__add {
@@ -210,7 +219,7 @@ export default defineComponent({
 
   &__enter {
     position: absolute;
-    top: 7rem;
+    top: 6rem;
     left: 128px;
     z-index: 3;
     opacity: 1;
@@ -233,7 +242,7 @@ export default defineComponent({
   }
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1330px) {
   .mealCard {
     min-width: 260px;
 
@@ -243,6 +252,22 @@ export default defineComponent({
 
     &:not(:last-child) {
       margin-right: 1.5rem;
+    }
+
+    &__enter {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 946px) {
+  .mealCard {
+    &__add {
+      transform: translate(-50%, 0);
+    }
+
+    &__heading {
+      font-size: 1.5rem;
     }
   }
 }

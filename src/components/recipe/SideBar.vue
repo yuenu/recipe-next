@@ -24,7 +24,7 @@ import recipeStore from '@/store/index'
 
 export default defineComponent({
   setup () {
-    const getCatgoryMeals = (category: string) => {
+    function getCatgoryMeals (category: string) {
       recipeStore.GET_MEALS_BY_CATEGORY(category)
     }
 

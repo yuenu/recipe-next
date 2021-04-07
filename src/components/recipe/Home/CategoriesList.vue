@@ -40,7 +40,7 @@ export default defineComponent({
 
     const fetchDone = ref(false)
 
-    const getGategoryMeals = async (category: string) => {
+    async function getGategoryMeals (category: string) {
       fetchDone.value = false
       await store.GET_MEALS_BY_CATEGORY(category)
       fetchDone.value = true

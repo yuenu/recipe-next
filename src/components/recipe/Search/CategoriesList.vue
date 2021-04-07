@@ -31,7 +31,7 @@ export default defineComponent({
       return store.getters.getCategory
     })
 
-    const getCategoryMeals = (category: string) => {
+    function getCategoryMeals (category: string) {
       store.GET_MEALS_BY_CATEGORY(category)
     }
 

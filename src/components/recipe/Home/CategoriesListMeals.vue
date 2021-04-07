@@ -64,8 +64,10 @@ export default defineComponent({
       return store.getters.getMeals
     })
 
+    const displayMeals = ref(4)
+
     const mealCounting = computed(() => getMeals.value.length)
-    const imagesLen = computed(() => Math.ceil(mealCounting.value / 4))
+    const imagesLen = computed(() => Math.ceil(mealCounting.value / displayMeals.value))
 
     const columnWidth = ref(1360)
     const isDragging = ref(false)
@@ -104,7 +106,7 @@ export default defineComponent({
 
     function touchStart () {
       return function (event: MouseEvent | TouchEvent) {
-        event.stopPropagation()
+        event.preventDefault()
         isDragging.value = true
         startPos.value = getPositionX(event)
 
@@ -116,7 +118,7 @@ export default defineComponent({
     }
 
     function touchEnd (event: MouseEvent | TouchEvent) {
-      event.stopPropagation()
+      event.preventDefault()
       isDragging.value = false
       cancelAnimationFrame(animationID.value)
 
@@ -136,7 +138,7 @@ export default defineComponent({
     }
 
     function touchMove (event: MouseEvent | TouchEvent) {
-      event.stopPropagation()
+      event.preventDefault()
       if (isDragging.value) {
         const currentPosition = getPositionX(event)
         currentTranslate.value =
@@ -152,25 +154,34 @@ export default defineComponent({
 
     const timeoutId = ref(0)
 
-    // ResizeObserver
+    /** ResizeObserver */
     const ro = new ResizeObserver((entries: ResizeObserverEntry[]) => {
       if (!mealCards.value) return
 
       window.clearTimeout(timeoutId.value)
       const cr = entries[0].contentRect
-      console.log(cr.width)
 
       for (const card of mealCards.value) {
-        if (window.innerWidth >= 1330) {
-          card.style.minWidth = (cr.width - 40 * 4) / 4 + 'px'
+        if (cr.width >= 1313) {
+          displayMeals.value = 4
+          card.style.minWidth = (cr.width - 40 * 4) / displayMeals.value + 'px'
+        } else if (cr.width >= 930) {
+          displayMeals.value = 4
+          card.style.minWidth = (cr.width - 24 * 4) / displayMeals.value + 'px'
+        } else if (cr.width >= 476) {
+          displayMeals.value = 2
+          card.style.minWidth = (cr.width - 24 * 2) / displayMeals.value + 'px'
         } else {
-          card.style.minWidth = (cr.width - 24 * 4) / 4 + 'px'
+          displayMeals.value = 1
+          card.style.minWidth = (cr.width - 24 * 1) / displayMeals.value + 'px'
         }
       }
-
+      currentIndex.value = 0
       columnWidth.value = cr.width
       // To deley the detect
-      timeoutId.value = window.setTimeout(() => setPositionByIndex(), 500)
+      timeoutId.value = window.setTimeout(() => {
+        setPositionByIndex()
+      }, 500)
     })
 
     onMounted(async () => {
@@ -235,10 +246,8 @@ export default defineComponent({
   width: 100%;
   height: auto;
   margin-top: 2.4rem;
-  // display: flex;
-  // align-items: center;
-  display:grid;
-  grid-template-columns: repeat(100, 1fr);
+  display: flex;
+  align-items: center;
   transition: all 0.6s cubic-bezier(0.03, -0.05, 0.01, 1.02);
   user-select: none;
   will-change: transform;
@@ -247,7 +256,7 @@ export default defineComponent({
 .pagination {
   &__item {
     display: inline-block;
-    margin: 0 10px;
+    margin: 20px 10px 0 10px;
   }
 
   &__link {
@@ -293,11 +302,5 @@ export default defineComponent({
 
 .grabbing {
   cursor: grabbing;
-}
-
-@media (max-width: 940px) {
-  .categoryList-meals {
-    grid-template-rows: repeat(2, 1fr);
-  }
 }
 </style>

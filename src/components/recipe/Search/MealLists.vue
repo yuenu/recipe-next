@@ -78,12 +78,14 @@ export default defineComponent({
 
     const modalStatus = ref(false)
     const mealId = ref('')
-    const setModalOpen = (id: string) => {
+
+    function setModalOpen (id: string) {
       modalStatus.value = true
       mealId.value = id
       document.body.style.overflow = 'hidden'
     }
-    const setModalClose = () => {
+
+    function setModalClose () {
       modalStatus.value = !modalStatus.value
       document.body.style.overflow = 'auto'
     }
@@ -94,7 +96,7 @@ export default defineComponent({
     const currentPage = ref(1)
     const onePageMealsCount = 6
 
-    const changePage = (page: number) => { currentPage.value = page }
+    function changePage (page: number) { currentPage.value = page }
 
     const handlePageMeals = computed(() => {
       return getMeals.value.filter((_, index) => {
@@ -106,12 +108,7 @@ export default defineComponent({
       })
     })
 
-    /**
-     * Add recipe
-     *
-     * @param {MouseEvent} event - clicked element
-     */
-    const favoriteRecipe = (event: MouseEvent) => {
+    function favoriteRecipe (event: MouseEvent) {
       console.log('add recipe', event)
     }
 
@@ -120,7 +117,10 @@ export default defineComponent({
       dataIsEmpty.value = false
     })
 
-    onMounted(() => { dataIsEmpty.value = true })
+    onMounted(() => {
+      console.log('getMeals', getMeals)
+      dataIsEmpty.value = true
+    })
 
     return {
       getMeals,
