@@ -4,13 +4,13 @@
       class="categoryList-meals--display"
       ref="slide"
       v-on="{
-        mousedown: touchStart(),
-        mouseup: touchEnd,
-        mousemove: touchMove,
-        mouseleave: touchMove,
-        touchstart: touchStart(),
-        touchend: touchEnd,
-        touchmove: touchMove,
+        'mousedown.passive': touchStart(),
+        'mouseup.passive': touchEnd,
+        'mousemove.passive': touchMove,
+        'mouseleave.passive': touchMove,
+        'touchstart.passive': touchStart(),
+        'touchend.passive': touchEnd,
+        'touchmove.passive': touchMove,
       }"
     >
       <div class="categoryList-meals" ref="slideBox">

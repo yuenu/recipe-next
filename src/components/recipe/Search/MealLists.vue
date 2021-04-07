@@ -118,7 +118,6 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      console.log('getMeals', getMeals)
       dataIsEmpty.value = true
     })
 
