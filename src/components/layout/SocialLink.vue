@@ -22,10 +22,10 @@ export default {
 
 <style lang="scss" scoped>
 .social-link {
-  margin: 2rem 0;
+  display: flex;
 
   &--icon {
-    font-size:1.2rem;
+    width: 20px;
     fill: $color-gray-dark-1;
   }
 

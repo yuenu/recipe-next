@@ -7,22 +7,33 @@
     />
     <div class="header__container">
       <div class="headerTop">
+        <div class="headerTop__phone">
+          <Phone class="headerTop__phone--icon" />
+          <a href="tel: 0988-XXX-XXX" class="headerTop__phone--desc">
+            0988-XXX-XXX
+          </a>
+        </div>
         <div class="headerTop__logo">
           <router-link to="/" class="headerTop__logo--link">
             <img src="@/assets/logo.png" alt="logo" />
           </router-link>
         </div>
-        <ul class="headerTop__lang">
-          <li class="headerTop__lang-box lang--cn">简</li>
-          <br />
-          <li class="headerTop__lang-box lang--tw">繁</li>
-          <br />
-          <li class="headerTop__lang-box lang--en">EN</li>
-        </ul>
+
+        <div class="headerTop__address">
+          <Location class="headerTop__address--icon" />
+          <span class="headerTop__address--desc">
+            Xitun Dist., Taichung City
+          </span>
+        </div>
       </div>
       <div class="headerBottom" ref="headerBottom">
-        <!-- <SearchForm class="headerBottom__search" /> -->
-
+        <ul class="headerBottom__lang">
+          <li class="headerBottom__lang-box lang--cn">简</li>
+          <br />
+          <li class="headerBottom__lang-box lang--tw">繁</li>
+          <br />
+          <li class="headerBottom__lang-box lang--en">EN</li>
+        </ul>
         <ul class="headerBottom__nav">
           <li>
             <router-link to="/" class="headerBottom__nav--link">
@@ -42,7 +53,7 @@
               class="headerBottom__nav--link"
               target="_blank"
             >
-              Projrcts
+              Others Projrcts
             </a>
           </li>
           <li>
@@ -53,15 +64,20 @@
               Settings
             </router-link>
           </li>
+          <li>
+            <router-link to="/about" class="headerBottom__nav--link">
+              About
+            </router-link>
+          </li>
         </ul>
-
-        <!-- <div class="headerBottom__social">
-          <Facebook class="headerBottom__social--img" />
-          <Twitter class="headerBottom__social--img" />
-          <Instagram class="headerBottom__social--img" />
-        </div> -->
+        <div class="headerBottom__last">
+          <SocialLink class="socialLink" />
+          <Search class="search" />
+          <div class="collection">
+            <Heart />
+          </div>
+        </div>
       </div>
-      <div class="ham"></div>
     </div>
     <div class="hamburger">
       <div class="hamburger__menu">
@@ -99,11 +115,21 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue'
-// import SearchForm from './SearchForm.vue'
+
+import Location from '@/components/UI/Icon/Location.vue'
+import Phone from '@/components/UI/Icon/Phone.vue'
+import Heart from '@/components/UI/Icon/Heart.vue'
+import Search from '@/components/UI/Icon/Search.vue'
+
+import SocialLink from '@/components/layout/SocialLink.vue'
 
 export default defineComponent({
   components: {
-    // SearchForm
+    Location,
+    Phone,
+    Heart,
+    SocialLink,
+    Search
   },
   setup () {
     const isMobileOpen = ref(false)
@@ -154,49 +180,55 @@ export default defineComponent({
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding: 0 10px;
   }
 }
 
 .headerTop {
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: relative;
-
+  justify-content: space-between;
   width: 100%;
+
+  &__phone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--icon {
+      width: 30px;
+      fill: $color-primary;
+    }
+
+    &--desc {
+      margin-left: 3px;
+      text-decoration: none;
+      font-size: 1.3rem;
+      color: $color-gray-dark-1;
+    }
+  }
+
+  &__address {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--icon {
+      fill: $color-primary;
+    }
+
+    &--desc {
+      margin-left: 5px;
+      text-decoration: none;
+      font-size: 1.3rem;
+      color: $color-gray-dark-1;
+    }
+  }
 
   &__logo {
     display: flex;
     align-items: center;
-  }
-
-  &__logo--link {
-    margin: 0 0 0 auto;
-  }
-
-  &__lang {
-    display: flex;
-    position: absolute;
-    top: 85px;
-    left: 10px;
-    list-style-type: none;
-  }
-
-  &__lang-box {
-    padding: 5px 10px 7px 10px;
-    margin: 0 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 800;
-    color: #fff;
-    background: rgba(213, 213, 228, 0.541);
-    border-radius: 50%;
-    transition: 0.2s ease;
-
-    &:hover {
-      background: rgb(118, 118, 192);
-      color: $color-primary;
-    }
+    margin-top: 2px;
   }
 }
 
@@ -205,6 +237,29 @@ export default defineComponent({
   height: 50px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+
+  &__lang {
+    display: flex;
+    list-style-type: none;
+
+    &-box {
+      padding: 5px 10px 7px 10px;
+      margin: 0 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 300;
+      color: #fff;
+      background: rgba(213, 213, 228, 0.541);
+      border-radius: 50%;
+      transition: 0.2s ease;
+
+      &:hover {
+        background: rgb(118, 118, 192);
+        color: $color-primary;
+      }
+    }
+  }
 
   &__social {
     width: 100%;
@@ -249,6 +304,10 @@ export default defineComponent({
   }
 
   &__search {
+    display: flex;
+  }
+
+  &__last {
     display: flex;
   }
 }
@@ -337,20 +396,65 @@ export default defineComponent({
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+.socialLink {
+  margin-right: 2rem;
+}
+
+.search {
+  padding: 2px;
+  margin-right: 1rem;
+}
+
+.collection {
+  padding: 2px;
+  position: relative;
+  cursor: pointer;
+
+  &:hover svg {
+    fill: khaki;
+  }
+
+  &:before {
+    content: '';
+    color: $color-gray-light-1;
+    width: 5px;
+    height: 16px;
+    border-left: 1px solid $color-gray-light-2;
+    position: absolute;
+    top: 50%;
+    left: -8px;
+    margin-top: -11px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .headerTop__address--desc,
+  .headerTop__phone--desc {
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 768px) {
   #check,
   .hamburger__menu {
     display: block;
   }
 
-  .container__left {
+  .headerTop__lang {
     display: none;
   }
 
-  .ham {
-    width: 53px;
-    height: 100%;
-    display: flex;
+  .headerTop {
+    flex-direction: column;
+
+    &__logo {
+      order: -1;
+    }
+
+    &__address,
+    &__phone {
+      margin: 5px 0;
+    }
   }
 }
 </style>

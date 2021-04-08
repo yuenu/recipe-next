@@ -22,7 +22,7 @@
             <Email />
           </div>
         </div>
-        <SocialLink />
+        <SocialLink class="socialLink" />
       </div>
     </div>
     <div class="contactUs">
@@ -240,6 +240,10 @@ export default defineComponent({
       fill: #c2ab45;
     }
   }
+}
+
+.socialLink {
+  margin-top:2rem;
 }
 
 .ins {

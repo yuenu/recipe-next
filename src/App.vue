@@ -77,8 +77,4 @@ body {
   transition: all 0.3s ease-out;
 }
 
-// utilities
-.u-text-align-center {
-  text-align: center;
-}
 </style>
