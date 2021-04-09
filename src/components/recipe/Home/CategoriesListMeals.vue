@@ -4,13 +4,13 @@
       class="categoryList-meals--display"
       ref="slide"
       v-on="{
-        'mousedown': touchStart(),
-        'mouseup': touchEnd,
-        'mousemove': touchMove,
-        'mouseleave': touchMove,
-        'touchstart': touchStart(),
-        'touchend': touchEnd,
-        'touchmove': touchMove,
+        mousedown: touchStart(),
+        mouseup: touchEnd,
+        mousemove: touchMove,
+        mouseleave: touchMove,
+        touchstart: touchStart(),
+        touchend: touchEnd,
+        touchmove: touchMove,
       }"
     >
       <div class="categoryList-meals" ref="slideBox">
@@ -182,10 +182,10 @@ export default defineComponent({
           card.style.minWidth = (cr.width - 24 * 1) / displayMeals.value + 'px'
         }
       }
-      // currentIndex.value = 0
       columnWidth.value = cr.width
       // To deley the detect
       timeoutId.value = window.setTimeout(() => {
+        currentIndex.value = 0
         setPositionByIndex()
       }, 500)
     })

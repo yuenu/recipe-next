@@ -82,12 +82,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$star-color: #fdb926;
-
 .introduction-section {
   max-width: 1330px;
   width: 100%;
   margin: 5rem 0 3rem 0;
+  padding:2rem 0;
 }
 
 .introduction {
@@ -133,7 +132,7 @@ $star-color: #fdb926;
   }
 
   &__rate-star {
-    fill: $star-color;
+    fill: $color-primary;
     width: 12px;
     margin: 0 2px;
   }

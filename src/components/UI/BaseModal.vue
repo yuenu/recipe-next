@@ -1,5 +1,5 @@
 <template>
-  <div :class="['modal']" v-if="isOpen">
+  <div class="modal" v-if="isOpen">
     <slot></slot>
     <div class="close" @click="close">
       <Close />
@@ -23,7 +23,7 @@ export default defineComponent({
   },
   emits: ['close'],
   setup (props, { emit }) {
-    const close = () => {
+    function close () {
       emit('close')
     }
 
@@ -61,8 +61,8 @@ export default defineComponent({
 
 .close {
   position: fixed;
-  top: 15px;
-  right: 3%;
+  top: 1rem;
+  right: 2.7rem;
   cursor: pointer;
 
   svg {

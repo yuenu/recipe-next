@@ -65,6 +65,8 @@ export default defineComponent({
 .railContainer {
   width: 100%;
   min-height: 40rem;
+  padding:2rem 10px;
+
 }
 
 .railContainerWrapper {
@@ -72,7 +74,6 @@ export default defineComponent({
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
-  margin: 5rem 0 0 0;
   justify-content: center;
 }
 
@@ -128,9 +129,8 @@ export default defineComponent({
   }
 }
 
-@media (max-width: 1360px) {
+@media (max-width: 1024px) {
   .railContainerWrapper {
-    padding: 0 10px;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
   }

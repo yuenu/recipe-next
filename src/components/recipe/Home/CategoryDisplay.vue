@@ -62,6 +62,7 @@ export default defineComponent({
   width: 100%;
   height: auto;
   margin: 0 0 3rem 0;
+  padding:2rem 0;
 }
 
 .card {

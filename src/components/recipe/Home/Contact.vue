@@ -139,10 +139,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 .contact {
   width: 100%;
-  margin: 1rem 0 4rem 0;
+  margin: 1rem 10px 2rem 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 1rem;
   min-height: 250px;
 }
 
@@ -248,12 +248,18 @@ export default defineComponent({
 
 .ins {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
   img {
     width: 100%;
-    padding: 10px 8px;
+    padding: 5px;
     cursor: pointer;
+  }
+}
+
+@media (max-width:1200px) {
+  .ins {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -261,6 +267,10 @@ export default defineComponent({
   .contact {
     grid-template-columns: 1fr;
     margin: 0;
+  }
+
+  .ins {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 

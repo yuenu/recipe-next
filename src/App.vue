@@ -59,22 +59,4 @@ body {
   font-family: 'Oswald', '微軟正黑體', 'Microsoft Yahei', sans-serif;
   overflow-x: hidden;
 }
-
-.route-enter-from,
-.route-leave-to {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.route-enter-to,
-.route-leave-from {
-  opacity: 1;
-  transform: translateY(0px);
-}
-
-.route-enter-active,
-.route-leave-active {
-  transition: all 0.3s ease-out;
-}
-
 </style>

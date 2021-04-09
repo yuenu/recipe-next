@@ -8,7 +8,6 @@
     class="mealCard"
     v-for="meal in categoryMeals"
     :key="meal.idMeal"
-    @click.prevent="setModalOpen(meal.idMeal)"
   >
     <div class="mealCard--cover"></div>
     <img
@@ -16,7 +15,7 @@
       :alt="meal.strMeal"
       class="mealCard__photo"
     />
-    <div class="mealCard__enter">
+    <div class="mealCard__enter" @click.prevent="setModalOpen(meal.idMeal)">
       <Link class="mealCard__enter-img" />
     </div>
 
@@ -34,7 +33,7 @@
         <Star class="mealCard__rate--star" />
       </div>
     </div>
-    <button class="mealCard__add">
+    <button class="mealCard__add" @click.prevent="setModalOpen(meal.idMeal)">
       View recipe
     </button>
   </div>

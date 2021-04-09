@@ -59,7 +59,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, computed, watch, reactive, inject } from 'vue'
+import {
+  defineComponent,
+  onBeforeMount,
+  computed,
+  watch,
+  reactive,
+  inject
+} from 'vue'
 import recipeStore from '@/store/index'
 import Close from '@/components/UI/Icon/Close.vue'
 
@@ -156,10 +163,10 @@ export default defineComponent({
     width: 100%;
     min-height: 100px;
     background: rgba(255, 255, 255, 0.945);
-    box-shadow: 0px 2px 5px rgb(255, 255, 255);
-    border-radius: 3  px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
     padding: 10px 30px;
-    margin: 10vh 0;
+    border-radius: 2px;
+    margin: 10vh 6px;
   }
 
   &__title {

@@ -69,13 +69,13 @@ export default defineComponent({
   margin: 0 0 5rem 0;
 }
 .mapDiv {
-  width:100%;
   height:60vh;
 }
 
 @media (max-width:1360px) {
   .googleMap {
     padding:0 10px;
+    margin: 0 0 2.5rem 0;
   }
 }
 </style>

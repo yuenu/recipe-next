@@ -26,25 +26,36 @@
           </span>
         </div>
       </div>
-      <div class="headerBottom" ref="headerBottom">
-        <ul class="headerBottom__lang">
-          <li class="headerBottom__lang-box lang--cn">简</li>
+      <div class="headerBottom">
+        <ul class="lang">
+          <li class="lang-box lang--cn">简</li>
           <br />
-          <li class="headerBottom__lang-box lang--tw">繁</li>
+          <li class="lang-box lang--tw">繁</li>
           <br />
-          <li class="headerBottom__lang-box lang--en">EN</li>
+          <li class="lang-box lang--en">EN</li>
         </ul>
-        <ul class="headerBottom__nav">
+        <ul class="headerBottom__nav" ref="nav">
           <li>
             <router-link to="/" class="headerBottom__nav--link">
               Home
             </router-link>
           </li>
           <li>
+            <router-link to="/search" class="headerBottom__nav--link">
+              Melas
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/about" class="headerBottom__nav--link">
+              About
+            </router-link>
+          </li>
+          <li>
             <router-link
-              to="/search"
-              class="headerBottom__nav--link"
-            >Melas
+              to="/editProfile"
+              class="headerBottom__nav--link login"
+            >
+              Settings
             </router-link>
           </li>
           <li>
@@ -56,25 +67,17 @@
               Others Projrcts
             </a>
           </li>
-          <li>
-            <router-link
-              to="/editProfile"
-              class="headerBottom__nav--link login"
-            >
-              Settings
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/about" class="headerBottom__nav--link">
-              About
-            </router-link>
-          </li>
         </ul>
         <div class="headerBottom__last">
           <SocialLink class="socialLink" />
-          <Search class="search" />
-          <div class="collection">
-            <Heart />
+          <div class="headerBottom__last--find">
+            <Search class="search" @click="searchFormSwitch" />
+            <div class="collection">
+              <div :class="['collection__list', { active: isHeartClick }]">
+                Favorite Meals
+              </div>
+              <Heart @onClick="heartClick" />
+            </div>
           </div>
         </div>
       </div>
@@ -85,36 +88,51 @@
         <span class="menuicon-bottom"></span>
       </div>
     </div>
-    <BaseModal
-      @close="isMobileOpen = false"
-      :isMobileOpen="isMobileOpen"
-      class="mobile__modal"
-    >
-      <ul class="mobile__nav">
-        <li class="mobile__item">
-          <a
-            href="https://profile-d6420.firebaseapp.com/"
-            class="mobile__link"
-            target="_blank"
-          >
-            Projects
-          </a>
-        </li>
-        <li class="mobile__item">
-          <router-link to="/" class="mobile__link"> MENU </router-link>
-        </li>
-        <li class="mobile__item">
-          <router-link to="/editProfile" class="mobile__link">
-            Settings
-          </router-link>
-        </li>
-      </ul>
-    </BaseModal>
+    <transition name="slide" mode="out-in">
+      <BaseModal
+        @close="isMobileOpen = false"
+        @click.self="isMobileOpen = false"
+        :isMobileOpen="isMobileOpen"
+        class="mobile__modal"
+      >
+        <ul class="mobile__nav">
+          <li class="mobile__item">
+            <a
+              href="https://profile-d6420.firebaseapp.com/"
+              class="mobile__link"
+              target="_blank"
+            >
+              Projects
+            </a>
+          </li>
+          <li class="mobile__item">
+            <router-link to="/" class="mobile__link"> MENU </router-link>
+          </li>
+          <li class="mobile__item">
+            <router-link to="/editProfile" class="mobile__link">
+              Settings
+            </router-link>
+          </li>
+        </ul>
+      </BaseModal>
+    </transition>
+
+    <transition name="fade" mode="out-in">
+      <BaseModal
+        :isMobileOpen="isSearchFormOpen"
+        @close="isSearchFormOpen = false"
+        @click.self="isSearchFormOpen = false"
+      >
+        <div class="search__tern">
+          <SearchForm />
+        </div>
+      </BaseModal>
+    </transition>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue'
+import { defineComponent, ref, onMounted, onBeforeUnmount } from 'vue'
 
 import Location from '@/components/UI/Icon/Location.vue'
 import Phone from '@/components/UI/Icon/Phone.vue'
@@ -123,43 +141,55 @@ import Search from '@/components/UI/Icon/Search.vue'
 
 import SocialLink from '@/components/layout/SocialLink.vue'
 
+import SearchForm from '@/components/layout/SearchForm.vue'
+
 export default defineComponent({
   components: {
     Location,
     Phone,
     Heart,
     SocialLink,
-    Search
+    Search,
+    SearchForm
   },
   setup () {
     const isMobileOpen = ref(false)
 
-    const headerBottom = ref<HTMLElement>()
-    const headerBottomOffset = ref(0)
+    const nav = ref<HTMLInputElement>()
 
-    const stickyHeader = () => {
-      if (headerBottom.value) {
-        if (window.pageYOffset > headerBottomOffset.value) {
-          headerBottom.value.classList.add('sticky')
+    function stickyHeader () {
+      if (nav.value) {
+        if (window.pageYOffset > nav.value.offsetTop) {
+          nav.value.classList.add('sticky')
         } else {
-          headerBottom.value.classList.remove('sticky')
+          nav.value.classList.remove('sticky')
         }
       }
     }
 
-    onMounted(() => {
-      // On mouted get headerBottom's offsetTop and store to headerBottomOffset
-      if (headerBottom.value) {
-        headerBottomOffset.value = headerBottom.value.offsetTop
-      }
-      document.addEventListener('scroll', () => {
-        stickyHeader()
-      })
-    })
+    const isHeartClick = ref(false)
+    function heartClick (isClick: boolean) {
+      isHeartClick.value = isClick
+    }
+
+    const isSearchFormOpen = ref(false)
+    function searchFormSwitch () {
+      isSearchFormOpen.value = !isSearchFormOpen.value
+    }
+
+    onMounted(() => document.addEventListener('scroll', () => stickyHeader()))
+
+    onBeforeUnmount(() =>
+      document.removeEventListener('scroll', () => stickyHeader())
+    )
 
     return {
       isMobileOpen,
-      headerBottom
+      nav,
+      heartClick,
+      isHeartClick,
+      searchFormSwitch,
+      isSearchFormOpen
     }
   }
 })
@@ -239,28 +269,6 @@ export default defineComponent({
   align-items: center;
   justify-content: space-between;
 
-  &__lang {
-    display: flex;
-    list-style-type: none;
-
-    &-box {
-      padding: 5px 10px 7px 10px;
-      margin: 0 6px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 300;
-      color: #fff;
-      background: rgba(213, 213, 228, 0.541);
-      border-radius: 50%;
-      transition: 0.2s ease;
-
-      &:hover {
-        background: rgb(118, 118, 192);
-        color: $color-primary;
-      }
-    }
-  }
-
   &__social {
     width: 100%;
     display: flex;
@@ -295,11 +303,11 @@ export default defineComponent({
     transition: all 140ms ease;
 
     &:hover {
-      color: rgb(177, 139, 16);
+      color: rgb(236, 190, 35);
     }
 
     &.router-link-exact-active {
-      color: rgb(255, 206, 45);
+      color: rgb(211, 185, 98);
     }
   }
 
@@ -308,6 +316,10 @@ export default defineComponent({
   }
 
   &__last {
+    display: flex;
+  }
+
+  &__last--find {
     display: flex;
   }
 }
@@ -352,7 +364,7 @@ export default defineComponent({
   width: 34px;
   height: 34px;
   cursor: pointer;
-  z-index: 999;
+  z-index: 12;
   opacity: 0;
   display: none;
 }
@@ -390,10 +402,34 @@ export default defineComponent({
 .sticky {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   background: #fff;
   z-index: 10;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+}
+
+.lang {
+  display: flex;
+  list-style-type: none;
+
+  &-box {
+    padding: 5px 10px 7px 10px;
+    margin: 0 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 300;
+    color: #fff;
+    background: rgba(213, 213, 228, 0.541);
+    border-radius: 50%;
+    transition: 0.2s ease;
+
+    &:hover {
+      background: rgb(118, 118, 192);
+      color: $color-primary;
+    }
+  }
 }
 
 .socialLink {
@@ -401,18 +437,20 @@ export default defineComponent({
 }
 
 .search {
-  padding: 2px;
-  margin-right: 1rem;
+  position: relative;
+  top: 3px;
+  right: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    fill: $color-primary;
+  }
 }
 
 .collection {
   padding: 2px;
   position: relative;
   cursor: pointer;
-
-  &:hover svg {
-    fill: khaki;
-  }
 
   &:before {
     content: '';
@@ -425,6 +463,38 @@ export default defineComponent({
     left: -8px;
     margin-top: -11px;
   }
+
+  &__list {
+    display: none;
+  }
+
+  &__list.active {
+    display: initial;
+    position: absolute;
+    bottom: -240px;
+    right: 0;
+    width: 100%;
+    min-width: 300px;
+    height: 240px;
+    background: #ccc;
+    z-index: 6;
+    padding: 1rem 2rem;
+    cursor: initial;
+    box-shadow: 0px 0px 20px rgba($color-black, 0.2);
+
+    &::before {
+      content: '';
+      background: #ccc;
+      width: 8px;
+      height: 8px;
+      position: absolute;
+      z-index: 6;
+      top: -3.5px;
+      right: 10px;
+      transform: rotate(45deg);
+      border-radius: 1px;
+    }
+  }
 }
 
 @media (max-width: 1024px) {
@@ -435,6 +505,10 @@ export default defineComponent({
 }
 
 @media (max-width: 768px) {
+  .header {
+    margin-bottom: 3rem;
+  }
+
   #check,
   .hamburger__menu {
     display: block;
@@ -455,6 +529,28 @@ export default defineComponent({
     &__phone {
       margin: 5px 0;
     }
+  }
+
+  .headerBottom {
+    flex-direction: column;
+
+    &__nav {
+      padding: 0.5rem 0;
+    }
+
+    &__nav--link {
+      padding: 0 8px;
+    }
+
+    &__last {
+      width: 100%;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+  }
+
+  .lang {
+    display: none;
   }
 }
 </style>

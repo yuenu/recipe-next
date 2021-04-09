@@ -61,7 +61,7 @@
 <style lang="scss" scoped>
 .product {
   max-width: 1330px;
-  margin: 2rem 0;
+  padding: 2rem 0;
 
   &__container {
     display: grid;
@@ -183,7 +183,10 @@
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 920px) {
+  .product {
+    border-bottom: 5px solid $color-gray-light-1;
+  }
 }
 
 @media (max-width: 476px) {
@@ -202,7 +205,6 @@
     &__body--3 &__description--1 {
       font-size: 3.2rem;
     }
-
   }
 }
 </style>

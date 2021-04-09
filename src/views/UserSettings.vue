@@ -57,8 +57,9 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 91px);
+  height:100%;
   width: 100%;
+  margin-top:5rem;
 }
 
 .card {
