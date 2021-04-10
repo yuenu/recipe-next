@@ -2,26 +2,26 @@
   <div class="cards__container">
     <MealModal
       v-if="isModalOpen"
-      @close="setModalClose"
+      @close="onModalClose"
       :mealId="mealId"
     />
-    <div v-if="dataIsEmpty" class="dataEmpty" >
+    <div v-if="isEmpty" class="dataEmpty">
       <h2 class="dataEmpty-text">No Data</h2>
     </div>
-    <div v-else-if="!dataIsEmpty" class="card" >
+    <div v-else-if="!isEmpty" class="card">
       <div
         class="card__box"
         v-for="meal in handlePageMeals"
         :key="meal.idMeal"
-        @click="setModalOpen(meal.idMeal)"
+        @click="onModalOpen(meal.idMeal)"
       >
         <div class="card__box__top">
           <div class="card__box__cover"></div>
           <div class="card__pic">
-            <img
-              :src="meal.strMealThumb"
-              :alt="meal.strMeal"
-              class="card__img"
+            <Skeleton
+              width="100%"
+              height="278"
+              v-imageLoad="{ src: meal.strMealThumb, alt: meal.strCategory }"
             />
             <div class="enter">
               <Link class="enter__img" />
@@ -33,19 +33,14 @@
                 <div class="card__title__text">{{ meal.strMeal }}</div>
               </div>
               <div class="card__rate">
-                <Star class="star" />
-                <Star class="star" />
-                <Star class="star" />
-                <Star class="star" />
-                <Star class="star" />
+                <Star />
               </div>
             </div>
-            <button class="card__add" @click.stop="favoriteRecipe($event)">
-              Save recipe
+            <button class="card__add">
+              Add recipe
             </button>
           </div>
         </div>
-        <!-- <h3 class="view">View Recipe</h3> -->
       </div>
     </div>
     <Pagination :getMeals="getMeals" @changePage="changePage" />
@@ -53,39 +48,49 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, onMounted, watch, inject } from 'vue'
+import {
+  defineComponent,
+  computed,
+  ref,
+  inject,
+  watchEffect
+} from 'vue'
 import recipeStore from '@/store/index'
+
 import MealModal from '@/components/recipe/MealModal.vue'
+import Pagination from './Pagination.vue'
+import Skeleton from '@/components/UI/Skeleton.vue'
+
 import Link from '@/components/UI/Icon/Link.vue'
 import Star from '@/components/UI/Icon/Star.vue'
-import Pagination from './Pagination.vue'
 
 export default defineComponent({
   components: {
     MealModal,
     Link,
     Star,
-    Pagination
+    Pagination,
+    Skeleton
   },
   inject: ['store'],
   setup () {
     const store = inject('store', recipeStore)
-    const dataIsEmpty = ref(true)
 
-    const getMeals = computed(() => {
-      return store.getters.getMeals
-    })
+    const getMeals = computed(() => store.getters.getMeals)
 
+    const isLoading = computed(() => store.getters.dataIsLoading)
+
+    /** Modal controal */
     const modalStatus = ref(false)
     const mealId = ref('')
 
-    function setModalOpen (id: string) {
+    function onModalOpen (id: string) {
       modalStatus.value = true
       mealId.value = id
       document.body.style.overflow = 'hidden'
     }
 
-    function setModalClose () {
+    function onModalClose () {
       modalStatus.value = !modalStatus.value
       document.body.style.overflow = 'auto'
     }
@@ -93,44 +98,44 @@ export default defineComponent({
       return modalStatus.value
     })
 
+    /** Pagnation */
     const currentPage = ref(1)
     const onePageMealsCount = 6
 
-    function changePage (page: number) { currentPage.value = page }
+    function changePage (page: number) {
+      currentPage.value = page
+    }
 
     const handlePageMeals = computed(() => {
       return getMeals.value.filter((_, index) => {
         if (currentPage.value === 1) {
-          return index < (onePageMealsCount * currentPage.value)
+          return index < onePageMealsCount * currentPage.value
         } else {
-          return (index >= (onePageMealsCount * (currentPage.value - 1))) && (index < (onePageMealsCount * currentPage.value))
+          return (
+            index >= onePageMealsCount * (currentPage.value - 1) &&
+            index < onePageMealsCount * currentPage.value
+          )
         }
       })
     })
 
-    function favoriteRecipe (event: MouseEvent) {
-      console.log('add recipe', event)
-    }
+    /** Card skeleton */
+    const isEmpty = ref(true)
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    watch(getMeals, (_val, _oldVal) => {
-      dataIsEmpty.value = false
-    })
-
-    onMounted(() => {
-      dataIsEmpty.value = true
+    watchEffect(() => {
+      isEmpty.value = !(getMeals.value.length !== 0)
     })
 
     return {
       getMeals,
       isModalOpen,
-      setModalOpen,
-      setModalClose,
+      onModalOpen,
+      onModalClose,
       mealId,
-      favoriteRecipe,
       changePage,
       handlePageMeals,
-      dataIsEmpty
+      isLoading,
+      isEmpty
     }
   }
 })
@@ -145,11 +150,10 @@ export default defineComponent({
   justify-items: end;
 
   &:empty {
-    background:red;
+    background: red;
   }
 
   &__box {
-    color: #fff;
     max-width: 300px;
     width: 100%;
     height: 370px;
@@ -304,15 +308,15 @@ export default defineComponent({
 }
 
 .dataEmpty {
-  width:100%;
-  height:770px;
-  border:1px solid #ddd;
-  display:flex;
+  width: 100%;
+  height: 770px;
+  border: 1px solid #ddd;
+  display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
 
   &-text {
-    color:#fdb926;
+    color: #fdb926;
   }
 }
 

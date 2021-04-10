@@ -26,11 +26,7 @@
         </div>
       </div>
       <div class="mealCard__rate">
-        <Star class="mealCard__rate--star" />
-        <Star class="mealCard__rate--star" />
-        <Star class="mealCard__rate--star" />
-        <Star class="mealCard__rate--star" />
-        <Star class="mealCard__rate--star" />
+        <Star />
       </div>
     </div>
     <button class="mealCard__add" @click.prevent="setModalOpen(meal.idMeal)">

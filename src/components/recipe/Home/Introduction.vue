@@ -99,7 +99,7 @@ export default defineComponent({
   align-items: center;
 
   &__heading {
-    font-size: 48px;
+    font-size: clamp(40px,3vw,48px);
     font-weight: 400;
   }
 
