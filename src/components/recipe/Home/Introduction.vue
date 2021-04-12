@@ -4,11 +4,7 @@
       <div class="introduction__content">
         <div class="introduction__heading">Pizza Express Margherita</div>
         <div class="introduction__rate">
-          <Star class="introduction__rate-star" />
-          <Star class="introduction__rate-star" />
-          <Star class="introduction__rate-star" />
-          <Star class="introduction__rate-star" />
-          <Star class="introduction__rate-star" />
+          <Star />
         </div>
         <div class="introduction__description">
           Pizza, dish of Italian origin consisting of a flattened disk of bread
@@ -129,12 +125,6 @@ export default defineComponent({
 
   &__descriptionIcon-text {
     text-align: center;
-  }
-
-  &__rate-star {
-    fill: $color-primary;
-    width: 12px;
-    margin: 0 2px;
   }
 
   &__pic,

@@ -1,59 +1,70 @@
 <template>
   <div class="search">
     <form @submit.prevent="submitForm" class="search__form">
-      <input
-        :class="['search__tern', { active: inputActive }]"
-        type="text"
-        placeholder="Search"
-        v-model.trim="searchInput"
-        autocapitalize="none"
-      />
-      <span :class="['search__icon', { active: inputActive }]"></span>
-      <div
-        :class="['search__clear', { active: inputActive }]"
-        @click="clearInput"
-      ></div>
+      <div class="search__group">
+        <input
+          :class="['search__tern', { square: inputActive }]"
+          type="text"
+          placeholder="Search"
+          v-model.trim="searchInput"
+          autocapitalize="none"
+        />
+        <button
+          :class="['search__icon', { close: inputActive }]"
+          type="reset"
+          @click="formToggle"
+        ></button>
+      </div>
     </form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, inject } from 'vue'
+import { defineComponent, ref, inject, onMounted } from 'vue'
 import recipeStore from '@/store/index'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
-  setup () {
+  props: {
+    searchActive: {
+      type: Boolean,
+      required: true
+    }
+  },
+  emits: ['searchSubmit'],
+  setup (props, { emit }) {
     const store = inject('store', recipeStore)
+    const router = useRouter()
+
     const searchInput = ref('')
 
-    const submitForm = () => {
+    function submitForm () {
+      emit('searchSubmit')
       store.SEARCH_MEALS(searchInput.value)
-      searchInput.value = ''
-    }
 
-    const clearInput = () => {
+      router.push({ name: 'searchResult' })
       searchInput.value = ''
     }
 
     const inputActive = ref(false)
-    document.addEventListener('click', (event: MouseEvent) => {
-      const inputTarget = event.target as HTMLElement
-      if (
-        inputTarget.classList.contains('search__tern') ||
-        inputTarget.classList.contains('search__icon')
-      ) {
-        inputActive.value = true
-      } else {
-        searchInput.value = ''
-        inputActive.value = false
-      }
-    })
+    function formToggle () {
+      inputActive.value = !inputActive.value
 
+      if (inputActive.value) {
+        searchInput.value = ''
+      }
+    }
+
+    onMounted(() => {
+      setTimeout(() => {
+        inputActive.value = props.searchActive
+      }, 300)
+    })
     return {
       searchInput,
       submitForm,
-      clearInput,
-      inputActive
+      inputActive,
+      formToggle
     }
   }
 })
@@ -62,58 +73,118 @@ export default defineComponent({
 <style lang="scss" scoped>
 .search {
   &__form {
-    display: flex;
-    max-width: 200px;
-    width: 185px;
+    height: 50px;
+    width: 300px;
     position: relative;
-    height: 28px;
+  }
+
+  &__group {
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
   &__tern {
-    padding: 0.2rem 0 0.1rem 4.4rem;
-    max-width: 180px;
-    height: 100%;
+    width: 50px;
+    height: 50px;
+    border: 4px solid $color-white;
+    border-radius: 50%;
+    background: transparent;
+    color: $color-white;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: Roboto;
+    outline: 0;
+    transition: width 0.4s ease-in-out, border-radius 0.8s ease-in-out,
+      padding 0.2s;
+    transition-delay: 0.4s;
+    transform: translate(0, -50%);
+  }
+
+  &__tern.square {
+    padding: 0 40px 0 10px;
+    width: 300px;
+    height: 50px;
+    border: 4px solid $color-white;
+    border-radius: 0;
+    color: $color-white;
+    font-size: 1rem;
+    font-weight: 400;
+    outline: 0;
+    transition: width 0.4s ease-in-out, border-radius 0.4s ease-in-out,
+      padding 0.2s;
+    transition-delay: 0.4s, 0s, 0.4s;
+    transform: translate(0, -50%);
   }
 
   &__icon {
-    background: url('../../assets/icon/search.png') no-repeat center / cover;
-    width: 12px;
-    height: 12px;
+    background: transparent;
     position: absolute;
-    left: 55px;
-    top: 8px;
-  }
-
-  &__icon.active {
-    left: 9px;
-  }
-
-  &__tern.active {
-    width: 100%;
-    padding: 0.2rem 1rem 0.1rem 1.7rem;
-  }
-
-  &__clear {
-    opacity: 0;
-  }
-
-  &__clear.active {
-    background: url('../../assets/icon/clear.png') no-repeat center / cover;
-    width: 12px;
-    height: 12px;
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    display: block;
-    z-index: 1;
+    top: 0;
+    right: 0;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    outline: none;
+    border: none;
+    color: $color-white;
     cursor: pointer;
-    opacity: 1;
+    transition: 0.2s ease-in-out;
+    transform: translate(0, -50%);
+  }
+
+  &__icon:before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 4px;
+    background-color: $color-white;
+    transform: rotate(45deg);
+    margin-top: 26px;
+    margin-left: 17px;
+    transition: 0.2s ease-in-out;
+  }
+
+  &__icon.close {
+    transition: 0.4s ease-in-out;
+    transition-delay: 0.4s;
+  }
+
+  &__icon.close:before {
+    content: '';
+    position: absolute;
+    width: 27px;
+    height: 4px;
+    margin-top: -1px;
+    margin-left: -13px;
+    background-color: $color-white;
+    transform: rotate(45deg);
+    transition: 0.2s ease-in-out;
+  }
+
+  &__icon.close:after {
+    content: '';
+    position: absolute;
+    width: 27px;
+    height: 4px;
+    background-color: $color-white;
+    margin-top: -1px;
+    margin-left: -13px;
+    cursor: pointer;
+    transform: rotate(-45deg);
   }
 }
 
-@media (max-width: 476px) {
+@media (max-width:476px) {
   .search {
-    display: none;
+
+    &__form {
+      width: 270px;
+    }
+
+    &__tern.square {
+      width:270px;
+    }
   }
 }
 </style>

@@ -18,9 +18,7 @@
         <div class="card__box__top">
           <div class="card__box__cover"></div>
           <div class="card__pic">
-            <Skeleton
-              width="100%"
-              height="278"
+            <CardSkeleton
               v-imageLoad="{ src: meal.strMealThumb, alt: meal.strCategory }"
             />
             <div class="enter">
@@ -48,18 +46,12 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  computed,
-  ref,
-  inject,
-  watchEffect
-} from 'vue'
+import { defineComponent, computed, ref, inject, watchEffect } from 'vue'
 import recipeStore from '@/store/index'
 
 import MealModal from '@/components/recipe/MealModal.vue'
 import Pagination from './Pagination.vue'
-import Skeleton from '@/components/UI/Skeleton.vue'
+import CardSkeleton from '@/components/recipe/Search/CardSkeleton.vue'
 
 import Link from '@/components/UI/Icon/Link.vue'
 import Star from '@/components/UI/Icon/Star.vue'
@@ -70,7 +62,7 @@ export default defineComponent({
     Link,
     Star,
     Pagination,
-    Skeleton
+    CardSkeleton
   },
   inject: ['store'],
   setup () {
@@ -171,18 +163,22 @@ export default defineComponent({
       box-shadow: -1px 0px 10px rgba(92, 92, 92, 0.21);
       z-index: 1;
     }
-  }
 
-  &__box__cover {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    opacity: 0;
-    transition: 0.3s ease all;
-    z-index: 2;
+    &__cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      opacity: 0;
+      transition: 0.3s ease all;
+      z-index: 2;
+    }
+
+    &__top {
+      width:100%;
+    }
   }
 
   &__box:hover &__box__cover {
@@ -190,6 +186,8 @@ export default defineComponent({
   }
 
   &__pic {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;

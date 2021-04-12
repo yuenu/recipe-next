@@ -32,14 +32,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+const fakeData = [
+  {
+    userName: 'yuenu',
+    email: 'abc@gamil.com'
+  }
+]
+
 export default defineComponent({
   setup () {
-    const fakeData = [
-      {
-        userName: 'yuenu',
-        email: 'abc@gamil.com'
-      }
-    ]
     function submitProfile () {
       console.log('sumbit the data!!!')
     }

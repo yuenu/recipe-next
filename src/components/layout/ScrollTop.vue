@@ -1,6 +1,6 @@
 <template>
   <div
-    ref="scrollTop"
+    ref="scrollTopEl"
     class="scrollToTop"
     @click="scrollToTop(300)"
   >
@@ -14,16 +14,16 @@ import { defineComponent, onMounted, ref } from 'vue'
 
 export default defineComponent({
   setup () {
-    const scrollTop = ref<HTMLInputElement>()
+    const scrollTopEl = ref<HTMLInputElement>()
 
     function scrollToTop (duration: number) {
-      const scrollElement = document.scrollingElement as HTMLInputElement
+      const scrollEl = document.scrollingElement as HTMLInputElement
       // cancel if already on top
-      if (scrollElement.scrollTop === 0 && document.scrollingElement === null) {
+      if (scrollEl.scrollTop === 0 && document.scrollingElement === null) {
         return
       }
 
-      const totalScrollDistance = scrollElement.scrollTop
+      const totalScrollDistance = scrollEl.scrollTop
       let scrollY = totalScrollDistance
       let oldTimestamp: number | null = null
 
@@ -32,8 +32,8 @@ export default defineComponent({
           // if duration is 0 scrollY will be -Infinity
           scrollY -=
             (totalScrollDistance * (newTimestamp - oldTimestamp)) / duration
-          if (scrollY <= 0) return (scrollElement.scrollTop = 0)
-          scrollElement.scrollTop = scrollY
+          if (scrollY <= 0) return (scrollEl.scrollTop = 0)
+          scrollEl.scrollTop = scrollY
         }
         oldTimestamp = newTimestamp
         window.requestAnimationFrame(step)
@@ -42,14 +42,14 @@ export default defineComponent({
     }
 
     const scrollButtonShow = () => {
-      if (scrollTop.value) {
+      if (scrollTopEl.value) {
         if (
           document.body.scrollTop > 800 ||
           document.documentElement.scrollTop > 800
         ) {
-          scrollTop.value.style.display = 'flex'
+          scrollTopEl.value.style.display = 'flex'
         } else {
-          scrollTop.value.style.display = 'none'
+          scrollTopEl.value.style.display = 'none'
         }
       }
     }
@@ -62,7 +62,7 @@ export default defineComponent({
 
     return {
       scrollToTop,
-      scrollTop
+      scrollTopEl
     }
   }
 })

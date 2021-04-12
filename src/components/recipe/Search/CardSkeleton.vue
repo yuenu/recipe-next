@@ -11,13 +11,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.card-skeleton {
-  width: 300px;
-  height: 370px;
-  border: 1px solid #ccc;
-  margin: 0 0 10px 0;
-  padding: 10px;
-}
-</style>

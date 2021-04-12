@@ -3,7 +3,8 @@
     <input
       type="checkbox"
       id="check"
-      v-model="isMobileOpen"
+      v-model="onModalOpen"
+      :class="['check', 'u-close-position', { active: onModalOpen }]"
     />
     <div class="header__container">
       <div class="headerTop">
@@ -34,7 +35,7 @@
           <br />
           <li class="lang-box lang--en">EN</li>
         </ul>
-        <ul class="headerBottom__nav" ref="nav">
+        <ul class="headerBottom__nav" ref="navEl">
           <li>
             <router-link to="/" class="headerBottom__nav--link">
               Home
@@ -71,9 +72,9 @@
         <div class="headerBottom__last">
           <SocialLink class="socialLink" />
           <div class="headerBottom__last--find">
-            <Search class="search" @click="searchFormSwitch" />
+            <Search class="search-icon" @click="searchFormActive" />
             <div class="collection">
-              <div :class="['collection__list', { active: isHeartClick }]">
+              <div :class="['collection__list', { active: onCollection }]">
                 Favorite Meals
               </div>
               <Heart @onClick="heartClick" />
@@ -82,17 +83,16 @@
         </div>
       </div>
     </div>
-    <div class="hamburger">
-      <div class="hamburger__menu">
+    <div class="hamburger u-close-position">
+      <div :class="['hamburger__menu', { active: onModalOpen }]">
         <span class="menuicon-top"></span>
         <span class="menuicon-bottom"></span>
       </div>
     </div>
     <transition name="slide" mode="out-in">
       <BaseModal
-        @close="isMobileOpen = false"
-        @click.self="isMobileOpen = false"
-        :isMobileOpen="isMobileOpen"
+        @click.self="onModalOpen = false"
+        :onModalOpen="onModalOpen && !onSearchFormOpen"
         class="mobile__modal"
       >
         <ul class="mobile__nav">
@@ -119,12 +119,11 @@
 
     <transition name="fade" mode="out-in">
       <BaseModal
-        :isMobileOpen="isSearchFormOpen"
-        @close="isSearchFormOpen = false"
-        @click.self="isSearchFormOpen = false"
+        :onModalOpen="onSearchFormOpen && onModalOpen"
+        @click.self="onModalOpen = false"
       >
-        <div class="search__tern">
-          <SearchForm />
+        <div class="search-box">
+          <SearchForm :searchActive="onModalOpen" @searchSubmit="onModalOpen = false" />
         </div>
       </BaseModal>
     </transition>
@@ -132,15 +131,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, onBeforeUnmount } from 'vue'
+import {
+  defineComponent,
+  ref,
+  onMounted,
+  onBeforeUnmount,
+  watchEffect
+} from 'vue'
 
+// Icon
 import Location from '@/components/UI/Icon/Location.vue'
 import Phone from '@/components/UI/Icon/Phone.vue'
 import Heart from '@/components/UI/Icon/Heart.vue'
 import Search from '@/components/UI/Icon/Search.vue'
 
 import SocialLink from '@/components/layout/SocialLink.vue'
-
 import SearchForm from '@/components/layout/SearchForm.vue'
 
 export default defineComponent({
@@ -153,43 +158,61 @@ export default defineComponent({
     SearchForm
   },
   setup () {
-    const isMobileOpen = ref(false)
+    /**
+     *  Control modal status,
+     *  v-model bind on '.check' checkbox
+     */
+    const onModalOpen = ref(false)
 
-    const nav = ref<HTMLInputElement>()
-
+    /** Sticky header */
+    const navEl = ref<HTMLInputElement>()
     function stickyHeader () {
-      if (nav.value) {
-        if (window.pageYOffset > nav.value.offsetTop) {
-          nav.value.classList.add('sticky')
+      if (navEl.value) {
+        if (window.pageYOffset > navEl.value.offsetTop) {
+          navEl.value.classList.add('sticky')
         } else {
-          nav.value.classList.remove('sticky')
+          navEl.value.classList.remove('sticky')
         }
       }
     }
 
-    const isHeartClick = ref(false)
-    function heartClick (isClick: boolean) {
-      isHeartClick.value = isClick
+    /** Collection meal  */
+    const onCollection = ref(false)
+    function heartClick (toggle: boolean) {
+      onCollection.value = toggle
     }
 
-    const isSearchFormOpen = ref(false)
-    function searchFormSwitch () {
-      isSearchFormOpen.value = !isSearchFormOpen.value
+    /** Search form control */
+    const onSearchFormOpen = ref(false)
+    function searchFormActive () {
+      onSearchFormOpen.value = true
+      onModalOpen.value = true
     }
 
-    onMounted(() => document.addEventListener('scroll', () => stickyHeader()))
+    function submit () {
+      console.log('submit')
+    }
+
+    onMounted(() => document.addEventListener('scroll', () => stickyHeader(), true))
 
     onBeforeUnmount(() =>
-      document.removeEventListener('scroll', () => stickyHeader())
+      document.removeEventListener('scroll', () => stickyHeader(), true)
     )
 
+    watchEffect(() => {
+      if (!onModalOpen.value) {
+        onSearchFormOpen.value = false
+      }
+    })
+
     return {
-      isMobileOpen,
-      nav,
+      navEl,
+      onModalOpen,
       heartClick,
-      isHeartClick,
-      searchFormSwitch,
-      isSearchFormOpen
+      onCollection,
+      searchFormActive,
+      onSearchFormOpen,
+      submit
     }
   }
 })
@@ -328,6 +351,7 @@ export default defineComponent({
   position: absolute;
   top: 10px;
   right: 3%;
+  z-index: 51;
 
   &__menu {
     width: 34px;
@@ -336,12 +360,16 @@ export default defineComponent({
     display: none;
   }
 
+  &__menu.active {
+    display: block;
+  }
+
   .menuicon-top,
   .menuicon-bottom {
     width: 17px;
     height: 2px;
     position: absolute;
-    background: #000;
+    background: $color-black;
     left: 50%;
     transform: translateX(-50%);
     transition: transform 0.2806s cubic-bezier(0.04, 0.04, 0.12, 0.96);
@@ -357,24 +385,31 @@ export default defineComponent({
   }
 }
 
-#check {
+.check {
   position: absolute;
   top: 10px;
   right: 3%;
   width: 34px;
   height: 34px;
   cursor: pointer;
-  z-index: 12;
+  // z-index: 12;
+  z-index: 52;
   opacity: 0;
   display: none;
 }
 
-#check:checked ~ .hamburger .menuicon-top {
-  transform: rotate(-45deg) translate(-50%, 0);
+.check.active {
+  display: block;
 }
 
-#check:checked ~ .hamburger .menuicon-bottom {
+.check:checked ~ .hamburger .menuicon-top {
+  transform: rotate(-45deg) translate(-50%, 0);
+  background: $color-white;
+}
+
+.check:checked ~ .hamburger .menuicon-bottom {
   transform: rotate(45deg) translate(-50%, 0);
+  background: $color-white;
 }
 
 .mobile {
@@ -436,7 +471,7 @@ export default defineComponent({
   margin-right: 2rem;
 }
 
-.search {
+.search-icon {
   position: relative;
   top: 3px;
   right: 1rem;
@@ -509,7 +544,7 @@ export default defineComponent({
     margin-bottom: 3rem;
   }
 
-  #check,
+  .check,
   .hamburger__menu {
     display: block;
   }

@@ -1,37 +1,25 @@
 <template>
   <div class="modal" v-if="isOpen">
     <slot></slot>
-    <div class="close" @click="close">
-      <Close />
-    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import Close from './Icon/Close.vue'
 
 export default defineComponent({
-  components: {
-    Close
-  },
   props: {
-    isMobileOpen: {
+    onModalOpen: {
       type: Boolean,
       required: true
     }
   },
-  emits: ['close'],
-  setup (props, { emit }) {
-    function close () {
-      emit('close')
-    }
-
+  setup (props) {
     const isOpen = computed(() => {
-      return props.isMobileOpen
+      return props.onModalOpen
     })
 
-    return { close, isOpen }
+    return { isOpen }
   }
 })
 </script>
@@ -46,7 +34,7 @@ export default defineComponent({
   bottom: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
@@ -60,10 +48,9 @@ export default defineComponent({
 }
 
 .close {
-  position: fixed;
-  top: 1rem;
-  right: 2.7rem;
+  z-index:52;
   cursor: pointer;
+  background: transparent;
 
   svg {
     fill: azure;

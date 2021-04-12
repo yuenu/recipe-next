@@ -10,10 +10,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, provide } from 'vue'
+import { defineComponent, provide, onBeforeMount } from 'vue'
 import TheHeader from '@/components/layout/TheHeader.vue'
 import TheFooter from '@/components/layout/TheFooter.vue'
 import ScrollTop from '@/components/layout/ScrollTop.vue'
+
 import store from '@/store/index'
 
 export default defineComponent({

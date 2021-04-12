@@ -27,7 +27,6 @@ const loadTest: Directive = {
   beforeMount (el: HTMLInputElement, binding) {
     const src: string = binding.value.src
     const alt: string = binding.value.alt
-    console.log(binding.value.cc)
 
     function createImage () {
       const newImg = new Image()

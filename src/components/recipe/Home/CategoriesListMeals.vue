@@ -2,19 +2,19 @@
   <div>
     <div
       class="categoryList-meals--display"
-      ref="slide"
+      ref="slideEl"
       v-on="{
         mousedown: touchStart(),
         mouseup: touchEnd,
         mousemove: touchMove,
         mouseleave: touchMove,
-        touchstart: touchStart(),
+        'touchstart.passive': touchStart(),
         touchend: touchEnd,
         touchmove: touchMove,
       }"
     >
-      <div class="categoryList-meals" ref="slideBox">
-        <MealCard @modalStatus="isModalOpen" />
+      <div class="categoryList-meals" ref="slideBoxEl">
+        <MealCard @modalStatus="onModalOpen" />
       </div>
     </div>
     <div class="pagination u-text-align-center">
@@ -87,12 +87,12 @@ export default defineComponent({
     const mealCards = ref<NodeListOf<HTMLElement>>()
 
     /** Touch slide */
-    const slide = ref<HTMLInputElement>()
-    const slideBox = ref<HTMLInputElement>()
+    const slideEl = ref<HTMLInputElement>()
+    const slideBoxEl = ref<HTMLInputElement>()
 
     function setSliderPosition () {
-      if (!slideBox.value) return
-      slideBox.value.style.transform = `translateX(${currentTranslate.value}px)`
+      if (!slideBoxEl.value) return
+      slideBoxEl.value.style.transform = `translateX(${currentTranslate.value}px)`
     }
 
     function setPositionByIndex () {
@@ -118,8 +118,8 @@ export default defineComponent({
         startPos.value = getPositionX(event)
 
         animationID.value = requestAnimationFrame(animation)
-        if (slide.value) {
-          slide.value.classList.add('grabbing')
+        if (slideEl.value) {
+          slideEl.value.classList.add('grabbing')
         }
       }
     }
@@ -138,8 +138,8 @@ export default defineComponent({
 
       setPositionByIndex()
 
-      if (slide.value) {
-        slide.value.classList.remove('grabbing')
+      if (slideEl.value) {
+        slideEl.value.classList.remove('grabbing')
       }
     }
 
@@ -159,7 +159,7 @@ export default defineComponent({
 
     const timeoutId = ref(0)
 
-    /** ResizeObserver */
+    /** ResizeObserver api */
     const ro = new ResizeObserver((entries: ResizeObserverEntry[]) => {
       if (!mealCards.value) return
       // Reset timeout
@@ -195,8 +195,8 @@ export default defineComponent({
         await store.GET_MEALS_BY_CATEGORY('Beef')
       }
 
-      if (slide.value) {
-        ro.observe(slide.value)
+      if (slideEl.value) {
+        ro.observe(slideEl.value)
         mealCards.value = document.querySelectorAll<HTMLElement>('.mealCard')
       }
     })
@@ -212,22 +212,24 @@ export default defineComponent({
 
     async function getAllMealCard () {
       await nextTick(() => {
-        mealCards.value = document.querySelectorAll<HTMLElement>('.mealCard')
+        mealCards.value = document.querySelectorAll<HTMLInputElement>('.mealCard')
         for (const card of mealCards.value) {
-          if (slide.value) {
-            card.style.minWidth = (slide.value.clientWidth - 24 * 4) / 4 + 'px'
+          if (slideEl.value) {
+            card.style.minWidth = (slideEl.value.clientWidth - 24 * 4) / 4 + 'px'
           }
         }
       })
     }
 
-    function isModalOpen (modalStatus: boolean) {
-      if (!slide.value) return
-
+    function onModalOpen (modalStatus: boolean) {
+      if (!slideEl.value) return
       if (modalStatus) {
-        ro.unobserve(slide.value)
+        ro.unobserve(slideEl.value)
       } else {
-        ro.observe(slide.value)
+        setTimeout(() => {
+          if (!slideEl.value) return
+          ro.observe(slideEl.value)
+        }, 5000)
       }
     }
 
@@ -239,15 +241,15 @@ export default defineComponent({
 
     return {
       getMeals,
-      slide,
-      slideBox,
+      slideEl,
+      slideBoxEl,
       imagesLen,
       currentIndex,
       changePageIndex,
       touchStart,
       touchEnd,
       touchMove,
-      isModalOpen
+      onModalOpen
     }
   }
 })

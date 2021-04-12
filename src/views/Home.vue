@@ -42,6 +42,7 @@ export default defineComponent({
   },
   setup () {
     const store = inject('store', recipeStore)
+
     onBeforeMount(async () => {
       await store.GET_CATEGORY()
     })

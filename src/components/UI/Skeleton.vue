@@ -9,7 +9,7 @@ export default defineComponent({
   props: {
     width: { type: [String, Number], default: '100%' },
     height: { type: [String, Number], default: '10' },
-    margin: { type: [String, Number], default: '0' },
+    margin: { type: [String, Number], default: '5' },
     mode: { type: String, default: 'light' }
   },
   setup (prop) {
@@ -50,7 +50,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .skeleton {
   position:relative;
-  min-height:0px;
+  min-height:0;
   overflow:hidden;
 
   &::after {
