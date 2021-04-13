@@ -1,42 +1,50 @@
 <template>
-  <MealModal
-    v-if="modalStatus"
-    @close="setModalClose"
-    :mealId="mealId"
-  />
-  <div
-    class="mealCard"
-    v-for="meal in categoryMeals"
-    :key="meal.idMeal"
-  >
-    <div class="mealCard--cover"></div>
-    <img
-      :src="meal.strMealThumb"
-      :alt="meal.strMeal"
-      class="mealCard__photo"
+  <div>
+    <MealModal
+      v-if="modalStatus"
+      @close="setModalClose"
+      :mealId="mealId"
+      @click.self="setModalClose"
     />
-    <div class="mealCard__enter" @click.prevent="setModalOpen(meal.idMeal)">
-      <Link class="mealCard__enter-img" />
-    </div>
+    <div
+      class="mealCard"
+      v-for="meal in categoryMeals"
+      :key="meal.idMeal"
+    >
+      <div class="mealCard--cover"></div>
+      <img
+        :src="meal.strMealThumb"
+        :alt="meal.strMeal"
+        class="mealCard__photo"
+      />
+      <div class="mealCard__enter" @click.prevent="setModalOpen(meal.idMeal)">
+        <Link class="mealCard__enter-img" />
+      </div>
 
-    <div class="mealCard__content">
-      <div class="mealCard__heading">
-        <div class="mealCard__heading--txt">
-          {{ meal.strMeal }}
+      <div class="mealCard__content">
+        <div class="mealCard__heading">
+          <div class="mealCard__heading--txt">
+            {{ meal.strMeal }}
+          </div>
+        </div>
+        <div class="mealCard__rate">
+          <Star />
         </div>
       </div>
-      <div class="mealCard__rate">
-        <Star />
-      </div>
+      <button class="mealCard__add" @click.prevent="setModalOpen(meal.idMeal)">
+        View recipe
+      </button>
     </div>
-    <button class="mealCard__add" @click.prevent="setModalOpen(meal.idMeal)">
-      View recipe
-    </button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, inject } from 'vue'
+import {
+  defineComponent,
+  ref,
+  computed,
+  inject
+} from 'vue'
 import recipeStore from '@/store/index'
 
 // UI
@@ -88,7 +96,7 @@ export default defineComponent({
 .mealCard {
   min-width: 300px;
   height: auto;
-  padding: 1rem;
+  padding: 10px;
   margin-bottom: 10px;
   position: relative;
   transition: all 0.3s ease-out;

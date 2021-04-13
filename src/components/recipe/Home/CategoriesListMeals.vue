@@ -184,7 +184,7 @@ export default defineComponent({
       }
       columnWidth.value = cr.width
       // To deley the detect
-      timeoutId.value = window.setTimeout(() => {
+      timeoutId.value = setTimeout(() => {
         currentIndex.value = 0
         setPositionByIndex()
       }, 500)
@@ -210,9 +210,9 @@ export default defineComponent({
       }
     })
 
-    async function getAllMealCard () {
+    async function calcCardMinWidth () {
       await nextTick(() => {
-        mealCards.value = document.querySelectorAll<HTMLInputElement>('.mealCard')
+        mealCards.value = document.querySelectorAll('.mealCard')
         for (const card of mealCards.value) {
           if (slideEl.value) {
             card.style.minWidth = (slideEl.value.clientWidth - 24 * 4) / 4 + 'px'
@@ -221,21 +221,15 @@ export default defineComponent({
       })
     }
 
-    function onModalOpen (modalStatus: boolean) {
-      if (!slideEl.value) return
-      if (modalStatus) {
+    function onModalOpen (isModalOpen: boolean) {
+      if (slideEl.value && isModalOpen) {
         ro.unobserve(slideEl.value)
-      } else {
-        setTimeout(() => {
-          if (!slideEl.value) return
-          ro.observe(slideEl.value)
-        }, 5000)
       }
     }
 
     watch(prop, val => {
       if (val) {
-        getAllMealCard()
+        calcCardMinWidth()
       }
     })
 

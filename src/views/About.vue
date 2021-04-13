@@ -37,7 +37,7 @@
         margin="5px 0"
       />
     </div>
-    <div class="progress-box"  style="display: inline-block;">
+    <div class="progress-box" style="display: inline-block;">
       <div
         class="progress-bar"
         data-label="Loading..."
@@ -46,16 +46,37 @@
       ></div>
       <button @click="startProgress">Start</button>
     </div>
+    <div class="container">
+      <div
+        class="box"
+        v-for="da in fakeData"
+        :key="da.id"
+        :ref="setBoxRef"
+      >
+        {{ da.id }} - {{ da.desc }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue'
+import { defineComponent, ref, onMounted, onBeforeUpdate, onUpdated } from 'vue'
 
 import Skeleton from '@/components/UI/Skeleton.vue'
 
 const imgSrc =
   'https://images.unsplash.com/photo-1593642634443-44adaa06623a?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1225&q=80'
+
+const fakeData = [
+  {
+    id: 1,
+    desc: 'console.log(this.$refs.input1)//<input type="text" id="input1">'
+  },
+  {
+    id: 2,
+    desc: 'wqrwqniofdshnodfdj,fdsjfiod, Good for you!!'
+  }
+]
 
 export default defineComponent({
   components: {
@@ -64,20 +85,45 @@ export default defineComponent({
   setup () {
     const progressEl = ref<HTMLInputElement>()
 
+    let boxRefs: HTMLInputElement[] = []
+    const setBoxRef = (el: HTMLInputElement) => {
+      if (el) {
+        boxRefs.push(el)
+      }
+    }
+
+    onBeforeUpdate(() => {
+      console.log('onBeforeUpdate')
+      boxRefs = []
+    })
+    onUpdated(() => {
+      console.log('boxRefs', boxRefs)
+    })
+
     function startProgress () {
       if (progressEl.value) {
         const computedStyle = getComputedStyle(progressEl.value)
-        const width = parseFloat(computedStyle.getPropertyValue('--width') || '0')
+        const width = parseFloat(
+          computedStyle.getPropertyValue('--width') || '0'
+        )
         progressEl.value.style.setProperty('--width', (width + 0.1).toString())
       }
     }
 
     onMounted(() => {
+      console.log('setBoxRef', boxRefs)
+      boxRefs[0].classList.add('123test')
+
       const timeoutID = setInterval(() => {
         if (progressEl.value) {
           const computedStyle = getComputedStyle(progressEl.value)
-          const width = parseFloat(computedStyle.getPropertyValue('--width') || '0')
-          progressEl.value.style.setProperty('--width', (width + 0.1).toString())
+          const width = parseFloat(
+            computedStyle.getPropertyValue('--width') || '0'
+          )
+          progressEl.value.style.setProperty(
+            '--width',
+            (width + 0.1).toString()
+          )
 
           if (width >= 99.9) {
             clearInterval(timeoutID)
@@ -89,7 +135,9 @@ export default defineComponent({
     return {
       imgSrc,
       progressEl,
-      startProgress
+      startProgress,
+      fakeData,
+      setBoxRef
     }
   }
 })
@@ -111,7 +159,7 @@ export default defineComponent({
   border-radius: 1.5rem;
   color: #fff;
   position: relative;
-  display:inline-block;
+  display: inline-block;
 
   &:before {
     content: attr(data-label);
@@ -126,6 +174,18 @@ export default defineComponent({
     max-width: calc(100% - 1rem);
     background-color: #069;
     border-radius: 1rem;
+  }
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .box {
+    width: 100%;
+    margin: 0 auto;
   }
 }
 </style>

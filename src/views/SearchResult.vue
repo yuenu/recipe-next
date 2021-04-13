@@ -1,7 +1,7 @@
 <template>
   <div class="result">
     <div class="result__title">
-      <div class="banner">Salad</div>
+      <div class="banner">{{ searchName }}</div>
     </div>
     <div class="container">
       <CategoriesList />
@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, inject } from 'vue'
+import { defineComponent, onBeforeMount, inject, computed } from 'vue'
 import recipeStore from '@/store/index'
 
 import MealLists from '@/components/recipe/Search/MealLists.vue'
@@ -28,6 +28,14 @@ export default defineComponent({
     onBeforeMount(async () => {
       await store.GET_CATEGORY()
     })
+
+    const searchName = computed(() => {
+      return store.getters.getSearchName
+    })
+
+    return {
+      searchName
+    }
   }
 })
 </script>

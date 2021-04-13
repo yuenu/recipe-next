@@ -1,61 +1,61 @@
 <template>
-  <transition name="fade">
-    <teleport to="body">
-      <div class="meal__modal">
-        <div class="close" @click="close">
-          <Close />
-        </div>
-        <div
-          class="meal__container"
-          v-for="meal in getMealData"
-          :key="meal.mealId"
-        >
-          <h1 class="meal__title">{{ meal.mealName }}</h1>
-          <div class="meal__media">
-            <img
-              :src="meal.mealImgUrl"
-              :alt="meal.mealName"
-              class="meal__media__img"
-            />
-            <a
-              :href="meal.mealYoutubeLink"
-              class="meal__media__link"
-              target="_blank"
-            >
-              Youtube
-            </a>
-          </div>
-          <div class="meal__label">
-            <div class="meal__area">
-              Area: <span class="meal__label__area">{{ meal.mealArea }}</span>
-            </div>
-            <div class="meal__category">
-              Category:
-              <span class="meal__label__category">{{ meal.mealCategory }}</span>
-            </div>
-          </div>
-          <div class="meal__info">
-            <h2 class="meal__info__title">Instruction</h2>
-            <p
-              class="meal__info__content"
-              v-html="meal.mealInstructions.replace(/\r?\n/g, '<br />')"
-            ></p>
-          </div>
-          <div class="meal__ingrendients">
-            <h2 class="meal__ingrendients__title">ingredients</h2>
 
-            <li
-              class="meal__ingrendients__content"
-              v-for="ingrendients in meal.mealIngredients"
-              :key="ingrendients"
-            >
-              {{ ingrendients }}
-            </li>
+  <teleport to="body">
+    <div class="meal__modal">
+      <div class="close" @click="close">
+        <Close />
+      </div>
+      <div
+        class="meal__container"
+        v-for="meal in getMealData"
+        :key="meal.mealId"
+      >
+        <h1 class="meal__title">{{ meal.mealName }}</h1>
+        <div class="meal__media">
+          <img
+            :src="meal.mealImgUrl"
+            :alt="meal.mealName"
+            class="meal__media__img"
+          />
+          <a
+            :href="meal.mealYoutubeLink"
+            class="meal__media__link"
+            target="_blank"
+          >
+            Youtube
+          </a>
+        </div>
+        <div class="meal__label">
+          <div class="meal__area">
+            Area: <span class="meal__label__area">{{ meal.mealArea }}</span>
           </div>
+          <div class="meal__category">
+            Category:
+            <span class="meal__label__category">{{ meal.mealCategory }}</span>
+          </div>
+        </div>
+        <div class="meal__info">
+          <h2 class="meal__info__title">Instruction</h2>
+          <p
+            class="meal__info__content"
+            v-html="meal.mealInstructions.replace(/\r?\n/g, '<br />')"
+          ></p>
+        </div>
+        <div class="meal__ingrendients">
+          <h2 class="meal__ingrendients__title">ingredients</h2>
+
+          <li
+            class="meal__ingrendients__content"
+            v-for="ingrendients in meal.mealIngredients"
+            :key="ingrendients"
+          >
+            {{ ingrendients }}
+          </li>
         </div>
       </div>
-    </teleport>
-  </transition>
+    </div>
+  </teleport>
+
 </template>
 
 <script lang="ts">
@@ -107,20 +107,22 @@ export default defineComponent({
       return store.getters.getMealDetail
     })
 
-    watch(getMealDetail, newVal => {
-      const mealInfo = newVal[0]
-      mealData.mealId = mealInfo.idMeal
-      mealData.mealName = mealInfo.strMeal
-      mealData.mealArea = mealInfo.strArea
-      mealData.mealCategory = mealInfo.strCategory
-      mealData.mealImgUrl = mealInfo.strMealThumb
-      mealData.mealYoutubeLink = mealInfo.strYoutube
-      mealData.mealInstructions = mealInfo.strInstructions
-      for (let i = 1; i <= 20; i++) {
-        if (mealInfo['strIngredient' + i]) {
-          mealData.mealIngredients.push(
-            `${mealInfo['strIngredient' + i]} -> ${mealInfo['strMeasure' + i]}`
-          )
+    watch(getMealDetail, val => {
+      if (val) {
+        const mealInfo = val[0]
+        mealData.mealId = mealInfo.idMeal
+        mealData.mealName = mealInfo.strMeal
+        mealData.mealArea = mealInfo.strArea
+        mealData.mealCategory = mealInfo.strCategory
+        mealData.mealImgUrl = mealInfo.strMealThumb
+        mealData.mealYoutubeLink = mealInfo.strYoutube
+        mealData.mealInstructions = mealInfo.strInstructions
+        for (let i = 1; i <= 20; i++) {
+          if (mealInfo['strIngredient' + i]) {
+            mealData.mealIngredients.push(
+              `${mealInfo['strIngredient' + i]} -> ${mealInfo['strMeasure' + i]}`
+            )
+          }
         }
       }
     })

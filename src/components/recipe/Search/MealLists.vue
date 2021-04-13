@@ -138,7 +138,7 @@ export default defineComponent({
   height: fit-content;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
+  gap: 10px;
   justify-items: end;
 
   &:empty {
@@ -177,7 +177,7 @@ export default defineComponent({
     }
 
     &__top {
-      width:100%;
+      width: 100%;
     }
   }
 
@@ -192,6 +192,7 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     position: relative;
+    margin: auto;
   }
 
   &__img {
@@ -321,13 +322,10 @@ export default defineComponent({
 @media (max-width: 1100px) {
   .card {
     grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
 
     &__box {
-      max-width: 350px;
-    }
-
-    &__img {
-      width: 80%;
+      max-width: 300px;
     }
   }
 }
@@ -356,6 +354,9 @@ export default defineComponent({
 
     &__content {
       transform: translateY(0);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     &__box:hover &__content {
@@ -396,8 +397,8 @@ export default defineComponent({
       max-width: 250px;
     }
 
-    &__img {
-      width: 90%;
+    &__content {
+      height:120px;
     }
   }
 }

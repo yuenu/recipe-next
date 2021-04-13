@@ -8,6 +8,7 @@ type Recipe = {
   meal: Response.meal[]
   categories: Response.Category[]
   isLoading: boolean
+  searchName: string
 }
 
 const state = reactive<Recipe>({
@@ -15,14 +16,16 @@ const state = reactive<Recipe>({
   meals: [],
   meal: [],
   categories: [],
-  isLoading: false
+  isLoading: false,
+  searchName: ''
 })
 
 const getters = reactive({
   getMeals: computed(() => state.meals),
   getCategory: computed(() => state.categories),
   getMealDetail: computed(() => state.meal),
-  dataIsLoading: computed(() => state.isLoading)
+  dataIsLoading: computed(() => state.isLoading),
+  getSearchName: computed(() => state.searchName)
 })
 
 const actions = {
@@ -30,6 +33,7 @@ const actions = {
   async SEARCH_MEALS (input: string) {
     try {
       state.isLoading = true
+      state.searchName = input
       state.meals = await api.searchByName(input)
       state.isLoading = false
     } catch (e) {
@@ -50,6 +54,7 @@ const actions = {
   async GET_MEALS_BY_CATEGORY (category: string) {
     try {
       state.isLoading = true
+      state.searchName = category
       state.meals = await api.searchByCategory(category)
       state.isLoading = false
     } catch (e) {

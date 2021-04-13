@@ -64,26 +64,28 @@ export default defineComponent({
 .categories {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  gap: 1rem;
+  gap: 0.6rem;
   overflow: hidden;
   justify-items: center;
+  padding:10px;
 }
 
 .cat__box {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  justify-items: center;
   align-items: center;
   width: 150px;
+  height:130px;
   cursor: pointer;
   user-select: none;
   padding: 10px 0;
   transition: 0.2s all ease;
-  border-radius: 5px;
 
   &:hover {
     transform: scale(1.02) translateY(-5px);
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.2);
     background-color: #eee;
   }
 
