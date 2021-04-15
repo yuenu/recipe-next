@@ -105,7 +105,7 @@ import SocialLink from '@/components/layout/SocialLink.vue'
 
 import { useRouter } from 'vue-router'
 
-import recipeStore from '@/store/index'
+import RecipeStore from '@/store/index'
 
 export default defineComponent({
   name: 'contact',
@@ -117,7 +117,7 @@ export default defineComponent({
     SocialLink
   },
   setup () {
-    const store = inject('store', recipeStore)
+    const store = inject('store', RecipeStore)
     const router = useRouter()
 
     const instagram = computed(() => {

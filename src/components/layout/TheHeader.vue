@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <header class="header">
     <input
       type="checkbox"
       id="check"
@@ -16,7 +16,7 @@
         </div>
         <div class="headerTop__logo">
           <router-link to="/" class="headerTop__logo--link">
-            <img src="@/assets/logo.png" alt="logo" />
+            <img src="@/assets/example/logo.png" alt="logo" />
           </router-link>
         </div>
 
@@ -127,7 +127,7 @@
         </div>
       </BaseModal>
     </transition>
-  </div>
+  </header>
 </template>
 
 <script lang="ts">
@@ -228,7 +228,7 @@ export default defineComponent({
   &__container {
     width: 100%;
     height: 100%;
-    max-width: 1330px;
+    max-width: $container-MAX-width;
     margin: 0 auto;
     display: flex;
     align-items: center;

@@ -6,14 +6,3 @@
     viewBox="0 0 24 24"
   ><path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z"/></svg>
 </template>
-
-<style lang="scss" scoped>
-svg {
-  fill:#fff;
-  transition:0.3s all ease;
-
-  &:hover {
-    fill:#20ad96;
-  }
-}
-</style>

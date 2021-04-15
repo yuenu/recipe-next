@@ -20,15 +20,15 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import recipeStore from '@/store/index'
+import RecipeStore from '@/store/index'
 
 export default defineComponent({
   setup () {
     function getCatgoryMeals (category: string) {
-      recipeStore.GET_MEALS_BY_CATEGORY(category)
+      RecipeStore.GET_MEALS_BY_CATEGORY(category)
     }
 
-    const categories = computed(() => recipeStore.getters.getCategory)
+    const categories = computed(() => RecipeStore.getters.getCategory)
 
     return {
       categories,

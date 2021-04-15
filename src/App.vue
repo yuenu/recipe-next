@@ -1,10 +1,12 @@
 <template>
   <TheHeader />
-  <router-view v-slot="{ Component }">
-    <transition name="route" mode="out-in">
-      <component :is="Component" />
-    </transition>
-  </router-view>
+  <main role="main">
+    <router-view v-slot="{ Component }">
+      <transition name="route" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
+  </main>
   <ScrollTop />
   <TheFooter />
 </template>
@@ -30,9 +32,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Syne+Tactile&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Spirax&display=swap');
 
 * {
   margin: 0;
@@ -48,10 +47,10 @@ export default defineComponent({
 html {
   min-height: 100%;
   position: relative;
+  box-sizing: border-box;
 }
 
 body {
-  box-sizing: border-box;
   width: 100%;
   min-height: calc(100vh - 91px);
   display: flex;
@@ -60,4 +59,5 @@ body {
   font-family: 'Oswald', '微軟正黑體', 'Microsoft Yahei', sans-serif;
   overflow-x: hidden;
 }
+
 </style>

@@ -44,7 +44,7 @@ import {
   watch,
   nextTick
 } from 'vue'
-import recipeStore from '@/store/index'
+import RecipeStore from '@/store/index'
 import MealCard from '@/components/UI/MealCard.vue'
 
 export default defineComponent({
@@ -59,15 +59,15 @@ export default defineComponent({
   },
   setup (prop) {
     // API DATA
-    const store = inject('store', recipeStore)
-    const getMeals = computed(() => {
+    const store = inject('store', RecipeStore)
+    const getMealsData = computed(() => {
       return store.getters.getMeals
     })
 
     /** Display on list which meal of numbers */
     const displayMeals = ref(4)
 
-    const mealCounting = computed(() => getMeals.value.length)
+    const mealCounting = computed(() => getMealsData.value.length)
     const imagesLen = computed(() =>
       Math.ceil(mealCounting.value / displayMeals.value)
     )
@@ -191,17 +191,17 @@ export default defineComponent({
     })
 
     onMounted(async () => {
-      if (getMeals.value.length === 0) {
+      if (getMealsData.value.length === 0) {
         await store.GET_MEALS_BY_CATEGORY('Beef')
       }
 
       if (slideEl.value) {
         ro.observe(slideEl.value)
-        mealCards.value = document.querySelectorAll<HTMLElement>('.mealCard')
+        mealCards.value = document.querySelectorAll<HTMLInputElement>('.mealCard')
       }
     })
 
-    watch(getMeals, val => {
+    watch(getMealsData, val => {
       if (val) {
         currentIndex.value = 0
         startPos.value = 0
@@ -212,7 +212,7 @@ export default defineComponent({
 
     async function calcCardMinWidth () {
       await nextTick(() => {
-        mealCards.value = document.querySelectorAll('.mealCard')
+        mealCards.value = document.querySelectorAll<HTMLInputElement>('.mealCard')
         for (const card of mealCards.value) {
           if (slideEl.value) {
             card.style.minWidth = (slideEl.value.clientWidth - 24 * 4) / 4 + 'px'
@@ -234,7 +234,6 @@ export default defineComponent({
     })
 
     return {
-      getMeals,
       slideEl,
       slideBoxEl,
       imagesLen,

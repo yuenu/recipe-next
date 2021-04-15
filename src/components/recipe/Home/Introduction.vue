@@ -79,7 +79,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .introduction-section {
-  max-width: 1330px;
+  max-width: $container-MAX-width;
   width: 100%;
   margin: 5rem 0 3rem 0;
   padding:2rem 0;

@@ -1,4 +1,4 @@
-// change route animation
+// Route change animation
 .route-enter-from,
 .route-leave-to {
   opacity: 0;
@@ -16,7 +16,7 @@
   transition: all 0.3s ease-out;
 }
 
-// modal slide animation
+// Modal slide animation
 .slide-enter-from,
 .slide-leave-to {
   transform: translateY(-100%);

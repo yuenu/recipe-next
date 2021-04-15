@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <div class="container">
-      <div class="main">
+    <div class="wrapper">
+      <div class="container">
         <Hero />
         <Introduction />
         <CategoryDisplay />
@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeMount, inject } from 'vue'
-import recipeStore from '@/store/index'
+import RecipeStore from '@/store/index'
 
 import Hero from '@/components/recipe/Home/Hero.vue'
 import Introduction from '@/components/recipe/Home/Introduction.vue'
@@ -41,7 +41,7 @@ export default defineComponent({
     Contact
   },
   setup () {
-    const store = inject('store', recipeStore)
+    const store = inject('store', RecipeStore)
 
     onBeforeMount(async () => {
       await store.GET_CATEGORY()
@@ -55,20 +55,19 @@ export default defineComponent({
   width: 100%;
 }
 
-.container {
+.wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
 }
 
-.main {
-  max-width: 1330px;
+.container {
+  max-width: $container-MAX-width;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #fff;
+  background: $color-white;
 }
 </style>

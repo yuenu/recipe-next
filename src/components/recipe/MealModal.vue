@@ -12,10 +12,10 @@
       >
         <h1 class="meal__title">{{ meal.mealName }}</h1>
         <div class="meal__media">
-          <img
-            :src="meal.mealImgUrl"
-            :alt="meal.mealName"
-            class="meal__media__img"
+          <Skeleton
+            width="440"
+            height="270"
+            v-imageLoad="{ src: meal.mealImgUrl, alt: meal.mealName }"
           />
           <a
             :href="meal.mealYoutubeLink"
@@ -67,12 +67,14 @@ import {
   reactive,
   inject
 } from 'vue'
-import recipeStore from '@/store/index'
+import RecipeStore from '@/store/index'
 import Close from '@/components/UI/Icon/Close.vue'
+import Skeleton from '@/components/UI/Skeleton.vue'
 
 export default defineComponent({
   components: {
-    Close
+    Close,
+    Skeleton
   },
   props: {
     mealId: {
@@ -82,7 +84,7 @@ export default defineComponent({
   },
   emits: ['close'],
   setup (props, { emit }) {
-    const store = inject('store', recipeStore)
+    const store = inject('store', RecipeStore)
 
     onBeforeMount(() => {
       store.GET_MEALS_BY_ID(props.mealId)
@@ -108,21 +110,19 @@ export default defineComponent({
     })
 
     watch(getMealDetail, val => {
-      if (val) {
-        const mealInfo = val[0]
-        mealData.mealId = mealInfo.idMeal
-        mealData.mealName = mealInfo.strMeal
-        mealData.mealArea = mealInfo.strArea
-        mealData.mealCategory = mealInfo.strCategory
-        mealData.mealImgUrl = mealInfo.strMealThumb
-        mealData.mealYoutubeLink = mealInfo.strYoutube
-        mealData.mealInstructions = mealInfo.strInstructions
-        for (let i = 1; i <= 20; i++) {
-          if (mealInfo['strIngredient' + i]) {
-            mealData.mealIngredients.push(
-              `${mealInfo['strIngredient' + i]} -> ${mealInfo['strMeasure' + i]}`
-            )
-          }
+      const mealInfo = val[0]
+      mealData.mealId = mealInfo.idMeal
+      mealData.mealName = mealInfo.strMeal
+      mealData.mealArea = mealInfo.strArea
+      mealData.mealCategory = mealInfo.strCategory
+      mealData.mealImgUrl = mealInfo.strMealThumb
+      mealData.mealYoutubeLink = mealInfo.strYoutube
+      mealData.mealInstructions = mealInfo.strInstructions
+      for (let i = 1; i <= 20; i++) {
+        if (mealInfo['strIngredient' + i]) {
+          mealData.mealIngredients.push(
+            `${mealInfo['strIngredient' + i]} -> ${mealInfo['strMeasure' + i]}`
+          )
         }
       }
     })
@@ -156,7 +156,7 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    z-index: 50;
+    z-index: 60;
     overflow: auto;
   }
 
@@ -179,6 +179,9 @@ export default defineComponent({
 
   &__media {
     position: relative;
+    width: 100%;
+    max-height: 270px;
+
     &:hover {
       opacity: 0.8;
     }
@@ -190,8 +193,7 @@ export default defineComponent({
   }
 
   &__media__img {
-    width: 100%;
-    max-height: 270px;
+
     border-radius: 4px;
     box-shadow: 0px 2px 7px #000;
     object-fit: cover;

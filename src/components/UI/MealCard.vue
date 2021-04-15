@@ -1,40 +1,39 @@
 <template>
-  <div>
-    <MealModal
-      v-if="modalStatus"
-      @close="setModalClose"
-      :mealId="mealId"
-      @click.self="setModalClose"
+  <MealModal
+    v-if="modalStatus"
+    @close="setModalClose"
+    :mealId="mealId"
+    @click.self="setModalClose"
+  />
+  <div
+    class="mealCard"
+    v-for="meal in categoryMeals"
+    :key="meal.idMeal"
+  >
+    <div class="mealCard--cover"></div>
+    <Skeleton
+      class="123"
+      width="100%"
+      height="250"
+      v-imageLoad="{ src: meal.strMealThumb, alt: meal.strMeal, className: 'mealCard__photo' }"
     />
-    <div
-      class="mealCard"
-      v-for="meal in categoryMeals"
-      :key="meal.idMeal"
-    >
-      <div class="mealCard--cover"></div>
-      <img
-        :src="meal.strMealThumb"
-        :alt="meal.strMeal"
-        class="mealCard__photo"
-      />
-      <div class="mealCard__enter" @click.prevent="setModalOpen(meal.idMeal)">
-        <Link class="mealCard__enter-img" />
-      </div>
-
-      <div class="mealCard__content">
-        <div class="mealCard__heading">
-          <div class="mealCard__heading--txt">
-            {{ meal.strMeal }}
-          </div>
-        </div>
-        <div class="mealCard__rate">
-          <Star />
-        </div>
-      </div>
-      <button class="mealCard__add" @click.prevent="setModalOpen(meal.idMeal)">
-        View recipe
-      </button>
+    <div class="mealCard__enter" @click.prevent="setModalOpen(meal.idMeal)">
+      <Link class="mealCard__enter-img" />
     </div>
+
+    <div class="mealCard__content">
+      <div class="mealCard__heading">
+        <div class="mealCard__heading--txt">
+          {{ meal.strMeal }}
+        </div>
+      </div>
+      <div class="mealCard__rate">
+        <Star />
+      </div>
+    </div>
+    <button class="mealCard__add" @click.prevent="setModalOpen(meal.idMeal)">
+      View recipe
+    </button>
   </div>
 </template>
 
@@ -45,23 +44,25 @@ import {
   computed,
   inject
 } from 'vue'
-import recipeStore from '@/store/index'
+import RecipeStore from '@/store/index'
 
 // UI
 import Star from '@/components/UI/Icon/Star.vue'
 import Link from '@/components/UI/Icon/Link.vue'
 
 import MealModal from '@/components/recipe/MealModal.vue'
+import Skeleton from '@/components/UI/Skeleton.vue'
 
 export default defineComponent({
   components: {
     MealModal,
     Star,
-    Link
+    Link,
+    Skeleton
   },
   emits: ['modalStatus'],
   setup (_props, { emit }) {
-    const store = inject('store', recipeStore)
+    const store = inject('store', RecipeStore)
     const categoryMeals = computed(() => store.getters.getMeals)
     const mealId = ref('')
 

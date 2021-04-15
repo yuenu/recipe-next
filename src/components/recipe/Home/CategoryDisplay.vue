@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, onBeforeMount, ref } from 'vue'
-import recipeStore from '@/store/index'
+import RecipeStore from '@/store/index'
 import type { Category } from '@/apis/response.type'
 import Check from '@/components/UI/Icon/Check.vue'
 
@@ -40,7 +40,7 @@ export default defineComponent({
     Check
   },
   setup () {
-    const store = inject('store', recipeStore)
+    const store = inject('store', RecipeStore)
     const onCategories = ref<Category[]>([])
 
     function textEllipsis (text: string) {

@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, computed, ref } from 'vue'
-import recipeStore from '@/store/index'
+import RecipeStore from '@/store/index'
 import CategoriesListMeals from '@/components/recipe/Home/CategoriesListMeals.vue'
 
 export default defineComponent({
@@ -30,7 +30,7 @@ export default defineComponent({
   },
   inject: ['store'],
   setup () {
-    const store = inject('store', recipeStore)
+    const store = inject('store', RecipeStore)
 
     const categories = computed(() => {
       return store.getters.getCategory.filter(catgory => {

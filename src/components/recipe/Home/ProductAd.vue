@@ -10,7 +10,7 @@
         <div class="product__body--1">
           <img
             class="product__dress"
-            src="@/assets/favorite.png"
+            src="@/assets/example/favorite.png"
             alt="favorite"
           />
           <div class="product__description u-text-align-center">
@@ -46,7 +46,7 @@
         <div class="product__body--3">
           <img
             class="pic3__dress product__dress"
-            src="@/assets/health.png"
+            src="@/assets/example/health.png"
             alt="health"
           />
           <div class="product__description u-text-align-center">
@@ -60,7 +60,7 @@
 
 <style lang="scss" scoped>
 .product {
-  max-width: 1330px;
+  max-width: $container-MAX-width;
   padding: 2rem 0;
 
   &__container {

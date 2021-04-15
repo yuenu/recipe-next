@@ -1,5 +1,5 @@
 <template>
-  <div class="cards__container">
+  <div class="meals-list">
     <MealModal
       v-if="isModalOpen"
       @close="onModalClose"
@@ -19,7 +19,11 @@
           <div class="card__box__cover"></div>
           <div class="card__pic">
             <CardSkeleton
-              v-imageLoad="{ src: meal.strMealThumb, alt: meal.strCategory }"
+              v-imageLoad="{
+                src: meal.strMealThumb,
+                alt: meal.strCategory,
+                className: 'card__img',
+              }"
             />
             <div class="enter">
               <Link class="enter__img" />
@@ -42,12 +46,14 @@
       </div>
     </div>
     <Pagination :getMeals="getMeals" @changePage="changePage" />
+    <Donate />
+
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed, ref, inject, watchEffect } from 'vue'
-import recipeStore from '@/store/index'
+import RecipeStore from '@/store/index'
 
 import MealModal from '@/components/recipe/MealModal.vue'
 import Pagination from './Pagination.vue'
@@ -56,17 +62,20 @@ import CardSkeleton from '@/components/recipe/Search/CardSkeleton.vue'
 import Link from '@/components/UI/Icon/Link.vue'
 import Star from '@/components/UI/Icon/Star.vue'
 
+import Donate from '@/components/recipe/Search/Donate.vue'
+
 export default defineComponent({
   components: {
     MealModal,
     Link,
     Star,
     Pagination,
-    CardSkeleton
+    CardSkeleton,
+    Donate
   },
   inject: ['store'],
   setup () {
-    const store = inject('store', recipeStore)
+    const store = inject('store', RecipeStore)
 
     const getMeals = computed(() => store.getters.getMeals)
 
@@ -134,16 +143,18 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.meals-list {
+  min-height:960px;
+  max-height:1200px;
+  height:100%;
+}
+
 .card {
   height: fit-content;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   justify-items: end;
-
-  &:empty {
-    background: red;
-  }
 
   &__box {
     max-width: 300px;
@@ -301,7 +312,7 @@ export default defineComponent({
   margin: 0 2px;
 }
 
-.cards__container {
+.meals-list {
   width: 100%;
   margin: 0 0 0 16px;
 }
@@ -398,13 +409,13 @@ export default defineComponent({
     }
 
     &__content {
-      height:120px;
+      height: 120px;
     }
   }
 }
 
 @media (max-width: 650px) {
-  .cards__container {
+  .meals-list {
     margin: 0;
   }
   .card {
@@ -474,7 +485,7 @@ export default defineComponent({
     padding: 3px 0;
   }
 
-  .cards__container {
+  .meals-list {
     width: 100%;
     margin: 0 3px;
   }

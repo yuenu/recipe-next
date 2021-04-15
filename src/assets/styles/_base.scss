@@ -1,0 +1,27 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+
+  &::selection {
+    background: rgba(255, 148, 1, 0.69);
+    color: $color-white;
+  }
+}
+
+html {
+  min-height: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  min-height: calc(100vh - 91px);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+  font-family: 'Oswald', '微軟正黑體', 'Microsoft Yahei', sans-serif;
+  overflow-x: hidden;
+}

@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, inject, onMounted } from 'vue'
-import recipeStore from '@/store/index'
+import RecipeStore from '@/store/index'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
@@ -33,7 +33,7 @@ export default defineComponent({
   },
   emits: ['searchSubmit'],
   setup (props, { emit }) {
-    const store = inject('store', recipeStore)
+    const store = inject('store', RecipeStore)
     const router = useRouter()
 
     const searchInput = ref('')
@@ -42,7 +42,7 @@ export default defineComponent({
       emit('searchSubmit')
       store.SEARCH_MEALS(searchInput.value)
 
-      router.push({ name: 'searchResult' })
+      router.push({ name: 'searchResult', query: { q: searchInput.value } })
       searchInput.value = ''
     }
 

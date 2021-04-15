@@ -56,6 +56,9 @@
         {{ da.id }} - {{ da.desc }}
       </div>
     </div>
+    <div class="cbox">
+      <div class="cbox__item">123</div>
+    </div>
   </div>
 </template>
 
@@ -186,6 +189,26 @@ export default defineComponent({
   .box {
     width: 100%;
     margin: 0 auto;
+  }
+}
+
+.cbox {
+  width: 150px;
+  height: 150px;
+  background:#ddd;
+  border: 1px solid red;
+  margin:0 auto;
+    display: -moz-box; /* Mozilla */
+  display: -webkit-box; /* WebKit */
+
+  box-pack: center;
+  -webkit-box-pack: center;
+  // box-align: center;
+  // -webkit-box-align: center;
+
+  &__itme {
+    width:100%;
+    -webkit-box-pack: center;
   }
 }
 </style>

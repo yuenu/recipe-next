@@ -23,7 +23,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, watchEffect } from 'vue'
-import recipeStore from '@/store/index'
+import RecipeStore from '@/store/index'
 
 export default defineComponent({
   setup () {
@@ -31,10 +31,10 @@ export default defineComponent({
      * Get categories data
      */
     const sliderIndex = ref(0)
-    const categories = computed(() => recipeStore.getters.getCategory)
+    const categories = computed(() => RecipeStore.getters.getCategory)
 
     const getCatgoryMeals = (category: string) => {
-      recipeStore.GET_MEALS_BY_CATEGORY(category)
+      RecipeStore.GET_MEALS_BY_CATEGORY(category)
     }
 
     /**
