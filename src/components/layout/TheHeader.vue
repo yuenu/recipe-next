@@ -29,26 +29,26 @@
       </div>
       <div class="headerBottom">
         <ul class="lang">
-          <li class="lang-box lang--cn">简</li>
+          <li class="lang-box lang--cn" @click="changeLang('cn')">简</li>
           <br />
-          <li class="lang-box lang--tw">繁</li>
+          <li class="lang-box lang--tw" @click="changeLang('tw')">繁</li>
           <br />
-          <li class="lang-box lang--en">EN</li>
+          <li class="lang-box lang--en" @click="changeLang('en')" >EN</li>
         </ul>
         <ul class="headerBottom__nav" ref="navEl">
           <li>
             <router-link to="/" class="headerBottom__nav--link">
-              Home
+              {{ t('navigation.home') }}
             </router-link>
           </li>
           <li>
             <router-link to="/search" class="headerBottom__nav--link">
-              Melas
+              {{ t('navigation.meals')}}
             </router-link>
           </li>
           <li>
             <router-link to="/about" class="headerBottom__nav--link">
-              About
+              {{ t('navigation.about')}}
             </router-link>
           </li>
           <li>
@@ -56,7 +56,7 @@
               to="/editProfile"
               class="headerBottom__nav--link login"
             >
-              Settings
+              {{ t('navigation.settings')}}
             </router-link>
           </li>
           <li>
@@ -65,7 +65,7 @@
               class="headerBottom__nav--link"
               target="_blank"
             >
-              Others Projrcts
+              {{ t('navigation.projects')}}
             </a>
           </li>
         </ul>
@@ -93,25 +93,37 @@
       <BaseModal
         @click.self="onModalOpen = false"
         :onModalOpen="onModalOpen && !onSearchFormOpen"
-        class="mobile__modal"
+        class="navigation__modal"
       >
-        <ul class="mobile__nav">
-          <li class="mobile__item">
+        <ul class="navigation__nav">
+          <li class="navigation__item">
+            <router-link to="/" class="navigation__link">
+              <span>01</span>Home
+            </router-link>
+          </li>
+          <li class="navigation__item">
+            <router-link to="/search" class="navigation__link">
+              <span>02</span>Melas
+            </router-link>
+          </li>
+          <li class="navigation__item">
+            <router-link to="/about" class="navigation__link">
+              <span>03</span>About
+            </router-link>
+          </li>
+          <li class="navigation__item">
+            <router-link to="/editProfile" class="navigation__link">
+              <span>04</span>Settings
+            </router-link>
+          </li>
+          <li class="navigation__item">
             <a
               href="https://profile-d6420.firebaseapp.com/"
-              class="mobile__link"
+              class="navigation__link"
               target="_blank"
             >
-              Projects
+              <span>05</span>Others Projrct
             </a>
-          </li>
-          <li class="mobile__item">
-            <router-link to="/" class="mobile__link"> MENU </router-link>
-          </li>
-          <li class="mobile__item">
-            <router-link to="/editProfile" class="mobile__link">
-              Settings
-            </router-link>
           </li>
         </ul>
       </BaseModal>
@@ -123,7 +135,10 @@
         @click.self="onModalOpen = false"
       >
         <div class="search-box">
-          <SearchForm :searchActive="onModalOpen" @searchSubmit="onModalOpen = false" />
+          <SearchForm
+            :searchActive="onModalOpen"
+            @searchSubmit="onModalOpen = false"
+          />
         </div>
       </BaseModal>
     </transition>
@@ -148,6 +163,8 @@ import Search from '@/components/UI/Icon/Search.vue'
 import SocialLink from '@/components/layout/SocialLink.vue'
 import SearchForm from '@/components/layout/SearchForm.vue'
 
+import { useI18n } from 'vue-i18n'
+
 export default defineComponent({
   components: {
     Location,
@@ -158,6 +175,11 @@ export default defineComponent({
     SearchForm
   },
   setup () {
+    const { t, locale } = useI18n()
+    function changeLang (lang: string) {
+      locale.value = lang
+    }
+
     /**
      *  Control modal status,
      *  v-model bind on '.check' checkbox
@@ -193,7 +215,9 @@ export default defineComponent({
       console.log('submit')
     }
 
-    onMounted(() => document.addEventListener('scroll', () => stickyHeader(), true))
+    onMounted(() =>
+      document.addEventListener('scroll', () => stickyHeader(), true)
+    )
 
     onBeforeUnmount(() =>
       document.removeEventListener('scroll', () => stickyHeader(), true)
@@ -212,7 +236,9 @@ export default defineComponent({
       onCollection,
       searchFormActive,
       onSearchFormOpen,
-      submit
+      submit,
+      t,
+      changeLang
     }
   }
 })
@@ -412,25 +438,43 @@ export default defineComponent({
   background: $color-white;
 }
 
-.mobile {
+.navigation {
   &__nav {
     list-style-type: none;
+    text-align:center;
   }
 
   &__link {
-    display: inline-block;
-    color: #fff;
-    text-decoration: none;
-    padding: 20px 28px;
-    margin: 10px 0;
-    border-radius: 3px;
-    font-size: 26px;
-    background: rgb(72, 72, 72);
-    transition: all 300ms ease;
-  }
+    &:link,
+    &:visited {
+      display: inline-block;
+      font-size: 3rem;
+      font-weight: 300;
+      padding: 1rem 2rem;
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+      background-image: linear-gradient(
+        120deg,
+        transparent 0%,
+        transparent 50%,
+        $color-white 50%
+      );
+      background-size: 250%;
+      transition: all 0.4s;
+    }
 
-  &__link:hover {
-    background: rgb(100, 100, 100);
+    span {
+      margin-right: 1.5rem;
+      display: inline-block;
+    }
+
+    &:hover,
+    &:active {
+      background-position: 100%;
+      color: $color-primary;
+      transform: translateX(0.5rem);
+    }
   }
 }
 
@@ -586,6 +630,18 @@ export default defineComponent({
 
   .lang {
     display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .navigation {
+    &__link {
+      &:link,
+      &:visited {
+        font-size: 2.5rem;
+        padding: 0.5rem 1rem;
+      }
+    }
   }
 }
 </style>

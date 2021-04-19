@@ -1,0 +1,9 @@
+{
+  "navigation": {
+    "home" : "Home",
+    "meals": "食譜",
+    "about": "關於我",
+    "settings": "個人設定",
+    "projects": "其他作品"
+  }
+}

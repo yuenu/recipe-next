@@ -57,7 +57,8 @@
       </div>
     </div>
     <div class="cbox">
-      <div class="cbox__item">123</div>
+      <div class="cbox__item">{{ t("navigation.about") }}</div>
+      <button @click="changeLang">changeLang</button>
     </div>
   </div>
 </template>
@@ -66,6 +67,7 @@
 import { defineComponent, ref, onMounted, onBeforeUpdate, onUpdated } from 'vue'
 
 import Skeleton from '@/components/UI/Skeleton.vue'
+import { useI18n } from 'vue-i18n'
 
 const imgSrc =
   'https://images.unsplash.com/photo-1593642634443-44adaa06623a?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1225&q=80'
@@ -86,6 +88,11 @@ export default defineComponent({
     Skeleton
   },
   setup () {
+    const { t, locale } = useI18n()
+    function changeLang () {
+      locale.value = 'en'
+    }
+
     const progressEl = ref<HTMLInputElement>()
 
     let boxRefs: HTMLInputElement[] = []
@@ -114,7 +121,6 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      console.log('setBoxRef', boxRefs)
       boxRefs[0].classList.add('123test')
 
       const timeoutID = setInterval(() => {
@@ -140,7 +146,9 @@ export default defineComponent({
       progressEl,
       startProgress,
       fakeData,
-      setBoxRef
+      setBoxRef,
+      t,
+      changeLang
     }
   }
 })

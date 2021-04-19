@@ -39,7 +39,7 @@
               </div>
             </div>
             <button class="card__add">
-              Add recipe
+              View recipe
             </button>
           </div>
         </div>
@@ -123,8 +123,11 @@ export default defineComponent({
     /** Card skeleton */
     const isEmpty = ref(true)
 
+    const isSearched = computed(() => store.getters.getSearchName)
+
     watchEffect(() => {
       isEmpty.value = !(getMeals.value.length !== 0)
+      currentPage.value = isSearched.value ? 1 : currentPage.value
     })
 
     return {
@@ -145,7 +148,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .meals-list {
   min-height:960px;
-  max-height:1200px;
   height:100%;
 }
 

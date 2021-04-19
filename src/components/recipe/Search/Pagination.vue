@@ -99,7 +99,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .pagination {
   display: inline-block;
-  margin: 20px 0 0 60px;
+  margin: 20px 0 20px 40px;
 
   &__link {
     color: black;

@@ -1,0 +1,9 @@
+{
+  "navigation": {
+    "home" : "home",
+    "meals": "Meals",
+    "about": "About",
+    "settings": "Settings",
+    "projects": "Others Projects"
+  }
+}
