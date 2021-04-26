@@ -1,5 +1,5 @@
 <template>
-  <div class="CategoryList">
+  <div class="CategoryList" id="CategoryList">
     <div class="categories">
       <div
         class="cat__box"

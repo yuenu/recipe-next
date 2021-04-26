@@ -5,5 +5,47 @@
     "about": "About",
     "settings": "Settings",
     "projects": "Others Projects"
+  },
+  "home": {
+    "hero": {
+      "heading": "Make meal by your own",
+      "secondary_heading": "You can discover thousands of meals on here every day!",
+      "ctaBtn": "Try now!"
+    },
+    "intro": {
+      "heading": "Pizza Express Margherita",
+      "description": "Pizza, dish of Italian origin consisting of a flattened disk of bread dough topped with some combination of olive oil, oregano, tomato, olives, mozzarella or other cheese, and many other ingredients, baked quickly—usually, in a commercial setting, using a wood-fired oven heated to a very high temperature—and served hot.",
+      "icon1": "Fast",
+      "icon2": "Health",
+      "icon3": "Idea"
+    },
+    "rail": {
+      "salay": {
+        "heading": "The Everyday Salad",
+        "description": "Fear Risotto no more! This simple recipe is perfect for family dinners."
+      },
+      "baked": {
+        "heading": "Baked Cod with Vegetables",
+        "description": "Baked Cod with Vegetables. 30 minute meal!"
+      },
+      "risotto": {
+        "heading": "Simple Risotto",
+        "description": "Fear Risotto no more! This simple recipe is perfect for family dinners."
+      },
+      "mixin": {
+        "heading": "Sweet and Spicy Main Dish Recipes",
+        "description": "One of the best flavor combinations going is the seemingly odd-couple marriage of sweet and spicy."
+      }
+    }
+  },
+  "contact": {
+    "heading1": "SIGN UP FOR OUR UPDATE",
+    "heading2": "CONTACT US",
+    "heading3": "INSTAGRAM",
+    "content1": "To stay up-to-date on our promotions, discounts, sales, special offers and more.",
+    "location": "No.99, Sec. 3, Taiwan Blvd., Xitun Dist., Taichung City 407610, Taiwan (R.O.C.)",
+    "time1": "Monday-Friday: 9:00 am - 6:00 pm",
+    "time2": "Saturday: 9:00 am - 4:00 pm",
+    "eamil": "Send Us Email"
   }
 }

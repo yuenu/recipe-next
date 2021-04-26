@@ -126,6 +126,7 @@
             </a>
           </li>
         </ul>
+
       </BaseModal>
     </transition>
 
@@ -494,19 +495,23 @@ export default defineComponent({
   list-style-type: none;
 
   &-box {
-    padding: 5px 10px 7px 10px;
-    margin: 0 6px;
+    width:2.2rem;
+    height:2.2rem;
+    padding-bottom:2px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
     cursor: pointer;
     font-size: 14px;
-    font-weight: 300;
-    color: #fff;
-    background: rgba(213, 213, 228, 0.541);
+    font-weight: 600;
+    color: rgba(#333, 0.4);
     border-radius: 50%;
-    transition: 0.2s ease;
+    transition: 0.1s;
 
     &:hover {
-      background: rgb(118, 118, 192);
-      color: $color-primary;
+      background: $color-primary;
+      color: $color-white;
     }
   }
 }

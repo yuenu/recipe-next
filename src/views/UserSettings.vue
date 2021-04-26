@@ -2,9 +2,12 @@
   <div class="user-settings">
     <div class="card">
       <h1 class="card__title u-align-items-center">個人資料</h1>
-      <form @submit.prevent="submitProfile">
+      <form>
         <div class="card__input user">
-          <label for="uName"><span class="card__label">username:</span>  {{ fakeData[0].userName }}</label>
+          <label
+            for="uName"
+          ><span class="card__label">Username:</span>
+            {{ fakeData[0].userName }}</label>
           <input
             type="text"
             placeholder="Your user name"
@@ -12,7 +15,10 @@
           />
         </div>
         <div class="card__input password">
-          <label for="uName"><span class="card__label">Eamil:</span>  {{ fakeData[0].email }}</label>
+          <label
+            for="uName"
+          ><span class="card__label">Eamil:</span>
+            {{ fakeData[0].email }}</label>
           <input type="eamil" placeholder="Your user eamil" />
         </div>
         <div class="card__input password">
@@ -41,12 +47,7 @@ const fakeData = [
 
 export default defineComponent({
   setup () {
-    function submitProfile () {
-      console.log('sumbit the data!!!')
-    }
-
     return {
-      submitProfile,
       fakeData
     }
   }
@@ -58,18 +59,19 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  height:100%;
+  height: 100%;
   width: 100%;
-  margin-top:5rem;
+  margin-top: 5rem;
 }
 
 .card {
   background-color: #fff;
   padding: 30px 40px 50px 40px;
   border-radius: 5px;
-  box-shadow: 0px 1px 5px rgb(91, 91, 91);
+  box-shadow: 5px 5px 2px rgb(91, 91, 91);
   max-width: 400px;
   width: max-content;
+  border: 1px solid rgb(91, 91, 91);
 
   &__title {
     margin: 0rem 0 2.2rem 0;
@@ -84,8 +86,8 @@ export default defineComponent({
     label {
       min-width: 100px;
       padding-right: 10px;
-      margin-bottom:5px;
-      display:inline-block;
+      margin-bottom: 5px;
+      display: inline-block;
     }
 
     input {
@@ -95,26 +97,27 @@ export default defineComponent({
   }
 
   &__label {
-    color:#ffffff;
-    background:#2196f3;
-    padding:2px 5px;
+    color: #ffffff;
+    background: #2196f3;
+    padding: 2px 5px;
   }
 }
 
 .button {
-  margin-top:10px;
+  margin-top: 10px;
   padding: 10px 18px;
   border-radius: 3px;
   border: none;
   outline: none;
-  background-color: rgb(60, 60, 196);
+  background-color: #2196f3;
   color: #fff;
   font-size: 14px;
   letter-spacing: 2px;
   cursor: pointer;
+  font-family: initial;
 
   &:hover {
-    background-color: rgb(81, 81, 199);
+    background-color: #3ea6fa;
     color: #fff;
   }
 }

@@ -4,12 +4,11 @@
       <div class="container">
         <div class="content">
           <div class="content__heading u-margin-bottom-small">
-            SIGN UP FOR OUR UPDATE
+            {{ t('contact.heading1') }}
           </div>
           <hr class="divide" />
           <div class="content__info">
-            To stay up-to-date on our promotions, discounts, sales, special
-            offers and more.
+            {{ t('contact.content1') }}
           </div>
         </div>
         <div class="email">
@@ -29,7 +28,7 @@
       <div class="container">
         <div class="content">
           <div class="content__heading u-margin-bottom-small">
-            CONTACT US
+            {{ t('contact.heading2') }}
           </div>
           <hr class="divide" />
           <div class="content__info">
@@ -37,22 +36,25 @@
               <Location class="info-box--icon" />
               <span
                 class="info-box--desc"
-              >No.99, Sec. 3, Taiwan Blvd., Xitun Dist., Taichung City 407610,
-                Taiwan (R.O.C.)</span>
+              >
+                {{ t('contact.location') }}
+              </span>
             </div>
             <div class="info-box">
               <Phone class="info-box--icon" />
               <a
                 href="tel: 0988-XXX-XXX"
                 class="info-box--desc"
-              >0988-XXX-XXX</a>
+              >
+                0988-XXX-XXX
+              </a>
             </div>
             <div class="info-box">
               <Clock class="info-box--icon" />
               <span class="info-box--desc">
-                Monday-Friday: 9:00 am - 6:00 pm
+                {{ t('contact.time1') }}
                 <br />
-                Saturday: 9:00 am - 4:00 pm
+                {{ t('contact.time2') }}
               </span>
             </div>
             <div class="info-box">
@@ -60,7 +62,9 @@
               <a
                 class="info-box--desc"
                 href="mailto: miraiku82@gamil.com"
-              >Send Us Email</a>
+              >
+                Send Us Email
+              </a>
             </div>
           </div>
         </div>
@@ -70,7 +74,7 @@
       <div class="container">
         <div class="content">
           <div class="content__heading u-margin-bottom-small">
-            INSTAGRAM
+            {{ t('contact.heading3') }}
           </div>
           <hr class="divide" />
           <div class="content__info ins">
@@ -104,6 +108,7 @@ import Location from '@/components/UI/Icon/Location.vue'
 import SocialLink from '@/components/layout/SocialLink.vue'
 
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
 import RecipeStore from '@/store/index'
 
@@ -117,6 +122,8 @@ export default defineComponent({
     SocialLink
   },
   setup () {
+    const { t } = useI18n()
+
     const store = inject('store', RecipeStore)
     const router = useRouter()
 
@@ -131,7 +138,7 @@ export default defineComponent({
       router.push({ name: 'searchResult' })
     }
 
-    return { instagram, searchIns }
+    return { instagram, searchIns, t }
   }
 })
 </script>

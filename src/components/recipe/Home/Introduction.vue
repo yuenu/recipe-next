@@ -2,19 +2,17 @@
   <div class="introduction-section">
     <div class="introduction">
       <div class="introduction__content">
-        <div class="introduction__heading">Pizza Express Margherita</div>
+        <div class="introduction__heading">{{ t('home.intro.heading') }}</div>
         <div class="introduction__rate">
           <Star />
         </div>
         <div class="introduction__description">
-          Pizza, dish of Italian origin consisting of a flattened disk of bread
-          dough topped with some combination of olive oil, oregano, tomato,
-          olives, mozzarella or other cheese, and many other ingredients, baked
-          quickly—usually, in a commercial setting, using a wood-fired oven
-          heated to a very high temperature—and served hot.
+          {{ t('home.intro.description') }}
         </div>
         <CtaButton class="ctaButton introduction__ctaButton" />
-
+        <div class="test123">
+          {{ descriptionIcon}}
+        </div>
         <div class="introduction__descriptionIcon">
           <div
             class="introduction__descriptionIcon-box"
@@ -45,9 +43,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref, getCurrentInstance, ComponentInternalInstance, onMounted } from 'vue'
 import Star from '@/components/UI/Icon/Star.vue'
 import CtaButton from '@/components/UI/CtaButton.vue'
+
+import { useI18n } from 'vue-i18n'
+
+interface Icon {
+  id: number
+  text: string
+  src: any
+}
 
 export default defineComponent({
   components: {
@@ -55,24 +61,51 @@ export default defineComponent({
     Star
   },
   setup () {
-    const descriptionIcon = [
+    const { t } = useI18n()
+
+    const { proxy } = getCurrentInstance() as ComponentInternalInstance
+
+    const descriptionIcon = ref<Icon[]>([
       {
         id: 1,
-        text: 'Fast',
+        text: t('home.intro.icon1'),
         src: require('@/assets/icon/cook.svg')
       },
       {
         id: 2,
-        text: 'Health',
+        text: t('home.intro.icon2'),
         src: require('@/assets/icon/cook-self.svg')
       },
       {
         id: 2,
-        text: 'Idea',
+        text: t('home.intro.icon3'),
         src: require('@/assets/icon/idea.svg')
       }
-    ]
-    return { descriptionIcon }
+    ])
+
+    // onMounted(() => {
+    //   if (proxy) {
+    //     descriptionIcon.value = ([
+    //       {
+    //         id: 1,
+    //         text: t('home.intro.icon1'),
+    //         src: require('@/assets/icon/cook.svg')
+    //       },
+    //       {
+    //         id: 2,
+    //         text: t('home.intro.icon2'),
+    //         src: require('@/assets/icon/cook-self.svg')
+    //       },
+    //       {
+    //         id: 2,
+    //         text: t('home.intro.icon3'),
+    //         src: require('@/assets/icon/idea.svg')
+    //       }
+    //     ])
+    //   }
+    // })
+
+    return { descriptionIcon, t }
   }
 })
 </script>

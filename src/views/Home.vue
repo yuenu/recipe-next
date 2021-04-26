@@ -6,8 +6,8 @@
         <Introduction />
         <CategoryDisplay />
         <ProductAd />
-        <RailContainer />
         <CategoriesList />
+        <RailContainer />
         <Contact />
         <GoogleMap />
       </div>

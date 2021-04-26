@@ -1,9 +1,61 @@
 {
   "navigation": {
-    "home" : "Home",
+    "home" : "首頁",
     "meals": "食譜",
     "about": "關於我",
     "settings": "個人設定",
     "projects": "其他作品"
+  },
+  "home": {
+    "hero": {
+      "heading": "為你自己做料理",
+      "secondary_heading": "每天都有新食譜!",
+      "ctaBtn": "發現!"
+    },
+    "intro": {
+      "heading": "瑪格麗塔披薩",
+      "description": "瑪格麗特披薩（Margherita）是義大利的一種披薩餅，也是拿坡里披薩的代表。一般說法認為瑪格麗特披薩這個名字是來自於義大利王妃瑪格麗特。由於瑪格麗特王妃認為這種披薩上「綠色的羅勒、白色的莫薩里拉乾酪、紅色的番茄醬好比義大利國旗」，對這種披薩十分鍾愛，因此用自己的名字命名了這款披薩[1]。發明瑪格麗塔披薩的店家至今仍無定論，拿坡里的兩家披薩店Pietro... e basta così（現改名為Pizzeria Brandi）和Pizzeria Antica Port'Alba都自稱是瑪格麗塔披薩的發明者。",
+      "icon1": "快速",
+      "icon2": "健康",
+      "icon3": "點子"
+    },
+    "rail": {
+      "salay": {
+        "heading": "天天一沙拉",
+        "description": "用新鮮的水果和蔬菜，簡單的搭配即可解決一餐。"
+      },
+      "baked": {
+        "heading": "蔬菜焗鱈魚",
+        "description": "蔬菜烤的鱈魚。 30分鐘料理!"
+      },
+      "risotto": {
+        "heading": "義大利燉飯",
+        "description": "不再擔心意大利調味飯！這個簡單的食譜非常適合家庭聚餐。"
+      },
+      "mixin": {
+        "heading": "香辣主菜食譜",
+        "description": "探索最好的風味組合之一是甜辣味刺激你的味蕾。"
+      }
+    }
+  },
+  "contact": {
+    "heading1": "訂閱我們",
+    "heading2": "聯絡我們",
+    "heading3": "食材",
+    "content1": "輕鬆變化每天菜色，找到零失敗人氣食譜。再也不用煩惱明天煮什麼。",
+    "location": "40701台中市西屯區台灣大道三段99號",
+    "time1": "禮拜一至禮拜五: 早上9:00 - 下午6:00",
+    "time2": "禮拜六: 早上9:00 - 下午4:00",
+    "eamil": "Send Us Email"
+  },
+  "category": {
+    "beef": "牛肉",
+    "chicken": "雞肉",
+    "dessert": "甜點",
+    "lamb": "羊肉",
+    "miscellaneous": "雜菜",
+    "pasta": "pasta",
+    "pork": "豬肉",
+    "seafood": "海鮮"
   }
 }

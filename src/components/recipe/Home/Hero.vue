@@ -1,9 +1,9 @@
 <template>
   <section class="hero">
     <div class="hero-box">
-      <h2 class="hero-box__heading">Make meal by your own</h2>
+      <h2 class="hero-box__heading">{{ t("home.hero.heading") }}</h2>
       <div class="hero-box__text">
-        You can discover thousands of meals on here every day!
+        {{ t('home.hero.secondary_heading') }}
       </div>
       <CtaButton />
     </div>
@@ -14,9 +14,15 @@
 import { defineComponent } from 'vue'
 import CtaButton from '@/components/UI/CtaButton.vue'
 
+import { useI18n } from 'vue-i18n'
+
 export default defineComponent({
   components: {
     CtaButton
+  },
+  setup () {
+    const { t } = useI18n()
+    return { t }
   }
 })
 </script>
@@ -39,6 +45,12 @@ export default defineComponent({
   &-box__heading {
     font-size: 45px;
     margin-bottom: 1.1rem;
+  }
+}
+
+@media (max-width:476px) {
+  .hero-box {
+    padding: 0 20px;
   }
 }
 </style>

@@ -3,12 +3,14 @@
     <div class="product__container">
       <div class="product-box--1">
         <img
+          lazingLoad
           src="@/assets/example/bg2-1.png"
           alt="bg2-1"
           class="product__bg"
         />
         <div class="product__body--1">
           <img
+            lazingLoad
             class="product__dress"
             src="@/assets/example/favorite.png"
             alt="favorite"
@@ -23,6 +25,7 @@
       </div>
       <div class="product-box--2">
         <img
+          lazingLoad
           src="@/assets/example/bg2-2.png"
           alt="bg2-2"
           class="product__bg"
@@ -39,12 +42,14 @@
       </div>
       <div class="product-box--3">
         <img
+          lazingLoad
           src="@/assets/example/bg2-3.png"
           alt="bg2-3"
           class="product__bg"
         />
         <div class="product__body--3">
           <img
+            lazingLoad
             class="pic3__dress product__dress"
             src="@/assets/example/health.png"
             alt="health"

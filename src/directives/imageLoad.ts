@@ -8,6 +8,7 @@ const imageLoad: Directive = {
 
     function createImage () {
       const newImg = new Image()
+
       newImg.classList.add('skeleton-img')
       if (className) newImg.classList.add(className)
 

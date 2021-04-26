@@ -48,6 +48,7 @@ html {
   min-height: 100%;
   position: relative;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {

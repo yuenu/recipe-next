@@ -206,13 +206,11 @@ export default defineComponent({
   background:#ddd;
   border: 1px solid red;
   margin:0 auto;
-    display: -moz-box; /* Mozilla */
+  display: -moz-box; /* Mozilla */
   display: -webkit-box; /* WebKit */
 
   box-pack: center;
   -webkit-box-pack: center;
-  // box-align: center;
-  // -webkit-box-align: center;
 
   &__itme {
     width:100%;

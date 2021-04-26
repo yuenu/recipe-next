@@ -13,20 +13,20 @@ export default defineComponent({
     mode: { type: String, default: 'light' }
   },
   setup (prop) {
-    function isNUmeric (val) {
+    function isNumeric (val) {
       return /^\d+$/.test(val)
     }
 
     const _width = computed(() =>
-      isNUmeric(prop.width) ? prop.width + 'px' : prop.width
+      isNumeric(prop.width) ? prop.width + 'px' : prop.width
     )
 
     const _height = computed(() =>
-      isNUmeric(prop.height) ? prop.height + 'px' : prop.height
+      isNumeric(prop.height) ? prop.height + 'px' : prop.height
     )
 
     const _margin = computed(() =>
-      isNUmeric(prop.margin) ? prop.margin + 'px' : prop.margin
+      isNumeric(prop.margin) ? prop.margin + 'px' : prop.margin
     )
 
     const _background = computed(() =>
