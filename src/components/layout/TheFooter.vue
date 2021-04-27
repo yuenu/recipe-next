@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <div class="footer__copyright">
-      © 2021 All Rights Reserved. - Created by yuenu
+      © 2021 All Rights Reserved. - Created by <span class="author">yuenu</span>
     </div>
   </footer>
 </template>
@@ -28,5 +28,9 @@ export default defineComponent({})
   &__copyright {
     font-size: 14px;
   }
+}
+
+.author {
+  color: $color-primary;
 }
 </style>

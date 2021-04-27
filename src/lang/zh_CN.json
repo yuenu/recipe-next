@@ -10,7 +10,7 @@
     "hero": {
       "heading": "为你自己做料理",
       "secondary_heading": "每天都有新食谱!",
-      "ctaBtn": "发现!"
+      "ctaBtn": "发现 !"
     },
     "intro": {
       "heading": "玛格丽塔披萨",
@@ -22,15 +22,15 @@
     "rail": {
       "salay": {
         "heading": "天天一沙拉",
-        "description": "不再担心意大利调味饭！这个简单的食谱非常适合家庭聚餐。"
+        "description": "用新鲜的水果和蔬菜，简单的搭配即可解决一餐。"
       },
       "baked": {
         "heading": "蔬菜焗鳕鱼",
         "description": "蔬菜烤的鳕鱼。 30分钟料理!"
       },
       "risotto": {
-        "heading": "简易烩饭(Risotto)",
-        "description": "Fear Risotto no more! This simple recipe is perfect for family dinners."
+        "heading": "义大利炖饭",
+        "description": "不再担心意大利调味饭！这个简单的食谱非常适合家庭聚餐。"
       },
       "mixin": {
         "heading": "香辣主菜食谱",
@@ -54,8 +54,14 @@
     "dessert": "甜点",
     "lamb": "羊肉",
     "miscellaneous": "杂菜",
-    "pasta": "pasta",
+    "pasta": "义大利面",
     "pork": "猪肉",
-    "seafood": "海鲜"
+    "seafood": "海鲜",
+    "side": "配菜",
+    "starter": "开胃菜",
+    "vegan": "全素",
+    "vegetarian": "蛋奶素",
+    "breakfast": "早餐",
+    "goat": "山羊"
   }
 }

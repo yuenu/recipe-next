@@ -34,18 +34,13 @@
           <div class="content__info">
             <div class="info-box">
               <Location class="info-box--icon" />
-              <span
-                class="info-box--desc"
-              >
+              <span class="info-box--desc">
                 {{ t('contact.location') }}
               </span>
             </div>
             <div class="info-box">
               <Phone class="info-box--icon" />
-              <a
-                href="tel: 0988-XXX-XXX"
-                class="info-box--desc"
-              >
+              <a href="tel: 0988-XXX-XXX" class="info-box--desc">
                 0988-XXX-XXX
               </a>
             </div>
@@ -59,10 +54,7 @@
             </div>
             <div class="info-box">
               <Email class="info-box--icon" />
-              <a
-                class="info-box--desc"
-                href="mailto: miraiku82@gamil.com"
-              >
+              <a class="info-box--desc" href="mailto: miraiku82@gamil.com">
                 Send Us Email
               </a>
             </div>
@@ -164,17 +156,17 @@ export default defineComponent({
     font-size: 1.8rem;
     margin-left: 5px;
   }
+
+  &__info {
+    font-size: 1.3rem;
+    letter-spacing: 0.8px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
 }
 
 .divide {
   margin: 5px 0;
-}
-
-.content__info {
-  font-size: 1.3rem;
-  letter-spacing: 0.8px;
-  font-weight: lighter;
-  line-height: 1.7;
 }
 
 .info-box {
@@ -196,7 +188,8 @@ export default defineComponent({
     color: #333;
   }
 
-  &:nth-child(2) &--desc {
+  &:nth-child(2) &--desc,
+  &:nth-child(4) &--desc {
     font-weight: bold;
     font-size: 1.5rem;
   }
@@ -250,7 +243,7 @@ export default defineComponent({
 }
 
 .socialLink {
-  margin-top:2rem;
+  margin-top: 2rem;
 }
 
 .ins {
@@ -264,7 +257,7 @@ export default defineComponent({
   }
 }
 
-@media (max-width:1200px) {
+@media (max-width: 1200px) {
   .ins {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -281,11 +274,10 @@ export default defineComponent({
   }
 }
 
-@media (max-width:476px) {
+@media (max-width: 476px) {
   .ins {
-    grid-template-columns:repeat(2, 1fr);
-    gap:10px;
-
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 }
 </style>

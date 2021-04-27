@@ -19,8 +19,50 @@
 }
 
 .skeleton-img {
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
   max-height: inherit;
   object-fit: cover;
+}
+
+#mealModal .meal__label__area {
+  background: #892b64;
+  color: #e9a37e;
+  padding: 3px 5px;
+  border-radius: 5px;
+}
+
+// loading animation
+.loading {
+  position: relative;
+  background-color: rgb(221, 219, 221);
+  min-height: 20px;
+
+  &::after {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 1), transparent);
+    animation: loading 1s infinite;
+  }
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  85% {
+    opacity: 1;
+    transform: translateX(90%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(100%);
+  }
 }

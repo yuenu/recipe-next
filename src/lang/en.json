@@ -10,7 +10,7 @@
     "hero": {
       "heading": "Make meal by your own",
       "secondary_heading": "You can discover thousands of meals on here every day!",
-      "ctaBtn": "Try now!"
+      "ctaBtn": "Try now !"
     },
     "intro": {
       "heading": "Pizza Express Margherita",
@@ -47,5 +47,21 @@
     "time1": "Monday-Friday: 9:00 am - 6:00 pm",
     "time2": "Saturday: 9:00 am - 4:00 pm",
     "eamil": "Send Us Email"
+  },
+  "category": {
+    "beef": "Beef",
+    "chicken": "Chicken",
+    "dessert": "Dessert",
+    "lamb": "Lamb",
+    "miscellaneous": "Miscellaneous",
+    "pasta": "Pasta",
+    "pork": "Pork",
+    "seafood": "Seafood",
+    "side": "Side",
+    "starter": "Starter",
+    "vegan": "Vegan",
+    "vegetarian": "Vegetarian",
+    "breakfast": "Breakfast",
+    "goat": "Goat"
   }
 }

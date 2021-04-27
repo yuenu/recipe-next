@@ -1,7 +1,7 @@
 <template>
 
   <teleport to="body">
-    <div class="meal__modal">
+    <div class="meal__modal" id="mealModal">
       <div class="close" @click="close">
         <Close />
       </div>
@@ -13,9 +13,9 @@
         <h1 class="meal__title">{{ meal.mealName }}</h1>
         <div class="meal__media">
           <Skeleton
-            width="440"
-            height="270"
-            v-imageLoad="{ src: meal.mealImgUrl, alt: meal.mealName }"
+            width="100%"
+            height="260"
+            v-imageLoad="{ src: meal.mealImgUrl, alt: meal.mealName, className: 'meal__img' }"
           />
           <a
             :href="meal.mealYoutubeLink"

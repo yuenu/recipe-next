@@ -32,7 +32,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-
 * {
   margin: 0;
   padding: 0;
@@ -57,7 +56,7 @@ body {
   display: flex;
   flex-direction: column;
   margin-bottom: 32px;
-  font-family: 'Oswald', '微軟正黑體', 'Microsoft Yahei', sans-serif;
+  font-family: 'Oswald', 'Noto Sans TC', 'Microsoft Yahei', sans-serif;
   overflow-x: hidden;
 }
 

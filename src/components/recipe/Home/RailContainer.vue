@@ -24,39 +24,41 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, computed } from 'vue'
 
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
   setup () {
     const { t } = useI18n()
 
-    const data = ref([
-      {
-        id: 1,
-        img: require('@/assets/example/img1.jpg'),
-        title: t('home.rail.salay.heading'),
-        description: t('home.rail.salay.description')
-      },
-      {
-        id: 2,
-        img: require('@/assets/example/img2.jpg'),
-        title: t('home.rail.baked.heading'),
-        description: t('home.rail.baked.description')
-      },
-      {
-        id: 3,
-        img: require('@/assets/example/img3.jpg'),
-        title: t('home.rail.risotto.heading'),
-        description: t('home.rail.risotto.description')
-      },
-      {
-        id: 4,
-        img: require('@/assets/example/img4.jpg'),
-        title: t('home.rail.mixin.heading'),
-        description: t('home.rail.mixin.description')
-      }
-    ])
+    const data = computed(() => {
+      return [
+        {
+          id: 1,
+          img: require('@/assets/example/img1.jpg'),
+          title: t('home.rail.salay.heading'),
+          description: t('home.rail.salay.description')
+        },
+        {
+          id: 2,
+          img: require('@/assets/example/img2.jpg'),
+          title: t('home.rail.baked.heading'),
+          description: t('home.rail.baked.description')
+        },
+        {
+          id: 3,
+          img: require('@/assets/example/img3.jpg'),
+          title: t('home.rail.risotto.heading'),
+          description: t('home.rail.risotto.description')
+        },
+        {
+          id: 4,
+          img: require('@/assets/example/img4.jpg'),
+          title: t('home.rail.mixin.heading'),
+          description: t('home.rail.mixin.description')
+        }
+      ]
+    })
     return { data }
   }
 })

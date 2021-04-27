@@ -8,7 +8,7 @@
           :key="item.idCategory"
         >
           <div class="card__content">
-            <h2 class="card__content--heading">{{ item.strCategory }}</h2>
+            <h2 class="card__content--heading">{{ t(`category.${item.strCategory.toLowerCase()}`) }}</h2>
             <div class="card__content--details">
               {{ textEllipsis(item.strCategoryDescription) }}
             </div>
@@ -35,11 +35,15 @@ import RecipeStore from '@/store/index'
 import type { Category } from '@/apis/response.type'
 import Check from '@/components/UI/Icon/Check.vue'
 
+import { useI18n } from 'vue-i18n'
+
 export default defineComponent({
   components: {
     Check
   },
   setup () {
+    const { t } = useI18n()
+
     const store = inject('store', RecipeStore)
     const onCategories = ref<Category[]>([])
 
@@ -52,7 +56,11 @@ export default defineComponent({
       const categorayData = await store.GET_CATEGORY()
       if (categorayData) { onCategories.value = categorayData.filter((item) => +item.idCategory <= 3) }
     })
-    return { onCategories, textEllipsis }
+    return {
+      onCategories,
+      textEllipsis,
+      t
+    }
   }
 })
 </script>

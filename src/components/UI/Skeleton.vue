@@ -1,5 +1,5 @@
 <template>
-  <div class="skeleton" :style="style"></div>
+  <div class="skeleton" :style="!isManual ? style : manualStyle"></div>
 </template>
 
 <script lang="ts">
@@ -9,8 +9,9 @@ export default defineComponent({
   props: {
     width: { type: [String, Number], default: '100%' },
     height: { type: [String, Number], default: '10' },
-    margin: { type: [String, Number], default: '5' },
-    mode: { type: String, default: 'light' }
+    margin: { type: [String, Number], default: '0' },
+    mode: { type: String, default: 'light' },
+    manual: { type: Boolean, default: false }
   },
   setup (prop) {
     function isNumeric (val) {
@@ -30,8 +31,12 @@ export default defineComponent({
     )
 
     const _background = computed(() =>
-      prop.mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : '#dddbdd'
+      prop.mode === 'dark'
+        ? 'rgba(255, 255, 255, 0.2)'
+        : '#dddbdd'
     )
+
+    const isManual = computed(() => prop.manual)
 
     const style = computed(() => {
       return {
@@ -42,28 +47,38 @@ export default defineComponent({
       }
     })
 
-    return { style }
+    const manualStyle = computed(() => {
+      return {
+        background: _background.value
+      }
+    })
+
+    return {
+      style,
+      manualStyle,
+      isManual
+    }
   }
 })
 </script>
 
 <style lang="scss" scoped>
 .skeleton {
-  position:relative;
-  min-height:0;
-  overflow:hidden;
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
 
   &::after {
-    content:'';
-    position:absolute;
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255,255,255,0.8),
+      rgba(255, 255, 255, 0.8),
       transparent
     );
     animation: wave 1s linear infinite;
@@ -72,18 +87,18 @@ export default defineComponent({
 
 @keyframes wave {
   0% {
-    opacity:0;
-    transform:translateX(-100%);
+    opacity: 0;
+    transform: translateX(-100%);
   }
 
-  85%{
-    opacity:1;
-    transform:translateX(90%);
+  85% {
+    opacity: 1;
+    transform: translateX(90%);
   }
 
-  100%{
-    opacity:1;
-    transform:translateX(100%);
+  100% {
+    opacity: 1;
+    transform: translateX(100%);
   }
 }
 </style>

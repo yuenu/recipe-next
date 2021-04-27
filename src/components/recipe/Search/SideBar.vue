@@ -15,7 +15,7 @@
             :alt="cat.strCategory"
           />
         </div>
-        <div class="sidebar__text">{{ cat.strCategory }}</div>
+        <div class="sidebar__text">{{ t(`category.${cat.strCategory.toLowerCase()}`) }}</div>
         <div class="sidebar__img-last">
           <img :src="cat.strCategoryThumb" :alt="cat.strCategory" />
         </div>
@@ -36,11 +36,15 @@ import { useRouter } from 'vue-router'
 import RecipeStore from '@/store/index'
 import Arrow from '@/components/UI/Icon/Arrow.vue'
 
+import { useI18n } from 'vue-i18n'
+
 export default defineComponent({
   components: {
     Arrow
   },
   setup () {
+    const { t } = useI18n()
+
     const store = inject('store', RecipeStore)
     const router = useRouter()
 
@@ -72,7 +76,8 @@ export default defineComponent({
       getCategories,
       onCategoryMeals,
       isStretch,
-      onStretch
+      onStretch,
+      t
     }
   }
 })

@@ -10,9 +10,6 @@
           {{ t('home.intro.description') }}
         </div>
         <CtaButton class="ctaButton introduction__ctaButton" />
-        <div class="test123">
-          {{ descriptionIcon}}
-        </div>
         <div class="introduction__descriptionIcon">
           <div
             class="introduction__descriptionIcon-box"
@@ -43,17 +40,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, getCurrentInstance, ComponentInternalInstance, onMounted } from 'vue'
+import {
+  defineComponent,
+  computed
+} from 'vue'
 import Star from '@/components/UI/Icon/Star.vue'
 import CtaButton from '@/components/UI/CtaButton.vue'
 
 import { useI18n } from 'vue-i18n'
-
-interface Icon {
-  id: number
-  text: string
-  src: any
-}
 
 export default defineComponent({
   components: {
@@ -62,48 +56,25 @@ export default defineComponent({
   },
   setup () {
     const { t } = useI18n()
-
-    const { proxy } = getCurrentInstance() as ComponentInternalInstance
-
-    const descriptionIcon = ref<Icon[]>([
-      {
-        id: 1,
-        text: t('home.intro.icon1'),
-        src: require('@/assets/icon/cook.svg')
-      },
-      {
-        id: 2,
-        text: t('home.intro.icon2'),
-        src: require('@/assets/icon/cook-self.svg')
-      },
-      {
-        id: 2,
-        text: t('home.intro.icon3'),
-        src: require('@/assets/icon/idea.svg')
-      }
-    ])
-
-    // onMounted(() => {
-    //   if (proxy) {
-    //     descriptionIcon.value = ([
-    //       {
-    //         id: 1,
-    //         text: t('home.intro.icon1'),
-    //         src: require('@/assets/icon/cook.svg')
-    //       },
-    //       {
-    //         id: 2,
-    //         text: t('home.intro.icon2'),
-    //         src: require('@/assets/icon/cook-self.svg')
-    //       },
-    //       {
-    //         id: 2,
-    //         text: t('home.intro.icon3'),
-    //         src: require('@/assets/icon/idea.svg')
-    //       }
-    //     ])
-    //   }
-    // })
+    const descriptionIcon = computed(() => {
+      return [
+        {
+          id: 1,
+          text: t('home.intro.icon1'),
+          src: require('@/assets/icon/cook.svg')
+        },
+        {
+          id: 2,
+          text: t('home.intro.icon2'),
+          src: require('@/assets/icon/cook-self.svg')
+        },
+        {
+          id: 2,
+          text: t('home.intro.icon3'),
+          src: require('@/assets/icon/idea.svg')
+        }
+      ]
+    })
 
     return { descriptionIcon, t }
   }
@@ -115,7 +86,7 @@ export default defineComponent({
   max-width: $container-MAX-width;
   width: 100%;
   margin: 5rem 0 3rem 0;
-  padding:2rem 0;
+  padding: 2rem 0;
 }
 
 .introduction {
@@ -128,7 +99,7 @@ export default defineComponent({
   align-items: center;
 
   &__heading {
-    font-size: clamp(40px,3vw,48px);
+    font-size: clamp(40px, 3vw, 48px);
     font-weight: 400;
   }
 
@@ -174,7 +145,7 @@ export default defineComponent({
 
 @media (max-width: 920px) {
   .introduction-section {
-    margin:0;
+    margin: 0;
     border-bottom: 5px solid #ddd;
     border-top: 5px solid #ddd;
   }

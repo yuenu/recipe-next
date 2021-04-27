@@ -47,7 +47,6 @@
     </div>
     <Pagination :getMeals="getMeals" @changePage="changePage" />
     <Donate />
-
   </div>
 </template>
 
@@ -147,8 +146,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .meals-list {
-  min-height:960px;
-  height:100%;
+  min-height: 960px;
+  height: 100%;
 }
 
 .card {
@@ -445,6 +444,7 @@ export default defineComponent({
     &__pic {
       justify-content: center;
       align-items: flex-start;
+      min-width: 100px;
     }
 
     &__img {

@@ -1,5 +1,5 @@
 <template>
-  <button class="ctaButton" @click="onClicked">{{ t('home.hero.ctaBtn') }}</button>
+  <button class="ctaButton">{{ t('home.hero.ctaBtn') }}</button>
 </template>
 
 <script lang="ts">
@@ -11,16 +11,7 @@ export default defineComponent({
   setup () {
     const { t } = useI18n()
 
-    function onClicked () {
-      const categoryList = document.querySelector('#CategoryList') as HTMLButtonElement
-      if (categoryList) {
-        categoryList.scrollIntoView({
-          behavior: 'smooth'
-        })
-      }
-    }
-
-    return { onClicked, t }
+    return { t }
   }
 })
 </script>
@@ -36,7 +27,7 @@ export default defineComponent({
   height: 3.3rem;
   margin: 36px 0 0;
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 400;
   font-family: inherit;
   position: relative;
   float: left;

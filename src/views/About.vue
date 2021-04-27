@@ -1,23 +1,5 @@
 <template>
   <div class="about-section">
-    <Skeleton width="60" height="60" />
-    <Skeleton height="20" />
-    <Skeleton width="80%" />
-    <Skeleton width="80%" />
-    <Skeleton width="80%" />
-
-    <div style="background: #333; height:250px; margin: 20px 0; padding: 20px;">
-      <Skeleton
-        width="60"
-        height="60"
-        mode="dark"
-      />
-      <Skeleton height="20" mode="dark" />
-      <Skeleton width="80%" mode="dark" />
-      <Skeleton width="80%" mode="dark" />
-      <Skeleton width="80%" mode="dark" />
-    </div>
-
     <div class="card-skeleton" style="display: inline-block;">
       <div class="img" style="width:275px; height:280px;">
         <Skeleton
@@ -26,11 +8,12 @@
           v-loadTest="{ src: imgSrc, alt: 'testImgAlt' }"
         />
       </div>
-      <Skeleton
-        width="50%"
-        height="20"
-        margin="20px 0 0 0"
-      />
+      <div
+        class="loading"
+        style="width:100%; marginTop: 10px;"
+        v-loadTest="{ text: 'apple' }"
+      ></div>
+
       <Skeleton
         width="40%"
         height="20"
@@ -56,15 +39,19 @@
         {{ da.id }} - {{ da.desc }}
       </div>
     </div>
-    <div class="cbox">
-      <div class="cbox__item">{{ t("navigation.about") }}</div>
-      <button @click="changeLang">changeLang</button>
+
+    <div
+      class="skText"
+      style="margin:20px;"
+      skeletonLoad
+    >
+      <span>This is skeleton text test line!</span>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, onBeforeUpdate, onUpdated } from 'vue'
+import { defineComponent, ref, onMounted } from 'vue'
 
 import Skeleton from '@/components/UI/Skeleton.vue'
 import { useI18n } from 'vue-i18n'
@@ -95,20 +82,12 @@ export default defineComponent({
 
     const progressEl = ref<HTMLInputElement>()
 
-    let boxRefs: HTMLInputElement[] = []
+    const boxRefs: HTMLInputElement[] = []
     const setBoxRef = (el: HTMLInputElement) => {
       if (el) {
         boxRefs.push(el)
       }
     }
-
-    onBeforeUpdate(() => {
-      console.log('onBeforeUpdate')
-      boxRefs = []
-    })
-    onUpdated(() => {
-      console.log('boxRefs', boxRefs)
-    })
 
     function startProgress () {
       if (progressEl.value) {
@@ -203,9 +182,9 @@ export default defineComponent({
 .cbox {
   width: 150px;
   height: 150px;
-  background:#ddd;
+  background: #ddd;
   border: 1px solid red;
-  margin:0 auto;
+  margin: 0 auto;
   display: -moz-box; /* Mozilla */
   display: -webkit-box; /* WebKit */
 
@@ -213,8 +192,13 @@ export default defineComponent({
   -webkit-box-pack: center;
 
   &__itme {
-    width:100%;
+    width: 100%;
     -webkit-box-pack: center;
   }
+}
+
+.card__heading {
+  width: 100%;
+  min-height: 5px;
 }
 </style>

@@ -10,7 +10,7 @@
     "hero": {
       "heading": "為你自己做料理",
       "secondary_heading": "每天都有新食譜!",
-      "ctaBtn": "發現!"
+      "ctaBtn": "發現 !"
     },
     "intro": {
       "heading": "瑪格麗塔披薩",
@@ -54,8 +54,14 @@
     "dessert": "甜點",
     "lamb": "羊肉",
     "miscellaneous": "雜菜",
-    "pasta": "pasta",
+    "pasta": "義大利面",
     "pork": "豬肉",
-    "seafood": "海鮮"
+    "seafood": "海鮮",
+    "side": "配菜",
+    "starter": "開胃菜",
+    "vegan": "全素",
+    "vegetarian": "蛋奶素",
+    "breakfast": "早餐",
+    "goat": "山羊"
   }
 }

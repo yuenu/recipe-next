@@ -33,7 +33,7 @@
           <br />
           <li class="lang-box lang--tw" @click="changeLang('tw')">繁</li>
           <br />
-          <li class="lang-box lang--en" @click="changeLang('en')" >EN</li>
+          <li class="lang-box lang--en" @click="changeLang('en')">EN</li>
         </ul>
         <ul class="headerBottom__nav" ref="navEl">
           <li>
@@ -43,12 +43,12 @@
           </li>
           <li>
             <router-link to="/search" class="headerBottom__nav--link">
-              {{ t('navigation.meals')}}
+              {{ t('navigation.meals') }}
             </router-link>
           </li>
           <li>
             <router-link to="/about" class="headerBottom__nav--link">
-              {{ t('navigation.about')}}
+              {{ t('navigation.about') }}
             </router-link>
           </li>
           <li>
@@ -56,7 +56,7 @@
               to="/editProfile"
               class="headerBottom__nav--link login"
             >
-              {{ t('navigation.settings')}}
+              {{ t('navigation.settings') }}
             </router-link>
           </li>
           <li>
@@ -65,7 +65,7 @@
               class="headerBottom__nav--link"
               target="_blank"
             >
-              {{ t('navigation.projects')}}
+              {{ t('navigation.projects') }}
             </a>
           </li>
         </ul>
@@ -98,22 +98,22 @@
         <ul class="navigation__nav">
           <li class="navigation__item">
             <router-link to="/" class="navigation__link">
-              <span>01</span>Home
+              <span>01</span>{{ t('navigation.home') }}
             </router-link>
           </li>
           <li class="navigation__item">
             <router-link to="/search" class="navigation__link">
-              <span>02</span>Melas
+              <span>02</span>{{ t('navigation.meals') }}
             </router-link>
           </li>
           <li class="navigation__item">
             <router-link to="/about" class="navigation__link">
-              <span>03</span>About
+              <span>03</span>{{ t('navigation.about') }}
             </router-link>
           </li>
           <li class="navigation__item">
             <router-link to="/editProfile" class="navigation__link">
-              <span>04</span>Settings
+              <span>04</span>{{ t('navigation.settings') }}
             </router-link>
           </li>
           <li class="navigation__item">
@@ -122,11 +122,24 @@
               class="navigation__link"
               target="_blank"
             >
-              <span>05</span>Others Projrct
+              <span>05</span>{{ t('navigation.projects') }}
             </a>
           </li>
         </ul>
 
+        <ul class="navigation__lang">
+          <li class="navigation__lang-box lang--cn" @click="changeLang('cn')">
+            简
+          </li>
+          <br />
+          <li class="navigation__lang-box lang--tw" @click="changeLang('tw')">
+            繁
+          </li>
+          <br />
+          <li class="navigation__lang-box lang--en" @click="changeLang('en')">
+            EN
+          </li>
+        </ul>
       </BaseModal>
     </transition>
 
@@ -442,7 +455,7 @@ export default defineComponent({
 .navigation {
   &__nav {
     list-style-type: none;
-    text-align:center;
+    text-align: center;
   }
 
   &__link {
@@ -477,6 +490,20 @@ export default defineComponent({
       transform: translateX(0.5rem);
     }
   }
+
+  &__lang {
+    list-style: none;
+    display: flex;
+    position: absolute;
+    bottom: 5vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: rgba($color-white, 0.6);
+    max-width: 150px;
+    width: 100%;
+    justify-content: space-evenly;
+    font-size: 1.4rem;
+  }
 }
 
 .sticky {
@@ -495,10 +522,10 @@ export default defineComponent({
   list-style-type: none;
 
   &-box {
-    width:2.2rem;
-    height:2.2rem;
-    padding-bottom:2px;
-    display:flex;
+    width: 2.2rem;
+    height: 2.2rem;
+    padding-bottom: 2px;
+    display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 5px;

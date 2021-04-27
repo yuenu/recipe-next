@@ -12,7 +12,7 @@
           :alt="cat.strCategory"
           class="cat__box-img"
         />
-        <div class="cat__box-txt">{{ cat.strCategory }}</div>
+        <div class="cat__box-txt">{{ t(`category.${cat.strCategory.toLowerCase()}`) }}</div>
       </div>
     </div>
     <CategoriesListMeals :fetchDone="fetchDone" />
@@ -24,12 +24,16 @@ import { defineComponent, inject, computed, ref } from 'vue'
 import RecipeStore from '@/store/index'
 import CategoriesListMeals from '@/components/recipe/Home/CategoriesListMeals.vue'
 
+import { useI18n } from 'vue-i18n'
+
 export default defineComponent({
   components: {
     CategoriesListMeals
   },
   inject: ['store'],
   setup () {
+    const { t } = useI18n()
+
     const store = inject('store', RecipeStore)
 
     const categories = computed(() => {
@@ -49,7 +53,8 @@ export default defineComponent({
     return {
       categories,
       getGategoryMeals,
-      fetchDone
+      fetchDone,
+      t
     }
   }
 })
