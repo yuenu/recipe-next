@@ -15,7 +15,9 @@
             :alt="cat.strCategory"
           />
         </div>
-        <div class="sidebar__text">{{ t(`category.${cat.strCategory.toLowerCase()}`) }}</div>
+        <div class="sidebar__text">
+          {{ t(`category.${cat.strCategory.toLowerCase()}`) }}
+        </div>
         <div class="sidebar__img-last">
           <img :src="cat.strCategoryThumb" :alt="cat.strCategory" />
         </div>
@@ -120,7 +122,7 @@ export default defineComponent({
   &__img-first {
     margin: 0 30px 0 12px;
     img {
-      width: 42px;
+      width: 50px;
       margin-left: 10px;
     }
   }

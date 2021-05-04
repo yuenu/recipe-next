@@ -16,9 +16,9 @@
             alt="favorite"
           />
           <div class="product__description u-text-align-center">
-            <h2 class="product__description--1">Multiple</h2>
+            <h2 class="product__description--1">{{ t('home.product.heading1-1')}}</h2>
             <h6 class="product__description--2">
-              More than 6000 kinds of meals
+              {{ t('home.product.heading1-2')}}
             </h6>
           </div>
         </div>
@@ -32,10 +32,10 @@
         />
         <div class="product__body--2">
           <div class="product__description u-text-align-center">
-            <h2 class="product__description--1">special meals</h2>
-            <h1 class="product__description--2">1 month free</h1>
+            <h2 class="product__description--1">{{ t('home.product.heading2-1')}}</h2>
+            <h1 class="product__description--2">{{ t('home.product.heading2-2')}}</h1>
             <h6 class="product__description--3">
-              Use our recipe to happy meals
+              {{ t('home.product.heading2-3')}}
             </h6>
           </div>
         </div>
@@ -55,13 +55,28 @@
             alt="health"
           />
           <div class="product__description u-text-align-center">
-            <h2 class="product__description--1">Cookself</h2>
+            <h2 class="product__description--1">{{ t('home.product.heading3-1')}}</h2>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+export default defineComponent({
+  setup () {
+    const { t } = useI18n()
+
+    return {
+      t
+    }
+  }
+})
+</script>
 
 <style lang="scss" scoped>
 .product {
@@ -143,7 +158,7 @@
 
     &--3 {
       font-size: 1rem;
-      font-weight: 300;
+      font-weight: 400;
     }
   }
 

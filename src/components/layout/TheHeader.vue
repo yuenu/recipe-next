@@ -503,6 +503,14 @@ export default defineComponent({
     width: 100%;
     justify-content: space-evenly;
     font-size: 1.4rem;
+
+    &-box {
+      cursor: pointer;
+    }
+
+    &-box:hover {
+      color: $color-primary;
+    }
   }
 }
 

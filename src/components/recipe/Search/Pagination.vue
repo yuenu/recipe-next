@@ -1,7 +1,7 @@
 <template>
-  <div class="pagination" v-if="!!getMeals.length">
+  <div class="pagination">
     <div
-      :class="['pagination__link' ,'prev', { disabled: !hasPrev}]"
+      :class="['pagination__link', 'prev', { disabled: !hasPrev }]"
       href="#"
       @click="prevPage"
     >
@@ -72,6 +72,7 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     watch(getMeals, (_value, _oldValue) => {
       currentPage.value = 1
+      hasNext.value = true
 
       if (pages.value === 1) {
         hasPrev.value = false
@@ -81,6 +82,11 @@ export default defineComponent({
 
     onMounted(() => {
       hasNext.value = pages.value !== 1
+      // Initial meal list, if no data then pagination disable
+      if (getMeals.value.length === 0) {
+        hasPrev.value = false
+        hasNext.value = false
+      }
     })
 
     return {
@@ -117,20 +123,27 @@ export default defineComponent({
     }
 
     &.current {
-      color:#fff;
+      color: $color-white;
     }
   }
 }
 
 .pagination__link.disabled {
   pointer-events: none;
-  background:#fff;
-  color:#ddd;
+  background: $color-white;
+  color: #ddd;
 }
 
-@media (max-width:476px) {
+@media (max-width: 476px) {
   .pagination {
     margin: 20px 0 0 0;
+
+    &__link {
+      &:hover {
+        background: transparent;
+        color: #000;
+      }
+    }
   }
 }
 </style>

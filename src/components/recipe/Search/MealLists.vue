@@ -393,6 +393,9 @@ export default defineComponent({
     &__add {
       transform: translateY(0);
       padding: 5px;
+      position: absolute;
+      bottom: 5vh;
+      left: 0;
     }
   }
 
@@ -409,9 +412,6 @@ export default defineComponent({
       max-width: 250px;
     }
 
-    &__content {
-      height: 120px;
-    }
   }
 }
 
@@ -475,7 +475,7 @@ export default defineComponent({
       padding: 3px;
       border-radius: 0;
       float: right;
-      width: 90px;
+      bottom:0;
     }
   }
 
