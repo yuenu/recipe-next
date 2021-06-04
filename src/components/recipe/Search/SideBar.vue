@@ -35,7 +35,7 @@
 <script lang="ts">
 import { defineComponent, computed, inject, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import RecipeStore from '@/store/index'
+import RecipeStore from '@/store'
 import Arrow from '@/components/UI/Icon/Arrow.vue'
 
 import { useI18n } from 'vue-i18n'

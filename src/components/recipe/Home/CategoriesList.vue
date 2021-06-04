@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, computed, ref } from 'vue'
-import RecipeStore from '@/store/index'
+import RecipeStore from '@/store'
 import CategoriesListMeals from '@/components/recipe/Home/CategoriesListMeals.vue'
 
 import { useI18n } from 'vue-i18n'

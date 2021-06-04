@@ -16,9 +16,11 @@
             alt="favorite"
           />
           <div class="product__description u-text-align-center">
-            <h2 class="product__description--1">{{ t('home.product.heading1-1')}}</h2>
+            <h2 class="product__description--1">
+              {{ t('home.product.heading1-1') }}
+            </h2>
             <h6 class="product__description--2">
-              {{ t('home.product.heading1-2')}}
+              {{ t('home.product.heading1-2') }}
             </h6>
           </div>
         </div>
@@ -32,10 +34,14 @@
         />
         <div class="product__body--2">
           <div class="product__description u-text-align-center">
-            <h2 class="product__description--1">{{ t('home.product.heading2-1')}}</h2>
-            <h1 class="product__description--2">{{ t('home.product.heading2-2')}}</h1>
+            <h2 class="product__description--1">
+              {{ t('home.product.heading2-1') }}
+            </h2>
+            <h1 class="product__description--2">
+              {{ t('home.product.heading2-2') }}
+            </h1>
             <h6 class="product__description--3">
-              {{ t('home.product.heading2-3')}}
+              {{ t('home.product.heading2-3') }}
             </h6>
           </div>
         </div>
@@ -55,7 +61,9 @@
             alt="health"
           />
           <div class="product__description u-text-align-center">
-            <h2 class="product__description--1">{{ t('home.product.heading3-1')}}</h2>
+            <h2 class="product__description--1">
+              {{ t('home.product.heading3-1') }}
+            </h2>
           </div>
         </div>
       </div>
@@ -80,7 +88,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .product {
-  max-width: $container-MAX-width;
+  max-width: $container-max-width;
   padding: 2rem 0;
 
   &__container {
@@ -157,7 +165,8 @@ export default defineComponent({
     }
 
     &--3 {
-      font-size: 1rem;
+      margin-top: 0.6rem;
+      font-size: 1.2rem;
       font-weight: 400;
     }
   }

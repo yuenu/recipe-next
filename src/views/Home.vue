@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeMount, inject } from 'vue'
-import RecipeStore from '@/store/index'
+import RecipeStore from '@/store'
 
 import Hero from '@/components/recipe/Home/Hero.vue'
 import Introduction from '@/components/recipe/Home/Introduction.vue'
@@ -62,7 +62,7 @@ export default defineComponent({
 }
 
 .container {
-  max-width: $container-MAX-width;
+  max-width: $container-max-width;
   width: 100%;
   display: flex;
   flex-direction: column;

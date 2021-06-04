@@ -7,17 +7,22 @@
     "projects": "其他作品"
   },
   "home": {
+    "header": {
+      "location": "台中市台灣大道",
+      "collection": "蒐藏",
+      "collection_description": "找尋你喜愛的料理"
+    },
     "hero": {
       "heading": "為你自己做料理",
       "secondary_heading": "每天都有新食譜!",
-      "ctaBtn": "發現 !"
+      "ctaBtn": "食譜"
     },
     "intro": {
       "heading": "瑪格麗塔披薩",
-      "description": "瑪格麗特披薩（Margherita）是義大利的一種披薩餅，也是拿坡里披薩的代表。一般說法認為瑪格麗特披薩這個名字是來自於義大利王妃瑪格麗特。由於瑪格麗特王妃認為這種披薩上「綠色的羅勒、白色的莫薩里拉乾酪、紅色的番茄醬好比義大利國旗」，對這種披薩十分鍾愛，因此用自己的名字命名了這款披薩[1]。發明瑪格麗塔披薩的店家至今仍無定論，拿坡里的兩家披薩店Pietro... e basta così（現改名為Pizzeria Brandi）和Pizzeria Antica Port'Alba都自稱是瑪格麗塔披薩的發明者。",
+      "description": "瑪格麗特披薩（Margherita）是義大利的一種披薩餅，也是拿坡里披薩的代表。一般說法認為瑪格麗特披薩這個名字是來自於義大利王妃瑪格麗特。由於瑪格麗特王妃認為這種披薩上「綠色的羅勒、白色的莫薩里拉乾酪、紅色的番茄醬好比義大利國旗」，對這種披薩十分鍾愛，因此用自己的名字命名了這款披薩。發明瑪格麗塔披薩的店家至今仍無定論，拿坡里的兩家披薩店Pietro... e basta così（現改名為Pizzeria Brandi）和Pizzeria Antica Port'Alba都自稱是瑪格麗塔披薩的發明者。",
       "icon1": "快速",
       "icon2": "健康",
-      "icon3": "點子"
+      "icon3": "創意"
     },
     "rail": {
       "salay": {
@@ -39,11 +44,11 @@
     },
     "product": {
       "heading1-1": "超多樣",
-      "heading1-2": "超過一千多種食譜",
-      "heading2-1": "美味的料理",
-      "heading2-2": "終身免費",
+      "heading1-2": "超過三百多種食譜",
+      "heading2-1": "簡單的",
+      "heading2-2": "自己做料理",
       "heading2-3": "找到你喜愛的料理",
-      "heading3-1": "自己煮"
+      "heading3-1": "健康"
     }
   },
   "contact": {

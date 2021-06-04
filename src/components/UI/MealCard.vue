@@ -18,7 +18,7 @@
       v-imageLoad="{ src: meal.strMealThumb, alt: meal.strMeal, className: 'mealCard__photo' }"
     />
     <div class="mealCard__enter" @click.prevent="setModalOpen(meal.idMeal)">
-      <Link class="mealCard__enter-img" />
+      <LinkIcon class="mealCard__enter-img" />
     </div>
 
     <div class="mealCard__content">
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="mealCard__rate">
-        <Star />
+        <StarIcon />
       </div>
     </div>
     <button class="mealCard__add" @click.prevent="setModalOpen(meal.idMeal)">
@@ -44,11 +44,10 @@ import {
   computed,
   inject
 } from 'vue'
-import RecipeStore from '@/store/index'
+import RecipeStore from '@/store'
 
-// UI
-import Star from '@/components/UI/Icon/Star.vue'
-import Link from '@/components/UI/Icon/Link.vue'
+import StarIcon from '@/components/UI/Icon/Star.vue'
+import LinkIcon from '@/components/UI/Icon/Link.vue'
 
 import MealModal from '@/components/recipe/MealModal.vue'
 import Skeleton from '@/components/UI/Skeleton.vue'
@@ -56,8 +55,8 @@ import Skeleton from '@/components/UI/Skeleton.vue'
 export default defineComponent({
   components: {
     MealModal,
-    Star,
-    Link,
+    StarIcon,
+    LinkIcon,
     Skeleton
   },
   emits: ['modalStatus'],

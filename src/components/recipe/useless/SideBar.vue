@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import RecipeStore from '@/store/index'
+import RecipeStore from '@/store'
 
 export default defineComponent({
   setup () {

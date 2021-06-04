@@ -1,11 +1,8 @@
 <template>
   <div class="googleMap">
-    <div
-      class="mapDiv"
-      ref="mapDiv"
-    ></div>
+    <h1 class="googleMap__heading">地圖資訊</h1>
+    <div class="mapDiv" ref="mapDiv"></div>
   </div>
-
 </template>
 
 <script lang="ts">
@@ -24,7 +21,9 @@ export default defineComponent({
     const loader = new Loader({ apiKey: googleMapsApiKey, language: 'zh_TW' })
 
     function initMap () {
-      if (!mapDiv.value) { return }
+      if (!mapDiv.value) {
+        return
+      }
 
       const map = ref<google.maps.Map>()
       const marker = ref<google.maps.Marker>()
@@ -35,20 +34,23 @@ export default defineComponent({
         zoom: 16
       })
 
-      geocoder.geocode({ address: 'Taichung City Government' }, (results, status) => {
-        if (status === 'OK' && results) {
-          if (!map.value) return
-          map.value.setCenter(results[0].geometry.location)
-          marker.value = new google.maps.Marker({
-            map: map.value,
-            position: results[0].geometry.location
-          })
-        } else {
-          console.log(
-            'Geocode was not successful for the following reason: ' + status
-          )
+      geocoder.geocode(
+        { address: 'Taichung City Government' },
+        (results, status) => {
+          if (status === 'OK' && results) {
+            if (!map.value) return
+            map.value.setCenter(results[0].geometry.location)
+            marker.value = new google.maps.Marker({
+              map: map.value,
+              position: results[0].geometry.location
+            })
+          } else {
+            console.log(
+              'Geocode was not successful for the following reason: ' + status
+            )
+          }
         }
-      })
+      )
     }
 
     onMounted(async () => {
@@ -65,16 +67,24 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .googleMap {
-  width:100%;
+  width: 100%;
   margin: 0 0 5rem 0;
+
+  &__heading {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+    // display: inline-block;
+  }
 }
 .mapDiv {
-  height:60vh;
+  height: 60vh;
 }
 
-@media (max-width:1360px) {
+@media (max-width: 1360px) {
   .googleMap {
-    padding:0 10px;
+    padding: 0 10px;
     margin: 0 0 2.5rem 0;
   }
 }

@@ -13,7 +13,6 @@
         class="card__box"
         v-for="meal in handlePageMeals"
         :key="meal.idMeal"
-        @click="onModalOpen(meal.idMeal)"
       >
         <div class="card__box__top">
           <div class="card__box__cover"></div>
@@ -21,24 +20,30 @@
             <CardSkeleton
               v-imageLoad="{
                 src: meal.strMealThumb,
-                alt: meal.strCategory,
+                alt: meal.strMeal,
                 className: 'card__img',
               }"
             />
-            <div class="enter">
-              <Link class="enter__img" />
+            <div class="collect">
+              <HeartIcon
+                class="collect__img"
+                :collected="meal.collected"
+                @click="handleCollection(meal)"
+              />
             </div>
           </div>
           <div class="card__content">
-            <div class="card__content__left">
-              <div class="card__title">
-                <div class="card__title__text">{{ meal.strMeal }}</div>
-              </div>
-              <div class="card__rate">
-                <Star />
-              </div>
+            <div class="card__title">
+              <div class="card__title__text">{{ meal.strMeal }}</div>
             </div>
-            <button class="card__add">
+            <div class="card__rate">
+              <StarIcon />
+            </div>
+
+            <button
+              class="card__hovered"
+              @click.stop="onModalOpen(meal.idMeal)"
+            >
               View recipe
             </button>
           </div>
@@ -52,33 +57,31 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref, inject, watchEffect } from 'vue'
-import RecipeStore from '@/store/index'
+import RecipeStore, { CollectionMealType } from '@/store'
 
 import MealModal from '@/components/recipe/MealModal.vue'
 import Pagination from './Pagination.vue'
 import CardSkeleton from '@/components/recipe/Search/CardSkeleton.vue'
-
-import Link from '@/components/UI/Icon/Link.vue'
-import Star from '@/components/UI/Icon/Star.vue'
-
 import Donate from '@/components/recipe/Search/Donate.vue'
+
+import HeartIcon from '@/components/UI/Icon/Heart.vue'
+import StarIcon from '@/components/UI/Icon/Star.vue'
 
 export default defineComponent({
   components: {
     MealModal,
-    Link,
-    Star,
+    StarIcon,
     Pagination,
     CardSkeleton,
-    Donate
+    Donate,
+    HeartIcon
   },
   inject: ['store'],
   setup () {
     const store = inject('store', RecipeStore)
 
     const getMeals = computed(() => store.getters.getMeals)
-
-    const isLoading = computed(() => store.getters.dataIsLoading)
+    // const isLoading = computed(() => store.getters.getDataIsLoading)
 
     /** Modal controal */
     const modalStatus = ref(false)
@@ -104,6 +107,12 @@ export default defineComponent({
 
     function changePage (page: number) {
       currentPage.value = page
+    }
+
+    /** Collection */
+
+    function handleCollection (meal: CollectionMealType) {
+      store.ADD_COLLECTED_RECIPE(meal)
     }
 
     const handlePageMeals = computed(() => {
@@ -137,8 +146,8 @@ export default defineComponent({
       mealId,
       changePage,
       handlePageMeals,
-      isLoading,
-      isEmpty
+      isEmpty,
+      handleCollection
     }
   }
 })
@@ -257,8 +266,8 @@ export default defineComponent({
     white-space: normal;
   }
 
-  &__add {
-    font-size: 1.2rem;
+  &__hovered {
+    margin-top: 1.8rem;
     padding: 10px 0;
     width: 100%;
     border-radius: 23px;
@@ -270,20 +279,18 @@ export default defineComponent({
     font-family: 'Oswald', sans-serif;
     transition: 0.42s all ease;
 
-    transform: translateY(100%);
-
     &:hover {
       background: #333;
       color: #fdb926;
     }
   }
 
-  &__box:hover &__add {
-    transform: translateY(20%);
-  }
+  // &__box:hover &__hovered {
+  //   transform: translateY(20%);
+  // }
 }
 
-.enter {
+.collect {
   position: absolute;
   top: 35%;
   left: 42%;
@@ -297,12 +304,11 @@ export default defineComponent({
   &__img {
     width: 40px;
     height: auto;
-    fill: #333;
     background-size: 50px 50px;
   }
 }
 
-.card__box:hover .enter {
+.card__box:hover .collect {
   opacity: 1;
   transform: translatex(0px);
 }
@@ -368,14 +374,13 @@ export default defineComponent({
       transform: translateY(0);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
     }
 
     &__box:hover &__content {
       transform: translateY(0);
     }
 
-    &__box:hover &__add {
+    &__box:hover &__hovered {
       transform: translateY(0);
     }
 
@@ -390,16 +395,12 @@ export default defineComponent({
       }
     }
 
-    &__add {
-      transform: translateY(0);
+    &__hovered {
       padding: 5px;
-      position: absolute;
-      bottom: 5vh;
-      left: 0;
     }
   }
 
-  .enter {
+  .collect {
     display: none;
   }
 }
@@ -411,7 +412,6 @@ export default defineComponent({
     &__box {
       max-width: 250px;
     }
-
   }
 }
 
@@ -456,11 +456,6 @@ export default defineComponent({
       height: auto;
       display: flex;
       justify-content: space-between;
-      padding: 0 0 0 6px;
-    }
-
-    &__content__left {
-      width: 170px;
     }
 
     &__title {
@@ -471,11 +466,11 @@ export default defineComponent({
       transform: scale(1);
     }
 
-    &__add {
+    &__hovered {
       padding: 3px;
       border-radius: 0;
       float: right;
-      bottom:0;
+      bottom: 0;
     }
   }
 

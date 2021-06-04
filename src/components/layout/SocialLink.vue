@@ -6,7 +6,7 @@
       href="https://www.facebook.com/"
       class="social__link"
     >
-      <Facebook class="social__link--icon" />
+      <FacebookIcon class="social__link--icon" />
     </a>
     <a
       target="_blank"
@@ -14,7 +14,7 @@
       href="https://twitter.com/?lang=zh-tw"
       class="social__link"
     >
-      <Twitter class="social__link--icon" />
+      <TwitterIcon class="social__link--icon" />
     </a>
     <a
       target="_blank"
@@ -22,21 +22,21 @@
       href="https://www.instagram.com/"
       class="social__link"
     >
-      <Instagram class="social__link--icon" />
+      <InstagramIcon class="social__link--icon" />
     </a>
   </div>
 </template>
 
 <script lang="ts">
-import Facebook from '@/components/UI/Icon/Facebook.vue'
-import Twitter from '@/components/UI/Icon/Twitter.vue'
-import Instagram from '@/components/UI/Icon/Instagram.vue'
+import FacebookIcon from '@/components/UI/Icon/Facebook.vue'
+import TwitterIcon from '@/components/UI/Icon/Twitter.vue'
+import InstagramIcon from '@/components/UI/Icon/Instagram.vue'
 
 export default {
   components: {
-    Facebook,
-    Twitter,
-    Instagram
+    FacebookIcon,
+    TwitterIcon,
+    InstagramIcon
   }
 }
 </script>
@@ -44,12 +44,14 @@ export default {
 <style lang="scss" scoped>
 .social {
   display: flex;
+  align-items: center;
 
   &__link {
     text-decoration: underline;
     display:inline-block;
     width:2.5rem;
     height:2.5rem;
+
     border-radius:50%;
     -webkit-box-pack: center;
     -webkit-box-align:center;
@@ -57,7 +59,7 @@ export default {
     display:flex;
     margin-right:5px;
     position:relative;
-    top:-7px;
+
     transition:0.5 all;
     opacity:0.4;
 

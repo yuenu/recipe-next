@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, onBeforeMount, ref } from 'vue'
-import RecipeStore from '@/store/index'
+import RecipeStore from '@/store'
 import type { Category } from '@/apis/response.type'
 import Check from '@/components/UI/Icon/Check.vue'
 

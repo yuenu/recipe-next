@@ -13,11 +13,10 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeMount, inject, computed } from 'vue'
-import RecipeStore from '@/store/index'
+import RecipeStore from '@/store'
 
 import MealLists from '@/components/recipe/Search/MealLists.vue'
 import SideBar from '@/components/recipe/Search/SideBar.vue'
-
 import Contact from '@/components/recipe/Home/Contact.vue'
 
 export default defineComponent({
@@ -46,7 +45,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .result {
-  max-width: $container-MAX-width;
+  max-width: $container-max-width;
   margin: 2rem auto;
   width: 100%;
 

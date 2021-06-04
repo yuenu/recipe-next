@@ -22,6 +22,7 @@ export default defineComponent({})
 
 <style lang="scss" scoped>
 .donate {
+  align-self: end;
   width: calc(100% - 1rem);
   background-color: rgba($color-primary, 0.8);
   height: 460px;
@@ -65,15 +66,13 @@ export default defineComponent({})
 
 .sponsor-btn {
   padding: 8px 36px;
-  background: linear-gradient(
-    90deg,
-    rgba(29, 107, 221, 1) 0%,
-    rgba(183, 148, 233, 1) 100%
-  );
-  color: #ddd;
+  background: rgba($color-primary, 0.7);
+  color: $color-white;
   border: 0;
   border-radius: 100px;
-  transition: background 0.5s;
+  transition: background-color 0.3s ease-out;
+  box-shadow: 1px 4px 10px rgba($color-black, 0.2);
+
   cursor: pointer;
   position: absolute;
   bottom: -100px;
@@ -82,12 +81,12 @@ export default defineComponent({})
   font-size: 20px;
 
   &:hover {
-    background: linear-gradient(
-      90deg,
-      rgba(183, 148, 233, 1) 0%,
-      rgba(29, 107, 221, 1) 100%
-    );
-    color: $color-white;
+    background: $color-primary;
+  }
+
+  &:active {
+    transform: translate(0px, 1px);
+    box-shadow: 1px 2px 8px rgba($color-black, 0.2);
   }
 }
 

@@ -1,12 +1,17 @@
 {
   "navigation": {
-    "home" : "home",
+    "home" : "Home",
     "meals": "Meals",
     "about": "About",
     "settings": "Settings",
     "projects": "Others Projects"
   },
   "home": {
+    "header": {
+      "location": "Xitun Dist., Taichung City",
+      "collection": "Collection Recipe",
+      "collection_description": "Find your favorite reipce"
+    },
     "hero": {
       "heading": "Make meal by your own",
       "secondary_heading": "You can discover thousands of meals on here every day!",

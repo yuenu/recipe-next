@@ -21,6 +21,7 @@ export type CategoryMeals = {
   idMeal: string
   strMeal: string
   strMealThumb: string
+  collected?: boolean
 }
 
 export type meal = {

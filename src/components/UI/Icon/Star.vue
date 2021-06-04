@@ -18,7 +18,7 @@
 .star,
 svg {
   fill: #fdb926;
-  width: 12px;
+  width: 10px;
   margin: 0 2px;
 }
 </style>

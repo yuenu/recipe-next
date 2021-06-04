@@ -1,6 +1,6 @@
 <template>
   <TheHeader />
-  <main role="main">
+  <main role="main" id="main">
     <router-view v-slot="{ Component }">
       <transition name="route" mode="out-in">
         <component :is="Component" />
@@ -17,7 +17,7 @@ import TheHeader from '@/components/layout/TheHeader.vue'
 import TheFooter from '@/components/layout/TheFooter.vue'
 import ScrollTop from '@/components/layout/ScrollTop.vue'
 
-import store from '@/store/index'
+import store from '@/store'
 
 export default defineComponent({
   components: {
@@ -58,6 +58,10 @@ body {
   margin-bottom: 32px;
   font-family: 'Oswald', 'Noto Sans TC', 'Microsoft Yahei', sans-serif;
   overflow-x: hidden;
+}
+
+#main.sticky {
+  padding-top: 100px;
 }
 
 </style>

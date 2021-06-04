@@ -83,7 +83,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .introduction-section {
-  max-width: $container-MAX-width;
+  max-width: $container-max-width;
   width: 100%;
   margin: 5rem 0 3rem 0;
   padding: 2rem 0;
@@ -99,7 +99,7 @@ export default defineComponent({
   align-items: center;
 
   &__heading {
-    font-size: clamp(40px, 3vw, 48px);
+    font-size: 42px;
     font-weight: 400;
   }
 

@@ -33,19 +33,19 @@
           <hr class="divide" />
           <div class="content__info">
             <div class="info-box">
-              <Location class="info-box--icon" />
+              <LocationIcon class="info-box--icon" />
               <span class="info-box--desc">
                 {{ t('contact.location') }}
               </span>
             </div>
             <div class="info-box">
-              <Phone class="info-box--icon" />
+              <PhoneIcon class="info-box--icon" />
               <a href="tel: 0988-XXX-XXX" class="info-box--desc">
                 0988-XXX-XXX
               </a>
             </div>
             <div class="info-box">
-              <Clock class="info-box--icon" />
+              <ClockIcon class="info-box--icon" />
               <span class="info-box--desc">
                 {{ t('contact.time1') }}
                 <br />
@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-    <div class="instagram">
+    <div class="ingredient">
       <div class="container">
         <div class="content">
           <div class="content__heading u-margin-bottom-small">
@@ -72,7 +72,7 @@
           <div class="content__info ins">
             <div
               class="ins-box"
-              v-for="ins in instagram"
+              v-for="ins in ingredient"
               :key="ins.idCategory"
               :title="ins.strCategoryDescription"
             >
@@ -93,24 +93,23 @@
 <script lang="ts">
 import { defineComponent, inject, computed } from 'vue'
 import Email from '@/components/UI/Icon/Email.vue'
-import Clock from '@/components/UI/Icon/Clock.vue'
-import Phone from '@/components/UI/Icon/Phone.vue'
-import Location from '@/components/UI/Icon/Location.vue'
+import ClockIcon from '@/components/UI/Icon/Clock.vue'
+import PhoneIcon from '@/components/UI/Icon/Phone.vue'
+import LocationIcon from '@/components/UI/Icon/Location.vue'
 
 import SocialLink from '@/components/layout/SocialLink.vue'
 
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
-import RecipeStore from '@/store/index'
+import RecipeStore from '@/store'
 
 export default defineComponent({
-  name: 'contact',
   components: {
     Email,
-    Clock,
-    Phone,
-    Location,
+    ClockIcon,
+    PhoneIcon,
+    LocationIcon,
     SocialLink
   },
   setup () {
@@ -119,7 +118,7 @@ export default defineComponent({
     const store = inject('store', RecipeStore)
     const router = useRouter()
 
-    const instagram = computed(() => {
+    const ingredient = computed(() => {
       return store.getters.getCategory.filter(cat => {
         return +cat.idCategory <= 8
       })
@@ -130,7 +129,7 @@ export default defineComponent({
       router.push({ name: 'searchResult' })
     }
 
-    return { instagram, searchIns, t }
+    return { ingredient, searchIns, t }
   }
 })
 </script>

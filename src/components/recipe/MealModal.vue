@@ -67,7 +67,7 @@ import {
   reactive,
   inject
 } from 'vue'
-import RecipeStore from '@/store/index'
+import RecipeStore from '@/store'
 import Close from '@/components/UI/Icon/Close.vue'
 import Skeleton from '@/components/UI/Skeleton.vue'
 

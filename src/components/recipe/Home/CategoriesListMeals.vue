@@ -44,7 +44,7 @@ import {
   watch,
   nextTick
 } from 'vue'
-import RecipeStore from '@/store/index'
+import RecipeStore from '@/store'
 import MealCard from '@/components/UI/MealCard.vue'
 
 export default defineComponent({

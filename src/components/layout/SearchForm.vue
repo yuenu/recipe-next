@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, inject, onMounted } from 'vue'
-import RecipeStore from '@/store/index'
+import RecipeStore from '@/store'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
