@@ -6,7 +6,7 @@
       :mealId="mealId"
     />
     <div v-if="isEmpty" class="dataEmpty">
-      <h2 class="dataEmpty-text">No Data</h2>
+      <h2 class="dataEmpty-text">{{ t('noResult')}}</h2>
     </div>
     <div v-else-if="!isEmpty" class="card">
       <div
@@ -67,6 +67,8 @@ import Donate from '@/components/recipe/Search/Donate.vue'
 import HeartIcon from '@/components/UI/Icon/Heart.vue'
 import StarIcon from '@/components/UI/Icon/Star.vue'
 
+import { useI18n } from 'vue-i18n'
+
 export default defineComponent({
   components: {
     MealModal,
@@ -78,6 +80,7 @@ export default defineComponent({
   },
   inject: ['store'],
   setup () {
+    const { t } = useI18n()
     const store = inject('store', RecipeStore)
 
     const getMeals = computed(() => store.getters.getMeals)
@@ -110,7 +113,6 @@ export default defineComponent({
     }
 
     /** Collection */
-
     function handleCollection (meal: CollectionMealType) {
       store.ADD_COLLECTED_RECIPE(meal)
     }
@@ -130,15 +132,15 @@ export default defineComponent({
 
     /** Card skeleton */
     const isEmpty = ref(true)
-
     const isSearched = computed(() => store.getters.getSearchName)
 
     watchEffect(() => {
-      isEmpty.value = !(getMeals.value.length !== 0)
+      isEmpty.value = !(getMeals.value && getMeals.value.length !== 0)
       currentPage.value = isSearched.value ? 1 : currentPage.value
     })
 
     return {
+      t,
       getMeals,
       isModalOpen,
       onModalOpen,

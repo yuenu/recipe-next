@@ -10,7 +10,7 @@
       </div>
       <div
         class="loading"
-        style="width:100%; marginTop: 10px;"
+        style="width:100%; margin: 10px;"
         v-loadTest="{ text: 'apple' }"
       ></div>
 
@@ -34,7 +34,6 @@
         class="box"
         v-for="da in fakeData"
         :key="da.id"
-        :ref="setBoxRef"
       >
         {{ da.id }} - {{ da.desc }}
       </div>
@@ -46,6 +45,17 @@
       skeletonLoad
     >
       <span>This is skeleton text test line!</span>
+    </div>
+
+    <div class="clipborad">
+      <div class="text" ref="textEl">
+        Lorem ipsum <span style="color: red;">dolor </span>sit amet consectetur adipisicing elit. Natus debitis
+        laudantium quisquam aut pariatur consectetur, corrupti deserunt error
+        porro enim maxime amet earum quis, quidem consequatur excepturi aliquid
+        asperiores sequi.
+      </div>
+      <button @click="copy">Copy</button>
+      <!-- <button @click="copyToClipboard(textEl?.value.innterHTML)">Copy2</button> -->
     </div>
   </div>
 </template>
@@ -82,11 +92,36 @@ export default defineComponent({
 
     const progressEl = ref<HTMLInputElement>()
 
-    const boxRefs: HTMLInputElement[] = []
-    const setBoxRef = (el: HTMLInputElement) => {
-      if (el) {
-        boxRefs.push(el)
+    const textEl = ref<HTMLInputElement>()
+    function copy () {
+      console.log(textEl.value)
+      console.log(document.getElementsByClassName('clipborad')[0])
+      if (textEl.value) {
+        const range = document.createRange()
+
+        // const texts = textEl.value.innerHTML
+
+        range.selectNode(textEl.value)
+
+        const selection = window.getSelection()
+
+        if (selection) {
+          selection.removeAllRanges()
+          selection.addRange(range)
+          document.execCommand('copy')
+          selection.removeAllRanges()
+        }
       }
+    }
+
+    function copyToClipboard (text: string) {
+      const el = document.createElement('textarea')
+      el.addEventListener('focusin', e => e.stopPropagation())
+      el.value = text
+      document.body.appendChild(el)
+      el.select()
+      document.execCommand('copy')
+      document.body.removeChild(el)
     }
 
     function startProgress () {
@@ -100,8 +135,6 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      boxRefs[0].classList.add('123test')
-
       const timeoutID = setInterval(() => {
         if (progressEl.value) {
           const computedStyle = getComputedStyle(progressEl.value)
@@ -125,9 +158,11 @@ export default defineComponent({
       progressEl,
       startProgress,
       fakeData,
-      setBoxRef,
       t,
-      changeLang
+      changeLang,
+      copy,
+      textEl,
+      copyToClipboard
     }
   }
 })

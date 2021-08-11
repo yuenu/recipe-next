@@ -1,5 +1,6 @@
 <template>
   <div class="collection">
+    <div v-if="getCollectionCount !== 0" class="collection__count-heart">{{ getCollectionCount }}</div>
     <HeartIcon @onCollected="onCollected" />
     <div :class="['collection__list', { active: collectionIsOpen }]">
       <div class="collection__heading">{{ t('home.header.collection') }}
@@ -122,6 +123,21 @@ export default defineComponent({
     top: 50%;
     left: -8px;
     margin-top: -11px;
+  }
+
+  &__count-heart {
+    position: absolute;
+    top:-5px;
+    right:-5px;
+    font-size:8px;
+    width:1rem;
+    height:1.1rem;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:50%;
+    background:$color-primary;
+    color:#fff;
   }
 
   &__list {

@@ -15,7 +15,7 @@
     <div class="headerTop__address">
       <LocationIcon class="headerTop__address--icon" />
       <span class="headerTop__address--description">
-        {{ t('home.header.location')}}
+        {{ t('home.header.location') }}
       </span>
     </div>
   </div>
@@ -48,6 +48,8 @@ export default defineComponent({
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  min-height: 65px;
+  position: relative;
 
   &__phone {
     display: flex;
@@ -86,7 +88,11 @@ export default defineComponent({
   }
 
   &__logo {
-    margin-bottom:-8px;
+    margin-bottom: -8px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
   }
 }
 

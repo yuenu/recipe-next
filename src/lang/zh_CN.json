@@ -7,6 +7,11 @@
     "projects": "其他作品"
   },
   "home": {
+    "header": {
+      "location": "台中市台湾大道",
+      "collection": "搜藏",
+      "collection_description": "找寻你喜爱的料理"
+    },
     "hero": {
       "heading": "为你自己做料理",
       "secondary_heading": "每天都有新食谱!",
@@ -71,5 +76,6 @@
     "vegetarian": "蛋奶素",
     "breakfast": "早餐",
     "goat": "山羊"
-  }
+  },
+  "noResult": "没有资料"
 }

@@ -33,7 +33,7 @@ export default defineComponent({
   name: 'Pagination',
   props: {
     getMeals: {
-      required: true,
+      required: false,
       type: Array as PropType<CategoryMeals[]>
     }
   },
@@ -83,7 +83,7 @@ export default defineComponent({
     onMounted(() => {
       hasNext.value = pages.value !== 1
       // Initial meal list, if no data then pagination disable
-      if (getMeals.value.length === 0) {
+      if (getMeals.value && getMeals.value.length === 0) {
         hasPrev.value = false
         hasNext.value = false
       }

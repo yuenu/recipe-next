@@ -9,7 +9,7 @@
   "home": {
     "header": {
       "location": "Xitun Dist., Taichung City",
-      "collection": "Collection Recipe",
+      "collection": "Collection",
       "collection_description": "Find your favorite reipce"
     },
     "hero": {
@@ -76,5 +76,6 @@
     "vegetarian": "Vegetarian",
     "breakfast": "Breakfast",
     "goat": "Goat"
-  }
+  },
+  "noResult": "No Result"
 }

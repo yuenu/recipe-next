@@ -1,5 +1,4 @@
 <template>
-
   <teleport to="body">
     <div class="meal__modal" id="mealModal">
       <div class="close" @click="close">

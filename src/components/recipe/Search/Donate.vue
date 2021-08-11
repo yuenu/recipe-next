@@ -8,8 +8,8 @@
     <div class="donate__content">
       <img src="@/assets/example/free-1.png" alt="free" />
       <div class="donate__heading">Drink</div>
-      <div class="donate__sub">Buy us a coffee</div>
-      <button class="sponsor-btn">Sponsor</button>
+      <div class="donate__sub">Buy me a coffee</div>
+      <button class="sponsor-btn">Donate</button>
     </div>
   </div>
 </template>

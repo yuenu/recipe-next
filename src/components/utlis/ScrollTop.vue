@@ -79,7 +79,7 @@ $color-primary: #ffce2d;
   width: 50px;
   height: 50px;
   right: 2%;
-  bottom: 2%;
+  bottom: 4%;
   border-radius: 50%;
   border: 2px solid $text-color;
   display: none;

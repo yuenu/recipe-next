@@ -15,7 +15,7 @@
 import { defineComponent, provide } from 'vue'
 import TheHeader from '@/components/layout/TheHeader.vue'
 import TheFooter from '@/components/layout/TheFooter.vue'
-import ScrollTop from '@/components/layout/ScrollTop.vue'
+import ScrollTop from '@/components/utlis/ScrollTop.vue'
 
 import store from '@/store'
 
@@ -57,7 +57,7 @@ body {
   flex-direction: column;
   margin-bottom: 32px;
   font-family: 'Oswald', 'Noto Sans TC', 'Microsoft Yahei', sans-serif;
-  overflow-x: hidden;
+  // overflow-x: hidden;
 }
 
 #main.sticky {
