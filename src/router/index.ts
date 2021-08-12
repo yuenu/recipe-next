@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
+import RecipeStore from '@/store'
+import { nextTick } from 'vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -31,6 +33,20 @@ const router = createRouter({
   scrollBehavior (_to, _from, _savedPosition) {
     return { left: 0, top: 0 }
   }
+})
+
+router.beforeEach(async (to, _from, next) => {
+  if (to.path === '/search' && to.query.q) {
+    const query = String(to.query.q)
+    await RecipeStore.SEARCH_MEALS(query)
+  }
+
+  if (to.path === '/search' && to.query.ca) {
+    const category = String(to.query.ca)
+    await RecipeStore.GET_MEALS_BY_CATEGORY(category)
+  }
+
+  next()
 })
 
 export default router

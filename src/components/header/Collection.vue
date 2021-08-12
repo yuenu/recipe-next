@@ -1,10 +1,19 @@
 <template>
   <div class="collection">
-    <div v-if="getCollectionCount !== 0" class="collection__count-heart">{{ getCollectionCount }}</div>
-    <HeartIcon @onCollected="onCollected" />
+    <div v-if="getCollectionCount !== 0" class="collection__count-heart">
+      {{ getCollectionCount }}
+    </div>
+    <HeartIcon
+      @onCollected="onCollected"
+      :getCollectionCount="getCollectionCount"
+    />
     <div :class="['collection__list', { active: collectionIsOpen }]">
-      <div class="collection__heading">{{ t('home.header.collection') }}
-        <span v-if="getCollectionCount !== 0" class="collection__count">({{ getCollectionCount }})</span>
+      <div class="collection__heading">
+        {{ t('home.header.collection') }}
+        <span
+          v-if="getCollectionCount !== 0"
+          class="collection__count"
+        >({{ getCollectionCount }})</span>
       </div>
 
       <div v-if="getCollection.length === 0" class="collection__empty">
@@ -127,17 +136,17 @@ export default defineComponent({
 
   &__count-heart {
     position: absolute;
-    top:-5px;
-    right:-5px;
-    font-size:8px;
-    width:1rem;
-    height:1.1rem;
-    display:flex;
+    top: -8px;
+    right: -8px;
+    font-size: 6px;
+    width: 1rem;
+    height: 1.1rem;
+    display: flex;
     justify-content: center;
     align-items: center;
-    border-radius:50%;
-    background:$color-primary;
-    color:#fff;
+    border-radius: 50%;
+    background: $color-primary;
+    color: #fff;
   }
 
   &__list {

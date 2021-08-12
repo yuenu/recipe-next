@@ -1,5 +1,7 @@
 <template>
+  <!-- <router-link to="/search"> -->
   <button class="ctaButton">{{ t('home.hero.ctaBtn') }}</button>
+  <!-- </router-link> -->
 </template>
 
 <script lang="ts">

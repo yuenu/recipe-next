@@ -117,7 +117,7 @@ export default defineComponent({
 
     &__address,
     &__phone {
-      margin: 5px 0;
+      display: none;
     }
   }
 }

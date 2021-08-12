@@ -364,15 +364,21 @@ export default defineComponent({
       }
     }
 
+    &__box__top {
+      height:100%;
+    }
+
     &__box__cover {
       display: none;
     }
 
-    &__img {
-      width: 100%;
+    &__pic {
+      height:55%;
     }
 
     &__content {
+      height:45%;
+      justify-content: space-around;
       transform: translateY(0);
       display: flex;
       flex-direction: column;

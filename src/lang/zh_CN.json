@@ -77,5 +77,6 @@
     "breakfast": "早餐",
     "goat": "山羊"
   },
-  "noResult": "没有资料"
+  "noResult": "没有资料",
+  "search": "限定英文，Ex:cake丶chocolate"
 }

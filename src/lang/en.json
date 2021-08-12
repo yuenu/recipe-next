@@ -77,5 +77,6 @@
     "breakfast": "Breakfast",
     "goat": "Goat"
   },
-  "noResult": "No Result"
+  "noResult": "No Result",
+  "search": "search"
 }

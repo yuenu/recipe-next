@@ -103,6 +103,7 @@ export default defineComponent({
 
     function animation () {
       setSliderPosition()
+      console.log('animation')
       if (isDragging.value) requestAnimationFrame(animation)
     }
 
@@ -129,6 +130,7 @@ export default defineComponent({
       cancelAnimationFrame(animationID.value)
 
       const movedBy = currentTranslate.value - prevTranslate.value
+      console.log('movedBy', movedBy)
 
       if (movedBy < -100 && currentIndex.value < imagesLen.value - 1) {
         currentIndex.value += 1

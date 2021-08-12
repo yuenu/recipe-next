@@ -42,7 +42,9 @@ const actions = {
     try {
       state.isLoading = true
       state.searchName = input
-      state.meals = await api.searchByName(input)
+      const result = await api.searchByName(input)
+      console.log('search', result)
+      if (result !== null) state.meals = result
       state.isLoading = false
     } catch (e) {
       console.log(e)
@@ -62,9 +64,9 @@ const actions = {
   async GET_MEALS_BY_CATEGORY (category: string) {
     try {
       state.isLoading = true
-
       state.searchName = category
-      state.meals = await api.searchByCategory(category)
+      const result = await api.searchByCategory(category)
+      if (result !== null) state.meals = result
 
       // If has collection meal, fetch meal data after add collected to meal
       if (state.collection.length !== 0) {

@@ -5,9 +5,9 @@
         <input
           :class="['search__tern', { square: inputActive }]"
           type="text"
-          placeholder="Search"
+          :placeholder="t('search')"
           v-model.trim="searchInput"
-          autocapitalize="none"
+          autocapitalize="off"
         />
         <button
           :class="['search__icon', { close: inputActive }]"
@@ -20,9 +20,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, inject, onMounted } from 'vue'
-import RecipeStore from '@/store'
+import { defineComponent, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   props: {
@@ -33,14 +33,13 @@ export default defineComponent({
   },
   emits: ['searchSubmit'],
   setup (props, { emit }) {
-    const store = inject('store', RecipeStore)
+    const { t } = useI18n()
     const router = useRouter()
 
     const searchInput = ref('')
 
     function submitForm () {
       emit('searchSubmit')
-      store.SEARCH_MEALS(searchInput.value)
 
       router.push({ name: 'searchResult', query: { q: searchInput.value } })
       searchInput.value = ''
@@ -61,6 +60,7 @@ export default defineComponent({
       }, 300)
     })
     return {
+      t,
       searchInput,
       submitForm,
       inputActive,
