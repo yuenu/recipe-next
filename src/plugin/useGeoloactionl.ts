@@ -13,7 +13,8 @@ export function useGeolocation<T> () {
   onMounted(() => {
     if (isSupported) {
       watcher = navigator.geolocation.watchPosition(
-        position => (coords.value = position.coords))
+        position => (coords.value = position.coords)
+      )
     }
   })
 

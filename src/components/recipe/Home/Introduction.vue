@@ -40,10 +40,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  computed
-} from 'vue'
+import { defineComponent, computed } from 'vue'
 import Star from '@/components/UI/Icon/Star.vue'
 import CtaButton from '@/components/UI/CtaButton.vue'
 

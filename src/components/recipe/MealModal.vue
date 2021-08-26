@@ -14,7 +14,11 @@
           <Skeleton
             width="100%"
             height="260"
-            v-imageLoad="{ src: meal.mealImgUrl, alt: meal.mealName, className: 'meal__img' }"
+            v-imageLoad="{
+              src: meal.mealImgUrl,
+              alt: meal.mealName,
+              className: 'meal__img',
+            }"
           />
           <a
             :href="meal.mealYoutubeLink"
@@ -54,7 +58,6 @@
       </div>
     </div>
   </teleport>
-
 </template>
 
 <script lang="ts">
@@ -192,7 +195,6 @@ export default defineComponent({
   }
 
   &__media__img {
-
     border-radius: 4px;
     box-shadow: 0px 2px 7px #000;
     object-fit: cover;

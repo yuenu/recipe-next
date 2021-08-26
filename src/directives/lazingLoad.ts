@@ -3,17 +3,14 @@ const options = {
   thresholds: 0
 }
 
-const lazingLoad = new IntersectionObserver(
-  (entries, observer) => {
-    entries.forEach(entry => {
-      console.log('cool')
-      if (entry.isIntersecting) {
-        observer.unobserve(entry.target)
-      }
-    })
-  },
-  options
-)
+const lazingLoad = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    console.log('cool')
+    if (entry.isIntersecting) {
+      observer.unobserve(entry.target)
+    }
+  })
+}, options)
 
 export default {
   beforeMount (el: HTMLInputElement) {

@@ -12,7 +12,9 @@
           :alt="cat.strCategory"
           class="cat__box-img"
         />
-        <div class="cat__box-txt">{{ t(`category.${cat.strCategory.toLowerCase()}`) }}</div>
+        <div class="cat__box-txt">
+          {{ t(`category.${cat.strCategory.toLowerCase()}`) }}
+        </div>
       </div>
     </div>
     <CategoriesListMeals :fetchDone="fetchDone" />
@@ -72,7 +74,7 @@ export default defineComponent({
   gap: 0.6rem;
   overflow: hidden;
   justify-items: center;
-  padding:10px;
+  padding: 10px;
 }
 
 .cat__box {
@@ -82,7 +84,7 @@ export default defineComponent({
   justify-items: center;
   align-items: center;
   width: 150px;
-  height:130px;
+  height: 130px;
   cursor: pointer;
   user-select: none;
   padding: 10px 0;

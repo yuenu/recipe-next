@@ -1,6 +1,6 @@
 <template>
   <div class="carousel" ref="carouselSection">
-    <div class="carousel__section" >
+    <div class="carousel__section">
       <img
         v-for="img in getShowImg"
         :key="img.id"
@@ -195,9 +195,9 @@ export default defineComponent({
   transform: scale(1.2);
 }
 
-@media (max-width:940px) {
+@media (max-width: 940px) {
   .carousel {
-    max-width:600px;
+    max-width: 600px;
   }
 }
 </style>

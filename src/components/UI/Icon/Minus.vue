@@ -7,7 +7,7 @@
     x="0px"
     y="0px"
     viewBox="0 0 16 16"
-    style="enable-background:new 0 0 16 16;"
+    style="enable-background: new 0 0 16 16"
     xml:space="preserve"
   >
     <g>
@@ -24,35 +24,20 @@ S11.309,14,8,14z"
         />
       </g>
     </g>
-    <g>
-    </g>
-    <g>
-    </g>
-    <g>
-    </g>
-    <g>
-    </g>
-    <g>
-    </g>
-    <g>
-    </g>
-    <g>
-    </g>
-    <g>
-    </g>
-    <g>
-    </g>
-    <g>
-    </g>
-    <g>
-    </g>
-    <g>
-    </g>
-    <g>
-    </g>
-    <g>
-    </g>
-    <g>
-    </g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
   </svg>
 </template>

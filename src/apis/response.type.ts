@@ -1,4 +1,3 @@
-
 /**
  * @property {string} idCategory - id
  * @property {string} strCategory - name
@@ -78,5 +77,4 @@ export type meal = {
   strImageSource?: string
   strCreativeCommonsConfirmed?: string
   dateModified?: string
-
 }

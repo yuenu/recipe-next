@@ -48,7 +48,7 @@ export default defineComponent({
 }
 
 .close {
-  z-index:52;
+  z-index: 52;
   cursor: pointer;
   background: transparent;
 

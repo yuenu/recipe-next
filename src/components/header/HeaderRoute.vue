@@ -16,10 +16,7 @@
       </router-link>
     </li>
     <li>
-      <router-link
-        to="/editProfile"
-        class="headerBottom__nav--link login"
-      >
+      <router-link to="/editProfile" class="headerBottom__nav--link login">
         {{ t('navigation.settings') }}
       </router-link>
     </li>

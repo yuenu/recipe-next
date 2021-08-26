@@ -1,7 +1,7 @@
 <template>
   <section class="hero">
     <div class="hero-box">
-      <h2 class="hero-box__heading">{{ t("home.hero.heading") }}</h2>
+      <h2 class="hero-box__heading">{{ t('home.hero.heading') }}</h2>
       <div class="hero-box__text">
         {{ t('home.hero.secondary_heading') }}
       </div>
@@ -48,7 +48,7 @@ export default defineComponent({
   }
 }
 
-@media (max-width:476px) {
+@media (max-width: 476px) {
   .hero-box {
     padding: 0 20px;
   }

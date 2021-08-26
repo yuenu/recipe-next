@@ -23,8 +23,8 @@ module.exports = {
       'error',
       'single',
       {
-        avoidEscape: true,
-      },
+        avoidEscape: true
+      }
     ],
     'vue/max-attributes-per-line': [
       'error',
@@ -32,23 +32,23 @@ module.exports = {
         singleline: 2,
         multiline: {
           max: 1,
-          allowFirstLine: false,
-        },
-      },
+          allowFirstLine: false
+        }
+      }
     ],
     '@typescript-eslint/member-delimiter-style': [
       'error',
       {
         multiline: {
           delimiter: 'none',
-          requireLast: true,
+          requireLast: true
         },
         singleline: {
           delimiter: 'semi',
-          requireLast: false,
-        },
-      },
+          requireLast: false
+        }
+      }
     ],
-    'vue/html-self-closing': 0,
-  },
+    'vue/html-self-closing': 0
+  }
 }

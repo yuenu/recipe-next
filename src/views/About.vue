@@ -1,7 +1,7 @@
 <template>
   <div class="about-section">
-    <div class="card-skeleton" style="display: inline-block;">
-      <div class="img" style="width:275px; height:280px;">
+    <div class="card-skeleton" style="display: inline-block">
+      <div class="img" style="width: 275px; height: 280px">
         <Skeleton
           width="100%"
           height="100%"
@@ -10,7 +10,7 @@
       </div>
       <div
         class="loading"
-        style="width:100%; margin: 10px;"
+        style="width: 100%; margin: 10px"
         v-loadTest="{ text: 'apple' }"
       ></div>
 
@@ -20,7 +20,7 @@
         margin="5px 0"
       />
     </div>
-    <div class="progress-box" style="display: inline-block;">
+    <div class="progress-box" style="display: inline-block">
       <div
         class="progress-bar"
         data-label="Loading..."
@@ -41,7 +41,7 @@
 
     <div
       class="skText"
-      style="margin:20px;"
+      style="margin: 20px"
       skeletonLoad
     >
       <span>This is skeleton text test line!</span>
@@ -49,10 +49,10 @@
 
     <div class="clipborad">
       <div class="text" ref="textEl">
-        Lorem ipsum <span style="color: red;">dolor </span>sit amet consectetur adipisicing elit. Natus debitis
-        laudantium quisquam aut pariatur consectetur, corrupti deserunt error
-        porro enim maxime amet earum quis, quidem consequatur excepturi aliquid
-        asperiores sequi.
+        Lorem ipsum <span style="color: red">dolor </span>sit amet consectetur
+        adipisicing elit. Natus debitis laudantium quisquam aut pariatur
+        consectetur, corrupti deserunt error porro enim maxime amet earum quis,
+        quidem consequatur excepturi aliquid asperiores sequi.
       </div>
       <button @click="copy">Copy</button>
       <!-- <button @click="copyToClipboard(textEl?.value.innterHTML)">Copy2</button> -->

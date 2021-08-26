@@ -1,23 +1,25 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 import RecipeStore from '@/store'
-import { nextTick } from 'vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/search',
     name: 'searchResult',
-    component: () => import(/* webpackChunkName: "search" */ '@/views/SearchResult.vue')
+    component: () =>
+      import(/* webpackChunkName: "search" */ '@/views/SearchResult.vue')
   },
   {
     path: '/editProfile',
     name: 'editProfile',
-    component: () => import(/* webpackChunkName: "editProfile" */ '@/views/UserSettings.vue')
+    component: () =>
+      import(/* webpackChunkName: "editProfile" */ '@/views/UserSettings.vue')
   },
   {
     path: '/about',
     name: 'about',
-    component: () => import(/* webpackChunkName: "About" */ '@/views/About.vue')
+    component: () =>
+      import(/* webpackChunkName: "About" */ '@/views/About.vue')
   },
   {
     path: '/',

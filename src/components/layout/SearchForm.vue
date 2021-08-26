@@ -175,15 +175,14 @@ export default defineComponent({
   }
 }
 
-@media (max-width:476px) {
+@media (max-width: 476px) {
   .search {
-
     &__form {
       width: 270px;
     }
 
     &__tern.square {
-      width:270px;
+      width: 270px;
     }
   }
 }

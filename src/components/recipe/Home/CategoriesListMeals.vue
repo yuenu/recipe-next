@@ -199,7 +199,8 @@ export default defineComponent({
 
       if (slideEl.value) {
         ro.observe(slideEl.value)
-        mealCards.value = document.querySelectorAll<HTMLInputElement>('.mealCard')
+        mealCards.value =
+          document.querySelectorAll<HTMLInputElement>('.mealCard')
       }
     })
 
@@ -214,10 +215,12 @@ export default defineComponent({
 
     async function calcCardMinWidth () {
       await nextTick(() => {
-        mealCards.value = document.querySelectorAll<HTMLInputElement>('.mealCard')
+        mealCards.value =
+          document.querySelectorAll<HTMLInputElement>('.mealCard')
         for (const card of mealCards.value) {
           if (slideEl.value) {
-            card.style.minWidth = (slideEl.value.clientWidth - 24 * 4) / 4 + 'px'
+            card.style.minWidth =
+              (slideEl.value.clientWidth - 24 * 4) / 4 + 'px'
           }
         }
       })

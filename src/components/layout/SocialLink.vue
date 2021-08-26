@@ -48,23 +48,23 @@ export default {
 
   &__link {
     text-decoration: underline;
-    display:inline-block;
-    width:2.5rem;
-    height:2.5rem;
+    display: inline-block;
+    width: 2.5rem;
+    height: 2.5rem;
 
-    border-radius:50%;
+    border-radius: 50%;
     -webkit-box-pack: center;
-    -webkit-box-align:center;
-    justify-content:center;
-    display:flex;
-    margin-right:5px;
-    position:relative;
+    -webkit-box-align: center;
+    justify-content: center;
+    display: flex;
+    margin-right: 5px;
+    position: relative;
 
-    transition:0.5 all;
-    opacity:0.4;
+    transition: 0.5 all;
+    opacity: 0.4;
 
     &:hover {
-      opacity:1;
+      opacity: 1;
       background: $color-primary;
     }
   }
@@ -77,8 +77,7 @@ export default {
     width: 18px;
     fill: $color-gray-dark-1;
     position: relative;
-    top:7px;
+    top: 7px;
   }
-
 }
 </style>

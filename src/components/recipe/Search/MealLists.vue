@@ -6,7 +6,7 @@
       :mealId="mealId"
     />
     <div v-if="isEmpty" class="dataEmpty">
-      <h2 class="dataEmpty-text">{{ t('noResult')}}</h2>
+      <h2 class="dataEmpty-text">{{ t('noResult') }}</h2>
     </div>
     <div v-else-if="!isEmpty" class="card">
       <div
@@ -365,7 +365,7 @@ export default defineComponent({
     }
 
     &__box__top {
-      height:100%;
+      height: 100%;
     }
 
     &__box__cover {
@@ -373,11 +373,11 @@ export default defineComponent({
     }
 
     &__pic {
-      height:55%;
+      height: 55%;
     }
 
     &__content {
-      height:45%;
+      height: 45%;
       justify-content: space-around;
       transform: translateY(0);
       display: flex;

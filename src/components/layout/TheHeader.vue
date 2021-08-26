@@ -118,12 +118,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  ref,
-  onMounted,
-  watchEffect
-} from 'vue'
+import { defineComponent, ref, onMounted, watchEffect } from 'vue'
 
 // Icon
 import Search from '@/components/UI/Icon/Search.vue'
@@ -182,10 +177,14 @@ export default defineComponent({
 
     const rafTimer = ref(0)
     onMounted(() =>
-      document.addEventListener('scroll', function () {
-        cancelAnimationFrame(rafTimer.value)
-        rafTimer.value = requestAnimationFrame(toggleHeaderSticky)
-      }, true)
+      document.addEventListener(
+        'scroll',
+        function () {
+          cancelAnimationFrame(rafTimer.value)
+          rafTimer.value = requestAnimationFrame(toggleHeaderSticky)
+        },
+        true
+      )
     )
 
     watchEffect(() => {

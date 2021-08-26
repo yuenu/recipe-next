@@ -8,7 +8,9 @@
           :key="item.idCategory"
         >
           <div class="card__content">
-            <h2 class="card__content--heading">{{ t(`category.${item.strCategory.toLowerCase()}`) }}</h2>
+            <h2 class="card__content--heading">
+              {{ t(`category.${item.strCategory.toLowerCase()}`) }}
+            </h2>
             <div class="card__content--details">
               {{ textEllipsis(item.strCategoryDescription) }}
             </div>
@@ -54,7 +56,9 @@ export default defineComponent({
 
     onBeforeMount(async () => {
       const categorayData = await store.GET_CATEGORY()
-      if (categorayData) { onCategories.value = categorayData.filter((item) => +item.idCategory <= 3) }
+      if (categorayData) {
+        onCategories.value = categorayData.filter(item => +item.idCategory <= 3)
+      }
     })
     return {
       onCategories,
@@ -70,7 +74,7 @@ export default defineComponent({
   width: 100%;
   height: auto;
   margin: 0 0 3rem 0;
-  padding:2rem 0;
+  padding: 2rem 0;
 }
 
 .card {
@@ -141,8 +145,8 @@ export default defineComponent({
 
 @media (max-width: 920px) {
   .categoryDisplay {
-    margin:0;
-    border-bottom:5px solid #ddd;
+    margin: 0;
+    border-bottom: 5px solid #ddd;
   }
   .card {
     grid-template-columns: 1fr;

@@ -15,7 +15,11 @@
       class="123"
       width="100%"
       height="250"
-      v-imageLoad="{ src: meal.strMealThumb, alt: meal.strMeal, className: 'mealCard__photo' }"
+      v-imageLoad="{
+        src: meal.strMealThumb,
+        alt: meal.strMeal,
+        className: 'mealCard__photo',
+      }"
     />
     <div class="mealCard__enter" @click.prevent="setModalOpen(meal.idMeal)">
       <LinkIcon class="mealCard__enter-img" />
@@ -38,12 +42,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  ref,
-  computed,
-  inject
-} from 'vue'
+import { defineComponent, ref, computed, inject } from 'vue'
 import RecipeStore from '@/store'
 
 import StarIcon from '@/components/UI/Icon/Star.vue'

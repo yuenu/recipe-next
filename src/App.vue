@@ -63,5 +63,4 @@ body {
 #main.sticky {
   padding-top: 100px;
 }
-
 </style>

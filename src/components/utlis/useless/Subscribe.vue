@@ -6,11 +6,13 @@
     <div class="bg-1"></div>
     <div class="content">
       <div class="content__text">
-        <div class="content__text__title u-align-items-center">SIGN UP FOR OUR UPDATE</div>
+        <div class="content__text__title u-align-items-center">
+          SIGN UP FOR OUR UPDATE
+        </div>
         <hr />
         <div class="content__text__sub">
-          To stay up-to-date on our promotions,
-          discounts, sales, special offers and more.
+          To stay up-to-date on our promotions, discounts, sales, special offers
+          and more.
         </div>
       </div>
       <div class="email">
@@ -67,8 +69,8 @@ export default defineComponent({
   padding-top: 3vh;
   img {
     width: 70%;
-    display:block;
-    margin:auto;
+    display: block;
+    margin: auto;
   }
 }
 
@@ -147,7 +149,7 @@ hr {
   }
 
   .bg img {
-    margin:0;
+    margin: 0;
   }
 }
 
@@ -157,20 +159,20 @@ hr {
   }
 
   .bg img {
-    width:50%;
-    margin:0 auto;
+    width: 50%;
+    margin: 0 auto;
   }
 
   .content {
-    margin:5vh 0;
+    margin: 5vh 0;
 
     &__text {
-      width:300px;
+      width: 300px;
     }
   }
 
   .email {
-    margin:0 auto;
+    margin: 0 auto;
   }
 }
 </style>

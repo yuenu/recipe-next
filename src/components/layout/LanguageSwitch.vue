@@ -1,10 +1,25 @@
 <template>
   <ul :class="[isMobile ? 'mobile__lang' : 'lang']">
-    <li :class="[isMobile ? 'mobile__lang-box' : 'lang-box']" @click="changeLang('cn')">简</li>
+    <li
+      :class="[isMobile ? 'mobile__lang-box' : 'lang-box']"
+      @click="changeLang('cn')"
+    >
+      简
+    </li>
     <br />
-    <li :class="[isMobile ? 'mobile__lang-box' : 'lang-box']" @click="changeLang('tw')">繁</li>
+    <li
+      :class="[isMobile ? 'mobile__lang-box' : 'lang-box']"
+      @click="changeLang('tw')"
+    >
+      繁
+    </li>
     <br />
-    <li :class="[isMobile ? 'mobile__lang-box' : 'lang-box']" @click="changeLang('en')">EN</li>
+    <li
+      :class="[isMobile ? 'mobile__lang-box' : 'lang-box']"
+      @click="changeLang('en')"
+    >
+      EN
+    </li>
   </ul>
 </template>
 

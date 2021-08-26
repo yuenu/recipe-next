@@ -69,12 +69,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$text-color:#333;
+$text-color: #333;
 
 $color-primary: #ffce2d;
 
 .scrollToTop {
-  z-index:10;
+  z-index: 10;
   position: fixed;
   width: 50px;
   height: 50px;

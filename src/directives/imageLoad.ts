@@ -62,7 +62,7 @@ const loadTest: Directive = {
 }
 
 const skeletonLoad: Directive = {
-  beforeMount (el: HTMLInputElement, binding) {
+  beforeMount (el: HTMLInputElement) {
     el.classList.add('123')
     const children = el.children
 

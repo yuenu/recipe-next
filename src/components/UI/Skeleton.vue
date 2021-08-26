@@ -31,9 +31,7 @@ export default defineComponent({
     )
 
     const _background = computed(() =>
-      prop.mode === 'dark'
-        ? 'rgba(255, 255, 255, 0.2)'
-        : '#dddbdd'
+      prop.mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : '#dddbdd'
     )
 
     const isManual = computed(() => prop.manual)

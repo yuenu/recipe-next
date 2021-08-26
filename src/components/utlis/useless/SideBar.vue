@@ -64,7 +64,7 @@ export default defineComponent({
     align-items: center;
     cursor: pointer;
     padding: 8px 10px 8px 10px;
-    color:rgb(10,10,10);
+    color: rgb(10, 10, 10);
   }
 
   &__box:first-of-type {
@@ -81,7 +81,7 @@ export default defineComponent({
 
   &__box:hover {
     background: rgb(41, 44, 56);
-    color:#eee;
+    color: #eee;
   }
 
   &__img {
