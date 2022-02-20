@@ -1,24 +1,35 @@
-# recipe-vue3
+# Cook Meal
 
-## Project setup
-```
-npm install
+### Find thousands of recipes to cook youself
+
+![](./screenshot.png)
+
+## Architecture
+
+- Vue.js 3.0.0 (composition api)
+
+- [Vue Router](https://router.vuejs.org/) - To mange router
+
+- [Vue i18n](https://kazupon.github.io/vue-i18n/) - multilingual page
+
+- [axios](https://github.com/axios/axios)
+
+- googlemaps/js-api
+
+- Typescript
+
+## Code quality
+
+- ESLint
+
+- Prettier
+
+- Husky pre-commit hook w/ lint-staged
+
+## Run
+
+```terminal
+yarn && yarn serve
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Open http://localhost:8080/
