@@ -5,7 +5,6 @@ const options = {
 
 const lazingLoad = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
-    console.log('cool')
     if (entry.isIntersecting) {
       observer.unobserve(entry.target)
     }

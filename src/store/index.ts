@@ -43,11 +43,10 @@ const actions = {
       state.isLoading = true
       state.searchName = input
       const result = await api.searchByName(input)
-      console.log('search', result)
       if (result !== null) state.meals = result
       state.isLoading = false
     } catch (e) {
-      console.log(e)
+      console.warn(e)
       state.isLoading = false
     }
   },
@@ -57,7 +56,7 @@ const actions = {
       state.categories = await api.getAllCategory()
       return state.categories
     } catch (e) {
-      console.log(e)
+      console.warn(e)
     }
   },
 
@@ -83,7 +82,7 @@ const actions = {
       }
       state.isLoading = false
     } catch (e) {
-      console.log(e)
+      console.warn(e)
       state.isLoading = false
     }
   },
@@ -92,7 +91,7 @@ const actions = {
     try {
       state.meal = await api.searchById(mealId)
     } catch (e) {
-      console.log(e)
+      console.warn(e)
     }
   },
 

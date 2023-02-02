@@ -14,7 +14,6 @@ module.exports = {
   rules: {
     indent: ['error', 2],
     'object-curly-spacing': ['error', 'always'],
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'vue/html-indent': ['error', 2],
     'vue/html-closing-bracket-newline': 'error',
