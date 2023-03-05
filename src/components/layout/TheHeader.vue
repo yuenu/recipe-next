@@ -21,11 +21,11 @@
               {{ t('navigation.meals') }}
             </router-link>
           </li>
-          <li>
+          <!-- <li>
             <router-link to="/about" class="headerBottom__nav--link">
               {{ t('navigation.about') }}
             </router-link>
-          </li>
+          </li> -->
           <li>
             <router-link
               to="/editProfile"
